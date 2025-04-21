@@ -1,0 +1,73 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem 1.5rem;
+  background-color: $neutral-white;
+  border-bottom: 2px solid $neutral-light;
+
+  .header-left h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    .quick-add {
+      padding: 0.4rem 0.8rem;
+      border: 1px solid #2563eb;
+      color: #2563eb;
+      background: transparent;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .notif-icon {
+      position: relative;
+      font-size: 1.2rem;
+
+      .notif-dot {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 8px;
+        height: 8px;
+        background: red;
+        border-radius: 50%;
+      }
+    }
+
+    .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .profile-icon {
+        font-size: 1.4rem;
+        color: #555;
+      }
+
+      .profile-info {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+        span:first-child {
+          font-weight: 600;
+        }
+        span:last-child {
+          font-size: 0.8rem;
+          color: #888;
+        }
+      }
+
+      .fa-caret-down {
+        font-size: 0.8rem;
+        color: #888;
+      }
+    }
+  }
+}
