@@ -54,8 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // If full_name is null or empty, use the actual value from database
                     $_SESSION['full_name'] = !empty($user['full_name']) ? $user['full_name'] : $username;
                     $_SESSION['role'] = !empty($user['role']) ? $user['role'] : 'User';
-                    
-                    header('Location: dashboard.php');
+                    $_SESSION['show_loader'] = true;
+                    header('Location: loader.php');
                     exit();
                 } else {
                     $login_error = 'Invalid username or password.';

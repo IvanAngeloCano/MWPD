@@ -619,61 +619,8 @@ body {
 
 .bagong-logo {
   width: 100px;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-
-/* Loader styles */
-body.loader-page,
-html.loader-page {
-  height: 100%;
-  margin: 0;
-  background: #f9f9f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.loader-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(36, 110, 233, 0.07);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.loader {
-  border: 8px solid #e3e8f0;
-  border-top: 8px solid #246EE9;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 24px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loader-logo {
-  width: 70px;
-  margin-bottom: 16px;
-}
-
-.loader-text {
-  font-family: 'Montserrat', sans-serif;
-  color: #246EE9;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-}
+  position: fixed; /* Positions the element relative to the viewport */
+  bottom: 20px; /* Places the element at the bottom edge */
+  right: 20px; /* Places the element at the right edge */
+  z-index: 1000; /* Ensures the element is on top of other content */
+}/*# sourceMappingURL=style.css.map */
