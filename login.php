@@ -139,22 +139,7 @@ include '_head.php';
     }
   </script>
   
-  <style>
-    /* Fixed height error container to prevent layout shifts */
-    .error-container {
-      min-height: 30px; /* Adjust height as needed */
-      margin-bottom: 10px;
-      position: relative;
-    }
-    
-    .login-error {
-      color: red;
-      text-align: center;
-      font-size: 14px;
-      position: absolute;
-      width: 100%;
-    }
-  </style>
+
 </body>
 
 </html>
