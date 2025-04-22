@@ -4,7 +4,11 @@
 
 @import 'sidebar', 'header', 'loader';
 
+<<<<<<< Updated upstream
 @import 'dashboard';
+=======
+@import 'dashboard', 'direct_hire', 'profile';
+>>>>>>> Stashed changes
 
 * {
   margin: 0;

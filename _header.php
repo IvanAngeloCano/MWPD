@@ -17,15 +17,21 @@ if (session_status() === PHP_SESSION_NONE) {
       <span class="notif-dot"></span>
     </div>
 
-    <div class="user-profile">
-      <div class="profile-icon">
-        <i class="fa fa-user-circle"></i>
+    <a href="profile.php" class="user-profile-link" style="text-decoration: none !important; border-bottom: none !important;">
+      <div class="user-profile">
+        <div class="profile-icon">
+          <?php if(isset($_SESSION['profile_picture']) && !empty($_SESSION['profile_picture'])): ?>
+            <img src="<?= htmlspecialchars($_SESSION['profile_picture']) ?>" alt="Profile picture" class="header-profile-picture">
+          <?php else: ?>
+            <i class="fa fa-user-circle"></i>
+          <?php endif; ?>
+        </div>
+        <div class="profile-info">
+          <span><?= isset($_SESSION['full_name']) ? htmlspecialchars($_SESSION['full_name']) : htmlspecialchars($_SESSION['username']) ?></span>
+          <span><?= isset($_SESSION['role']) ? htmlspecialchars($_SESSION['role']) : 'User' ?></span>
+        </div>
       </div>
-      <div class="profile-info">
-        <span><?= isset($_SESSION['full_name']) ? htmlspecialchars($_SESSION['full_name']) : htmlspecialchars($_SESSION['username']) ?></span>
-        <span><?= isset($_SESSION['role']) ? htmlspecialchars($_SESSION['role']) : 'User' ?></span>
-      </div>
-    </div>
+    </a>
   </div>
 </header>
 
