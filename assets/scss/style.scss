@@ -2,8 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-//Semantics
-@import 'sidebar', 'header';
+@import 'sidebar', 'header', 'loader';
 
 @import 'dashboard', 'direct_hire';
 
@@ -94,6 +93,14 @@ body {
     height: 50%;
     left: 0;
     z-index: 0;
+  }
+
+  .login-error {
+    color: #e53935; // strong red for errors
+    text-align: center;
+    font-size: 14px;
+    position: absolute;
+    width: 100%;
   }
 
   .upper-half-bg {

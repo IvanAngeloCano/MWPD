@@ -1,4 +1,5 @@
 <?php
+include 'session.php';
 $pageTitle = "Information Sheet - MWPD Filing System";
 include '_head.php';
 ?>

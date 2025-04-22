@@ -1,4 +1,5 @@
 <?php
+include 'session.php';
 $pageTitle = "Direct Hire - MWPD Filing System";
 include '_head.php';
 ?>

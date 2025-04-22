@@ -1,4 +1,5 @@
 <?php
+include 'session.php';
 $pageTitle = "Job Fairs - MWPD Filing System";
 include '_head.php';
 ?>

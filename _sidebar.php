@@ -38,7 +38,7 @@
   </div>
 
   <div class="logout nav-links">
-    <a href="login.php" class="nav-item">
+    <a href="logout.php" class="nav-item">
       <i class="fa fa-sign-out-alt logout-icon"></i>
       <span>Logout</span>
     </a>
