@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $login_error = 'Please enter both username and password.';
     } else {
         try {
-            $stmt = $pdo->prepare('SELECT id, password FROM users WHERE username = ?');
+            $stmt = $pdo->prepare('SELECT id, password, full_name, role FROM users WHERE username = ?');
             $stmt->execute([$username]);
             $user = $stmt->fetch();
             
@@ -46,8 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 
                 if ($is_valid) {
+                    // Store user data in session
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $username;
+                    
+                    // Make sure we're getting the actual values from the database
+                    // If full_name is null or empty, use the actual value from database
+                    $_SESSION['full_name'] = !empty($user['full_name']) ? $user['full_name'] : $username;
+                    $_SESSION['role'] = !empty($user['role']) ? $user['role'] : 'User';
+                    
                     header('Location: dashboard.php');
                     exit();
                 } else {
@@ -71,11 +78,7 @@ include '_head.php';
       <div class="login-box">
         <img src="assets\images\DMW Logo.png" alt="DMW Logo" class="dmw-logo">
         <h2>Login to system</h2>
-        <?php if ($login_error): ?>
-          <div style="color: red; margin-bottom: 1em; text-align: center;">
-            <?= htmlspecialchars($login_error) ?>
-          </div>
-        <?php endif; ?>
+       
         <form method="POST" action="login.php">
           <div class="username-box">
             <label>Enter your Username</label>
@@ -93,8 +96,18 @@ include '_head.php';
               <input type="password" name="password" placeholder="Password" id="password" required>
               <i class="fa fa-eye toggle-password" onclick="togglePassword()"></i>
             </div>
+              <!-- Error message container with fixed height -->
+          <div class="error-container">
+            <?php if ($login_error): ?>
+              <div class="login-error">
+                <?= htmlspecialchars($login_error) ?>
+              </div>
+            <?php endif; ?>
           </div>
-
+          </div>
+          
+        
+         
           <button type="submit" class="login-button text-md">Login</button>
         </form>
       </div>
@@ -116,7 +129,32 @@ include '_head.php';
   <img src="assets\images\bagong-pilipinas-logo.png" class="bagong-logo" alt="Bagong Pilipinas">
 
   <script>
+    function togglePassword() {
+      var passwordField = document.getElementById("password");
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+      } else {
+        passwordField.type = "password";
+      }
+    }
   </script>
+  
+  <style>
+    /* Fixed height error container to prevent layout shifts */
+    .error-container {
+      min-height: 30px; /* Adjust height as needed */
+      margin-bottom: 10px;
+      position: relative;
+    }
+    
+    .login-error {
+      color: red;
+      text-align: center;
+      font-size: 14px;
+      position: absolute;
+      width: 100%;
+    }
+  </style>
 </body>
 
 </html>
