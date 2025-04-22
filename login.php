@@ -1,6 +1,65 @@
-<?php 
-  $pageTitle = "Login - MWPD Filing System";
-  include '_head.php'; 
+<?php
+session_start();
+require_once 'connection.php';
+$pageTitle = "Login - MWPD Filing System";
+$login_error = '';
+
+// If already logged in, redirect to dashboard
+if (isset($_SESSION['user_id'])) {
+    header('Location: dashboard.php');
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if ($username === '' || $password === '') {
+        $login_error = 'Please enter both username and password.';
+    } else {
+        try {
+            $stmt = $pdo->prepare('SELECT id, password FROM users WHERE username = ?');
+            $stmt->execute([$username]);
+            $user = $stmt->fetch();
+            
+            if (!$user) {
+                $login_error = 'Invalid username or password.';
+            } else {
+                // Check if password is a hash (starts with $2y$) or plain text
+                $stored_password = $user['password'];
+                $is_valid = false;
+                
+                // Option 1: Password is stored as a hash
+                if (strpos($stored_password, '$2y$') === 0) {
+                    $is_valid = password_verify($password, $stored_password);
+                } 
+                // Option 2: Password is stored as plain text (temporary fallback)
+                else {
+                    $is_valid = ($password === $stored_password);
+                    
+                    // Upgrade to hashed password if match is found
+                    if ($is_valid) {
+                        $hash = password_hash($password, PASSWORD_DEFAULT);
+                        $update = $pdo->prepare('UPDATE users SET password = ? WHERE id = ?');
+                        $update->execute([$hash, $user['id']]);
+                    }
+                }
+                
+                if ($is_valid) {
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['username'] = $username;
+                    header('Location: dashboard.php');
+                    exit();
+                } else {
+                    $login_error = 'Invalid username or password.';
+                }
+            }
+        } catch (PDOException $e) {
+            $login_error = 'Database error. Please try again later.';
+        }
+    }
+}
+include '_head.php';
 ?>
 
 <body>
@@ -12,7 +71,12 @@
       <div class="login-box">
         <img src="assets\images\DMW Logo.png" alt="DMW Logo" class="dmw-logo">
         <h2>Login to system</h2>
-        <form method="POST" action="dashboard.php">
+        <?php if ($login_error): ?>
+          <div style="color: red; margin-bottom: 1em; text-align: center;">
+            <?= htmlspecialchars($login_error) ?>
+          </div>
+        <?php endif; ?>
+        <form method="POST" action="login.php">
           <div class="username-box">
             <label>Enter your Username</label>
             <div class="input-group">
