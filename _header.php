@@ -25,7 +25,53 @@ if (session_status() === PHP_SESSION_NONE) {
         <span><?= isset($_SESSION['full_name']) ? htmlspecialchars($_SESSION['full_name']) : htmlspecialchars($_SESSION['username']) ?></span>
         <span><?= isset($_SESSION['role']) ? htmlspecialchars($_SESSION['role']) : 'User' ?></span>
       </div>
-      <i class="fa fa-caret-down"></i>
     </div>
   </div>
 </header>
+
+
+<div id="quickAddModal" class="quick-add-modal hidden">
+  <div class="modal-content">
+    <h2>Select Process</h2>
+    <div class="quick-add-cards">
+      <a href="direct_hire_form.php" class="quick-card">
+        <i class="fa fa-briefcase"></i>
+        <span>Direct Hire</span>
+      </a>
+      <a href="balik_manggagawa_form.php" class="quick-card">
+        <i class="fa fa-sign-in-alt"></i>
+        <span>Balik Manggagawa</span>
+      </a>
+      <a href="gov_to_gov_form.php" class="quick-card">
+        <i class="fa fa-university"></i>
+        <span>Gov-to-Gov</span>
+      </a>
+      <a href="job_fair_form.php" class="quick-card">
+        <i class="fa fa-clipboard-list"></i>
+        <span>Job Fairs</span>
+      </a>
+    </div>
+    <button class="modal-close" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+
+<script>
+  const quickAddBtn = document.querySelector('.quick-add');
+  const modal = document.getElementById('quickAddModal');
+
+  quickAddBtn.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+  });
+
+  function closeModal() {
+    modal.classList.add('hidden');
+  }
+
+  // Optional: Close modal on outside click
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+</script>

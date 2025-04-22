@@ -4,7 +4,7 @@
 
 @import 'sidebar', 'header', 'loader';
 
-@import '_dashboard';
+@import 'dashboard';
 
 * {
   margin: 0;
@@ -41,9 +41,9 @@ body {
 
   .main-content {
     flex: 1;
-    padding: 1.5rem;
     overflow-y: auto; // if content is long
     background-color: $neutral-white;
+    padding: 1rem;
   }
 }
 

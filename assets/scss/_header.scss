@@ -24,7 +24,16 @@
       border-radius: 4px;
       font-weight: 600;
       cursor: pointer;
+      transition: background 0.2s ease;
+
+
+      &:hover {
+        color: white;
+        background-color: #2563eb;
+        border: 1px solid white;
+      }
     }
+
 
     .notif-icon {
       position: relative;
@@ -55,9 +64,11 @@
         display: flex;
         flex-direction: column;
         line-height: 1.2;
+
         span:first-child {
           font-weight: 600;
         }
+
         span:last-child {
           font-size: 0.8rem;
           color: #888;
@@ -68,6 +79,75 @@
         font-size: 0.8rem;
         color: #888;
       }
+    }
+  }
+}
+
+
+.quick-add-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.199);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+
+  &.hidden {
+    display: none;
+  }
+
+  .modal-content {
+    background: $neutral-white;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 400px;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    .quick-add-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+
+      .quick-card {
+        background: $neutral-light;
+        padding: 1rem;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        justify-content: center;
+        color: $neutral-dark;
+        transition: 0.2s;
+
+        i {
+          font-size: 24px;
+          margin-bottom: 0.5rem;
+        }
+
+        &:hover {
+          background-color: $brand-primary;
+          color: white;
+        }
+      }
+    }
+
+    .modal-close {
+      background: $brand-primary;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
     }
   }
 }
