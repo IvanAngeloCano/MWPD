@@ -69,7 +69,7 @@
 }
 .sidebar .logo span {
   font-size: 0.9rem;
-  color: #1a237e;
+  color: #246EE9;
 }
 .sidebar .logo span strong {
   font-weight: 700;
@@ -142,6 +142,12 @@
   border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.2s ease;
+}
+.header .header-right .quick-add:hover {
+  color: white;
+  background-color: #2563eb;
+  border: 1px solid white;
 }
 .header .header-right .notif-icon {
   position: relative;
@@ -182,6 +188,247 @@
   color: #888;
 }
 
+.quick-add-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.199);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.quick-add-modal.hidden {
+  display: none;
+}
+.quick-add-modal .modal-content {
+  background: #FFFFFF;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 400px;
+  text-align: center;
+}
+.quick-add-modal .modal-content h2 {
+  margin-bottom: 1rem;
+}
+.quick-add-modal .modal-content .quick-add-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.quick-add-modal .modal-content .quick-add-cards .quick-card {
+  background: #F3F4F6;
+  padding: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  justify-content: center;
+  color: #737373;
+  transition: 0.2s;
+}
+.quick-add-modal .modal-content .quick-add-cards .quick-card i {
+  font-size: 24px;
+  margin-bottom: 0.5rem;
+}
+.quick-add-modal .modal-content .quick-add-cards .quick-card:hover {
+  background-color: #246EE9;
+  color: white;
+}
+.quick-add-modal .modal-content .modal-close {
+  background: #246EE9;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 1rem;
+  height: 100%;
+}
+
+.bento-box {
+  background-color: #F3F4F6;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.box-total-records {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.box-pending-approvals {
+  grid-column: span 2;
+  grid-row: 3/span 3;
+  overflow: auto;
+}
+.box-pending-approvals table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.box-pending-approvals table th,
+.box-pending-approvals table td {
+  text-align: left;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+}
+.box-pending-approvals table thead {
+  background-color: white;
+}
+
+.box-calendar {
+  grid-column: 3;
+  grid-row: 1/span 5;
+}
+.box-calendar .calendar-placeholder {
+  background-color: #f0f0f0;
+  flex: 1;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+}
+
+.box-tbd {
+  grid-column: 1/span 2;
+  grid-row: 6/span 2;
+}
+
+.box-activity-log {
+  grid-column: 3;
+  grid-row: 6/span 2;
+}
+.box-activity-log ul {
+  list-style: none;
+  padding: 0;
+}
+.box-activity-log ul li {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.box-total-records {
+  display: flex;
+  flex-direction: column;
+  background-color: #246EE9;
+}
+.box-total-records h2 {
+  margin-bottom: 0.2rem;
+  color: white;
+}
+.box-total-records .record-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.box-total-records .record-card {
+  flex: 1;
+  max-width: 150px;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease-in-out;
+}
+.box-total-records .record-card:hover {
+  transform: translateY(-2px);
+}
+.box-total-records .record-card .card-text {
+  display: flex;
+  flex-direction: column;
+}
+.box-total-records .record-card .card-text .record-count {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #246EE9;
+}
+.box-total-records .record-card .card-text .record-label {
+  font-size: 0.875rem;
+  color: #737373;
+}
+.box-total-records .record-card .card-icon {
+  font-size: 1.75rem;
+  color: #737373;
+}
+
+.box-calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  justify-content: start;
+}
+.box-calendar .calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.box-calendar .calendar-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.box-calendar .calendar-header button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.box-calendar .calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+.box-calendar .calendar-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+}
+.box-calendar .calendar-grid .day {
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  background-color: #f5f5f5;
+  position: relative;
+}
+.box-calendar .calendar-grid .event {
+  background-color: #2b7de9;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -212,9 +459,9 @@ body {
 }
 .layout-wrapper .main-content {
   flex: 1;
-  padding: 1.5rem;
   overflow-y: auto;
   background-color: #FFFFFF;
+  padding: 1rem;
 }
 
 .dashboard-header {
