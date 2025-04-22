@@ -26,13 +26,13 @@
         <i class="fa fa-university"></i>
         <span>Gov-To-Gov</span>
       </a>
-      <a href="information_sheet.php" class="nav-item <?= ($currentPage == 'information_sheet.php') ? 'active' : '' ?>">
-        <i class="fa fa-info-circle"></i>
-        <span>Information sheet</span>
-      </a>
       <a href="job_fairs.php" class="nav-item <?= ($currentPage == 'job_fairs.php') ? 'active' : '' ?>">
         <i class="fa fa-clipboard-list"></i>
         <span>Job Fairs</span>
+      </a>
+      <a href="information_sheet.php" class="nav-item <?= ($currentPage == 'information_sheet.php') ? 'active' : '' ?>">
+        <i class="fa fa-info-circle"></i>
+        <span>Information sheet</span>
       </a>
     </nav>
   </div>
