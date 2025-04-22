@@ -14,7 +14,7 @@
         <i class="fa fa-th-large"></i>
         <span>Dashboard</span>
       </a>
-      <a href="direct_hire.php" class="nav-item <?= ($currentPage == 'direct_hire.php') ? 'active' : '' ?>">
+      <a href="direct_hire.php" class="nav-item <?= ($currentPage == 'direct_hire.php' || $currentPage == 'direct_hire_add.php') ? 'active' : '' ?>">
         <i class="fa fa-briefcase"></i>
         <span>Direct Hire</span>
       </a>

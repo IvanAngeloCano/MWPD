@@ -1,0 +1,414 @@
+.direct-hire-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .direct-hire-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+
+      .tab {
+        padding: 0.5rem 1rem;
+        border: none;
+        background-color: #eee;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 1rem;
+
+
+        &.active {
+          background-color: $brand-primary;
+          color: white;
+        }
+      }
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+
+
+      .search-bar {
+        flex: 1;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+
+      }
+
+      .btn {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        background-color: #444;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1rem;
+
+
+        i {
+          font-size: 1rem;
+        }
+
+        &.add-btn {
+          background-color: #28a745;
+        }
+
+        &.filter-btn {
+          background-color: #007bff;
+        }
+      }
+    }
+
+    .table-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #666;
+
+      .rows-input {
+        width: 60px;
+        padding: 0.2rem;
+        margin-left: 0.3rem;
+      }
+    }
+  }
+
+  .direct-hire-table {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        background-color: $brand-primary;
+        color: white;
+
+        th {
+          padding: 0.75rem;
+          text-align: left;
+        }
+      }
+
+      tbody tr {
+        border-bottom: 1px solid #ddd;
+
+        td {
+          padding: 0.75rem;
+        }
+
+        .status {
+          padding: 0.3rem 0.6rem;
+          border-radius: 12px;
+          font-size: 0.75rem;
+          font-weight: bold;
+
+          &.approved {
+            background-color: #d4edda;
+            color: #155724;
+          }
+
+          &.pending {
+            background-color: #fff3cd;
+            color: #856404;
+          }
+
+          &.declined {
+            background-color: #f8d7da;
+            color: #721c24;
+          }
+        }
+
+        .action-icons {
+          display: flex;
+          gap: 0.5rem;
+
+          i {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .direct-hire-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+
+      button {
+        padding: 0.4rem 0.8rem;
+        border: 1px solid transparent;
+        background-color: transparent;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.9rem;
+
+        i {
+          font-size: 0.85rem;
+        }
+
+        &.prev-btn {
+          background-color: $neutral-dark;
+          color: #fff;
+          border: none;
+        }
+
+        &.next-btn {
+          background-color: $brand-primary;
+          color: #fff;
+          border: none;
+        }
+      }
+
+      .page {
+        padding: 0.4rem 0.8rem;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        cursor: pointer;
+        border-radius: 6px;
+
+        &.active {
+          background-color: $brand-primary;
+          color: #fff;
+          border-color: transparent;
+        }
+      }
+    }
+
+    .go-to-page {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+
+      input {
+        width: 50px;
+        height: 1.5rem;
+        padding: 0.3rem;
+      }
+
+      .go-btn {
+        height: 1.5rem;
+        background-color: #444;
+        color: #fff;
+        border: none;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Direct Hire Add
+
+.add-record-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.record-tabs {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  .tab {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+
+    &.active {
+      background-color: $brand-primary;
+      color: white;
+    }
+  }
+}
+
+.record-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+
+      input,
+      textarea {
+        padding: 0.5rem;
+        border: 1px solid $neutral-dark;
+        border-radius: 6px;
+        margin-top: 0.25rem;
+
+        &:focus {
+          outline: 1px solid $brand-primary;
+        }
+      }
+    }
+  }
+
+  .file-upload-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    .uploaded-files {
+      flex: 1;
+      min-width: 300px;
+
+      .file-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $neutral-light;
+        padding: 0.5rem;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+
+        .drag-handle {
+          cursor: grab;
+        }
+
+        .file-name {
+          flex: 1;
+          margin: 0 1rem;
+        }
+
+        .file-size {
+          margin-right: 1rem;
+          color: $neutral-dark;
+        }
+
+        .delete-file {
+          background: none;
+          border: none;
+          color: red;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .upload-box {
+      flex: 1;
+      min-width: 300px;
+      border: 2px dashed $neutral-dark;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+
+      .upload-placeholder {
+        text-align: center;
+
+        i {
+          font-size: 2rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .browse-btn {
+          background: none;
+          border: none;
+          color: $brand-primary;
+          font-weight: bold;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    font-size: 1rem;
+
+    a {
+      font-size: 1rem;
+
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+
+
+      &.btn-primary {
+        background-color: $brand-primary;
+        color: white;
+        border: none;
+      }
+
+      &.btn-outline-primary {
+        background-color: white;
+        color: $brand-primary;
+        border: 2px solid $brand-primary;
+      }
+
+      &.btn-reset {
+        background-color: white;
+        color: $brand-primary;
+        border: 1px dashed $brand-primary;
+      }
+
+      &.btn-cancel {
+        background-color: white;
+        color: black;
+        border: 1px solid $neutral-dark;
+      }
+    }
+  }
+}

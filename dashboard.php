@@ -88,17 +88,31 @@ include '_head.php';
                   <th>Time</th>
                 </tr>
               </thead>
+
+              <!-- Limit to only 3 rows of data -->
               <tbody>
                 <tr>
                   <td>Direct Hire</td>
                   <td>Maria Santos</td>
-                  <td>Pending</td>
+                  <td><span class="status-badge pending">Pending</span></td>
                   <td>2h ago</td>
                 </tr>
-                <!-- Add more rows as needed -->
+                <tr>
+                  <td>Gov-to-Gov</td>
+                  <td>Juan Dela Cruz</td>
+                  <td><span class="status-badge approved">Approved</span></td>
+                  <td>1d ago</td>
+                </tr>
+                <tr>
+                  <td>Balik Manggagawa</td>
+                  <td>Ana Reyes</td>
+                  <td><span class="status-badge declined">Declined</span></td>
+                  <td>3h ago</td>
+                </tr>
               </tbody>
             </table>
           </div>
+
 
           <!-- Box 3: Calendar -->
           <div class="bento-box box-calendar">
