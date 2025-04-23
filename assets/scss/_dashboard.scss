@@ -183,7 +183,6 @@
   background-color: $brand-primary;
 
   h2 {
-    margin-bottom: .2rem;
     color: white;
   }
 
@@ -228,6 +227,7 @@
     .card-icon {
       font-size: 1.75rem;
       color: $neutral-dark;
+      background-color: transparent;
     }
   }
 }

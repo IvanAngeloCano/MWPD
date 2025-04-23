@@ -265,9 +265,9 @@ include '_head.php';
               <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
             </form>
             
-            <div class="search-help">
+            <!-- <div class="search-help">
               <p><strong>Search tips:</strong> Use <code>field:value</code> for exact match (e.g., <code>name:John</code>, <code>status:approved</code>)</p>
-            </div>
+            </div> -->
             
             <button class="btn filter-btn"><i class="fa fa-filter"></i> Filter</button>
             <a href="direct_hire_add.php?type=<?= urlencode($active_tab) ?>">

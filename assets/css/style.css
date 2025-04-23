@@ -593,7 +593,6 @@ html.loader-page {
   background-color: #246EE9;
 }
 .box-total-records h2 {
-  margin-bottom: 0.2rem;
   color: white;
 }
 .box-total-records .record-cards {
@@ -651,6 +650,7 @@ html.loader-page {
 .box-total-records .record-card .card-icon {
   font-size: 1.75rem;
   color: #737373;
+  background-color: transparent;
 }
 
 .box-calendar {
@@ -1023,9 +1023,9 @@ html.loader-page {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -1041,7 +1041,7 @@ html.loader-page {
   border-radius: 6px;
   font-size: 1rem;
   min-width: 300px;
-  width: 350px;
+  width: 100%;
 }
 .direct-hire-wrapper .direct-hire-top .controls .btn {
   display: -webkit-box;

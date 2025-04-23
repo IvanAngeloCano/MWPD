@@ -31,7 +31,7 @@
 
     .controls {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       gap: 0.5rem;
       font-size: 1rem;
@@ -44,7 +44,7 @@
         border-radius: 6px;
         font-size: 1rem;
         min-width: 300px;
-        width: 350px;
+        width: 100%;
       }
 
       .btn {
@@ -393,6 +393,7 @@ a {
   h2 {
     font-size: 1rem;
   }
+
 
   .tab {
     padding: 0.5rem 1rem;
