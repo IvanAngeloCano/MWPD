@@ -265,7 +265,7 @@ function time_elapsed_string($datetime, $full = false) {
               <?php endforeach; ?>
             </ul>
             <div class="view-all">
-              <p class="records-info">Showing <?= count($activity_logs) ?> most recent activities</p>
+              <!-- <p class="records-info">Showing <?= count($activity_logs) ?> most recent activities</p> -->
             </div>
             <?php else: ?>
             <div class="no-records">

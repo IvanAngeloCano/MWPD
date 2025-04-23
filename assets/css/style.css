@@ -176,6 +176,7 @@
   border: 1px solid #2563eb;
   color: #2563eb;
   background: transparent;
+  font-size: 1rem;
   border-radius: 4px;
   font-weight: 600;
   cursor: pointer;
@@ -210,7 +211,7 @@
   gap: 0.5rem;
 }
 .header .header-right .user-profile .profile-icon {
-  font-size: 1.4rem;
+  font-size: 1rem;
   color: #555;
 }
 .header .header-right .user-profile .profile-info {
@@ -225,6 +226,7 @@
 }
 .header .header-right .user-profile .profile-info span:first-child {
   font-weight: 600;
+  font-size: 1rem;
 }
 .header .header-right .user-profile .profile-info span:last-child {
   font-size: 0.8rem;
@@ -314,8 +316,8 @@
 }
 
 .header-profile-picture {
-  width: 40px;
-  height: 40px;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
@@ -665,9 +667,10 @@ html.loader-page {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 1.2rem;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  overflow-y: auto;
 }
 .box-calendar .calendar-header {
   display: -webkit-box;
@@ -703,7 +706,7 @@ html.loader-page {
   position: relative;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
+  gap: 1rem 0.4em;
   text-align: center;
 }
 .box-calendar .calendar-grid .day {
@@ -922,6 +925,7 @@ html.loader-page {
   list-style: none;
   padding: 0;
   margin: 15px 0 0 0;
+  overflow: auto;
 }
 .activity-list li {
   display: -webkit-box;
@@ -932,7 +936,7 @@ html.loader-page {
 }
 
 .activity-time {
-  color: #666;
+  color: #246EE9;
   font-weight: 500;
   margin-right: 15px;
   min-width: 50px;
@@ -1847,6 +1851,11 @@ a {
           box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   margin: 25px;
   overflow: hidden;
+  padding: 0;
+}
+
+.main-profile {
+  padding: 0 !important;
 }
 
 .profile-header {

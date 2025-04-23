@@ -56,4 +56,3 @@ try {
     header('Location: direct_hire.php?error=' . urlencode($e->getMessage()));
     exit();
 }
-?> 

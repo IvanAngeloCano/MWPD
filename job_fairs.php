@@ -353,8 +353,8 @@ include '_head.php';
   }
   
   .btn-primary {
-    background-color: #007bff;
-    color: white;
+    background-color: #28a745;
+    color: white !important;
   }
   
   .btn-info {
