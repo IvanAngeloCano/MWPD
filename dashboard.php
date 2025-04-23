@@ -195,28 +195,15 @@ function time_elapsed_string($datetime, $full = false) {
                   <th>Time</th>
                 </tr>
               </thead>
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
               <tbody>
                 <?php foreach ($pending_approvals as $approval): ?>
                 <tr>
-<<<<<<< Updated upstream
-                  <td>Direct Hire</td>
-                  <td>Maria Santos</td>
-                  <td>Pending</td>
-                  <td>2h ago</td>
-                </tr>
-                <!-- Add more rows as needed -->
-=======
                   <td><?= htmlspecialchars($approval['process_type']) ?></td>
                   <td><?= htmlspecialchars($approval['name']) ?></td>
                   <td><span class="status-badge pending"><?= ucfirst(htmlspecialchars($approval['status'])) ?></span></td>
                   <td title="<?= date('M j, Y g:i A', strtotime($approval['created_at'])) ?>"><?= time_elapsed_string($approval['created_at']) ?></td>
                 </tr>
                 <?php endforeach; ?>
->>>>>>> Stashed changes
               </tbody>
             </table>
             <?php else: ?>

@@ -44,8 +44,6 @@
   }
 }
 
-<<<<<<< Updated upstream
-=======
 .status-badge {
   padding: 0.25rem 0.6rem;
   border-radius: 9999px;
@@ -70,7 +68,6 @@
   }
 }
 
->>>>>>> Stashed changes
 .box-calendar {
   grid-column: 3;
   grid-row: 1 / span 5;
@@ -486,7 +483,9 @@
 .box-pending-approvals td:last-child {
   position: relative;
   cursor: help;
+
   
+
   &[title]:hover::after {
     content: attr(title);
     position: absolute;

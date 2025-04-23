@@ -310,8 +310,6 @@
   cursor: pointer;
 }
 
-<<<<<<< Updated upstream
-=======
 .header-profile-picture {
   width: 40px;
   height: 40px;
@@ -407,7 +405,6 @@ html.loader-page {
   letter-spacing: 2px;
 }
 
->>>>>>> Stashed changes
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -443,19 +440,6 @@ html.loader-page {
   grid-column: span 2;
   grid-row: 3/span 3;
   overflow: auto;
-<<<<<<< Updated upstream
-=======
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: start;
-  background-color: white;
-}
-.box-pending-approvals h2 {
-  margin-bottom: 0.2rem;
->>>>>>> Stashed changes
 }
 .box-pending-approvals table {
   width: 100%;
@@ -469,6 +453,27 @@ html.loader-page {
 }
 .box-pending-approvals table thead {
   background-color: white;
+}
+
+.status-badge {
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.status-badge.approved {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+.status-badge.pending {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+.status-badge.declined {
+  background-color: #fee2e2;
+  color: #991b1b;
 }
 
 .box-calendar {
@@ -733,12 +738,6 @@ html.loader-page {
           align-items: center;
 }
 
-<<<<<<< Updated upstream
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-=======
 .records-info {
   font-size: 14px;
   color: #555;
@@ -1014,6 +1013,7 @@ html.loader-page {
   cursor: pointer;
   border-radius: 6px;
   font-size: 1rem;
+  text-decoration: none;
 }
 .direct-hire-wrapper .direct-hire-top .tabs .tab.active {
   background-color: #246EE9;
@@ -1040,6 +1040,8 @@ html.loader-page {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
+  min-width: 300px;
+  width: 350px;
 }
 .direct-hire-wrapper .direct-hire-top .controls .btn {
   display: -webkit-box;
@@ -1056,6 +1058,7 @@ html.loader-page {
   color: #fff;
   cursor: pointer;
   font-size: 1rem;
+  text-decoration: none;
 }
 .direct-hire-wrapper .direct-hire-top .controls .btn i {
   font-size: 1rem;
@@ -1065,6 +1068,61 @@ html.loader-page {
 }
 .direct-hire-wrapper .direct-hire-top .controls .btn.filter-btn {
   background-color: #007bff;
+}
+.direct-hire-wrapper .direct-hire-top .controls .btn.search-btn {
+  margin-left: 5px;
+}
+.direct-hire-wrapper .direct-hire-top .controls .btn.go-btn {
+  height: 1.5rem;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.direct-hire-wrapper .direct-hire-top .controls .btn.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.direct-hire-wrapper .direct-hire-top .controls .btn.btn-danger:hover {
+  background-color: #c82333;
+}
+.direct-hire-wrapper .direct-hire-top .controls .btn.btn-cancel {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #333;
+}
+.direct-hire-wrapper .direct-hire-top .search-help {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 6px 0;
+  font-size: 0.85rem;
+  color: #495057;
+}
+.direct-hire-wrapper .direct-hire-top .search-help p {
+  margin: 0;
+}
+.direct-hire-wrapper .direct-hire-top .search-help code {
+  background-color: #e9ecef;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+.direct-hire-wrapper .direct-hire-top .search-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .direct-hire-wrapper .direct-hire-top .table-footer {
   display: -webkit-box;
@@ -1104,6 +1162,7 @@ html.loader-page {
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: bold;
+  display: inline-block;
 }
 .direct-hire-wrapper .direct-hire-table table tbody tr .status.approved {
   background-color: #d4edda;
@@ -1112,6 +1171,10 @@ html.loader-page {
 .direct-hire-wrapper .direct-hire-table table tbody tr .status.pending {
   background-color: #fff3cd;
   color: #856404;
+}
+.direct-hire-wrapper .direct-hire-table table tbody tr .status.denied {
+  background-color: #f8d7da;
+  color: #721c24;
 }
 .direct-hire-wrapper .direct-hire-table table tbody tr .status.declined {
   background-color: #f8d7da;
@@ -1122,9 +1185,30 @@ html.loader-page {
   display: -ms-flexbox;
   display: flex;
   gap: 0.5rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 .direct-hire-wrapper .direct-hire-table table tbody tr .action-icons i {
   cursor: pointer;
+}
+.direct-hire-wrapper .direct-hire-table table tbody tr .action-icons a {
+  color: inherit;
+  text-decoration: none;
+}
+.direct-hire-wrapper .direct-hire-table table tbody tr .action-icons i.fa-eye {
+  color: #007bff;
+}
+.direct-hire-wrapper .direct-hire-table table tbody tr .action-icons i.fa-edit {
+  color: #28a745;
+}
+.direct-hire-wrapper .direct-hire-table table tbody tr .action-icons i.fa-trash-alt {
+  color: #dc3545;
+}
+.direct-hire-wrapper .direct-hire-table table .no-records {
+  text-align: center;
+  padding: 20px;
+  color: #666;
 }
 .direct-hire-wrapper .direct-hire-bottom {
   display: -webkit-box;
@@ -1146,7 +1230,7 @@ html.loader-page {
           align-items: center;
   gap: 0.4rem;
 }
-.direct-hire-wrapper .direct-hire-bottom .pagination button {
+.direct-hire-wrapper .direct-hire-bottom .pagination button, .direct-hire-wrapper .direct-hire-bottom .pagination a {
   padding: 0.4rem 0.8rem;
   border: 1px solid transparent;
   background-color: transparent;
@@ -1160,16 +1244,17 @@ html.loader-page {
           align-items: center;
   gap: 0.3rem;
   font-size: 0.9rem;
+  text-decoration: none;
 }
-.direct-hire-wrapper .direct-hire-bottom .pagination button i {
+.direct-hire-wrapper .direct-hire-bottom .pagination button i, .direct-hire-wrapper .direct-hire-bottom .pagination a i {
   font-size: 0.85rem;
 }
-.direct-hire-wrapper .direct-hire-bottom .pagination button.prev-btn {
+.direct-hire-wrapper .direct-hire-bottom .pagination button.prev-btn, .direct-hire-wrapper .direct-hire-bottom .pagination a.prev-btn {
   background-color: #737373;
   color: #fff;
   border: none;
 }
-.direct-hire-wrapper .direct-hire-bottom .pagination button.next-btn {
+.direct-hire-wrapper .direct-hire-bottom .pagination button.next-btn, .direct-hire-wrapper .direct-hire-bottom .pagination a.next-btn {
   background-color: #246EE9;
   color: #fff;
   border: none;
@@ -1180,6 +1265,7 @@ html.loader-page {
   background-color: #fff;
   cursor: pointer;
   border-radius: 6px;
+  text-decoration: none;
 }
 .direct-hire-wrapper .direct-hire-bottom .pagination .page.active {
   background-color: #246EE9;
@@ -1200,14 +1286,71 @@ html.loader-page {
   height: 1.5rem;
   padding: 0.3rem;
 }
-.direct-hire-wrapper .direct-hire-bottom .go-to-page .go-btn {
-  height: 1.5rem;
-  background-color: #444;
-  color: #fff;
+.direct-hire-wrapper .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.direct-hire-wrapper .modal .modal-content {
+  background-color: white;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 100%;
+  max-width: 500px;
+}
+.direct-hire-wrapper .modal .modal-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+.direct-hire-wrapper .modal .modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+.direct-hire-wrapper .modal .modal-close {
+  background: none;
   border: none;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
+  font-size: 22px;
   cursor: pointer;
+  color: #888;
+}
+.direct-hire-wrapper .modal .modal-body {
+  padding: 20px;
+}
+.direct-hire-wrapper .modal .modal-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+a {
+  text-decoration: none;
 }
 
 .add-record-wrapper {
@@ -1240,6 +1383,7 @@ html.loader-page {
   cursor: pointer;
   border-radius: 6px;
   font-size: 1rem;
+  text-decoration: none;
 }
 .record-tabs .tab.active {
   background-color: #246EE9;
@@ -1375,6 +1519,7 @@ html.loader-page {
 }
 .record-form .form-actions a {
   font-size: 1rem;
+  text-decoration: none;
 }
 .record-form .form-actions .btn {
   display: -webkit-box;
@@ -1389,6 +1534,7 @@ html.loader-page {
   font-weight: 600;
   cursor: pointer;
   font-size: 1rem;
+  text-decoration: none;
 }
 .record-form .form-actions .btn.btn-primary {
   background-color: #246EE9;
@@ -2138,10 +2284,6 @@ html.loader-page {
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  text-decoration: none;
->>>>>>> Stashed changes
 }
 
 body {
@@ -2230,6 +2372,13 @@ body {
   height: 50%;
   left: 0;
   z-index: 0;
+}
+.main-grid .login-error {
+  color: #e53935;
+  text-align: center;
+  font-size: 14px;
+  position: absolute;
+  width: 100%;
 }
 .main-grid .upper-half-bg {
   top: 0;
@@ -2385,61 +2534,8 @@ body {
 
 .bagong-logo {
   width: 100px;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-
-/* Loader styles */
-body.loader-page,
-html.loader-page {
-  height: 100%;
-  margin: 0;
-  background: #f9f9f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.loader-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(36, 110, 233, 0.07);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.loader {
-  border: 8px solid #e3e8f0;
-  border-top: 8px solid #246EE9;
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 24px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loader-logo {
-  width: 70px;
-  margin-bottom: 16px;
-}
-
-.loader-text {
-  font-family: 'Montserrat', sans-serif;
-  color: #246EE9;
-  font-size: 1.2rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-}
+  position: fixed; /* Positions the element relative to the viewport */
+  bottom: 20px; /* Places the element at the bottom edge */
+  right: 20px; /* Places the element at the right edge */
+  z-index: 1000; /* Ensures the element is on top of other content */
+}/*# sourceMappingURL=style.css.map */

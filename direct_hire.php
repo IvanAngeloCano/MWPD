@@ -249,9 +249,6 @@ include '_head.php';
     ?>
 
     <main class="main-content">
-<<<<<<< Updated upstream
-      <!-- Your page content here -->
-=======
       <section class="direct-hire-wrapper">
         <!-- Top Section -->
         <div class="direct-hire-top">
@@ -406,7 +403,6 @@ include '_head.php';
           </div>
         </div>
       </section>
->>>>>>> Stashed changes
     </main>
   </div>
 </div>
@@ -455,137 +451,3 @@ include '_head.php';
     }
   };
 </script>
-
-<style>
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .modal-content {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    overflow: hidden;
-    width: 100%;
-    max-width: 500px;
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .modal-header h3 {
-    margin: 0;
-    font-size: 18px;
-  }
-  
-  .modal-close {
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    color: #888;
-  }
-  
-  .modal-body {
-    padding: 20px;
-  }
-  
-  .modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
-  .no-records {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-  }
-  
-  .search-form {
-    display: flex;
-    align-items: center;
-  }
-  
-  .search-btn {
-    margin-left: 5px;
-  }
-  
-  .status {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 500;
-  }
-  
-  .status.pending {
-    background-color: #ffeeba;
-    color: #856404;
-  }
-  
-  .status.approved {
-    background-color: #d4edda;
-    color: #155724;
-  }
-  
-  .status.denied {
-    background-color: #f8d7da;
-    color: #721c24;
-  }
-  
-  .action-icons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .action-icons a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  .action-icons i {
-    cursor: pointer;
-  }
-  
-  .action-icons i.fa-eye {
-    color: #007bff;
-  }
-  
-  .action-icons i.fa-edit {
-    color: #28a745;
-  }
-  
-  .action-icons i.fa-trash-alt {
-    color: #dc3545;
-  }
-</style>

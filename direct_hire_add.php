@@ -389,13 +389,13 @@ include '_head.php';
   }
   
   .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     padding: 8px 16px;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
     text-decoration: none;
   }
   
