@@ -4,7 +4,7 @@
 
 @import 'sidebar', 'header', 'loader';
 
-@import 'dashboard', 'direct_hire', 'profile';
+@import 'dashboard', 'direct_hire', 'gov_to_gov','profile';
 
 * {
   margin: 0;
@@ -12,6 +12,9 @@
   box-sizing: border-box;
 }
 
+a:visited{
+  color: inherit;
+}
 
 body {
   font-family: 'Montserrat', sans-serif;

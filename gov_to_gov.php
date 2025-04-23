@@ -1,29 +1,99 @@
 <?php
-include 'session.php';
-$pageTitle = "Gov to Gov - MWPD Filing System";
-include '_head.php';
+  // Page title for this listing
+  $pageTitle = "Gov-to-Gov – MWPD Filing System";
+  include '_head.php';
 ?>
-
 <div class="layout-wrapper">
   <?php include '_sidebar.php'; ?>
 
   <div class="content-wrapper">
     <?php
-    // Get current filename like 'dashboard-eme.php'
-    $currentFile = basename($_SERVER['PHP_SELF']);
-
-    // Remove the file extension
-    $fileWithoutExtension = pathinfo($currentFile, PATHINFO_FILENAME);
-
-    // Replace dashes with spaces
-    $pageTitle = ucwords(str_replace(['-', '_'], ' ', $fileWithoutExtension));
-
-    include '_header.php';
+      // Header title on the page
+      $pageTitle = "Gov-to-Gov";
+      include '_header.php';
     ?>
 
     <main class="main-content">
-      <!-- Your page content here -->
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde quos vitae aspernatur, commodi illo laborum, voluptatum maiores totam ut suscipit rerum! Ducimus soluta architecto doloribus provident sed inventore delectus dignissimos labore hic reiciendis corrupti in natus perferendis reprehenderit repellat enim rem, impedit fugit placeat aliquid quod nam ratione voluptates odio? Incidunt nobis tempora molestiae deleniti reiciendis. Sed repellat quod aperiam, molestias excepturi impedit adipisci. Enim sapiente nemo saepe explicabo vero at facere perspiciatis ut similique nisi quibusdam fugit ea, impedit sunt, nobis eos incidunt. Quasi expedita placeat, ipsum perferendis, in fuga libero facilis impedit, vel itaque consequuntur. Assumenda distinctio beatae incidunt commodi aspernatur dolorum voluptatibus repellat totam provident sed quidem, reiciendis sapiente error obcaecati optio. Nesciunt distinctio odit beatae perspiciatis voluptates numquam reiciendis ea, eum doloribus mollitia, repellendus deserunt quo expedita ex, esse delectus at cumque! Sunt repellendus natus, soluta hic consectetur qui voluptas officiis nam. Ad distinctio harum magnam dolorem similique vero. Accusantium incidunt sint ex culpa et, adipisci veniam nam aliquam quisquam eligendi, ipsa similique aperiam sequi quam numquam praesentium illum quae quasi veritatis voluptatibus corrupti qui. Quae exercitationem iusto et. Voluptatem amet nesciunt molestias explicabo deserunt culpa consequatur, voluptatibus reprehenderit dicta corporis odio. Recusandae vitae iusto veritatis!</p>
+      <section class="gtog-section">
+        <!-- Controls: Search, Filter, Add -->
+        <div class="gtog-controls">
+          <form action="" method="GET" class="search-form">
+            <input 
+              type="text" 
+              name="search" 
+              class="search-bar" 
+              placeholder="Search…"
+            >
+            <button type="submit" class="btn search-btn">
+              <i class="fa fa-search"></i>
+            </button>
+          </form>
+          <button class="btn filter-btn">
+            <i class="fa fa-filter"></i> Filter
+          </button>
+          <a href="gov_to_gov_add.php" class="btn add-btn">
+            <i class="fa fa-plus"></i> Add New Record
+          </a>
+        </div>
+
+        <!-- Data Table -->
+        <div class="gtog-table">
+          <table>
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Sex</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Example rows -->
+              <tr>
+                <td>1</td>
+                <td>Santos</td>
+                <td>Maria</td>
+                <td>Delacruz</td>
+                <td>F</td>
+                <td class="action-icons">
+                  <a href="#" title="View"><i class="fa fa-eye"></i></a>
+                  <a href="#" title="Edit"><i class="fa fa-edit"></i></a>
+                  <a href="#" title="Delete"><i class="fa fa-trash-alt"></i></a>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Dela Cruz</td>
+                <td>Juan</td>
+                <td>Garcia</td>
+                <td>M</td>
+                <td class="action-icons">
+                  <a href="#" title="View"><i class="fa fa-eye"></i></a>
+                  <a href="#" title="Edit"><i class="fa fa-edit"></i></a>
+                  <a href="#" title="Delete"><i class="fa fa-trash-alt"></i></a>
+                </td>
+              </tr>
+              <!-- …more rows… -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="gtog-pagination">
+          <button class="prev-btn" disabled>
+            <i class="fa fa-chevron-left"></i> Previous
+          </button>
+          <a href="#" class="page active">1</a>
+          <a href="#" class="page">2</a>
+          <span>…</span>
+          <a href="#" class="page">5</a>
+          <button class="next-btn">
+            Next <i class="fa fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
     </main>
   </div>
 </div>

@@ -132,6 +132,8 @@ function time_elapsed_string($datetime, $full = false) {
       <main class="main-content">
         <main class="dashboard-grid">
           <!-- Box 1: Total Records -->
+
+          <!-- Add As of this month kineme eme -->
           <div class="bento-box box-total-records">
             <h2>Total Records</h2>
             <div class="record-cards">
@@ -213,7 +215,7 @@ function time_elapsed_string($datetime, $full = false) {
             </div>
             <?php endif; ?>
             <div class="view-all">
-              <p class="records-info">Showing <?= min(count($pending_approvals), 5) ?> of <?= $direct_hire_pending ?> pending records</p>
+              <!-- <p class="records-info">Showing <?= min(count($pending_approvals), 5) ?> of <?= $direct_hire_pending ?> pending records</p> -->
             </div>
           </div>
 

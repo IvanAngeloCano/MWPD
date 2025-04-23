@@ -40,7 +40,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <div class="modal-content">
     <h2>Select Process</h2>
     <div class="quick-add-cards">
-      <a href="direct_hire_form.php" class="quick-card">
+      <a href="direct_hire_add.php" class="quick-card">
         <i class="fa fa-briefcase"></i>
         <span>Direct Hire</span>
       </a>

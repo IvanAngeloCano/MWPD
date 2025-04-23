@@ -156,6 +156,7 @@
   padding: 0.5rem 1.5rem;
   background-color: #FFFFFF;
   border-bottom: 2px solid #F3F4F6;
+  height: 60px;
 }
 .header .header-left h1 {
   font-size: 1.5rem;
@@ -292,6 +293,7 @@
   color: #737373;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+  height: 100px;
 }
 .quick-add-modal .modal-content .quick-add-cards .quick-card i {
   font-size: 24px;
@@ -308,6 +310,7 @@
   padding: 0.5rem 1rem;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 1rem;
 }
 
 .header-profile-picture {
@@ -644,7 +647,7 @@ html.loader-page {
   color: #246EE9;
 }
 .box-total-records .record-card .card-text .record-label {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: #737373;
 }
 .box-total-records .record-card .card-icon {
@@ -1007,13 +1010,20 @@ html.loader-page {
   gap: 0.5rem;
 }
 .direct-hire-wrapper .direct-hire-top .tabs .tab {
-  padding: 0.5rem 1rem;
+  padding: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   border: none;
   background-color: #eee;
   cursor: pointer;
   border-radius: 6px;
   font-size: 1rem;
   text-decoration: none;
+  height: 2rem;
 }
 .direct-hire-wrapper .direct-hire-top .tabs .tab.active {
   background-color: #246EE9;
@@ -1023,14 +1033,24 @@ html.loader-page {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   gap: 0.5rem;
   font-size: 1rem;
+}
+.direct-hire-wrapper .direct-hire-top .controls .search-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  gap: 0.5rem;
+  height: 2rem;
 }
 .direct-hire-wrapper .direct-hire-top .controls .search-bar {
   -webkit-box-flex: 1;
@@ -1040,8 +1060,6 @@ html.loader-page {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
-  min-width: 300px;
-  width: 100%;
 }
 .direct-hire-wrapper .direct-hire-top .controls .btn {
   display: -webkit-box;
@@ -1059,6 +1077,7 @@ html.loader-page {
   cursor: pointer;
   font-size: 1rem;
   text-decoration: none;
+  height: 2rem;
 }
 .direct-hire-wrapper .direct-hire-top .controls .btn i {
   font-size: 1rem;
@@ -1096,25 +1115,6 @@ html.loader-page {
   background-color: #f8f9fa;
   border: 1px solid #ddd;
   color: #333;
-}
-.direct-hire-wrapper .direct-hire-top .search-help {
-  background-color: #f8f9fa;
-  border: 1px solid #e9ecef;
-  border-radius: 4px;
-  padding: 8px 12px;
-  margin: 6px 0;
-  font-size: 0.85rem;
-  color: #495057;
-}
-.direct-hire-wrapper .direct-hire-top .search-help p {
-  margin: 0;
-}
-.direct-hire-wrapper .direct-hire-top .search-help code {
-  background-color: #e9ecef;
-  padding: 2px 4px;
-  border-radius: 3px;
-  font-family: monospace;
-  font-size: 0.85rem;
 }
 .direct-hire-wrapper .direct-hire-top .search-form {
   display: -webkit-box;
@@ -1230,7 +1230,11 @@ html.loader-page {
           align-items: center;
   gap: 0.4rem;
 }
-.direct-hire-wrapper .direct-hire-bottom .pagination button, .direct-hire-wrapper .direct-hire-bottom .pagination a {
+.direct-hire-wrapper .direct-hire-bottom .pagination button {
+  height: 2rem;
+}
+.direct-hire-wrapper .direct-hire-bottom .pagination button,
+.direct-hire-wrapper .direct-hire-bottom .pagination a {
   padding: 0.4rem 0.8rem;
   border: 1px solid transparent;
   background-color: transparent;
@@ -1246,15 +1250,18 @@ html.loader-page {
   font-size: 0.9rem;
   text-decoration: none;
 }
-.direct-hire-wrapper .direct-hire-bottom .pagination button i, .direct-hire-wrapper .direct-hire-bottom .pagination a i {
+.direct-hire-wrapper .direct-hire-bottom .pagination button i,
+.direct-hire-wrapper .direct-hire-bottom .pagination a i {
   font-size: 0.85rem;
 }
-.direct-hire-wrapper .direct-hire-bottom .pagination button.prev-btn, .direct-hire-wrapper .direct-hire-bottom .pagination a.prev-btn {
+.direct-hire-wrapper .direct-hire-bottom .pagination button.prev-btn,
+.direct-hire-wrapper .direct-hire-bottom .pagination a.prev-btn {
   background-color: #737373;
   color: #fff;
   border: none;
 }
-.direct-hire-wrapper .direct-hire-bottom .pagination button.next-btn, .direct-hire-wrapper .direct-hire-bottom .pagination a.next-btn {
+.direct-hire-wrapper .direct-hire-bottom .pagination button.next-btn,
+.direct-hire-wrapper .direct-hire-bottom .pagination a.next-btn {
   background-color: #246EE9;
   color: #fff;
   border: none;
@@ -1281,10 +1288,29 @@ html.loader-page {
           align-items: center;
   gap: 0.3rem;
 }
+.direct-hire-wrapper .direct-hire-bottom .go-to-page label {
+  font-size: 0.9rem;
+}
 .direct-hire-wrapper .direct-hire-bottom .go-to-page input {
+  font-size: 0.9rem;
   width: 50px;
   height: 1.5rem;
   padding: 0.3rem;
+}
+.direct-hire-wrapper .direct-hire-bottom .go-btn {
+  border: 1px solid transparent;
+  background-color: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.9rem;
+  text-decoration: none;
+  background-color: #246EE9;
+  color: #fff;
+  border: none;
+  padding: 0.2rem;
 }
 .direct-hire-wrapper .modal {
   display: none;
@@ -1384,6 +1410,13 @@ a {
   border-radius: 6px;
   font-size: 1rem;
   text-decoration: none;
+  height: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .record-tabs .tab.active {
   background-color: #246EE9;
@@ -1555,6 +1588,256 @@ a {
   background-color: white;
   color: black;
   border: 1px solid #737373;
+}
+
+/* gov_to_gov.scss */
+.gtog-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+  /* Controls (search, filter, add) */
+  /* Table */
+  /* Pagination */
+  /* Delete confirmation modal */
+}
+.gtog-section .gtog-controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+.gtog-section .gtog-controls .search-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  gap: 0.5rem;
+}
+.gtog-section .gtog-controls .search-form .search-bar {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+.gtog-section .gtog-controls .search-form .search-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #444;
+  color: #fff;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.gtog-section .gtog-controls .btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.gtog-section .gtog-controls .btn i {
+  font-size: 1rem;
+}
+.gtog-section .gtog-controls .btn.filter-btn {
+  background-color: #246EE9;
+}
+.gtog-section .gtog-controls .btn.add-btn {
+  background-color: #28a745;
+}
+.gtog-section .gtog-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.gtog-section .gtog-table table thead {
+  background-color: #246EE9;
+  color: #fff;
+}
+.gtog-section .gtog-table table thead th {
+  padding: 0.75rem;
+  text-align: left;
+}
+.gtog-section .gtog-table table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+.gtog-section .gtog-table table tbody tr td {
+  padding: 0.75rem;
+}
+.gtog-section .gtog-table table tbody tr .action-icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 0.5rem;
+}
+.gtog-section .gtog-table table tbody tr .action-icons a {
+  color: inherit;
+  text-decoration: none;
+}
+.gtog-section .gtog-table table tbody tr .action-icons i.fa-eye {
+  color: #246EE9;
+}
+.gtog-section .gtog-table table tbody tr .action-icons i.fa-edit {
+  color: #737373;
+}
+.gtog-section .gtog-table table tbody tr .action-icons i.fa-trash-alt {
+  color: #dc3545;
+}
+.gtog-section .gtog-table table tbody .no-records {
+  text-align: center;
+  padding: 1.5rem;
+  color: #666;
+}
+.gtog-section .gtog-pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.4rem;
+}
+.gtog-section .gtog-pagination .prev-btn,
+.gtog-section .gtog-pagination .next-btn,
+.gtog-section .gtog-pagination .page {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.gtog-section .gtog-pagination .prev-btn {
+  background-color: #737373;
+  color: #fff;
+  border: none;
+}
+.gtog-section .gtog-pagination .prev-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.gtog-section .gtog-pagination .page {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #737373;
+}
+.gtog-section .gtog-pagination .page.active {
+  background-color: #246EE9;
+  color: #fff;
+  border-color: transparent;
+}
+.gtog-section .gtog-pagination .next-btn {
+  background-color: #246EE9;
+  color: #fff;
+  border: none;
+}
+.gtog-section .gtog-pagination .next-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.gtog-section .modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.gtog-section .modal .modal-content {
+  background-color: #fff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  overflow: hidden;
+}
+.gtog-section .modal .modal-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+.gtog-section .modal .modal-header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+.gtog-section .modal .modal-header .modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #888;
+}
+.gtog-section .modal .modal-body {
+  padding: 1.5rem;
+  text-align: center;
+}
+.gtog-section .modal .modal-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem;
 }
 
 .profile-container {
@@ -2284,6 +2567,10 @@ a {
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+a:visited {
+  color: inherit;
 }
 
 body {
