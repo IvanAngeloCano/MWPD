@@ -9,7 +9,7 @@ include '_head.php';
 
   <div class="content-wrapper">
     <?php
-    // Get current filename like 'dashboard-eme.php'
+    // Get current filname like 'dashboard-eme.php'
     $currentFile = basename($_SERVER['PHP_SELF']);
 
     // Remove the file extension
