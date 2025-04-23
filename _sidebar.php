@@ -1,11 +1,11 @@
 <?php
-  $currentPage = basename($_SERVER['PHP_SELF']);
+$currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
 <aside class="sidebar">
   <div class="sidebar-top">
     <div class="logo">
-      <img src="assets\images\DMW Logo.png" alt="DMW Logo"/>
+      <img src="assets\images\DMW Logo.png" alt="DMW Logo" />
       <span>MWPD<br><strong>Filing System</strong></span>
     </div>
 
@@ -33,6 +33,14 @@
       <a href="information_sheet.php" class="nav-item <?= ($currentPage == 'information_sheet.php') ? 'active' : '' ?>">
         <i class="fa fa-info-circle"></i>
         <span>Information sheet</span>
+      </a>
+      <a href="accounts.php" class="nav-item <?= ($currentPage == 'accounts.php') ? 'active' : '' ?>">
+        <i class="fa fa-users-cog"></i>
+        <span>Accounts</span>
+      </a>
+      <a href="approvals.php" class="nav-item <?= ($currentPage == 'approvals.php') ? 'active' : '' ?>">
+        <i class="fa fa-check-circle"></i>
+        <span>Approval</span>
       </a>
     </nav>
   </div>
