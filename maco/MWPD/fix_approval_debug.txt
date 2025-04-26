@@ -1,0 +1,7 @@
+2025-04-25 15:54:18: Starting approval table fix script
+2025-04-25 15:54:18: direct_hire_approvals table does not exist, creating it
+2025-04-25 15:54:18: Error: SQLSTATE[HY000]: General error: 1005 Can't create table `mwpd`.`direct_hire_approvals` (errno: 150 "Foreign key constraint is incorrectly formed")
+2025-04-25 17:01:12: Starting approval table fix script
+2025-04-25 17:01:12: direct_hire_approvals table exists, checking if id is auto_increment
+2025-04-25 17:01:12: id column is already auto_increment
+2025-04-25 17:01:12: Script completed successfully

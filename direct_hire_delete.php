@@ -1,0 +1,53 @@
+<?php
+include 'session.php';
+require_once 'connection.php';
+
+// Check if ID is provided
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    header('Location: direct_hire.php?error=No record ID specified');
+    exit();
+}
+
+$record_id = (int)$_GET['id'];
+
+try {
+    // Start transaction
+    $pdo->beginTransaction();
+    
+    // Get record type before deletion for redirection
+    $stmt = $pdo->prepare("SELECT type FROM direct_hire WHERE id = ?");
+    $stmt->execute([$record_id]);
+    $record = $stmt->fetch();
+    
+    if (!$record) {
+        throw new Exception("Record not found");
+    }
+    
+    $record_type = $record['type'];
+    
+    // Delete record
+    $stmt = $pdo->prepare("DELETE FROM direct_hire WHERE id = ?");
+    $result = $stmt->execute([$record_id]);
+    
+    if (!$result) {
+        throw new Exception("Failed to delete record");
+    }
+    
+    // Commit transaction
+    $pdo->commit();
+    
+    // Redirect with success message
+    header("Location: direct_hire.php?tab=$record_type&success=Record deleted successfully");
+    exit();
+    
+} catch (Exception $e) {
+    // Rollback transaction on error
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
+    
+    // Redirect with error message
+    header('Location: direct_hire.php?error=' . urlencode($e->getMessage()));
+    exit();
+}
+?> 

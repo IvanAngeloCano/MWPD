@@ -1,0 +1,18 @@
+//Text sizes
+.text-md   { font-size: 16px; }
+.text-lg   { font-size: 24px; }
+.text-hg   { font-size: 32px; }
+
+//weight
+.font-medium   { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+//style
+.italic { font-style: italic; }
+.normal { font-style: normal; }
+
+//color
+.text-primary { color: $brand-primary; }
+.text-black { color: black; }
+.text-gray { color: $neutral-dark;}
