@@ -8,6 +8,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $employer = $_POST['employer'];
     $memoDate = $_POST['memo_date'];
 
+    // Get selected IDs from checkboxes (gov_to_gov table)
+    $selected_ids = isset($_POST['selected_ids']) ? $_POST['selected_ids'] : [];
+    if (empty($selected_ids)) {
+        die("No applicants selected for memo generation.");
+    }
+    // Prepare placeholders for PDO
+    $placeholders = implode(',', array_fill(0, count($selected_ids), '?'));
+
     // Load the Word template
     $template = new TemplateProcessor('GOVERNMENT_TO_GOVERNMENT_MEMORANDUM_TEMPLATE.docx');
 
@@ -15,14 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $template->setValue('employer', htmlspecialchars($employer));
     $template->setValue('date', htmlspecialchars($memoDate));
 
-    // Fetch only applicants with remark = 'good' (case-insensitive)
-    $stmt = $pdo->prepare("SELECT last_name, first_name, middle_name, passport_number FROM gov_to_gov WHERE LOWER(remarks) = :remark");
-    $stmt->execute(['remark' => 'good']);
+    // Fetch only applicants with selected IDs
+    $stmt = $pdo->prepare("SELECT last_name, first_name, middle_name, passport_number FROM gov_to_gov WHERE g2g IN ($placeholders)");
+    $stmt->execute($selected_ids);
     $applicants = $stmt->fetchAll();
     $count = count($applicants);
 
     if ($count === 0) {
-        die("No applicants with a 'good' remark found.");
+        die("No applicants found for the selected IDs.");
     }
 
     // Clone template rows

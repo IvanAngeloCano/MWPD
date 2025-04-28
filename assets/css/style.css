@@ -1608,7 +1608,6 @@ a {
   color: white;
 }
 
-/* gov_to_gov.scss */
 .gtog-section {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1618,12 +1617,44 @@ a {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 1rem;
-  /* Controls (search, filter, add) */
-  /* Table */
-  /* Pagination */
-  /* Delete confirmation modal */
 }
-.gtog-section .gtog-controls {
+.gtog-section .gtog-top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+}
+.gtog-section .gtog-top .tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5rem;
+}
+.gtog-section .gtog-top .tabs .tab {
+  padding: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-decoration: none;
+  height: 2rem;
+}
+.gtog-section .gtog-top .tabs .tab.active {
+  background-color: #246EE9;
+  color: white;
+}
+.gtog-section .gtog-top .controls {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1636,7 +1667,7 @@ a {
   gap: 0.5rem;
   font-size: 1rem;
 }
-.gtog-section .gtog-controls .search-form {
+.gtog-section .gtog-top .controls .search-form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1644,8 +1675,9 @@ a {
       -ms-flex: 1;
           flex: 1;
   gap: 0.5rem;
+  height: 2rem;
 }
-.gtog-section .gtog-controls .search-form .search-bar {
+.gtog-section .gtog-top .controls .search-bar {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -1654,21 +1686,7 @@ a {
   border-radius: 6px;
   font-size: 1rem;
 }
-.gtog-section .gtog-controls .search-form .search-btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 6px;
-  background-color: #444;
-  color: #fff;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.gtog-section .gtog-controls .btn {
+.gtog-section .gtog-top .controls .btn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1679,20 +1697,72 @@ a {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
+  background-color: #444;
   color: #fff;
   cursor: pointer;
   font-size: 1rem;
   text-decoration: none;
-  white-space: nowrap;
+  height: 2rem;
 }
-.gtog-section .gtog-controls .btn i {
+.gtog-section .gtog-top .controls .btn i {
   font-size: 1rem;
 }
-.gtog-section .gtog-controls .btn.filter-btn {
-  background-color: #246EE9;
-}
-.gtog-section .gtog-controls .btn.add-btn {
+.gtog-section .gtog-top .controls .btn.add-btn {
   background-color: #28a745;
+}
+.gtog-section .gtog-top .controls .btn.filter-btn {
+  background-color: #007bff;
+}
+.gtog-section .gtog-top .controls .btn.search-btn {
+  margin-left: 5px;
+}
+.gtog-section .gtog-top .controls .btn.go-btn {
+  height: 1.5rem;
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.gtog-section .gtog-top .controls .btn.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.gtog-section .gtog-top .controls .btn.btn-danger:hover {
+  background-color: #c82333;
+}
+.gtog-section .gtog-top .controls .btn.btn-cancel {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  color: #333;
+}
+.gtog-section .gtog-top .search-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.gtog-section .gtog-top .table-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+}
+.gtog-section .gtog-top .table-footer .rows-input {
+  width: 60px;
+  padding: 0.2rem;
+  margin-left: 0.3rem;
 }
 .gtog-section .gtog-table table {
   width: 100%;
@@ -1700,7 +1770,7 @@ a {
 }
 .gtog-section .gtog-table table thead {
   background-color: #246EE9;
-  color: #fff;
+  color: white;
 }
 .gtog-section .gtog-table table thead th {
   padding: 0.75rem;
@@ -1712,50 +1782,82 @@ a {
 .gtog-section .gtog-table table tbody tr td {
   padding: 0.75rem;
 }
+.gtog-section .gtog-table table tbody tr .status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: inline-block;
+}
+.gtog-section .gtog-table table tbody tr .status.approved {
+  background-color: #d4edda;
+  color: #155724;
+}
+.gtog-section .gtog-table table tbody tr .status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.gtog-section .gtog-table table tbody tr .status.denied, .gtog-section .gtog-table table tbody tr .status.declined {
+  background-color: #f8d7da;
+  color: #721c24;
+}
 .gtog-section .gtog-table table tbody tr .action-icons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  gap: 0.5rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  gap: 0.5rem;
+}
+.gtog-section .gtog-table table tbody tr .action-icons i {
+  cursor: pointer;
 }
 .gtog-section .gtog-table table tbody tr .action-icons a {
   color: inherit;
   text-decoration: none;
 }
 .gtog-section .gtog-table table tbody tr .action-icons i.fa-eye {
-  color: #246EE9;
+  color: #007bff;
 }
 .gtog-section .gtog-table table tbody tr .action-icons i.fa-edit {
-  color: #737373;
+  color: #28a745;
 }
 .gtog-section .gtog-table table tbody tr .action-icons i.fa-trash-alt {
   color: #dc3545;
 }
-.gtog-section .gtog-table table tbody .no-records {
+.gtog-section .gtog-table table .no-records {
   text-align: center;
-  padding: 1.5rem;
+  padding: 20px;
   color: #666;
 }
-.gtog-section .gtog-pagination {
+.gtog-section .gtog-bottom {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.gtog-section .gtog-bottom .pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   gap: 0.4rem;
 }
-.gtog-section .gtog-pagination .prev-btn,
-.gtog-section .gtog-pagination .next-btn,
-.gtog-section .gtog-pagination .page {
+.gtog-section .gtog-bottom .pagination button {
+  height: 2rem;
+}
+.gtog-section .gtog-bottom .pagination button, .gtog-section .gtog-bottom .pagination a {
   padding: 0.4rem 0.8rem;
   border: 1px solid transparent;
+  background-color: transparent;
   border-radius: 6px;
   cursor: pointer;
   display: -webkit-box;
@@ -1767,41 +1869,74 @@ a {
   gap: 0.3rem;
   font-size: 0.9rem;
   text-decoration: none;
-  white-space: nowrap;
 }
-.gtog-section .gtog-pagination .prev-btn {
+.gtog-section .gtog-bottom .pagination button i, .gtog-section .gtog-bottom .pagination a i {
+  font-size: 0.85rem;
+}
+.gtog-section .gtog-bottom .pagination button.prev-btn, .gtog-section .gtog-bottom .pagination a.prev-btn {
   background-color: #737373;
   color: #fff;
   border: none;
 }
-.gtog-section .gtog-pagination .prev-btn:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-.gtog-section .gtog-pagination .page {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  color: #737373;
-}
-.gtog-section .gtog-pagination .page.active {
-  background-color: #246EE9;
-  color: #fff;
-  border-color: transparent;
-}
-.gtog-section .gtog-pagination .next-btn {
+.gtog-section .gtog-bottom .pagination button.next-btn, .gtog-section .gtog-bottom .pagination a.next-btn {
   background-color: #246EE9;
   color: #fff;
   border: none;
 }
-.gtog-section .gtog-pagination .next-btn:disabled {
-  opacity: 0.5;
-  cursor: default;
+.gtog-section .gtog-bottom .pagination .page {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.gtog-section .gtog-bottom .pagination .page.active {
+  background-color: #246EE9;
+  color: #fff;
+  border-color: transparent;
+}
+.gtog-section .gtog-bottom .go-to-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.3rem;
+}
+.gtog-section .gtog-bottom .go-to-page label {
+  font-size: 0.9rem;
+}
+.gtog-section .gtog-bottom .go-to-page input {
+  font-size: 0.9rem;
+  width: 50px;
+  height: 1.5rem;
+  padding: 0.3rem;
+}
+.gtog-section .gtog-bottom .go-btn {
+  border: 1px solid transparent;
+  background-color: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.9rem;
+  text-decoration: none;
+  background-color: #246EE9;
+  color: #fff;
+  border: none;
+  padding: 0.2rem;
 }
 .gtog-section .modal {
   display: none;
   position: fixed;
   z-index: 1000;
-  inset: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -1811,13 +1946,13 @@ a {
           justify-content: center;
 }
 .gtog-section .modal .modal-content {
-  background-color: #fff;
+  background-color: white;
   border-radius: 8px;
   -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  width: 90%;
   overflow: hidden;
+  width: 100%;
+  max-width: 500px;
 }
 .gtog-section .modal .modal-header {
   display: -webkit-box;
@@ -1829,23 +1964,22 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 1rem;
+  padding: 15px 20px;
   border-bottom: 1px solid #eee;
 }
 .gtog-section .modal .modal-header h3 {
   margin: 0;
-  font-size: 1.125rem;
+  font-size: 18px;
 }
-.gtog-section .modal .modal-header .modal-close {
+.gtog-section .modal .modal-close {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 22px;
   cursor: pointer;
   color: #888;
 }
 .gtog-section .modal .modal-body {
-  padding: 1.5rem;
-  text-align: center;
+  padding: 20px;
 }
 .gtog-section .modal .modal-actions {
   display: -webkit-box;
@@ -1854,8 +1988,226 @@ a {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  gap: 0.75rem;
-  padding: 1rem;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.gtog-section a {
+  text-decoration: none;
+}
+
+.gtog-add-record-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+}
+
+.gtog-record-tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.gtog-record-tabs h2 {
+  font-size: 1rem;
+}
+.gtog-record-tabs .tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-decoration: none;
+  height: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.gtog-record-tabs .tab.active {
+  background-color: #246EE9;
+  color: white;
+}
+
+.gtog-record-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 2rem;
+}
+.gtog-record-form .form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.gtog-record-form .form-grid label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-weight: 600;
+}
+.gtog-record-form .form-grid label input, .gtog-record-form .form-grid label textarea {
+  padding: 0.5rem;
+  border: 1px solid #737373;
+  border-radius: 6px;
+  margin-top: 0.25rem;
+}
+.gtog-record-form .form-grid label input:focus, .gtog-record-form .form-grid label textarea:focus {
+  outline: 1px solid #246EE9;
+}
+.gtog-record-form .file-upload-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 2rem;
+}
+.gtog-record-form .file-upload-section .uploaded-files {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  min-width: 300px;
+}
+.gtog-record-form .file-upload-section .uploaded-files .file-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #F3F4F6;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+.gtog-record-form .file-upload-section .uploaded-files .file-item .drag-handle {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+.gtog-record-form .file-upload-section .uploaded-files .file-item .file-name {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin: 0 1rem;
+}
+.gtog-record-form .file-upload-section .uploaded-files .file-item .file-size {
+  margin-right: 1rem;
+  color: #737373;
+}
+.gtog-record-form .file-upload-section .uploaded-files .file-item .delete-file {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+.gtog-record-form .file-upload-section .upload-box {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  min-width: 300px;
+  border: 2px dashed #737373;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 2rem;
+}
+.gtog-record-form .file-upload-section .upload-box .upload-placeholder {
+  text-align: center;
+}
+.gtog-record-form .file-upload-section .upload-box .upload-placeholder i {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.gtog-record-form .file-upload-section .upload-box .upload-placeholder .browse-btn {
+  background: none;
+  border: none;
+  color: #246EE9;
+  font-weight: bold;
+  cursor: pointer;
+}
+.gtog-record-form .form-actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 1rem;
+  font-size: 1rem;
+}
+.gtog-record-form .form-actions a {
+  font-size: 1rem;
+  text-decoration: none;
+}
+.gtog-record-form .form-actions .btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+}
+.gtog-record-form .form-actions .btn.btn-primary {
+  background-color: #246EE9;
+  color: white;
+  border: none;
+}
+.gtog-record-form .form-actions .btn.btn-outline-primary {
+  background-color: white;
+  color: #246EE9;
+  border: 2px solid #246EE9;
+}
+.gtog-record-form .form-actions .btn.btn-reset {
+  background-color: white;
+  color: #246EE9;
+  border: 1px dashed #246EE9;
+}
+.gtog-record-form .form-actions .btn.btn-cancel {
+  background-color: white;
+  color: black;
+  border: 1px solid #737373;
+}
+.gtog-record-form .form-actions .btn.btn-success {
+  background-color: #28a745;
+  border: 1px solid #28a745;
+  color: white;
 }
 
 .profile-container {
