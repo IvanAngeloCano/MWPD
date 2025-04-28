@@ -256,3 +256,31 @@
 2025-04-28 13:22:30: Notification sent to Regional Director (ID: 3)
 2025-04-28 13:22:30: Transaction committed successfully
 2025-04-28 13:22:30: Success message set, redirecting to direct_hire_view.php?id=5
+2025-04-28 18:12:07: Script started - submit_clearance_approval_new.php
+2025-04-28 18:12:07: Record ID: 6
+2025-04-28 18:12:07: Transaction started
+2025-04-28 18:12:07: Record found: {"id":6,"control_no":"wa","name":"wa","jobsite":"wa","evaluated":"2025-04-03","for_confirmation":"2025-04-16","emailed_to_dhad":"2025-04-17","received_from_dhad":"2025-04-17","evaluator":"wa","note":"wa","type":"professional","status":null,"created_at":"2025-04-29 00:08:47","updated_at":"2025-04-29 00:08:47","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 18:12:07: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-28 18:12:07: Update result: true, Rows affected: 1
+2025-04-28 18:12:07: No existing approval found, creating new one...
+2025-04-28 18:12:07: Storing submitter user ID: 4 for record ID: 6
+2025-04-28 18:12:07: New approval inserted, ID: 46
+2025-04-28 18:12:07: Notifying Regional Directors about submission from adminla for record 6
+2025-04-28 18:12:07: Notification sent to Regional Director (ID: 1)
+2025-04-28 18:12:07: Notification sent to Regional Director (ID: 3)
+2025-04-28 18:12:07: Transaction committed successfully
+2025-04-28 18:12:07: Success message set, redirecting to direct_hire_view.php?id=6
+2025-04-28 18:40:27: Script started - submit_clearance_approval_new.php
+2025-04-28 18:40:27: Record ID: 11
+2025-04-28 18:40:27: Transaction started
+2025-04-28 18:40:27: Record found: {"id":11,"control_no":"DH-0090645","name":"JustinesTESTER","jobsite":"JULI","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:12:42","updated_at":"2025-04-28 16:12:42","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 18:40:27: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-28 18:40:27: Update result: true, Rows affected: 1
+2025-04-28 18:40:27: No existing approval found, creating new one...
+2025-04-28 18:40:27: Storing submitter user ID: 4 for record ID: 11
+2025-04-28 18:40:27: New approval inserted, ID: 46
+2025-04-28 18:40:27: Notifying Regional Directors about submission from adminla for record 11
+2025-04-28 18:40:27: Notification sent to Regional Director (ID: 1)
+2025-04-28 18:40:27: Notification sent to Regional Director (ID: 4)
+2025-04-28 18:40:27: Transaction committed successfully
+2025-04-28 18:40:27: Success message set, redirecting to direct_hire_view.php?id=11

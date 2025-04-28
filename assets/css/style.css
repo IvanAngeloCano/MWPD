@@ -1235,6 +1235,11 @@ html.loader-page {
           flex-direction: column;
   gap: 1rem;
 }
+.direct-hire-wrapper input {
+  border-radius: 6px;
+  border: 1px solid #737373;
+  width: 3rem;
+}
 .direct-hire-wrapper .direct-hire-top {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1284,6 +1289,9 @@ html.loader-page {
   gap: 0.5rem;
   font-size: 1rem;
 }
+.direct-hire-wrapper .direct-hire-top .controls input {
+  height: 2rem;
+}
 .direct-hire-wrapper .direct-hire-top .controls .search-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1292,7 +1300,7 @@ html.loader-page {
       -ms-flex: 1;
           flex: 1;
   gap: 0.5rem;
-  height: 2rem;
+  height: 1rem;
 }
 .direct-hire-wrapper .direct-hire-top .controls .search-bar {
   -webkit-box-flex: 1;
@@ -1373,11 +1381,11 @@ html.loader-page {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 0.875rem;
+  color: #737373;
 }
 .direct-hire-wrapper .direct-hire-top .table-footer .rows-input {
-  width: 60px;
+  width: 3rem;
   padding: 0.2rem;
   margin-left: 0.3rem;
 }
@@ -1430,6 +1438,7 @@ html.loader-page {
   color: #666;
 }
 .direct-hire-wrapper .direct-hire-bottom {
+  font-family: "Montserrat", sans-serif;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1451,6 +1460,7 @@ html.loader-page {
 }
 .direct-hire-wrapper .direct-hire-bottom .pagination button {
   height: 2rem;
+  font-family: "Montserrat", sans-serif !important;
 }
 .direct-hire-wrapper .direct-hire-bottom .pagination button,
 .direct-hire-wrapper .direct-hire-bottom .pagination a {
@@ -1508,13 +1518,12 @@ html.loader-page {
   gap: 0.3rem;
 }
 .direct-hire-wrapper .direct-hire-bottom .go-to-page label {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 .direct-hire-wrapper .direct-hire-bottom .go-to-page input {
-  font-size: 0.9rem;
-  width: 50px;
+  width: 3rem;
   height: 1.5rem;
-  padding: 0.3rem;
+  padding: 0.2rem;
 }
 .direct-hire-wrapper .direct-hire-bottom .go-btn {
   border: 1px solid transparent;
@@ -1592,10 +1601,6 @@ html.loader-page {
           justify-content: flex-end;
   gap: 10px;
   margin-top: 20px;
-}
-
-a {
-  text-decoration: none;
 }
 
 .add-record-wrapper {
@@ -3620,6 +3625,8 @@ a {
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
 }
 
 a:visited {
@@ -3634,8 +3641,6 @@ body {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   background-color: #f9f9f9;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
   color: black;
 }
 
