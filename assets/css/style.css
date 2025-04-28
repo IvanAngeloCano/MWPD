@@ -169,7 +169,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 1.5rem;
+  gap: 0.875rem;
 }
 .header .header-right .quick-add {
   padding: 0.4rem 0.8rem;
@@ -330,7 +330,7 @@ body.loader-page,
 html.loader-page {
   height: 100%;
   margin: 0;
-  background: #f9f9f9;
+  background: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -348,7 +348,7 @@ html.loader-page {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(36, 110, 233, 0.07);
+  background-color: white;
   z-index: 9999;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -366,14 +366,39 @@ html.loader-page {
 }
 
 .loader {
-  border: 8px solid #e3e8f0;
+  position: relative;
+  border: 8px solid #F3F4F6;
   border-top: 8px solid #246EE9;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   -webkit-animation: spin 1s linear infinite;
           animation: spin 1s linear infinite;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-bottom: 24px;
+}
+
+.loader-inner {
+  position: absolute;
+  -webkit-animation: spin2 1s linear infinite;
+          animation: spin2 1s linear infinite;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 @-webkit-keyframes spin {
@@ -397,9 +422,28 @@ html.loader-page {
             transform: rotate(360deg);
   }
 }
+@-webkit-keyframes spin2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
+@keyframes spin2 {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+            transform: rotate(-360deg);
+  }
+}
 .loader-logo {
-  width: 70px;
-  margin-bottom: 16px;
+  width: 100px;
 }
 
 .loader-text {
@@ -408,6 +452,191 @@ html.loader-page {
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 2px;
+}
+
+.main-grid {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr 1fr;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  place-items: center;
+  padding: 0px 80px;
+}
+.main-grid .upper-half-bg,
+.main-grid .lower-half-bg {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  left: 0;
+  z-index: 0;
+}
+.main-grid .login-error {
+  color: #e53935;
+  text-align: center;
+  font-size: 14px;
+  width: 100%;
+}
+.main-grid .upper-half-bg {
+  top: 0;
+  background-color: #246EE9;
+}
+.main-grid .lower-half-bg {
+  bottom: 0;
+  background-color: #FFFFFF;
+}
+.main-grid .login-wrapper {
+  grid-column: 1/span 2;
+  grid-row: 1/3;
+  z-index: 1;
+  align-self: center;
+  justify-self: center;
+  background: #FFFFFF;
+  padding: auto;
+  border-radius: 0.75rem;
+  -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 85%;
+  height: auto;
+  max-width: 420px;
+}
+.main-grid .login-wrapper form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  row-gap: 30px;
+  margin: 20px 0;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+.main-grid .login-wrapper .login-box {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.main-grid .login-wrapper .login-box .dmw-logo {
+  position: absolute;
+  top: -75px;
+  height: 120px;
+  border: 10px solid #246EE9;
+  background-color: #246EE9;
+  border-radius: 100%;
+}
+.main-grid .login-wrapper .login-box h2 {
+  margin-top: 70px;
+}
+.main-grid .info-upper-half,
+.main-grid .info-lower-half {
+  grid-column: 3/span 3;
+  z-index: 1;
+  padding: 0;
+  color: #737373;
+  margin: 0px;
+  width: 100%;
+}
+.main-grid .info-upper-half {
+  grid-row: 1/2;
+  align-self: end;
+  color: #F3F4F6;
+}
+.main-grid .info-upper-half p {
+  margin: 8px 0;
+}
+.main-grid .info-lower-half {
+  grid-row: 2/3;
+  align-self: start;
+}
+.main-grid .info-lower-half p {
+  margin: 8px 0;
+}
+
+.input-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  background-color: white;
+  height: 45px;
+}
+.input-group i {
+  color: #246EE9;
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+}
+.input-group input {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  font-family: "Montserrat", sans-serif;
+}
+.input-group input::-webkit-input-placeholder {
+  font-weight: 600;
+}
+.input-group input::-moz-placeholder {
+  font-weight: 600;
+}
+.input-group input:-ms-input-placeholder {
+  font-weight: 600;
+}
+.input-group input::-ms-input-placeholder {
+  font-weight: 600;
+}
+.input-group input::placeholder {
+  font-weight: 600;
+}
+.input-group:focus-within {
+  border-color: #246EE9;
+  -webkit-box-shadow: 0 0 0 2px rgba(36, 110, 233, 0.2);
+          box-shadow: 0 0 0 2px rgba(36, 110, 233, 0.2);
+}
+
+.login-button {
+  height: 45px;
+  padding: auto;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  border-radius: 6px;
+  background-color: #246EE9;
+  color: white;
+  border: none;
+}
+.login-button:hover {
+  cursor: pointer;
+}
+
+.bagong-logo {
+  width: 100px;
+  position: fixed; /* Positions the element relative to the viewport */
+  bottom: 20px; /* Places the element at the bottom edge */
+  right: 20px; /* Places the element at the right edge */
+  z-index: 1000; /* Ensures the element is on top of other content */
 }
 
 .dashboard-grid {
@@ -1169,29 +1398,6 @@ html.loader-page {
 }
 .direct-hire-wrapper .direct-hire-table table tbody tr td {
   padding: 0.75rem;
-}
-.direct-hire-wrapper .direct-hire-table table tbody tr .status {
-  padding: 0.3rem 0.6rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  display: inline-block;
-}
-.direct-hire-wrapper .direct-hire-table table tbody tr .status.approved {
-  background-color: #d4edda;
-  color: #155724;
-}
-.direct-hire-wrapper .direct-hire-table table tbody tr .status.pending {
-  background-color: #fff3cd;
-  color: #856404;
-}
-.direct-hire-wrapper .direct-hire-table table tbody tr .status.denied {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-.direct-hire-wrapper .direct-hire-table table tbody tr .status.declined {
-  background-color: #f8d7da;
-  color: #721c24;
 }
 .direct-hire-wrapper .direct-hire-table table tbody tr .action-icons {
   display: -webkit-box;
@@ -3463,215 +3669,26 @@ body {
   padding: 1rem;
 }
 
-.dashboard-header {
-  height: 60px;
-  background-color: #fff;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 0 1.5rem;
-  border-bottom: 1px solid #ddd;
-  -ms-flex-negative: 0;
-      flex-shrink: 0;
+.status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: inline-block;
 }
-
-.main-content {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  padding: 1.5rem;
-  overflow-y: auto;
-  background-color: #f9f9f9;
+.status.approved {
+  background-color: #d4edda;
+  color: #155724;
 }
-
-.main-grid {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: 1fr 1fr;
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-  place-items: center;
-  padding: 0px 80px;
+.status.pending {
+  background-color: #fff3cd;
+  color: #856404;
 }
-.main-grid .upper-half-bg,
-.main-grid .lower-half-bg {
-  position: absolute;
-  width: 100%;
-  height: 50%;
-  left: 0;
-  z-index: 0;
+.status.denied {
+  background-color: #f8d7da;
+  color: #721c24;
 }
-.main-grid .login-error {
-  color: #e53935;
-  text-align: center;
-  font-size: 14px;
-  position: absolute;
-  width: 100%;
-}
-.main-grid .upper-half-bg {
-  top: 0;
-  background-color: #246EE9;
-}
-.main-grid .lower-half-bg {
-  bottom: 0;
-  background-color: #FFFFFF;
-}
-.main-grid .login-wrapper {
-  grid-column: 1/span 2;
-  grid-row: 1/3;
-  z-index: 1;
-  align-self: center;
-  justify-self: center;
-  background: #FFFFFF;
-  padding: auto;
-  border-radius: 0.75rem;
-  -webkit-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  width: 85%;
-  height: auto;
-  max-width: 420px;
-}
-.main-grid .login-wrapper form {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  row-gap: 30px;
-  margin: 20px 0;
-  -webkit-box-align: stretch;
-      -ms-flex-align: stretch;
-          align-items: stretch;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
-}
-.main-grid .login-wrapper .login-box {
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.main-grid .login-wrapper .login-box .dmw-logo {
-  position: absolute;
-  top: -75px;
-  height: 120px;
-  border: 10px solid #246EE9;
-  background-color: #246EE9;
-  border-radius: 100%;
-}
-.main-grid .login-wrapper .login-box h2 {
-  margin-top: 70px;
-}
-.main-grid .info-upper-half,
-.main-grid .info-lower-half {
-  grid-column: 3/span 3;
-  z-index: 1;
-  padding: 0;
-  color: #737373;
-  margin: 0px;
-  width: 100%;
-}
-.main-grid .info-upper-half {
-  grid-row: 1/2;
-  align-self: end;
-  color: #F3F4F6;
-}
-.main-grid .info-upper-half p {
-  margin: 8px 0;
-}
-.main-grid .info-lower-half {
-  grid-row: 2/3;
-  align-self: start;
-}
-.main-grid .info-lower-half p {
-  margin: 8px 0;
-}
-
-.input-group {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
-  background-color: white;
-  height: 45px;
-}
-.input-group i {
-  color: #246EE9;
-  font-size: 1.25rem;
-  margin-right: 0.75rem;
-}
-.input-group input {
-  border: none;
-  outline: none;
-  font-size: 1rem;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  font-family: "Montserrat", sans-serif;
-}
-.input-group input::-webkit-input-placeholder {
-  font-weight: 600;
-}
-.input-group input::-moz-placeholder {
-  font-weight: 600;
-}
-.input-group input:-ms-input-placeholder {
-  font-weight: 600;
-}
-.input-group input::-ms-input-placeholder {
-  font-weight: 600;
-}
-.input-group input::placeholder {
-  font-weight: 600;
-}
-.input-group:focus-within {
-  border-color: #246EE9;
-  -webkit-box-shadow: 0 0 0 2px rgba(36, 110, 233, 0.2);
-          box-shadow: 0 0 0 2px rgba(36, 110, 233, 0.2);
-}
-
-.login-button {
-  height: 45px;
-  padding: auto;
-  width: 100%;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  border-radius: 6px;
-  background-color: #246EE9;
-  color: white;
-  border: none;
-}
-.login-button:hover {
-  cursor: pointer;
-}
-
-.bagong-logo {
-  width: 100px;
-  position: fixed; /* Positions the element relative to the viewport */
-  bottom: 20px; /* Places the element at the bottom edge */
-  right: 20px; /* Places the element at the right edge */
-  z-index: 1000; /* Ensures the element is on top of other content */
+.status.declined {
+  background-color: #f8d7da;
+  color: #721c24;
 }/*# sourceMappingURL=style.css.map */

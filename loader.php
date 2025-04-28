@@ -10,17 +10,25 @@ unset($_SESSION['show_loader']);
 ?>
 <!DOCTYPE html>
 <html lang="en" class="loader-page">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading...</title>
+    <link rel="icon" href="assets\images\DMW Logo.png" type="image/x-icon">
+
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body class="loader-page">
     <div class="loader-overlay">
-        <img src="assets/images/DMW Logo.png" alt="MWPD Logo" class="loader-logo">
-        <div class="loader"></div>
+        <div class="loader">
+            <div class="loader-inner">
+                <img src="assets/images/DMW Logo.png" alt="MWPD Logo" class="loader-logo">
+            </div>
+        </div>
+
         <div class="loader-text">Welcome to MWPD Filing System</div>
     </div>
     <script>
@@ -29,4 +37,5 @@ unset($_SESSION['show_loader']);
         }, 1500); // 1.5 seconds
     </script>
 </body>
+
 </html>

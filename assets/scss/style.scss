@@ -4,7 +4,7 @@
 
 @import 'sidebar', 'header', 'loader';
 
-@import 'dashboard', 'direct_hire', 'gov_to_gov', 'profile', 'accounts', 'approvals';
+@import 'login', 'dashboard', 'direct_hire', 'gov_to_gov', 'profile', 'accounts', 'approvals';
 
 * {
   margin: 0;
@@ -52,203 +52,54 @@ body {
   }
 }
 
+.status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: inline-block;
 
-
-
-.dashboard-header {
-  height: 60px;
-  background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1.5rem;
-  border-bottom: 1px solid #ddd;
-  flex-shrink: 0;
-}
-
-.main-content {
-  flex-grow: 1;
-  padding: 1.5rem;
-  overflow-y: auto;
-  background-color: #f9f9f9;
-}
-
-
-
-
-.main-grid {
-  display: grid;
-  gap: 15px;
-  grid-template-columns: repeat(5, 1fr); // 5 columns
-  grid-template-rows: 1fr 1fr;         // upper and lower halves
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-  place-items: center; // center everything as fallback
-  padding: 0px 80px;
-
-  // Aesthetic background layers
-  .upper-half-bg,
-  .lower-half-bg {
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    left: 0;
-    z-index: 0;
+  &.approved {
+    background-color: #d4edda;
+    color: #155724;
   }
 
-  .login-error {
-    color: #e53935; // strong red for errors
-    text-align: center;
-    font-size: 14px;
-    position: absolute;
-    width: 100%;
+  &.pending {
+    background-color: #fff3cd;
+    color: #856404;
   }
 
-  .upper-half-bg {
-    top: 0;
-    background-color: $brand-primary;
+  &.denied {
+    background-color: #f8d7da;
+    color: #721c24;
   }
 
-  .lower-half-bg {
-    bottom: 0;
-    background-color: $neutral-white;
-  }
-
-  // Login form wrapper (left side, spans both rows)
-  .login-wrapper {
-    grid-column: 1 / span 2;
-    grid-row: 1 / 3;
-    z-index: 1;
-    align-self: center;
-    justify-self: center;
-    background: $neutral-white;
-    padding: auto;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    width: 85%;
-    height: auto;
-    max-width: 420px;
-
-    form {
-      display: flex;
-      flex-direction: column;
-      row-gap: 30px;
-      margin: 20px 0;
-      align-items: stretch;
-      justify-content: space-evenly;
-    }
-
-
-    .login-box {
-      position: relative; 
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .dmw-logo {
-        position: absolute;
-        top: -75px;
-        height: 120px;
-        border: 10px solid $brand-primary;
-        background-color: $brand-primary;
-        border-radius: 100%;
-      }
-
-      h2{
-        margin-top: 70px;
-      }
-    }
-
-    
-  }
-
-  // Info texts (right side)
-  .info-upper-half,
-  .info-lower-half {
-    grid-column: 3 / span 3;
-    z-index: 1;
-    padding: 0;
-    color: $neutral-dark;
-    margin: 0px;
-    width: 100%;
-  }
-
-  .info-upper-half {
-    grid-row: 1 / 2;
-    align-self: end;
-    color: $neutral-light;
-    p {
-      margin: 8px 0;
-    }
-  }
-
-  .info-lower-half {
-    grid-row: 2 / 3;
-    align-self: start;
-    p {
-      margin: 8px 0;
-    }
+  &.declined {
+    background-color: #f8d7da;
+    color: #721c24;
   }
 }
 
 
 
-.input-group {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem;
-  padding: 0.75rem 1rem;
-  background-color: white;
-  height: 45px;
-
-  i {
-    color: $brand-primary; // Your blue color variable
-    font-size: 1.25rem;
-    margin-right: 0.75rem;
-  }
-
-  input {
-    border: none;
-    outline: none;
-    font-size: 1rem;
-    flex: 1;
-    font-family: $font-family;
-
-    &::placeholder {
-
-      font-weight: 600;
-    }
-  }
-
-  &:focus-within {
-    border-color: $brand-primary;
-    box-shadow: 0 0 0 2px rgba($brand-primary, 0.2); // Optional hover effect
-  }
-}
-
-.login-button{
-  height: 45px;
-  padding: auto;
-  width: 100%;
-  font-family: $font-family;
-  font-weight: 500;
-  border-radius: $border-radius;
-  background-color: $brand-primary;
-  color: white;
-  border: none;
-  
-  &:hover {
-    cursor: pointer;
-  }
-}
 
 
-.bagong-logo {
-  width: 100px;
-  position: fixed; /* Positions the element relative to the viewport */
-  bottom: 20px; /* Places the element at the bottom edge */
-  right: 20px; /* Places the element at the right edge */
-  z-index: 1000; /* Ensures the element is on top of other content */
-}
+// .dashboard-header {
+//   height: 60px;
+//   background-color: #fff;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 0 1.5rem;
+//   border-bottom: 1px solid #ddd;
+//   flex-shrink: 0;
+// }
+
+
+// .main-content {
+//   flex-grow: 1;
+//   padding: 1.5rem;
+//   overflow-y: auto;
+//   background-color: #f9f9f9;
+// }
+
