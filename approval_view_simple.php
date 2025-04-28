@@ -6,20 +6,21 @@ error_reporting(E_ALL);
 include 'session.php';
 require_once 'connection.php';
 require_once 'notifications.php'; // Include notification functions
-$pageTitle = "Approval View - MWPD Filing System";
+$pageTitle = "Approval";
 include '_head.php';
 
 // Function to log errors
-function logError($message) {
-    file_put_contents('approval_error_log.txt', date('Y-m-d H:i:s') . ': ' . $message . "\n", FILE_APPEND);
+function logError($message)
+{
+  file_put_contents('approval_error_log.txt', date('Y-m-d H:i:s') . ': ' . $message . "\n", FILE_APPEND);
 }
 
 // Check if user has Regional Director role
 if ($_SESSION['role'] !== 'regional director' && $_SESSION['role'] !== 'Regional Director') {
-    // Redirect to dashboard with error message
-    $_SESSION['error_message'] = "You don't have permission to access this page.";
-    header('Location: dashboard.php');
-    exit();
+  // Redirect to dashboard with error message
+  $_SESSION['error_message'] = "You don't have permission to access this page.";
+  header('Location: dashboard.php');
+  exit();
 }
 
 // Initialize variables
@@ -29,104 +30,104 @@ $success_message = '';
 
 // Process approval actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action']) && isset($_POST['approval_id'])) {
-        $action = $_POST['action'];
-        $approval_id = (int)$_POST['approval_id'];
-        $direct_hire_id = isset($_POST['direct_hire_id']) ? (int)$_POST['direct_hire_id'] : 0;
-        $comments = isset($_POST['comments']) ? trim($_POST['comments']) : '';
-        
-        try {
-            // Update record status based on action
-            $new_status = ($action === 'approve') ? 'approved' : 'denied';
-            
-            // Begin transaction
-            $pdo->beginTransaction();
-            
-            // First check if the approval record exists
-            $check_stmt = $pdo->prepare("SELECT * FROM direct_hire_clearance_approvals WHERE id = ?");
-            $check_stmt->execute([$approval_id]);
-            $approval_record = $check_stmt->fetch(PDO::FETCH_ASSOC);
-            
-            if ($approval_record) {
-                // Get the direct_hire record to retrieve the name
-                $name = "Applicant";
-                $submitted_by = $approval_record['submitted_by'] ?? 0;
-                
-                if ($direct_hire_id > 0 || (isset($approval_record['direct_hire_id']) && $approval_record['direct_hire_id'] > 0)) {
-                    if ($direct_hire_id <= 0) {
-                        $direct_hire_id = $approval_record['direct_hire_id'];
-                    }
-                    
-                    $dh_stmt = $pdo->prepare("SELECT name FROM direct_hire WHERE id = ?");
-                    $dh_stmt->execute([$direct_hire_id]);
-                    $dh_record = $dh_stmt->fetch(PDO::FETCH_ASSOC);
-                    if ($dh_record && isset($dh_record['name'])) {
-                        $name = $dh_record['name'];
-                    }
-                }
-                
-                // Update the approval record
-                $update_stmt = $pdo->prepare("UPDATE direct_hire_clearance_approvals SET status = ?, approved_by = ?, comments = ?, updated_at = NOW() WHERE id = ?");
-                $update_stmt->execute([$new_status, $_SESSION['user_id'], $comments, $approval_id]);
-                
-                // Get the direct_hire_id from the approval record if not provided
-                if ($direct_hire_id <= 0 && isset($approval_record['direct_hire_id'])) {
-                    $direct_hire_id = $approval_record['direct_hire_id'];
-                }
-                
-                // If we have the direct_hire_id, update the direct_hire record status
-                if ($direct_hire_id > 0) {
-                    $check_dh = $pdo->prepare("SELECT * FROM direct_hire WHERE id = ?");
-                    $check_dh->execute([$direct_hire_id]);
-                    
-                    if ($check_dh->rowCount() > 0) {
-                        $update_dh = $pdo->prepare("UPDATE direct_hire SET status = ?, approved_by = ?, approved_at = NOW() WHERE id = ?");
-                        $update_dh->execute([$new_status, $_SESSION['user_id'], $direct_hire_id]);
-                    } else {
-                        logError("Direct hire record not found for ID: $direct_hire_id");
-                    }
-                }
-                
-                // Send notification to the user who submitted the record
-                if ($submitted_by > 0) {
-                    notifyApprovalDecision($direct_hire_id, $approval_id, $submitted_by, $name, $new_status, $comments);
-                    logError("Notification sent to user $submitted_by about $name approval status: $new_status");
-                } else {
-                    logError("No submitted_by user found for approval ID: $approval_id");
-                }
-                
-                // Commit the transaction
-                $pdo->commit();
-                $success_message = "Record has been " . ($new_status == 'approved' ? 'approved' : 'denied') . " successfully.";
-                
-                // Log the approval action
-                logError("Approval action: $action for $name (ID: $direct_hire_id) by user " . $_SESSION['user_id'] . " with status $new_status");
-            } else {
-                $pdo->rollBack();
-                $error_message = "Approval record not found.";
-                logError("Approval record not found for ID: $approval_id");
-            }
-        } catch (PDOException $e) {
-            if ($pdo->inTransaction()) {
-                $pdo->rollBack();
-            }
-            $error_message = "Database error: " . $e->getMessage();
-            logError("Database error: " . $e->getMessage());
+  if (isset($_POST['action']) && isset($_POST['approval_id'])) {
+    $action = $_POST['action'];
+    $approval_id = (int)$_POST['approval_id'];
+    $direct_hire_id = isset($_POST['direct_hire_id']) ? (int)$_POST['direct_hire_id'] : 0;
+    $comments = isset($_POST['comments']) ? trim($_POST['comments']) : '';
+
+    try {
+      // Update record status based on action
+      $new_status = ($action === 'approve') ? 'approved' : 'denied';
+
+      // Begin transaction
+      $pdo->beginTransaction();
+
+      // First check if the approval record exists
+      $check_stmt = $pdo->prepare("SELECT * FROM direct_hire_clearance_approvals WHERE id = ?");
+      $check_stmt->execute([$approval_id]);
+      $approval_record = $check_stmt->fetch(PDO::FETCH_ASSOC);
+
+      if ($approval_record) {
+        // Get the direct_hire record to retrieve the name
+        $name = "Applicant";
+        $submitted_by = $approval_record['submitted_by'] ?? 0;
+
+        if ($direct_hire_id > 0 || (isset($approval_record['direct_hire_id']) && $approval_record['direct_hire_id'] > 0)) {
+          if ($direct_hire_id <= 0) {
+            $direct_hire_id = $approval_record['direct_hire_id'];
+          }
+
+          $dh_stmt = $pdo->prepare("SELECT name FROM direct_hire WHERE id = ?");
+          $dh_stmt->execute([$direct_hire_id]);
+          $dh_record = $dh_stmt->fetch(PDO::FETCH_ASSOC);
+          if ($dh_record && isset($dh_record['name'])) {
+            $name = $dh_record['name'];
+          }
         }
-    } else {
-        $error_message = "Missing required parameters.";
+
+        // Update the approval record
+        $update_stmt = $pdo->prepare("UPDATE direct_hire_clearance_approvals SET status = ?, approved_by = ?, comments = ?, updated_at = NOW() WHERE id = ?");
+        $update_stmt->execute([$new_status, $_SESSION['user_id'], $comments, $approval_id]);
+
+        // Get the direct_hire_id from the approval record if not provided
+        if ($direct_hire_id <= 0 && isset($approval_record['direct_hire_id'])) {
+          $direct_hire_id = $approval_record['direct_hire_id'];
+        }
+
+        // If we have the direct_hire_id, update the direct_hire record status
+        if ($direct_hire_id > 0) {
+          $check_dh = $pdo->prepare("SELECT * FROM direct_hire WHERE id = ?");
+          $check_dh->execute([$direct_hire_id]);
+
+          if ($check_dh->rowCount() > 0) {
+            $update_dh = $pdo->prepare("UPDATE direct_hire SET status = ?, approved_by = ?, approved_at = NOW() WHERE id = ?");
+            $update_dh->execute([$new_status, $_SESSION['user_id'], $direct_hire_id]);
+          } else {
+            logError("Direct hire record not found for ID: $direct_hire_id");
+          }
+        }
+
+        // Send notification to the user who submitted the record
+        if ($submitted_by > 0) {
+          notifyApprovalDecision($direct_hire_id, $approval_id, $submitted_by, $name, $new_status, $comments);
+          logError("Notification sent to user $submitted_by about $name approval status: $new_status");
+        } else {
+          logError("No submitted_by user found for approval ID: $approval_id");
+        }
+
+        // Commit the transaction
+        $pdo->commit();
+        $success_message = "Record has been " . ($new_status == 'approved' ? 'approved' : 'denied') . " successfully.";
+
+        // Log the approval action
+        logError("Approval action: $action for $name (ID: $direct_hire_id) by user " . $_SESSION['user_id'] . " with status $new_status");
+      } else {
+        $pdo->rollBack();
+        $error_message = "Approval record not found.";
+        logError("Approval record not found for ID: $approval_id");
+      }
+    } catch (PDOException $e) {
+      if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+      }
+      $error_message = "Database error: " . $e->getMessage();
+      logError("Database error: " . $e->getMessage());
     }
+  } else {
+    $error_message = "Missing required parameters.";
+  }
 }
 
 // Create approval table if it doesn't exist
 try {
-    $tableCheck = $pdo->prepare("SHOW TABLES LIKE 'direct_hire_clearance_approvals'");
-    $tableCheck->execute();
-    $tableExists = $tableCheck->rowCount() > 0;
-    
-    if (!$tableExists) {
-        // Create the approval table
-        $createTableSQL = "CREATE TABLE direct_hire_clearance_approvals (
+  $tableCheck = $pdo->prepare("SHOW TABLES LIKE 'direct_hire_clearance_approvals'");
+  $tableCheck->execute();
+  $tableExists = $tableCheck->rowCount() > 0;
+
+  if (!$tableExists) {
+    // Create the approval table
+    $createTableSQL = "CREATE TABLE direct_hire_clearance_approvals (
             id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
             direct_hire_id INT NOT NULL,
             document_id INT NULL,
@@ -139,27 +140,27 @@ try {
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             FOREIGN KEY (direct_hire_id) REFERENCES direct_hire(id) ON DELETE CASCADE
         )";
-        $pdo->exec($createTableSQL);
-        logError("Created direct_hire_clearance_approvals table");
-    }
+    $pdo->exec($createTableSQL);
+    logError("Created direct_hire_clearance_approvals table");
+  }
 } catch (PDOException $e) {
-    logError("Error checking/creating table: " . $e->getMessage());
+  logError("Error checking/creating table: " . $e->getMessage());
 }
 
 // Fetch all pending approvals
 try {
-    // Check if the required columns exist in the table
-    $checkColumnQuery = "SHOW COLUMNS FROM direct_hire_clearance_approvals LIKE 'record_type'";
-    $columnCheck = $pdo->query($checkColumnQuery);
-    
-    if ($columnCheck->rowCount() == 0) {
-        // Add the record_type column if it doesn't exist
-        $pdo->exec("ALTER TABLE direct_hire_clearance_approvals ADD COLUMN record_type ENUM('direct_hire','clearance','gov_to_gov','balik_manggagawa') NOT NULL DEFAULT 'clearance' AFTER document_id");
-        logError("Added record_type column to direct_hire_clearance_approvals");
-    }
-    
-    // Use a basic query to avoid potential issues
-    $stmt = $pdo->query("
+  // Check if the required columns exist in the table
+  $checkColumnQuery = "SHOW COLUMNS FROM direct_hire_clearance_approvals LIKE 'record_type'";
+  $columnCheck = $pdo->query($checkColumnQuery);
+
+  if ($columnCheck->rowCount() == 0) {
+    // Add the record_type column if it doesn't exist
+    $pdo->exec("ALTER TABLE direct_hire_clearance_approvals ADD COLUMN record_type ENUM('direct_hire','clearance','gov_to_gov','balik_manggagawa') NOT NULL DEFAULT 'clearance' AFTER document_id");
+    logError("Added record_type column to direct_hire_clearance_approvals");
+  }
+
+  // Use a basic query to avoid potential issues
+  $stmt = $pdo->query("
         SELECT a.id as approval_id, a.direct_hire_id, a.status,
                d.name, d.jobsite, d.type, a.created_at
         FROM direct_hire_clearance_approvals a
@@ -167,54 +168,60 @@ try {
         WHERE a.status = 'pending'
         ORDER BY a.created_at DESC
     ");
-    
-    if ($stmt) {
-        $pending_approvals = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } else {
-        logError("Statement failed after execution");
-    }
+
+  if ($stmt) {
+    $pending_approvals = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  } else {
+    logError("Statement failed after execution");
+  }
 } catch (PDOException $e) {
-    $error_message = "Error fetching pending approvals: " . $e->getMessage();
-    logError("Error fetching approvals: " . $e->getMessage());
+  $error_message = "Error fetching pending approvals: " . $e->getMessage();
+  logError("Error fetching approvals: " . $e->getMessage());
 }
 
 // Format date for display
-function format_date($date_string) {
-    if (empty($date_string)) return 'N/A';
-    return date('M j, Y', strtotime($date_string));
+function format_date($date_string)
+{
+  if (empty($date_string)) return 'N/A';
+  return date('M j, Y', strtotime($date_string));
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $pageTitle ?></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        /* Fix Bootstrap modal backdrop and z-index issues */
-        .modal-backdrop.show {
-          opacity: 0.5 !important;
-          z-index: 1050 !important;
-        }
-        .modal {
-          z-index: 1060 !important;
-        }
-        /* Ensure modal is above sidebar/header if custom z-indexes are used */
-        .modal-dialog {
-          z-index: 1061 !important;
-        }
-        /* Prevent backdrop from blocking pointer events on modal buttons */
-        .modal-backdrop {
-          pointer-events: none !important;
-        }
-        .modal.show {
-          pointer-events: auto !important;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><?= $pageTitle ?></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Fix Bootstrap modal backdrop and z-index issues */   
+    
+    .modal-backdrop.show {
+      opacity: 0.5 !important;
+      z-index: 1050 !important;
+    }
+
+    .modal {
+      z-index: 1060 !important;
+    }
+
+    /* Ensure modal is above sidebar/header if custom z-indexes are used */
+    .modal-dialog {
+      z-index: 1061 !important;
+    }
+
+    /* Prevent backdrop from blocking pointer events on modal buttons */
+    .modal-backdrop {
+      pointer-events: none !important;
+    }
+
+    .modal.show {
+      pointer-events: auto !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -266,20 +273,20 @@ function format_date($date_string) {
                           <a href="approval_detail_view.php?id=<?= $approval['approval_id'] ?>" class="btn btn-sm btn-primary">
                             <i class="fas fa-eye"></i> View
                           </a>
-                          <button class="btn btn-sm btn-success approve-record" 
-                                  data-bs-toggle="modal" 
-                                  data-bs-target="#approveModal"
-                                  data-id="<?= $approval['approval_id'] ?>"
-                                  data-direct-hire-id="<?= $approval['direct_hire_id'] ?>"
-                                  data-name="<?= htmlspecialchars($approval['name']) ?>">
+                          <button class="btn btn-sm btn-success approve-record"
+                            data-bs-toggle="modal"
+                            data-bs-target="#approveModal"
+                            data-id="<?= $approval['approval_id'] ?>"
+                            data-direct-hire-id="<?= $approval['direct_hire_id'] ?>"
+                            data-name="<?= htmlspecialchars($approval['name']) ?>">
                             <i class="fas fa-check"></i> Approve
                           </button>
-                          <button class="btn btn-sm btn-danger deny-record" 
-                                  data-bs-toggle="modal" 
-                                  data-bs-target="#denyModal"
-                                  data-id="<?= $approval['approval_id'] ?>"
-                                  data-direct-hire-id="<?= $approval['direct_hire_id'] ?>"
-                                  data-name="<?= htmlspecialchars($approval['name']) ?>">
+                          <button class="btn btn-sm btn-danger deny-record"
+                            data-bs-toggle="modal"
+                            data-bs-target="#denyModal"
+                            data-id="<?= $approval['approval_id'] ?>"
+                            data-direct-hire-id="<?= $approval['direct_hire_id'] ?>"
+                            data-name="<?= htmlspecialchars($approval['name']) ?>">
                             <i class="fas fa-times"></i> Deny
                           </button>
                         </td>
@@ -376,10 +383,13 @@ function format_date($date_string) {
     });
 
     // Extra: force modal focus and prevent backdrop issues
-    document.addEventListener('shown.bs.modal', function (event) {
+    document.addEventListener('shown.bs.modal', function(event) {
       const modal = event.target;
-      setTimeout(() => { modal.focus(); }, 50);
+      setTimeout(() => {
+        modal.focus();
+      }, 50);
     }, true);
   </script>
 </body>
+
 </html>

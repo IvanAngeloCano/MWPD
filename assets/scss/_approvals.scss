@@ -1,7 +1,6 @@
 .approvals-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
 
   .approvals-top {
     display: flex;
@@ -561,7 +560,3 @@
   }
 }
 
-// Global style for links inside approval pages
-a {
-  text-decoration: none;
-}

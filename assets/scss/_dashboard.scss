@@ -27,6 +27,12 @@
   grid-column: span 2;
   grid-row: 3 / span 3;
   overflow: auto;
+  display: flex;
+  justify-content: start;
+
+  h2 {
+    margin-bottom: .5rem;
+  }
 
   table {
     width: 100%;

@@ -16,11 +16,13 @@ a:visited{
   color: inherit;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
-  margin: 0;
-  padding: 0;
   background-color: #f9f9f9;
   box-sizing: border-box;
   color: black;

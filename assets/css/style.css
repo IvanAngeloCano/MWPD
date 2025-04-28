@@ -446,6 +446,15 @@ html.loader-page {
   grid-column: span 2;
   grid-row: 3/span 3;
   overflow: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+}
+.box-pending-approvals h2 {
+  margin-bottom: 0.5rem;
 }
 .box-pending-approvals table {
   width: 100%;
@@ -2839,7 +2848,6 @@ a {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 1rem;
 }
 .approvals-wrapper .approvals-top {
   display: -webkit-box;
@@ -3401,10 +3409,6 @@ a {
   text-align: center;
 }
 
-a {
-  text-decoration: none;
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -3416,11 +3420,13 @@ a:visited {
   color: inherit;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  margin: 0;
-  padding: 0;
   background-color: #f9f9f9;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
