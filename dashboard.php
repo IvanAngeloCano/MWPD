@@ -274,9 +274,15 @@ function time_elapsed_string($datetime, $full = false) {
             </div>
           </div>
 
-          <!-- Box 4: Activity List -->
+          <!-- Box 4: This Month List -->
           <div class="bento-box box-activity-log">
-            <h2>Recent Activity</h2>
+            <h2>This Month</h2>
+            
+          </div>
+          
+          <!-- Box 5: EMe (Bottom) -->
+          <div class="bento-box box-statistics">
+            <h2>Recent System Activity</h2>
             <?php if (count($activity_logs) > 0): ?>
             <ul class="activity-list">
               <?php foreach ($activity_logs as $log): 
@@ -305,43 +311,6 @@ function time_elapsed_string($datetime, $full = false) {
                 <p>No recent activity</p>
             </div>
             <?php endif; ?>
-          </div>
-          
-          <!-- Box 5: Statistics (Bottom) -->
-          <div class="bento-box box-statistics">
-            <h2>Statistics</h2>
-            <div class="statistics-content">
-              <!-- Monthly Metrics -->
-              <div class="stat-metrics">
-                <div class="metric-items">
-                  <div class="metric-item">
-                    <div class="metric-label">Total Records</div>
-                    <div class="metric-value"><?= number_format($direct_hire_total) ?></div>
-                    <div class="metric-trend positive">+12.5%</div>
-                  </div>
-                  <div class="metric-item">
-                    <div class="metric-label">Approval Rate</div>
-                    <div class="metric-value">84%</div>
-                    <div class="metric-trend positive">+2.3%</div>
-                  </div>
-                  <div class="metric-item">
-                    <div class="metric-label">Avg Processing</div>
-                    <div class="metric-value">3.2 days</div>
-                    <div class="metric-trend negative">+0.5 days</div>
-                  </div>
-                  <div class="metric-item">
-                    <div class="metric-label">Pending</div>
-                    <div class="metric-value"><?= number_format($direct_hire_pending) ?></div>
-                    <div class="metric-trend neutral">0%</div>
-                  </div>
-                  <div class="metric-item">
-                    <div class="metric-label">Total in Database</div>
-                    <div class="metric-value"><?= number_format($direct_hire_total) ?></div>
-                    <div class="metric-trend positive">+15.2%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </main>
 

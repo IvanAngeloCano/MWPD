@@ -228,3 +228,17 @@
 2025-04-26 16:02:18: Notification sent to Regional Director (ID: 1)
 2025-04-26 16:02:18: Transaction committed successfully
 2025-04-26 16:02:18: Success message set, redirecting to direct_hire_view.php?id=3
+2025-04-28 09:13:24: Script started - submit_clearance_approval_new.php
+2025-04-28 09:13:24: Record ID: 2
+2025-04-28 09:13:24: Transaction started
+2025-04-28 09:13:24: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:13:24: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-28 09:13:24: Update result: true, Rows affected: 1
+2025-04-28 09:13:24: No existing approval found, creating new one...
+2025-04-28 09:13:24: Storing submitter user ID: 3 for record ID: 2
+2025-04-28 09:13:24: New approval inserted, ID: 44
+2025-04-28 09:13:24: Notifying Regional Directors about submission from Ivan Angelo S. Cano for record 2
+2025-04-28 09:13:24: Notification sent to Regional Director (ID: 1)
+2025-04-28 09:13:24: Notification sent to Regional Director (ID: 3)
+2025-04-28 09:13:24: Transaction committed successfully
+2025-04-28 09:13:24: Success message set, redirecting to direct_hire_view.php?id=2

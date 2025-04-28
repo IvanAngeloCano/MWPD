@@ -415,6 +415,7 @@ html.loader-page {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(7, 1fr);
   gap: 1rem;
+  min-height: 600px;
   height: 100%;
 }
 
@@ -483,7 +484,8 @@ html.loader-page {
 
 .box-calendar {
   grid-column: 3;
-  grid-row: 1/span 5;
+  grid-row: 1/span 4;
+  gap: 0;
 }
 .box-calendar .calendar-placeholder {
   background-color: #f0f0f0;
@@ -497,9 +499,9 @@ html.loader-page {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
   color: #aaa;
 }
 
@@ -510,7 +512,7 @@ html.loader-page {
 
 .box-activity-log {
   grid-column: 3;
-  grid-row: 6/span 2;
+  grid-row: 5/span 3;
 }
 .box-activity-log ul {
   list-style: none;
@@ -649,7 +651,7 @@ html.loader-page {
   color: #246EE9;
 }
 .box-total-records .record-card .card-text .record-label {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   color: #737373;
 }
 .box-total-records .record-card .card-icon {
@@ -666,7 +668,6 @@ html.loader-page {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  gap: 1.2rem;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -698,15 +699,14 @@ html.loader-page {
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
   font-weight: 600;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  color: #333;
+  font-size: 0.875rem;
+  color: #737373;
 }
 .box-calendar .calendar-grid {
   position: relative;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 1rem 0.4em;
+  gap: 0.5rem 0.4rem;
   text-align: center;
 }
 .box-calendar .calendar-grid .day {

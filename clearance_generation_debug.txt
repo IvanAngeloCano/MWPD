@@ -254,3 +254,154 @@
 2025-04-26 14:15:34: PDF conversion successful
 2025-04-26 14:15:34: Document served without storing in database as requested
 2025-04-26 14:15:34: Cleaned up temporary DOCX file: temp/Clearance_DH-001_20250426_141528.docx
+2025-04-28 09:04:31: Clearance generation script started
+2025-04-28 09:04:31: Direct hire ID: 2
+2025-04-28 09:04:31: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:04:31: Record approval status: Not approved
+2025-04-28 09:04:31: Using template file: Directhireclearance.docx
+2025-04-28 09:04:31: Status is not approved - no signature
+2025-04-28 09:04:31: Document saved to: temp/Clearance_DH-0040_20250428_090431.docx
+2025-04-28 09:04:35: PDF conversion successful
+2025-04-28 09:04:35: Document served without storing in database as requested
+2025-04-28 09:04:35: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090431.docx
+2025-04-28 09:04:36: Clearance generation script started
+2025-04-28 09:04:36: Direct hire ID: 2
+2025-04-28 09:04:36: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:04:36: Record approval status: Not approved
+2025-04-28 09:04:36: Using template file: Directhireclearance.docx
+2025-04-28 09:04:36: Status is not approved - no signature
+2025-04-28 09:04:36: Document saved to: temp/Clearance_DH-0040_20250428_090436.docx
+2025-04-28 09:04:39: PDF conversion successful
+2025-04-28 09:04:39: Document served without storing in database as requested
+2025-04-28 09:04:39: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090436.docx
+2025-04-28 09:04:42: Clearance generation script started
+2025-04-28 09:04:42: Direct hire ID: 2
+2025-04-28 09:04:42: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:04:42: Record approval status: Not approved
+2025-04-28 09:04:42: Using template file: Directhireclearance.docx
+2025-04-28 09:04:42: Status is not approved - no signature
+2025-04-28 09:04:42: Document saved to: temp/Clearance_DH-0040_20250428_090442.docx
+2025-04-28 09:04:47: PDF conversion successful
+2025-04-28 09:04:47: Document served without storing in database as requested
+2025-04-28 09:04:47: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090442.docx
+2025-04-28 09:04:47: Clearance generation script started
+2025-04-28 09:04:47: Direct hire ID: 2
+2025-04-28 09:04:47: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:04:47: Record approval status: Not approved
+2025-04-28 09:04:47: Using template file: Directhireclearance.docx
+2025-04-28 09:04:47: Status is not approved - no signature
+2025-04-28 09:04:47: Document saved to: temp/Clearance_DH-0040_20250428_090447.docx
+2025-04-28 09:04:54: PDF conversion successful
+2025-04-28 09:04:54: Document served without storing in database as requested
+2025-04-28 09:04:54: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090447.docx
+2025-04-28 09:04:54: Clearance generation script started
+2025-04-28 09:04:54: Direct hire ID: 2
+2025-04-28 09:04:54: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:04:54: Record approval status: Not approved
+2025-04-28 09:04:54: Using template file: Directhireclearance.docx
+2025-04-28 09:04:54: Status is not approved - no signature
+2025-04-28 09:04:54: Document saved to: temp/Clearance_DH-0040_20250428_090454.docx
+2025-04-28 09:05:00: PDF conversion successful
+2025-04-28 09:05:00: Document served without storing in database as requested
+2025-04-28 09:05:00: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090454.docx
+2025-04-28 09:05:00: Clearance generation script started
+2025-04-28 09:05:00: Direct hire ID: 2
+2025-04-28 09:05:00: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:05:00: Record approval status: Not approved
+2025-04-28 09:05:00: Using template file: Directhireclearance.docx
+2025-04-28 09:05:00: Status is not approved - no signature
+2025-04-28 09:05:00: Document saved to: temp/Clearance_DH-0040_20250428_090500.docx
+2025-04-28 09:05:05: PDF conversion successful
+2025-04-28 09:05:05: Document served without storing in database as requested
+2025-04-28 09:05:05: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090500.docx
+2025-04-28 09:05:09: Clearance generation script started
+2025-04-28 09:05:09: Direct hire ID: 2
+2025-04-28 09:05:09: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:05:09: Record approval status: Not approved
+2025-04-28 09:05:09: Using template file: Directhireclearance.docx
+2025-04-28 09:05:09: Status is not approved - no signature
+2025-04-28 09:05:09: Document saved to: temp/Clearance_DH-0040_20250428_090509.docx
+2025-04-28 09:05:14: PDF conversion successful
+2025-04-28 09:05:14: Document served without storing in database as requested
+2025-04-28 09:05:14: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090509.docx
+2025-04-28 09:05:15: Clearance generation script started
+2025-04-28 09:05:15: Direct hire ID: 2
+2025-04-28 09:05:15: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:05:15: Record approval status: Not approved
+2025-04-28 09:05:15: Using template file: Directhireclearance.docx
+2025-04-28 09:05:15: Status is not approved - no signature
+2025-04-28 09:05:15: Document saved to: temp/Clearance_DH-0040_20250428_090515.docx
+2025-04-28 09:05:19: PDF conversion successful
+2025-04-28 09:05:20: Document served without storing in database as requested
+2025-04-28 09:05:20: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090515.docx
+2025-04-28 09:06:28: Clearance generation script started
+2025-04-28 09:06:28: Direct hire ID: 2
+2025-04-28 09:06:28: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:06:28: Record approval status: Not approved
+2025-04-28 09:06:28: Using template file: Directhireclearance.docx
+2025-04-28 09:06:28: Status is not approved - no signature
+2025-04-28 09:06:28: Document saved to: temp/Clearance_DH-0040_20250428_090628.docx
+2025-04-28 09:06:34: PDF conversion successful
+2025-04-28 09:06:34: Document served without storing in database as requested
+2025-04-28 09:06:34: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090628.docx
+2025-04-28 09:06:40: Clearance generation script started
+2025-04-28 09:06:40: Direct hire ID: 2
+2025-04-28 09:06:40: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:06:40: Record approval status: Not approved
+2025-04-28 09:06:40: Using template file: Directhireclearance.docx
+2025-04-28 09:06:40: Status is not approved - no signature
+2025-04-28 09:06:40: Document saved to: temp/Clearance_DH-0040_20250428_090640.docx
+2025-04-28 09:06:45: PDF conversion successful
+2025-04-28 09:06:45: Document served without storing in database as requested
+2025-04-28 09:06:45: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090640.docx
+2025-04-28 09:07:03: Clearance generation script started
+2025-04-28 09:07:03: Direct hire ID: 2
+2025-04-28 09:07:03: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:07:03: Record approval status: Not approved
+2025-04-28 09:07:03: Using template file: Directhireclearance.docx
+2025-04-28 09:07:03: Status is not approved - no signature
+2025-04-28 09:07:03: Document saved to: temp/Clearance_DH-0040_20250428_090703.docx
+2025-04-28 09:07:09: PDF conversion successful
+2025-04-28 09:07:09: Document served without storing in database as requested
+2025-04-28 09:07:09: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_090703.docx
+2025-04-28 09:09:03: Clearance generation script started
+2025-04-28 09:09:03: Direct hire ID: 1
+2025-04-28 09:09:03: Record found: {"id":1,"control_no":"DH-001","name":"Justinesb","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":"approved","created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 23:34:33","submitted_by":null,"approved_by":1,"approved_at":"2025-04-26 23:34:33"}
+2025-04-28 09:09:03: Record approval status: Approved
+2025-04-28 09:09:03: Using template file: Directhireclearance.docx
+2025-04-28 09:09:03: Status is approved - adding signature image
+2025-04-28 09:09:03: Added signature image using signature1_image placeholder
+2025-04-28 09:09:03: Document saved to: temp/Clearance_DH-001_20250428_090903.docx
+2025-04-28 09:09:08: PDF conversion successful
+2025-04-28 09:09:08: Document served without storing in database as requested
+2025-04-28 09:09:08: Cleaned up temporary DOCX file: temp/Clearance_DH-001_20250428_090903.docx
+2025-04-28 09:11:18: Clearance generation script started
+2025-04-28 09:11:18: Direct hire ID: 2
+2025-04-28 09:11:18: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:11:18: Record approval status: Not approved
+2025-04-28 09:11:18: Using template file: Directhireclearance.docx
+2025-04-28 09:11:18: Status is not approved - no signature
+2025-04-28 09:11:18: Document saved to: temp/Clearance_DH-0040_20250428_091118.docx
+2025-04-28 09:11:24: PDF conversion successful
+2025-04-28 09:11:24: Document served without storing in database as requested
+2025-04-28 09:11:24: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_091118.docx
+2025-04-28 09:13:37: Clearance generation script started
+2025-04-28 09:13:37: Direct hire ID: 2
+2025-04-28 09:13:37: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":"pending","created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:13:24","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:13:37: Record approval status: Not approved
+2025-04-28 09:13:37: Using template file: Directhireclearance.docx
+2025-04-28 09:13:37: Status is not approved - no signature
+2025-04-28 09:13:37: Document saved to: temp/Clearance_DH-0040_20250428_091337.docx
+2025-04-28 09:13:40: PDF conversion successful
+2025-04-28 09:13:40: Document served without storing in database as requested
+2025-04-28 09:13:40: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_091337.docx
+2025-04-28 09:15:03: Clearance generation script started
+2025-04-28 09:15:03: Direct hire ID: 2
+2025-04-28 09:15:03: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":"denied","created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:14:21","submitted_by":null,"approved_by":3,"approved_at":"2025-04-28 15:14:21"}
+2025-04-28 09:15:03: Record approval status: Not approved
+2025-04-28 09:15:03: Using template file: Directhireclearance.docx
+2025-04-28 09:15:03: Status is not approved - no signature
+2025-04-28 09:15:03: Document saved to: temp/Clearance_DH-0040_20250428_091503.docx
+2025-04-28 09:15:06: PDF conversion successful
+2025-04-28 09:15:06: Document served without storing in database as requested
+2025-04-28 09:15:06: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_091503.docx
