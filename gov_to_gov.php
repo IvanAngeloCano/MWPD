@@ -7,7 +7,7 @@ include '_head.php';
 // --- SEARCH, FILTER, PAGINATION LOGIC (Direct Hire Style) ---
 $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$rows_per_page = isset($_GET['rows']) ? (int)$_GET['rows'] : 8;
+$rows_per_page = isset($_GET['rows']) ? (int)$_GET['rows'] : 6;
 if ($rows_per_page < 1) $rows_per_page = 1;
 $offset = ($page - 1) * $rows_per_page;
 
@@ -581,7 +581,7 @@ try {
           const rowsInput = document.getElementById('rowsInput');
           const resetRowsBtn = document.getElementById('resetRowsBtn');
           let currentPage = 1;
-          let rowsPerPage = parseInt(rowsInput ? rowsInput.value : 8) || 8;
+          let rowsPerPage = parseInt(rowsInput ? rowsInput.value : 6) || 6;
           let filteredRows = rows;
           
           function renderTable(page = 1) {
@@ -651,14 +651,14 @@ try {
           }
           if (rowsInput) {
             rowsInput.addEventListener('change', function() {
-              rowsPerPage = parseInt(this.value) || 8;
+              rowsPerPage = parseInt(this.value) || 6;
               renderTable(1);
             });
           }
           if (resetRowsBtn) {
             resetRowsBtn.addEventListener('click', function() {
-              if (rowsInput) rowsInput.value = 8;
-              rowsPerPage = 8;
+              if (rowsInput) rowsInput.value = 6;
+              rowsPerPage = 6;
               renderTable(1);
             });
           }
