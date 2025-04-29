@@ -325,7 +325,7 @@ include '_head.php';
                 </tr>
               <?php else: ?>
                 <?php foreach ($records as $index => $record): ?>
-                  <tr>
+                  <tr data-id="<?= $record['id'] ?>">
                     <td><?= $offset + $index + 1 ?></td>
                     <td><?= htmlspecialchars($record['control_no']) ?></td>
                     <td><?= htmlspecialchars($record['name']) ?></td>
@@ -352,6 +352,8 @@ include '_head.php';
             </tbody>
           </table>
         </div>
+
+
 
         <!-- Bottom Section -->
         <div class="direct-hire-bottom">
@@ -456,4 +458,21 @@ include '_head.php';
       closeDeleteModal();
     }
   };
+</script>
+
+
+<!-- Handles the double click event -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tableRows = document.querySelectorAll('tbody tr');
+
+    tableRows.forEach(row => {
+      row.addEventListener('dblclick', () => {
+        const id = row.getAttribute('data-id');
+        if (id) {
+          window.location.href = `direct_hire_view.php?id=${id}`;
+        }
+      });
+    });
+  });
 </script>

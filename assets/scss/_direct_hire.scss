@@ -162,8 +162,15 @@
         }
       }
 
+
+
       tbody tr {
         border-bottom: 1px solid #ddd;
+        &:hover {
+          background-color: $neutral-light;
+        }
+
+
 
         td {
           padding: 0.75rem;

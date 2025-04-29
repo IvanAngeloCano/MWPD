@@ -694,6 +694,7 @@ html.loader-page {
   text-align: left;
   padding: 0.5rem;
   font-size: 0.875rem;
+  font-weight: bold;
 }
 .box-pending-approvals table thead {
   background-color: white;
@@ -1403,6 +1404,9 @@ html.loader-page {
 }
 .direct-hire-wrapper .direct-hire-table table tbody tr {
   border-bottom: 1px solid #ddd;
+}
+.direct-hire-wrapper .direct-hire-table table tbody tr:hover {
+  background-color: #F3F4F6;
 }
 .direct-hire-wrapper .direct-hire-table table tbody tr td {
   padding: 0.75rem;

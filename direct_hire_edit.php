@@ -228,7 +228,7 @@ try {
     $error_message = $e->getMessage();
 }
 
-$pageTitle = "Edit Record - Direct Hire";
+$pageTitle = "Direct Hire - Edit Record";
 include '_head.php';
 ?>
 

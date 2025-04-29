@@ -30,7 +30,7 @@ try {
     exit();
 }
 
-$pageTitle = "View Record - Direct Hire";
+$pageTitle = "Direct Hire - View Record";
 include '_head.php';
 ?>
 
