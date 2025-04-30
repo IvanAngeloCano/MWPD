@@ -153,7 +153,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 1rem;
   background-color: #FFFFFF;
   border-bottom: 2px solid #F3F4F6;
   height: 60px;
@@ -169,7 +169,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  gap: 0.875rem;
+  gap: 0.5rem;
 }
 .header .header-right .quick-add {
   padding: 0.4rem 0.8rem;
@@ -191,6 +191,7 @@
 .header .header-right .notif-icon {
   position: relative;
   font-size: 1.2rem;
+  margin: 0.5rem;
 }
 .header .header-right .notif-icon .notif-dot {
   position: absolute;
@@ -209,6 +210,11 @@
       -ms-flex-align: center;
           align-items: center;
   gap: 0.5rem;
+  padding: 0px 0.5rem;
+  border-radius: 6px;
+}
+.header .header-right .user-profile:hover {
+  background-color: #F3F4F6;
 }
 .header .header-right .user-profile .profile-icon {
   font-size: 1rem;
@@ -324,6 +330,19 @@
   -o-object-position: center;
      object-position: center;
   border: 2px solid #246EE9;
+}
+
+.fullscreen-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 10px;
+  color: #333;
+}
+
+.fullscreen-toggle:hover {
+  color: #246EE9;
 }
 
 body.loader-page,
@@ -694,6 +713,8 @@ html.loader-page {
   text-align: left;
   padding: 0.5rem;
   font-size: 0.875rem;
+}
+.box-pending-approvals table th {
   font-weight: bold;
 }
 .box-pending-approvals table thead {

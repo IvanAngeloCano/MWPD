@@ -405,3 +405,23 @@
 2025-04-28 09:15:06: PDF conversion successful
 2025-04-28 09:15:06: Document served without storing in database as requested
 2025-04-28 09:15:06: Cleaned up temporary DOCX file: temp/Clearance_DH-0040_20250428_091503.docx
+2025-04-30 03:30:42: Clearance generation script started
+2025-04-30 03:30:42: Direct hire ID: 12
+2025-04-30 03:30:42: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 07:28:53","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 03:30:42: Record approval status: Not approved
+2025-04-30 03:30:42: Using template file: Directhireclearance.docx
+2025-04-30 03:30:42: Status is not approved - no signature
+2025-04-30 03:30:42: Document saved to: temp/Clearance_DH-00109_20250430_033042.docx
+2025-04-30 03:30:48: PDF conversion successful
+2025-04-30 03:30:49: Document served without storing in database as requested
+2025-04-30 03:30:49: Cleaned up temporary DOCX file: temp/Clearance_DH-00109_20250430_033042.docx
+2025-04-30 03:30:49: Clearance generation script started
+2025-04-30 03:30:49: Direct hire ID: 12
+2025-04-30 03:30:49: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 07:28:53","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 03:30:49: Record approval status: Not approved
+2025-04-30 03:30:49: Using template file: Directhireclearance.docx
+2025-04-30 03:30:49: Status is not approved - no signature
+2025-04-30 03:30:49: Document saved to: temp/Clearance_DH-00109_20250430_033049.docx
+2025-04-30 03:30:52: PDF conversion successful
+2025-04-30 03:30:52: Document served without storing in database as requested
+2025-04-30 03:30:52: Cleaned up temporary DOCX file: temp/Clearance_DH-00109_20250430_033049.docx

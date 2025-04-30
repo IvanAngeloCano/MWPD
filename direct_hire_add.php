@@ -374,6 +374,7 @@ include '_head.php';
     $pageTitle = ucwords(str_replace(['-', '_'], ' ', $fileWithoutExtension));
 
     $pageTitle = 'Direct Hire - Add New Record';
+    $currentPage == 'direct_hire.php';
     include '_header.php';
     ?>
 

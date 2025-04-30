@@ -284,3 +284,17 @@
 2025-04-28 18:40:27: Notification sent to Regional Director (ID: 4)
 2025-04-28 18:40:27: Transaction committed successfully
 2025-04-28 18:40:27: Success message set, redirecting to direct_hire_view.php?id=11
+2025-04-30 03:20:44: Script started - submit_clearance_approval_new.php
+2025-04-30 03:20:44: Record ID: 1
+2025-04-30 03:20:44: Transaction started
+2025-04-30 03:20:44: Record found: {"id":1,"control_no":"DH-001","name":"Justinesb","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-30 09:20:42","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 03:20:44: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 03:20:44: Update result: true, Rows affected: 1
+2025-04-30 03:20:44: No existing approval found, creating new one...
+2025-04-30 03:20:44: Storing submitter user ID: 3 for record ID: 1
+2025-04-30 03:20:44: New approval inserted, ID: 48
+2025-04-30 03:20:44: Notifying Regional Directors about submission from Staff A for record 1
+2025-04-30 03:20:44: Notification sent to Regional Director (ID: 1)
+2025-04-30 03:20:44: Notification sent to Regional Director (ID: 4)
+2025-04-30 03:20:44: Transaction committed successfully
+2025-04-30 03:20:44: Success message set, redirecting to direct_hire_view.php?id=1
