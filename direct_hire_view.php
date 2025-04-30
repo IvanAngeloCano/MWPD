@@ -44,6 +44,35 @@ include '_head.php';
 
     <main class="main-content">
       <div class="record-view-wrapper">
+        <?php
+        // Extract approval/denial notes from the main note if they exist
+        $note = $record['note'] ?? '';
+        $approval_note = '';
+        $denial_note = '';
+        $denial_date = '';
+        $regular_note = $note;
+        
+        // Check for approval note
+        if (preg_match('/\[APPROVAL NOTE - (.+?)\]\n(.+?)(?=(\n\n\[|$))/s', $note, $matches)) {
+          $approval_date = $matches[1];
+          $approval_note = $matches[2];
+          $full_match = $matches[0];
+          $regular_note = str_replace($full_match, '', $regular_note);
+        }
+        
+        // Check for denial note
+        if (preg_match('/\[DENIAL NOTE - (.+?)\]\n(.+?)(?=(\n\n\[|$))/s', $note, $matches)) {
+          $denial_date = $matches[1];
+          $denial_note = $matches[2];
+          $full_match = $matches[0];
+          $regular_note = str_replace($full_match, '', $regular_note);
+        }
+        
+        // Clean up extra newlines
+        $regular_note = trim($regular_note);
+        ?>
+        
+
         <!-- Record Header -->
         <div class="record-header">
           <div class="record-title">
@@ -70,7 +99,7 @@ include '_head.php';
             <a href="direct_hire.php?tab=<?= urlencode($record['type']) ?>" class="btn btn-secondary">
               <i class="fa fa-arrow-left"></i> Back to List
             </a>
-            <form action="submit_clearance_approval_new.php" method="GET" id="approvalForm">
+            <form action="submit_for_approval.php" method="GET" id="approvalForm">
               <input type="hidden" name="id" value="<?= $record['id'] ?>">
               <button type="submit" 
                      class="btn btn-primary"
@@ -84,6 +113,39 @@ include '_head.php';
         
         <!-- Record Details -->
         <div class="record-details">
+          <!-- Status Notifications -->
+          <?php if ($record['status'] === 'approved' && !empty($approval_note)): ?>
+          <div class="status-notification approved">
+            <div class="notification-content">
+              <div class="notification-text">
+                <strong>Record has been approved successfully.</strong> <?= htmlspecialchars($approval_note) ?>
+              </div>
+              <div class="notification-meta">
+                <span class="notification-date"><?= htmlspecialchars($approval_date) ?></span>
+                <?php if (!empty($record['approved_by'])): ?>
+                <span class="notification-user">Approved by: <?= htmlspecialchars($record['approved_by']) ?></span>
+                <?php endif; ?>
+              </div>
+            </div>
+          </div>
+          <?php endif; ?>
+          
+          <?php if ($record['status'] === 'denied' && !empty($denial_note)): ?>
+          <div class="status-notification denied">
+            <div class="notification-content">
+              <div class="notification-text">
+                <strong>Record has been denied:</strong> <?= htmlspecialchars($denial_note) ?>
+              </div>
+              <div class="notification-meta">
+                <span class="notification-date"><?= htmlspecialchars($denial_date) ?></span>
+                <?php if (!empty($record['denied_by'])): ?>
+                <span class="notification-user">Denied by: <?= htmlspecialchars($record['denied_by']) ?></span>
+                <?php endif; ?>
+              </div>
+            </div>
+          </div>
+          <?php endif; ?>
+          
           <div class="record-section">
             <h3>Basic Information</h3>
             <div class="detail-grid">
@@ -148,11 +210,24 @@ include '_head.php';
             </div>
           </div>
           
+          <!-- Note extraction moved to top of file -->
+          
+          <?php /* Removing duplicate approval note section
+          if ($record['status'] === 'approved' && !empty($approval_note)): ?>
+          <div class="record-section approval-note">
+            <h3>Approval Note</h3>
+            <div class="notes-container">
+              <div class="note-meta">Approved on <?= htmlspecialchars($approval_date) ?></div>
+              <div class="note-content approval"><?= nl2br(htmlspecialchars($approval_note)) ?></div>
+            </div>
+          </div>
+          <?php endif; */?>
+          
           <div class="record-section">
             <h3>Notes</h3>
             <div class="notes-container">
-              <?php if (!empty($record['note'])): ?>
-              <div class="note-content"><?= nl2br(htmlspecialchars($record['note'])) ?></div>
+              <?php if (!empty($regular_note)): ?>
+              <div class="note-content"><?= nl2br(htmlspecialchars($regular_note)) ?></div>
               <?php else: ?>
               <div class="no-data">No notes available</div>
               <?php endif; ?>
@@ -268,80 +343,94 @@ include '_head.php';
   };
 </script>
 
-<?php
-// Helper functions
-function getFileIcon($fileType) {
-  $fileType = strtolower($fileType);
-  
-  if (strpos($fileType, 'pdf') !== false) {
-    return 'fa-file-pdf';
-  } elseif (strpos($fileType, 'word') !== false || strpos($fileType, 'doc') !== false) {
-    return 'fa-file-word';
-  } elseif (strpos($fileType, 'excel') !== false || strpos($fileType, 'sheet') !== false || strpos($fileType, 'xls') !== false) {
-    return 'fa-file-excel';
-  } elseif (strpos($fileType, 'image') !== false || strpos($fileType, 'jpg') !== false || strpos($fileType, 'png') !== false) {
-    return 'fa-file-image';
-  } else {
-    return 'fa-file';
-  }
-}
-
-function formatFileSize($size) {
-  $units = ['B', 'KB', 'MB', 'GB'];
-  $i = 0;
-  
-  while ($size >= 1024 && $i < count($units) - 1) {
-    $size /= 1024;
-    $i++;
-  }
-  
-  return round($size, 1) . ' ' . $units[$i];
-}
-?>
-
 <style>
   .record-view-wrapper {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    overflow: hidden;
+    padding: 20px;
+    margin: 20px;
   }
   
   .record-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #eee;
-    background-color: #f8f9fa;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
   }
   
-  .record-title h2 {
-    margin: 0 0 8px 0;
-    font-size: 24px;
-  }
-  
-  .record-subtitle {
-    display: flex;
-    gap: 15px;
-    color: #666;
-  }
-  
-  .control-no {
-    font-weight: 500;
+  .record-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
   }
   
   .record-actions {
     display: flex;
     gap: 10px;
+    margin-top: 10px;
   }
   
   .record-details {
-    padding: 20px;
+    margin-top: 20px;
   }
   
   .record-section {
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    overflow: hidden;
+  }
+  
+  .status-notification {
+    margin-bottom: 20px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  
+  .status-notification.approved {
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+    color: #0f5132;
+  }
+  
+  .status-notification.denied {
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    color: #842029;
+  }
+  
+  .status-notification .notification-content {
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .status-notification .notification-text {
+    flex: 1;
+  }
+  
+  .status-notification .notification-meta {
+    text-align: right;
+    font-size: 13px;
+    margin-left: 15px;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .status-notification .notification-date {
+    margin-bottom: 4px;
+  }
+  
+  .status-notification .notification-user {
+    font-weight: 500;
   }
   
   .record-section h3 {
@@ -571,4 +660,35 @@ function formatFileSize($size) {
       grid-template-columns: 1fr;
     }
   }
-</style> 
+</style>
+
+<?php
+// Helper functions
+function getFileIcon($fileType) {
+  $fileType = strtolower($fileType);
+  
+  if (strpos($fileType, 'pdf') !== false) {
+    return 'fa-file-pdf';
+  } elseif (strpos($fileType, 'word') !== false || strpos($fileType, 'doc') !== false) {
+    return 'fa-file-word';
+  } elseif (strpos($fileType, 'excel') !== false || strpos($fileType, 'sheet') !== false || strpos($fileType, 'xls') !== false) {
+    return 'fa-file-excel';
+  } elseif (strpos($fileType, 'image') !== false || strpos($fileType, 'jpg') !== false || strpos($fileType, 'png') !== false) {
+    return 'fa-file-image';
+  } else {
+    return 'fa-file';
+  }
+}
+
+function formatFileSize($size) {
+  $units = ['B', 'KB', 'MB', 'GB'];
+  $i = 0;
+  
+  while ($size >= 1024 && $i < count($units) - 1) {
+    $size /= 1024;
+    $i++;
+  }
+  
+  return round($size, 1) . ' ' . $units[$i];
+}
+?>

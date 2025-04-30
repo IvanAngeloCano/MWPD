@@ -277,6 +277,10 @@ try {
   .action-icons a {
     border: none !important;
   }
+
+  .last-column {
+    border-right: none !important;
+  }
 </style>
 
 <div class="layout-wrapper">
@@ -394,8 +398,8 @@ try {
               </div>
             </form>
             <button class="btn filter-btn" id="showFilterBarBtn"><i class="fa fa-filter"></i> Filter</button>
-            <a href="gov_to_gov_add.php"><button class="btn add-btn"><i class="fa fa-plus"></i> Add New Record</button></a>
-            <button onclick="document.getElementById('popupMemoForm').style.display='block'" class="btn go-btn create-memo"> <b>GENERATE MEMO</b> </button>
+            <button class="btn add-btn" onclick="window.location.href='gov_to_gov_add.php'"><i class="fa fa-plus"></i> Add New Record</button>
+            <button type="button" onclick="submitSelectedApplicants()" class="btn go-btn create-memo"> <b>GENERATE MEMO</b> </button>
           </div>
         </div>
 
@@ -417,12 +421,13 @@ try {
           <table>
             <thead>
               <tr>
-                <th></th>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Passport No.</th>
-                <th>Action</th>
+                <th style="width: 40px;"></th>
+                <th style="width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Last Name</th>
+                <th style="width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">First Name</th>
+                <th style="width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Middle Name</th>
+                <th style="width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Passport No.</th>
+                <th style="width: 80px;">Remarks</th>
+                <th class="last-column" style="width: 80px;">Action</th>
               </tr>
             </thead>
             <tbody id="g2g-tbody">
@@ -434,11 +439,12 @@ try {
                     $row_json = htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8');
                     echo "<tr>";
                     echo '<td><input type="checkbox" class="g2g-row-checkbox" name="selected_ids[]" value="'.htmlspecialchars($row['g2g']).'"></td>';
-                    echo "<td>" . htmlspecialchars($row['last_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['first_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['middle_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['passport_number']) . "</td>";
-                    echo '<td class="action-icons" style="border-left:none;">';
+                    echo "<td style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>" . htmlspecialchars($row['last_name']) . "</td>";
+                    echo "<td style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>" . htmlspecialchars($row['first_name']) . "</td>";
+                    echo "<td style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>" . htmlspecialchars($row['middle_name']) . "</td>";
+                    echo "<td style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>" . htmlspecialchars($row['passport_number']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['remarks']) . "</td>";
+                    echo '<td class="action-icons last-column">';
                     echo '<a href="gov_to_gov_view.php?id=' . urlencode($row['g2g']) . '" class="view-btn" title="View Record"><i class="fa fa-eye"></i></a>';
                     echo '<a href="gov_to_gov_edit.php?id=' . urlencode($row['g2g']) . '" class="edit-btn" title="Edit Record"><i class="fa fa-edit"></i></a>';
                     echo '<a href="delete_gov_to_gov.php?id=' . urlencode($row['g2g']) . '" class="delete-btn" title="Delete Record" onclick="return confirm(\'Are you sure you want to delete this record?\')"><i class="fa fa-trash-alt"></i></a>';
@@ -446,10 +452,10 @@ try {
                     echo "</tr>";
                   }
                 } else {
-                  echo "<tr><td colspan=6>No records found.</td></tr>";
+                  echo "<tr><td colspan=7>No records found.</td></tr>";
                 }
               } catch (PDOException $e) {
-                echo "<tr><td colspan=6>Error: " . $e->getMessage() . "</td></tr>";
+                echo "<tr><td colspan=7>Error: " . $e->getMessage() . "</td></tr>";
               }
               ?>
             </tbody>
@@ -671,3 +677,241 @@ try {
     </main>
   </div>
 </div>
+
+<!-- Popup Memo Form -->
+<div id="popupMemoForm" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close" onclick="document.getElementById('popupMemoForm').style.display='none'">&times;</span>
+      <h2>Generate Memorandum</h2>
+    </div>
+    <div class="modal-body">
+      <form action="generate_memo.php" method="POST" id="memoForm" target="_blank">
+        <div class="form-group">
+          <label for="employer">Employer:</label>
+          <input type="text" id="employer" name="employer" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="memo_date">Memo Date:</label>
+          <input type="date" id="memo_date" name="memo_date" class="form-control" value="<?= date('Y-m-d') ?>" required>
+        </div>
+        <div class="form-group">
+          <p><strong>Selected Applicants:</strong></p>
+          <div id="selectedApplicants"></div>
+          <div id="hiddenIdsContainer"></div>
+          <input type="hidden" name="source" value="gov_to_gov">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('popupMemoForm').style.display='none'">Cancel</button>
+          <button type="submit" class="btn btn-primary">Generate Memo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('popupMemoForm');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+// New function to prepare memo generation
+function prepareMemoGeneration() {
+  // Clear previous selections
+  const hiddenIdsContainer = document.getElementById('hiddenIdsContainer');
+  hiddenIdsContainer.innerHTML = '';
+  
+  // Get all checked checkboxes
+  const checkboxes = document.querySelectorAll('input.g2g-row-checkbox:checked');
+  console.log("Number of checked checkboxes:", checkboxes.length);
+  
+  if (checkboxes.length === 0) {
+    alert("Please select at least one applicant before generating a memo.");
+    return;
+  }
+  
+  const selectedIds = [];
+  const selectedNames = [];
+  
+  // Process each checked checkbox
+  checkboxes.forEach(function(checkbox) {
+    const row = checkbox.closest('tr');
+    const id = checkbox.value;
+    
+    // Debug - log each checkbox value
+    console.log("Selected ID:", id);
+    
+    const name = row.querySelector('td:nth-child(2)').textContent + ', ' + 
+                row.querySelector('td:nth-child(3)').textContent;
+    
+    selectedIds.push(id);
+    selectedNames.push(name);
+    
+    // Create a hidden input for each selected ID
+    const hiddenInput = document.createElement('input');
+    hiddenInput.type = 'hidden';
+    hiddenInput.name = 'selected_ids[]';
+    hiddenInput.value = id;
+    hiddenIdsContainer.appendChild(hiddenInput);
+    
+    // Debug - log each hidden input
+    console.log("Created hidden input with value:", id);
+  });
+  
+  // Display selected applicants
+  const selectedApplicantsDiv = document.getElementById('selectedApplicants');
+  
+  if (selectedNames.length > 0) {
+    let html = '<ul>';
+    selectedNames.forEach(function(name) {
+      html += '<li>' + name + '</li>';
+    });
+    html += '</ul>';
+    selectedApplicantsDiv.innerHTML = html;
+  } else {
+    selectedApplicantsDiv.innerHTML = '<p class="text-danger">No applicants selected. Please select at least one applicant.</p>';
+  }
+  
+  // Show the modal
+  document.getElementById('popupMemoForm').style.display = 'block';
+}
+
+// Add a submit event listener to the form
+document.getElementById('memoForm').addEventListener('submit', function(event) {
+  // Check if there are any hidden inputs for selected IDs
+  const hiddenInputs = document.querySelectorAll('input[name="selected_ids[]"]');
+  if (hiddenInputs.length === 0) {
+    event.preventDefault();
+    alert("Please select at least one applicant before generating a memo.");
+  } else {
+    console.log("Form submission with " + hiddenInputs.length + " selected IDs");
+  }
+});
+</script>
+
+<script>
+// Function to submit selected applicants directly to the memo form
+function submitSelectedApplicants() {
+  // Get all checked checkboxes
+  const checkboxes = document.querySelectorAll('input.g2g-row-checkbox:checked');
+  console.log("Number of checked checkboxes:", checkboxes.length);
+  
+  if (checkboxes.length === 0) {
+    alert("Please select at least one applicant before generating a memo.");
+    return;
+  }
+  
+  // Clear previous selections
+  document.getElementById('hiddenIdsContainer').innerHTML = '';
+  document.getElementById('selectedApplicants').innerHTML = '';
+  
+  const selectedIds = [];
+  const selectedNames = [];
+  
+  // Process each checked checkbox
+  checkboxes.forEach(function(checkbox) {
+    const row = checkbox.closest('tr');
+    const id = checkbox.value;
+    
+    // Debug - log each checkbox value
+    console.log("Selected ID:", id);
+    
+    // Get all the required fields from the table
+    const lastName = row.querySelector('td:nth-child(2)').textContent.trim();
+    const firstName = row.querySelector('td:nth-child(3)').textContent.trim();
+    const middleName = row.querySelector('td:nth-child(4)').textContent.trim();
+    const passportNo = row.querySelector('td:nth-child(5)').textContent.trim();
+    const fullName = lastName + ', ' + firstName + ' ' + middleName;
+    
+    selectedIds.push(id);
+    selectedNames.push(fullName + ' (Passport: ' + passportNo + ')');
+    
+    // Create a hidden input for each selected ID
+    const hiddenInput = document.createElement('input');
+    hiddenInput.type = 'hidden';
+    hiddenInput.name = 'selected_ids[]';
+    hiddenInput.value = id;
+    document.getElementById('hiddenIdsContainer').appendChild(hiddenInput);
+  });
+  
+  // Display selected applicants in the form
+  const selectedApplicantsDiv = document.getElementById('selectedApplicants');
+  
+  if (selectedNames.length > 0) {
+    let html = '<ul>';
+    selectedNames.forEach(function(name) {
+      html += '<li>' + name + '</li>';
+    });
+    html += '</ul>';
+    selectedApplicantsDiv.innerHTML = html;
+    
+    // Show the memo form
+    document.getElementById('popupMemoForm').style.display = 'block';
+  } else {
+    selectedApplicantsDiv.innerHTML = '';
+    alert('No applicants selected. Please select at least one applicant.');
+  }
+}
+
+// Add event listener for the Generate Memo button
+document.addEventListener('DOMContentLoaded', function() {
+  const generateMemoBtn = document.getElementById('generateMemoBtn');
+  if (generateMemoBtn) {
+    generateMemoBtn.addEventListener('click', function() {
+      const form = document.getElementById('memoForm');
+      const formData = new FormData(form);
+      
+      // Show loading indicator
+      generateMemoBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Generating...';
+      generateMemoBtn.disabled = true;
+      
+      // Create a new XMLHttpRequest
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'generate_memo.php', true);
+      
+      // Set up a handler for when the request finishes
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          // Hide the modal
+          document.getElementById('popupMemoForm').style.display = 'none';
+          
+          // Reset the button
+          generateMemoBtn.innerHTML = 'Generate Memo';
+          generateMemoBtn.disabled = false;
+          
+          // Create a blob from the response
+          const blob = new Blob([xhr.response], { type: 'application/pdf' });
+          const url = URL.createObjectURL(blob);
+          
+          // Open the PDF in a new tab
+          window.open(url, '_blank');
+        } else {
+          alert('Error generating memo. Please try again.');
+          
+          // Reset the button
+          generateMemoBtn.innerHTML = 'Generate Memo';
+          generateMemoBtn.disabled = false;
+        }
+      };
+      
+      // Handle network errors
+      xhr.onerror = function() {
+        alert('Network error occurred while generating memo.');
+        
+        // Reset the button
+        generateMemoBtn.innerHTML = 'Generate Memo';
+        generateMemoBtn.disabled = false;
+      };
+      
+      // Send the form data
+      xhr.send(formData);
+    });
+  }
+});
+</script>

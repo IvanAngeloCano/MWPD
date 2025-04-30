@@ -26,10 +26,8 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : '';
 $error_message = isset($_GET['error']) ? $_GET['error'] : '';
 
 // Handle pagination
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $rows_per_page = isset($_GET['rows']) ? (int)$_GET['rows'] : 8;
 if ($rows_per_page < 1) $rows_per_page = 1;
-$offset = ($page - 1) * $rows_per_page;
 
 // --- FILTER LOGIC ---
 $filter_sql = '';
@@ -147,9 +145,10 @@ try {
       $count_stmt = $pdo->prepare($count_sql);
       $count_stmt->execute($filter_params);
 
+      // Prepare the SQL but don't execute yet - we'll do that after calculating offset
       $sql = "SELECT * FROM direct_hire WHERE status = 'denied' $filter_sql ORDER BY created_at DESC LIMIT ?, ?";
       $stmt = $pdo->prepare($sql);
-      $stmt->execute(array_merge($filter_params, [$offset, $rows_per_page]));
+      // We'll execute this after calculating the offset
     }
   } else {
     // Professional or Household tab
@@ -237,19 +236,44 @@ try {
       $count_sql = "SELECT COUNT(*) FROM direct_hire WHERE type = ? $filter_sql";
       $count_stmt = $pdo->prepare($count_sql);
       $count_stmt->execute(array_merge([$active_tab], $filter_params));
-
+      
+      // Prepare the SQL but don't execute yet - we'll do that after calculating offset
       $sql = "SELECT * FROM direct_hire WHERE type = ? $filter_sql ORDER BY created_at DESC LIMIT ?, ?";
       $stmt = $pdo->prepare($sql);
-      $stmt->bindValue(1, $active_tab, PDO::PARAM_STR);
-      $stmt->bindValue(2, $offset, PDO::PARAM_INT);
-      $stmt->bindValue(3, $rows_per_page, PDO::PARAM_INT);
-      $stmt->execute();
     }
   }
 
   // Get total records and pages
   $total_records = $count_stmt->fetchColumn();
   $total_pages = ceil($total_records / $rows_per_page);
+  
+  // Now set the page number, ensuring it's within valid range
+  $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+  if ($page > $total_pages && $total_pages > 0) {
+    $page = $total_pages;
+  } elseif ($page < 1) {
+    $page = 1;
+  }
+  
+  // Calculate offset based on validated page number
+  $offset = ($page - 1) * $rows_per_page;
+  
+  // Now that we have the offset, execute the query with the proper parameters
+  if (!empty($search_query)) {
+    // For search queries, parameters were already bound and executed above
+  } else {
+    // For non-search queries, bind parameters and execute now
+    if ($active_tab === 'denied') {
+      // For denied tab
+      $stmt->execute(array_merge($filter_params, [$offset, $rows_per_page]));
+    } else {
+      // For professional/household tabs
+      $stmt->bindValue(1, $active_tab, PDO::PARAM_STR);
+      $stmt->bindValue(2, $offset, PDO::PARAM_INT);
+      $stmt->bindValue(3, $rows_per_page, PDO::PARAM_INT);
+      $stmt->execute();
+    }
+  }
 
   // Fetch all the records
   $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -307,9 +331,8 @@ include '_head.php';
             </div> -->
 
             <button class="btn filter-btn" id="showFilterBarBtn" style="margin-bottom:10px;"><i class="fa fa-filter"></i> Filter</button>
-            <a href="direct_hire_add.php?type=<?= urlencode($active_tab) ?>">
-              <button class="btn add-btn"><i class="fa fa-plus"></i> Add New Record</button>
-            </a>
+            <a href="direct_hire_add.php?type=<?= urlencode($active_tab) ?>" class="btn add-btn"><i class="fa fa-plus"></i> Add New Record</a>
+            <button onclick="document.getElementById('popupMemoForm').style.display='block'" class="btn go-btn create-memo" style="margin-left:10px;"><i class="fa fa-file-alt"></i> <b>GENERATE MEMO</b></button>
           </div>
 
           <?php if (!empty($error_message)): ?>
@@ -520,6 +543,7 @@ include '_head.php';
           <table>
             <thead>
               <tr>
+                <th><input type="checkbox" id="select-all-checkbox"></th>
                 <th>No.</th>
                 <th>Control No.</th>
                 <th>Name</th>
@@ -531,11 +555,12 @@ include '_head.php';
             <tbody>
               <?php if (count($records) == 0): ?>
                 <tr>
-                  <td colspan="6" class="no-records">No records found</td>
+                  <td colspan="7" class="no-records">No records found</td>
                 </tr>
               <?php else: ?>
                 <?php foreach ($records as $index => $record): ?>
                   <tr>
+                    <td><input type="checkbox" class="record-checkbox" value="<?= $record['id'] ?>"></td>
                     <td><?= $offset + $index + 1 ?></td>
                     <td><?= htmlspecialchars($record['control_no']) ?></td>
                     <td><?= htmlspecialchars($record['name']) ?></td>
@@ -635,65 +660,137 @@ include '_head.php';
 <div id="deleteModal" class="modal" style="display: none;">
   <div class="modal-content" style="max-width: 400px;">
     <div class="modal-header">
-      <h3>Confirm Delete</h3>
-      <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+      <span class="close" onclick="document.getElementById('deleteModal').style.display='none'">&times;</span>
+      <h2>Confirm Delete</h2>
     </div>
-    <div class="modal-body" style="text-align: center;">
-      <p>Are you sure you want to delete this record? This action cannot be undone.</p>
-      <div class="modal-actions" style="justify-content: center; margin-top: 20px;">
-        <button class="btn btn-cancel" onclick="closeDeleteModal()">Cancel</button>
-        <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
-      </div>
+    <div class="modal-body">
+      <p>Are you sure you want to delete this record?</p>
+      <p>This action cannot be undone.</p>
+    </div>
+    <div class="modal-footer">
+      <form id="deleteForm" action="direct_hire_delete.php" method="POST">
+        <input type="hidden" name="id" id="deleteId">
+        <button type="button" class="btn btn-secondary" onclick="document.getElementById('deleteModal').style.display='none'">Cancel</button>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Popup Memo Form -->
+<div id="popupMemoForm" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close" onclick="document.getElementById('popupMemoForm').style.display='none'">&times;</span>
+      <h2>Generate Memorandum</h2>
+    </div>
+    <div class="modal-body">
+      <form action="generate_memo.php" method="POST" id="memoForm">
+        <div class="form-group">
+          <label for="employer">Employer:</label>
+          <input type="text" id="employer" name="employer" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="memo_date">Memo Date:</label>
+          <input type="date" id="memo_date" name="memo_date" class="form-control" value="<?= date('Y-m-d') ?>" required>
+        </div>
+        <div class="form-group">
+          <p><strong>Selected Applicants:</strong></p>
+          <div id="selectedApplicants"></div>
+          <div id="selectedApplicantsIds"></div>
+          <input type="hidden" name="source" value="direct_hire">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('popupMemoForm').style.display='none'">Cancel</button>
+          <button type="submit" class="btn btn-primary">Generate Memo</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 
 <script>
-  function confirmDelete(id) {
-    const modal = document.getElementById('deleteModal');
-    const confirmBtn = document.getElementById('confirmDeleteBtn');
-
-    // Set the onclick event for the confirm button
-    confirmBtn.onclick = function() {
-      window.location.href = 'direct_hire_delete.php?id=' + id;
-    };
-
-    // Show the modal
-    modal.style.display = 'flex';
-  }
-
-  function closeDeleteModal() {
-    const modal = document.getElementById('deleteModal');
-    modal.style.display = 'none';
-  }
-
-  // Close modal when clicking outside
+  // Get the delete modal
+  var deleteModal = document.getElementById('deleteModal');
+  
+  // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
-    const modal = document.getElementById('deleteModal');
-    if (event.target === modal) {
-      closeDeleteModal();
+    if (event.target == deleteModal) {
+      deleteModal.style.display = "none";
     }
-  };
+    if (event.target == document.getElementById('popupMemoForm')) {
+      document.getElementById('popupMemoForm').style.display = "none";
+    }
+  }
+  
+  // Function to show delete confirmation modal
+  function showDeleteModal(id) {
+    document.getElementById('deleteId').value = id;
+    deleteModal.style.display = "block";
+  }
 
-  // Auto-submit rows per page on input, with debounce
+  // Update the memo form with selected applicants
   document.addEventListener('DOMContentLoaded', function() {
-    var rowsInput = document.getElementById('rowsInput');
-    var form = document.getElementById('rowsPerPageForm');
-    var debounceTimeout;
-    if (rowsInput) {
-      rowsInput.addEventListener('input', function() {
-        clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(function() {
-          form.submit();
-        }, 300); // 300ms debounce
+    // Handle select all checkbox
+    const selectAllCheckbox = document.getElementById('select-all-checkbox');
+    if (selectAllCheckbox) {
+      selectAllCheckbox.addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('.record-checkbox');
+        checkboxes.forEach(function(checkbox) {
+          checkbox.checked = selectAllCheckbox.checked;
+        });
       });
     }
-    var resetBtn = document.getElementById('resetRowsBtn');
-    if (resetBtn) {
-      resetBtn.addEventListener('click', function() {
-        rowsInput.value = 8;
-        form.submit();
+    
+    document.querySelector('.create-memo').addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Get all checkboxes in the table
+      const checkboxes = document.querySelectorAll('input[type="checkbox"].record-checkbox:checked');
+      
+      if (checkboxes.length === 0) {
+        alert('No applicants selected. Please select at least one applicant.');
+        return;
+      }
+      
+      const selectedIds = [];
+      const selectedNames = [];
+
+      checkboxes.forEach(function(checkbox) {
+        const row = checkbox.closest('tr');
+        const id = checkbox.value;
+        // Get the name from the 4th cell (index 3) which contains the name
+        const name = row.cells[3].textContent.trim();
+        
+        selectedIds.push(id);
+        selectedNames.push(name);
       });
-    }
+
+      // Display selected applicants
+      const selectedApplicantsDiv = document.getElementById('selectedApplicants');
+      const selectedApplicantsIdsDiv = document.getElementById('selectedApplicantsIds');
+      
+      if (selectedNames.length > 0) {
+        let html = '<ul>';
+        selectedNames.forEach(function(name) {
+          html += '<li>' + name + '</li>';
+        });
+        html += '</ul>';
+        selectedApplicantsDiv.innerHTML = html;
+        
+        // Add hidden inputs for selected IDs
+        let idsHtml = '';
+        selectedIds.forEach(function(id) {
+          idsHtml += '<input type="hidden" name="selected_ids[]" value="' + id + '">';
+        });
+        selectedApplicantsIdsDiv.innerHTML = idsHtml;
+        
+        document.getElementById('popupMemoForm').style.display = 'block';
+      } else {
+        selectedApplicantsDiv.innerHTML = '';
+        selectedApplicantsIdsDiv.innerHTML = '';
+        alert('No applicants selected. Please select at least one applicant.');
+      }
+    });
   });
 </script>

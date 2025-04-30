@@ -4,15 +4,25 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include notifications functions
-require_once 'notifications.php';
+// Include our session-based alert system
+require_once 'alert_system.php';
 
 // Get unread notifications count and recent notifications
 $unread_count = 0;
 $notifications = [];
 if (isset($_SESSION['user_id'])) {
+    // Always use database notifications for persistence across sessions
+    require_once 'notifications.php';
+    
+    // Ensure the notifications table exists
+    ensureNotificationsTableExists();
+    
+    // Get notifications from database
     $unread_count = countUnreadNotifications($_SESSION['user_id']);
-    $notifications = getUserNotifications($_SESSION['user_id'], true, 5);
+    $notifications = getUserNotifications($_SESSION['user_id'], true, 10);
+    
+    // Debug log for troubleshooting
+    error_log("Fetched " . count($notifications) . " notifications for user ID: " . $_SESSION['user_id']);
 }
 ?>
 <header class="header">
@@ -40,13 +50,23 @@ if (isset($_SESSION['user_id'])) {
           <?php if (empty($notifications)): ?>
             <div class="no-notifications">No notifications</div>
           <?php else: ?>
-            <?php foreach ($notifications as $notification): ?>
-              <div class="notification-item <?= $notification['is_read'] ? 'read' : 'unread' ?>" data-id="<?= $notification['id'] ?>">
+            <?php foreach ($notifications as $index => $notification): ?>
+              <?php 
+                // Format the notification time
+                $timeString = isset($notification['created_at']) ? $notification['created_at'] : date('Y-m-d H:i:s');
+                $timeStamp = strtotime($timeString);
+                
+                // Get read status
+                $isRead = isset($notification['is_read']) ? (int)$notification['is_read'] === 1 : false;
+              ?>
+              <div class="notification-item <?= $isRead ? 'read' : 'unread' ?>" 
+                   data-id="<?= $notification['id'] ?>" 
+                   data-link="<?= htmlspecialchars($notification['link'] ?? '') ?>">
                 <div class="notification-content">
                   <p><?= htmlspecialchars($notification['message']) ?></p>
-                  <span class="notification-time"><?= date('M j, g:i a', strtotime($notification['created_at'])) ?></span>
+                  <span class="notification-time"><?= date('M j, g:i a', $timeStamp) ?></span>
                 </div>
-                <button class="notification-dismiss" data-id="<?= $notification['id'] ?>">×</button>
+                <button type="button" class="notification-dismiss" data-id="<?= $notification['id'] ?>">×</button>
               </div>
             <?php endforeach; ?>
           <?php endif; ?>
@@ -71,6 +91,9 @@ if (isset($_SESSION['user_id'])) {
     </a>
   </div>
 </header>
+
+<!-- Display alerts -->
+<?php displayAlerts(); ?>
 
 <style>
 .notif-icon {
@@ -140,17 +163,26 @@ if (isset($_SESSION['user_id'])) {
   display: flex;
   padding: 12px 15px;
   border-bottom: 1px solid #f1f5f9;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   align-items: flex-start;
   justify-content: space-between;
+  cursor: pointer;
 }
 
 .notification-item:hover {
-  background-color: #f8fafc;
+  background-color: #f0f7ff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .notification-item.unread {
-  background-color: #f0f9ff;
+  background-color: #e6f3ff;
+  border-left: 3px solid #1e88e5;
+}
+
+.notification-item.read {
+  background-color: #ffffff;
+  border-left: 3px solid transparent;
 }
 
 .notification-content {
@@ -245,14 +277,6 @@ if (isset($_SESSION['user_id'])) {
     notificationIcon.addEventListener('click', function(e) {
       e.stopPropagation();
       notificationDropdown.style.display = notificationDropdown.style.display === 'block' ? 'none' : 'block';
-      
-      // Mark notifications as read when opened
-      if (notificationDropdown.style.display === 'block') {
-        const unreadItems = document.querySelectorAll('.notification-item.unread');
-        if (unreadItems.length > 0) {
-          markNotificationsAsRead(Array.from(unreadItems).map(item => item.dataset.id));
-        }
-      }
     });
     
     // Close dropdown when clicking outside
@@ -265,21 +289,36 @@ if (isset($_SESSION['user_id'])) {
     // Mark all as read
     markAllReadBtn.addEventListener('click', function() {
       const items = document.querySelectorAll('.notification-item');
-      const ids = Array.from(items).map(item => item.dataset.id);
-      markNotificationsAsRead(ids);
+      const ids = Array.from(items).map(item => item.dataset.id).filter(id => id);
+      if (ids.length > 0) {
+        markNotificationsAsRead(ids);
+      }
+    });
+    
+    // Handle notification item clicks for navigation
+    document.addEventListener('click', function(e) {
+      const notificationItem = e.target.closest('.notification-item');
+      if (notificationItem && !e.target.classList.contains('notification-dismiss')) {
+        const link = notificationItem.dataset.link;
+        if (link) {
+          window.location.href = link;
+        }
+      }
     });
     
     // Dismiss notification
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('notification-dismiss')) {
         const id = e.target.dataset.id;
-        dismissNotification(id);
+        if (id) {
+          dismissNotification(id);
+        }
       }
     });
     
     // Mark notifications as read via AJAX
     function markNotificationsAsRead(ids) {
-      if (!ids.length) return;
+      if (!ids || !ids.length) return;
       
       fetch('notification_actions.php', {
         method: 'POST',
@@ -312,6 +351,8 @@ if (isset($_SESSION['user_id'])) {
     
     // Dismiss notification via AJAX
     function dismissNotification(id) {
+      if (!id) return;
+      
       fetch('notification_actions.php', {
         method: 'POST',
         headers: {
@@ -332,7 +373,7 @@ if (isset($_SESSION['user_id'])) {
               
               // Check if no notifications left
               const list = document.getElementById('notificationList');
-              if (list.children.length === 0) {
+              if (list && list.children.length === 0) {
                 list.innerHTML = '<div class="no-notifications">No notifications</div>';
               }
               

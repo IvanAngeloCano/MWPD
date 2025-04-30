@@ -47,12 +47,38 @@ try {
     ");
     $activity_logs = $activity_stmt->fetchAll(PDO::FETCH_ASSOC);
     
+    // Get job fair events for calendar
+    $current_month = date('m');
+    $current_year = date('Y');
+    
+    // Get all job fairs for calendar highlighting
+    $job_fairs_stmt = $pdo->query("
+        SELECT id, date, venue, contact_info, status 
+        FROM job_fairs 
+        WHERE status != 'cancelled'
+        ORDER BY date ASC
+    ");
+    $job_fairs = $job_fairs_stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Get job fairs for current month to display in "This Month" section
+    $this_month_fairs_stmt = $pdo->query("
+        SELECT id, date, venue, contact_info, status 
+        FROM job_fairs 
+        WHERE MONTH(date) = $current_month 
+        AND YEAR(date) = $current_year
+        AND status != 'cancelled'
+        ORDER BY date ASC
+    ");
+    $this_month_fairs = $this_month_fairs_stmt->fetchAll(PDO::FETCH_ASSOC);
+    
 } catch (PDOException $e) {
     // Set defaults in case of database error
     $direct_hire_total = 0;
     $direct_hire_pending = 0;
     $pending_approvals = [];
     $activity_logs = [];
+    $job_fairs = [];
+    $this_month_fairs = [];
 }
 
 // Format time differences for display
@@ -276,8 +302,33 @@ function time_elapsed_string($datetime, $full = false) {
 
           <!-- Box 4: This Month List -->
           <div class="bento-box box-activity-log">
-            <h2>This Month</h2>
-            
+            <h2>This Month's Job Fairs</h2>
+            <?php if (count($this_month_fairs) > 0): ?>
+            <ul class="activity-list">
+              <?php foreach ($this_month_fairs as $fair): ?>
+              <li>
+                <div class="activity-time"><?= date('M j', strtotime($fair['date'])) ?></div>
+                <div class="activity-info">
+                  <div class="activity-text"><?= htmlspecialchars($fair['venue']) ?></div>
+                  <div class="activity-meta"><?= htmlspecialchars($fair['contact_info']) ?></div>
+                  <div class="activity-status">
+                    <span class="status-badge <?= strtolower($fair['status']) ?>">
+                      <?= ucfirst(htmlspecialchars($fair['status'])) ?>
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <?php endforeach; ?>
+            </ul>
+            <div class="view-all">
+              <!-- <a href="job_fairs.php" class="btn-link">View all job fairs <i class="fa fa-arrow-right"></i></a> -->
+            </div>
+            <?php else: ?>
+            <div class="no-records">
+              <i class="fa fa-calendar"></i>
+              <p>No job fairs scheduled this month</p>
+            </div>
+            <?php endif; ?>
           </div>
           
           <!-- Box 5: EMe (Bottom) -->
@@ -328,6 +379,17 @@ function time_elapsed_string($datetime, $full = false) {
   const nextBtn = document.getElementById('nextMonth');
 
   let currentDate = new Date();
+  
+  // Job fair dates from PHP
+  const jobFairDates = [
+    <?php foreach ($job_fairs as $fair): ?>
+      {
+        date: "<?= $fair['date'] ?>",
+        venue: "<?= addslashes($fair['venue']) ?>",
+        status: "<?= $fair['status'] ?>"
+      },
+    <?php endforeach; ?>
+  ];
 
   function renderCalendar(date) {
     const year = date.getFullYear();
@@ -348,8 +410,24 @@ function time_elapsed_string($datetime, $full = false) {
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
-      const isEvent = [5, 12].includes(day); // Sample event days
-      calendarGrid.innerHTML += `<div class="day ${isEvent ? 'event' : ''}">${day}</div>`;
+      // Check if this day has any job fairs
+      const currentDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      const hasEvent = jobFairDates.some(event => {
+        const eventDate = event.date.split(' ')[0]; // Get just the date part
+        return eventDate === currentDateStr;
+      });
+      
+      const events = jobFairDates.filter(event => {
+        const eventDate = event.date.split(' ')[0]; // Get just the date part
+        return eventDate === currentDateStr;
+      });
+      
+      let tooltip = '';
+      if (events.length > 0) {
+        tooltip = events.map(e => e.venue).join('\n');
+      }
+      
+      calendarGrid.innerHTML += `<div class="day ${hasEvent ? 'event' : ''}" ${tooltip ? `title="${tooltip}"` : ''}>${day}</div>`;
     }
   }
 
@@ -365,6 +443,8 @@ function time_elapsed_string($datetime, $full = false) {
 
   renderCalendar(currentDate);
 </script>
+
+<!-- Styles moved to _dashboard.scss -->
 
 </body>
 </html>
