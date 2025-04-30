@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: .5rem 1.5rem;
+  padding: .5rem 1rem;
   background-color: $neutral-white;
   border-bottom: 2px solid $neutral-light;
   height: 60px;
@@ -15,7 +15,7 @@
   .header-right {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0.5rem;
 
     .quick-add {
       padding: 0.4rem 0.8rem;
@@ -40,6 +40,7 @@
     .notif-icon {
       position: relative;
       font-size: 1.2rem;
+      margin: .5rem;
 
       .notif-dot {
         position: absolute;
@@ -56,6 +57,12 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      padding: 0px .5rem;
+      border-radius: 6px;
+
+      &:hover {
+        background-color: $neutral-light;
+      }
 
       .profile-icon {
         font-size: 1rem;
@@ -164,4 +171,17 @@
   object-fit: cover;
   object-position: center;
   border: 2px solid $brand-primary;
+}
+
+.fullscreen-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 10px;
+  color: #333;
+}
+
+.fullscreen-toggle:hover {
+  color: $brand-primary;
 }

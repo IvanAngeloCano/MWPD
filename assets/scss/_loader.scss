@@ -1,11 +1,11 @@
 // Loader styles for MWPD Filing System
 // Used in loader.php
 
-body.loader-page, 
+body.loader-page,
 html.loader-page {
   height: 100%;
   margin: 0;
-  background: #f9f9f9;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,11 +13,11 @@ html.loader-page {
 
 .loader-overlay {
   position: fixed;
-  top: 0; 
-  left: 0; 
-  right: 0; 
+  top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
-  background: rgba($brand-primary, 0.07); // MWPD blue, light overlay
+  background-color: white;
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -26,23 +26,49 @@ html.loader-page {
 }
 
 .loader {
-  border: 8px solid #e3e8f0;
-  border-top: 8px solid $brand-primary; // MWPD blue
+  position: relative;
+  border: 8px solid $neutral-light;
+  border-top: 8px solid $brand-primary;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 120px;
+  height: 120px;
   animation: spin 1s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 24px;
 }
 
+.loader-inner {
+  position: absolute;
+  animation: spin2 1s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin2 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
 }
 
 .loader-logo {
-  width: 70px;
-  margin-bottom: 16px;
+  width: 100px;
 }
 
 .loader-text {

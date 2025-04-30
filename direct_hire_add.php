@@ -373,7 +373,8 @@ include '_head.php';
     // Replace dashes with spaces
     $pageTitle = ucwords(str_replace(['-', '_'], ' ', $fileWithoutExtension));
 
-    $pageTitle = 'Add New Record to Direct Hire';
+    $pageTitle = 'Direct Hire - Add New Record';
+    $currentPage == 'direct_hire.php';
     include '_header.php';
     ?>
 

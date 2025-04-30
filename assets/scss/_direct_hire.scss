@@ -3,6 +3,12 @@
   flex-direction: column;
   gap: 1rem;
 
+  input {
+    border-radius: 6px;
+    border: 1px solid $neutral-dark;
+    width: 3rem;
+  }
+
   .direct-hire-top {
     display: flex;
     flex-direction: column;
@@ -12,9 +18,9 @@
       display: flex;
       gap: 0.5rem;
 
-      
 
-    
+
+
       .tab {
         padding: 0 1rem;
         display: flex;
@@ -41,12 +47,15 @@
       gap: 0.5rem;
       font-size: 1rem;
 
+      input {
+        height: 2rem;
+      }
 
       .search-form {
         display: flex;
         flex: 1;
         gap: 0.5rem;
-        height: 2rem;
+        height: 1rem;
       }
 
       .search-bar {
@@ -127,11 +136,11 @@
     .table-footer {
       display: flex;
       justify-content: space-between;
-      font-size: 0.85rem;
-      color: #666;
+      font-size: $font-small;
+      color: $neutral-dark;
 
       .rows-input {
-        width: 60px;
+        width: 3rem;
         padding: 0.2rem;
         margin-left: 0.3rem;
       }
@@ -153,40 +162,21 @@
         }
       }
 
+
+
       tbody tr {
         border-bottom: 1px solid #ddd;
+        &:hover {
+          background-color: $neutral-light;
+        }
+
+
 
         td {
           padding: 0.75rem;
         }
 
-        .status {
-          padding: 0.3rem 0.6rem;
-          border-radius: 12px;
-          font-size: 0.75rem;
-          font-weight: bold;
-          display: inline-block;
 
-          &.approved {
-            background-color: #d4edda;
-            color: #155724;
-          }
-
-          &.pending {
-            background-color: #fff3cd;
-            color: #856404;
-          }
-
-          &.denied {
-            background-color: #f8d7da;
-            color: #721c24;
-          }
-
-          &.declined {
-            background-color: #f8d7da;
-            color: #721c24;
-          }
-        }
 
         .action-icons {
           display: flex;
@@ -225,6 +215,7 @@
   }
 
   .direct-hire-bottom {
+    font-family: $font-family;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -236,6 +227,8 @@
 
       button {
         height: 2rem;
+        font-family: $font-family !important;
+
       }
 
       button,
@@ -290,14 +283,13 @@
       gap: 0.3rem;
 
       label {
-        font-size: .9rem;
+        font-size: $font-small;
       }
 
       input {
-        font-size: .9rem;
-        width: 50px;
+        width: 3rem;
         height: 1.5rem;
-        padding: 0.3rem;
+        padding: 0.2rem;
       }
     }
 
@@ -373,10 +365,13 @@
   }
 }
 
-// Global style for links inside direct hire pages
-a {
-  text-decoration: none;
-}
+
+
+
+
+
+
+
 
 
 
@@ -574,7 +569,7 @@ a {
         color: black;
         border: 1px solid $neutral-dark;
       }
-      
+
       &.btn-success {
         background-color: #28a745;
         border: 1px solid #28a745;
