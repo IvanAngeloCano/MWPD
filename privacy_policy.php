@@ -1,7 +1,6 @@
 <?php
-session_start();
-$pageTitle = "Privacy Policy - MWPD Filing System";
-include '_head.php';
+// Include session management
+include 'session.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,135 +22,129 @@ include '_head.php';
         <div style="text-align: left; margin-top: 20px;">
           <h2 style="color: #1976D2; margin-bottom: 20px;">Data Privacy Act of 2012 (Republic Act No. 10173)</h2>
           
-          <p style="margin-bottom: 15px; line-height: 1.6;">The Department of Migrant Workers (DMW) recognizes the importance of protecting your personal information and is committed to processing your data in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173). This Privacy Policy outlines how we collect, use, disclose, and protect your personal information when you use our services.</p>
+          <p style="margin-bottom: 15px; line-height: 1.6;">The Department of Migrant Workers (DMW) recognizes the importance of protecting personal information and is committed to processing data in accordance with the Data Privacy Act of 2012 (Republic Act No. 10173). This Privacy Policy outlines how we collect, use, disclose, and protect personal information when using our services.</p>
           
-          <p style="margin-bottom: 15px; line-height: 1.6;">We value your privacy and are dedicated to maintaining the confidentiality and security of your personal information. By accessing or using our services, you acknowledge that you have read and understood this Privacy Policy.</p>
+          <p style="margin-bottom: 15px; line-height: 1.6;">This system is intended for use by authorized staff and employees of the Department of Migrant Workers who are responsible for handling files and data in their official capacity. As an employee using this system, you are entrusted with access to personal and sensitive information, and are bound by this policy as well as all applicable data privacy laws and regulations.</p>
+
+          <h3 style="color: #1976D2; margin-top: 25px; margin-bottom: 15px;">1. Information We Collect</h3>
           
-          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">1. Information We Collect</h3>
-          <p style="margin-bottom: 15px; line-height: 1.6;">We collect personal information that is necessary for processing your applications, including but not limited to:</p>
+          <p style="margin-bottom: 15px; line-height: 1.6;">As authorized staff members, you will be processing the following types of information:</p>
+          
           <ul style="margin-bottom: 15px; padding-left: 20px;">
-            <li style="margin-bottom: 5px;">Full name and personal details (date of birth, gender, civil status)</li>
-            <li style="margin-bottom: 5px;">Contact information (address, email address, telephone numbers)</li>
-            <li style="margin-bottom: 5px;">Identification documents (passport details, government-issued IDs)</li>
-            <li style="margin-bottom: 5px;">Employment history and work experience</li>
-            <li style="margin-bottom: 5px;">Educational background and qualifications</li>
-            <li style="margin-bottom: 5px;">Skills, certifications, and professional licenses</li>
-            <li style="margin-bottom: 5px;">Medical information relevant to your employment</li>
-            <li style="margin-bottom: 5px;">Financial information for processing payments and benefits</li>
-            <li style="margin-bottom: 5px;">Family information and emergency contacts</li>
-            <li style="margin-bottom: 5px;">Other information required for processing your application</li>
+            <li style="margin-bottom: 5px;">Personal information (name, address, contact details, date of birth)</li>
+            <li style="margin-bottom: 5px;">Employment information (work history, qualifications, skills)</li>
+            <li style="margin-bottom: 5px;">Government-issued identification (passport details, IDs)</li>
+            <li style="margin-bottom: 5px;">Travel and deployment information</li>
+            <li style="margin-bottom: 5px;">Health information when required for employment purposes</li>
+            <li style="margin-bottom: 5px;">Other information necessary for processing overseas employment applications</li>
           </ul>
+
+          <h3 style="color: #1976D2; margin-top: 25px; margin-bottom: 15px;">2. Staff Responsibilities</h3>
           
-          <p style="margin-bottom: 15px; line-height: 1.6;">We collect this information through various means, including:</p>
+          <p style="margin-bottom: 15px; line-height: 1.6;">As an employee with access to this system, you are responsible for:</p>
+          
           <ul style="margin-bottom: 15px; padding-left: 20px;">
-            <li style="margin-bottom: 5px;">Application forms and documents you submit</li>
-            <li style="margin-bottom: 5px;">Interviews and personal interactions</li>
-            <li style="margin-bottom: 5px;">Correspondence through email, telephone, or other communication channels</li>
-            <li style="margin-bottom: 5px;">Our website and online platforms</li>
-            <li style="margin-bottom: 5px;">Third-party sources, with your consent or as permitted by law</li>
+            <li style="margin-bottom: 5px;">Maintaining the confidentiality of all personal information accessed through the system</li>
+            <li style="margin-bottom: 5px;">Processing data only for legitimate purposes related to your official duties</li>
+            <li style="margin-bottom: 5px;">Ensuring data accuracy and completeness in all records you maintain</li>
+            <li style="margin-bottom: 5px;">Reporting any data breaches or security incidents immediately</li>
+            <li style="margin-bottom: 5px;">Complying with all departmental data retention and disposal policies</li>
+            <li style="margin-bottom: 5px;">Not disclosing personal information to unauthorized parties</li>
           </ul>
+
+          <h3 style="color: #1976D2; margin-top: 25px; margin-bottom: 15px;">3. Purpose of Data Processing</h3>
           
-          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">2. How We Use Your Information</h3>
-          <p style="margin-bottom: 15px; line-height: 1.6;">Your personal information will be used for the following purposes:</p>
+          <p style="margin-bottom: 15px; line-height: 1.6;">The Department collects and processes personal information for the following purposes:</p>
+          
           <ul style="margin-bottom: 15px; padding-left: 20px;">
-            <li style="margin-bottom: 5px;">Processing and evaluating your application for overseas employment</li>
-            <li style="margin-bottom: 5px;">Verifying your identity and qualifications</li>
-            <li style="margin-bottom: 5px;">Matching you with suitable employment opportunities</li>
-            <li style="margin-bottom: 5px;">Communicating with you regarding your application and employment</li>
-            <li style="margin-bottom: 5px;">Providing pre-departure orientation and training</li>
-            <li style="margin-bottom: 5px;">Facilitating travel arrangements and visa processing</li>
-            <li style="margin-bottom: 5px;">Providing welfare services and assistance while you are abroad</li>
-            <li style="margin-bottom: 5px;">Processing insurance and benefits</li>
-            <li style="margin-bottom: 5px;">Complying with legal and regulatory requirements</li>
-            <li style="margin-bottom: 5px;">Responding to your inquiries and addressing your concerns</li>
-            <li style="margin-bottom: 5px;">Generating statistical data for policy development and research</li>
-            <li style="margin-bottom: 5px;">Improving our services and programs</li>
+            <li style="margin-bottom: 5px;">Processing and evaluating applications for overseas employment</li>
+            <li style="margin-bottom: 5px;">Verifying identities and qualifications</li>
+            <li style="margin-bottom: 5px;">Facilitating job matching and placement</li>
+            <li style="margin-bottom: 5px;">Ensuring compliance with legal and regulatory requirements</li>
+            <li style="margin-bottom: 5px;">Providing assistance and protection to migrant workers</li>
+            <li style="margin-bottom: 5px;">Maintaining records for statistical and reporting purposes</li>
+            <li style="margin-bottom: 5px;">Communicating with applicants regarding their applications</li>
           </ul>
-          
-          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">3. Legal Basis for Processing</h3>
-          <p style="margin-bottom: 15px; line-height: 1.6;">We process your personal information based on the following legal grounds:</p>
-          <ul style="margin-bottom: 15px; padding-left: 20px;">
-            <li style="margin-bottom: 5px;"><strong>Consent:</strong> When you provide your explicit consent for us to process your personal information for specific purposes.</li>
-            <li style="margin-bottom: 5px;"><strong>Contract:</strong> When processing is necessary for the performance of a contract to which you are a party or to take steps at your request prior to entering into a contract.</li>
-            <li style="margin-bottom: 5px;"><strong>Legal Obligation:</strong> When processing is necessary for compliance with a legal obligation to which we are subject.</li>
-            <li style="margin-bottom: 5px;"><strong>Legitimate Interests:</strong> When processing is necessary for our legitimate interests or those of a third party, except where such interests are overridden by your interests or fundamental rights and freedoms.</li>
-            <li style="margin-bottom: 5px;"><strong>Public Interest:</strong> When processing is necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in us.</li>
-          </ul>
-          
+
           <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">4. Information Sharing and Disclosure</h3>
-          <p style="margin-bottom: 15px; line-height: 1.6;">We may share your information with:</p>
+          <p style="margin-bottom: 15px; line-height: 1.6;">As authorized staff, you may share applicant information only with the following:</p>
           <ul style="margin-bottom: 15px; padding-left: 20px;">
-            <li style="margin-bottom: 5px;">Government agencies involved in the processing of your application and deployment (e.g., Department of Foreign Affairs, Philippine Overseas Employment Administration, Overseas Workers Welfare Administration)</li>
-            <li style="margin-bottom: 5px;">Foreign government agencies and embassies for visa and work permit processing</li>
-            <li style="margin-bottom: 5px;">Employers and recruitment agencies, as necessary for your employment</li>
+            <li style="margin-bottom: 5px;">Other authorized DMW personnel who need the information to perform their duties</li>
+            <li style="margin-bottom: 5px;">Prospective employers and recruitment agencies, as necessary for job placement</li>
+            <li style="margin-bottom: 5px;">Government agencies for regulatory compliance and reporting requirements</li>
+            <li style="margin-bottom: 5px;">Service providers who assist in processing applications or providing services to migrant workers</li>
             <li style="margin-bottom: 5px;">Medical facilities for required medical examinations</li>
             <li style="margin-bottom: 5px;">Insurance providers for coverage and claims processing</li>
-            <li style="margin-bottom: 5px;">Financial institutions for processing payments and remittances</li>
-            <li style="margin-bottom: 5px;">Service providers who assist us in delivering our services</li>
-            <li style="margin-bottom: 5px;">Legal representatives in case of disputes or legal proceedings</li>
-            <li style="margin-bottom: 5px;">Other entities as required by law or with your consent</li>
+            <li style="margin-bottom: 5px;">Legal authorities when required by law or court order</li>
           </ul>
           
-          <p style="margin-bottom: 15px; line-height: 1.6;">We ensure that third parties who receive your personal information maintain appropriate security measures and process your data only as instructed by us and in compliance with applicable laws.</p>
+          <p style="margin-bottom: 15px; line-height: 1.6;"><strong>Important:</strong> Information sharing must always be conducted in accordance with the Data Privacy Act and departmental policies. Never share personal information with unauthorized parties or for purposes outside the scope of your official duties.</p>
           
-          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">5. Data Security</h3>
-          <p style="margin-bottom: 15px; line-height: 1.6;">We implement appropriate technical, organizational, and physical security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. These measures include:</p>
+          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">5. Data Security Measures</h3>
+          <p style="margin-bottom: 15px; line-height: 1.6;">The Department implements appropriate security measures to protect personal information from unauthorized access, alteration, disclosure, or destruction. As a system user, you must adhere to these security protocols:</p>
           <ul style="margin-bottom: 15px; padding-left: 20px;">
-            <li style="margin-bottom: 5px;">Access controls and authentication mechanisms</li>
-            <li style="margin-bottom: 5px;">Encryption of sensitive data</li>
-            <li style="margin-bottom: 5px;">Regular security assessments and audits</li>
-            <li style="margin-bottom: 5px;">Staff training on data protection and security</li>
-            <li style="margin-bottom: 5px;">Physical security measures for our premises and facilities</li>
-            <li style="margin-bottom: 5px;">Secure disposal of data when no longer needed</li>
+            <li style="margin-bottom: 5px;">Use strong, unique passwords and change them regularly</li>
+            <li style="margin-bottom: 5px;">Never share your login credentials with others</li>
+            <li style="margin-bottom: 5px;">Lock your computer when away from your workstation</li>
+            <li style="margin-bottom: 5px;">Access the system only from secure networks and authorized devices</li>
+            <li style="margin-bottom: 5px;">Report any suspicious activities or potential security breaches immediately</li>
+            <li style="margin-bottom: 5px;">Follow all departmental IT security policies and procedures</li>
           </ul>
           
-          <p style="margin-bottom: 15px; line-height: 1.6;">While we strive to protect your personal information, no security measure is completely foolproof. We encourage you to take precautions to protect your personal information, such as keeping your login credentials confidential and logging out of your account after use.</p>
-          
-          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">6. Data Retention</h3>
-          <p style="margin-bottom: 15px; line-height: 1.6;">We retain your personal information for as long as necessary to fulfill the purposes for which it was collected, to comply with legal and regulatory requirements, or to protect our interests. The specific retention period depends on the nature of the information and the purposes for which it is processed.</p>
-          
-          <p style="margin-bottom: 15px; line-height: 1.6;">When your personal information is no longer needed, we will securely dispose of it or anonymize it so that it can no longer be associated with you.</p>
-          
-          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">7. Your Rights</h3>
-          <p style="margin-bottom: 15px; line-height: 1.6;">Under the Data Privacy Act, you have the following rights:</p>
+          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">6. Data Retention and Disposal</h3>
+          <p style="margin-bottom: 15px; line-height: 1.6;">The Department retains personal information only for as long as necessary to fulfill the purposes for which it was collected, or as required by law. As a system user, you must:</p>
           <ul style="margin-bottom: 15px; padding-left: 20px;">
-            <li style="margin-bottom: 5px;"><strong>Right to be informed:</strong> You have the right to be informed about the processing of your personal data, including the purpose, scope, and manner of processing.</li>
-            <li style="margin-bottom: 5px;"><strong>Right to access:</strong> You have the right to access your personal data that we hold about you and to request a copy of such data.</li>
-            <li style="margin-bottom: 5px;"><strong>Right to object:</strong> You have the right to object to the processing of your personal data, including for direct marketing purposes.</li>
-            <li style="margin-bottom: 5px;"><strong>Right to erasure or blocking:</strong> You have the right to request the erasure or blocking of your personal data when it is no longer necessary for the purpose for which it was collected, or when you withdraw your consent.</li>
-            <li style="margin-bottom: 5px;"><strong>Right to rectification:</strong> You have the right to request the correction of inaccuracies in your personal data.</li>
-            <li style="margin-bottom: 5px;"><strong>Right to data portability:</strong> You have the right to request the transfer of your personal data to another entity in a structured, commonly used, and machine-readable format.</li>
-            <li style="margin-bottom: 5px;"><strong>Right to damages:</strong> You have the right to be indemnified for damages sustained due to inaccurate, incomplete, outdated, false, unlawfully obtained, or unauthorized use of your personal data.</li>
-            <li style="margin-bottom: 5px;"><strong>Right to file a complaint:</strong> You have the right to file a complaint with the National Privacy Commission if you believe your rights have been violated.</li>
+            <li style="margin-bottom: 5px;">Follow departmental records retention schedules</li>
+            <li style="margin-bottom: 5px;">Securely dispose of records that have reached their retention period</li>
+            <li style="margin-bottom: 5px;">Use approved methods for secure deletion of electronic records</li>
+            <li style="margin-bottom: 5px;">Never retain copies of personal information on personal devices</li>
           </ul>
           
-          <p style="margin-bottom: 15px; line-height: 1.6;">To exercise these rights, please contact our Data Protection Officer using the contact information provided below.</p>
+          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">7. Data Subject Rights</h3>
+          <p style="margin-bottom: 15px; line-height: 1.6;">Under the Data Privacy Act, individuals have certain rights regarding their personal information. As a system user, you should be aware that applicants have the right to:</p>
+          <ul style="margin-bottom: 15px; padding-left: 20px;">
+            <li style="margin-bottom: 5px;">Access their personal information</li>
+            <li style="margin-bottom: 5px;">Correct inaccuracies in their personal information</li>
+            <li style="margin-bottom: 5px;">Object to the processing of their personal information</li>
+            <li style="margin-bottom: 5px;">Erase or block their personal information under certain circumstances</li>
+            <li style="margin-bottom: 5px;">Be informed about the collection and processing of their personal information</li>
+            <li style="margin-bottom: 5px;">Data portability</li>
+            <li style="margin-bottom: 5px;">File a complaint with the National Privacy Commission</li>
+          </ul>
           
-          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">8. Cookies and Similar Technologies</h3>
-          <p style="margin-bottom: 15px; line-height: 1.6;">Our website may use cookies and similar technologies to enhance your browsing experience, analyze website traffic, and personalize content. Cookies are small text files that are stored on your device when you visit a website.</p>
+          <p style="margin-bottom: 15px; line-height: 1.6;">If an applicant requests to exercise any of these rights, direct them to the Department's Data Protection Officer or follow the established procedures for handling such requests.</p>
           
-          <p style="margin-bottom: 15px; line-height: 1.6;">You can control cookies through your browser settings. However, disabling cookies may affect the functionality of our website.</p>
+          <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">8. Staff Compliance and Training</h3>
+          <p style="margin-bottom: 15px; line-height: 1.6;">All staff members with access to this system are required to:</p>
+          <ul style="margin-bottom: 15px; padding-left: 20px;">
+            <li style="margin-bottom: 5px;">Complete regular data privacy and security training</li>
+            <li style="margin-bottom: 5px;">Sign a confidentiality agreement</li>
+            <li style="margin-bottom: 5px;">Acknowledge understanding of this privacy policy</li>
+            <li style="margin-bottom: 5px;">Comply with all data protection laws and departmental policies</li>
+            <li style="margin-bottom: 5px;">Report any violations of this policy to the Data Protection Officer</li>
+          </ul>
+          
+          <p style="margin-bottom: 15px; line-height: 1.6;">Failure to comply with this policy may result in disciplinary action, up to and including termination of employment and legal proceedings.</p>
           
           <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">9. Changes to This Policy</h3>
-          <p style="margin-bottom: 15px; line-height: 1.6;">We may update this Privacy Policy from time to time to reflect changes in our practices, services, or applicable laws. The updated policy will be posted on our website with the effective date. We encourage you to review this policy periodically to stay informed about how we protect your personal information.</p>
-          
-          <p style="margin-bottom: 15px; line-height: 1.6;">Significant changes to this policy will be communicated to you through appropriate channels, such as email notifications or prominent notices on our website.</p>
+          <p style="margin-bottom: 15px; line-height: 1.6;">This Privacy Policy may be updated periodically to reflect changes in our practices, services, or applicable laws. Staff will be notified of any significant changes to this policy. It is your responsibility as a system user to review and understand the current policy.</p>
           
           <h3 style="color: #1976D2; margin: 20px 0 10px; font-size: 1.2rem;">10. Contact Information</h3>
-          <p style="margin-bottom: 15px; line-height: 1.6;">If you have any questions, concerns, or requests regarding this Privacy Policy or the processing of your personal information, please contact our Data Protection Officer at:</p>
+          <p style="margin-bottom: 15px; line-height: 1.6;">If you have questions, concerns, or requests regarding this Privacy Policy or the processing of personal information within the system, please contact the Department's Data Protection Officer:</p>
           
-          <p style="margin-bottom: 15px; line-height: 1.6;">
-            <strong>Data Protection Officer</strong><br>
-            Department of Migrant Workers<br>
-            2nd Floor, Blas F. Ople Building<br>
-            Ortigas Avenue corner EDSA, Mandaluyong City<br>
-            Email: dpo@dmw.gov.ph<br>
-            Phone: (02) 8722-1144
-          </p>
-        </div>
-        
-        <div style="text-align: center; margin-top: 30px;">
-          <a href="login.php" style="background-color: #1976D2; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: 500; display: inline-block;">Back to Login</a>
+          <div style="margin-bottom: 20px; line-height: 1.6;">
+            <p style="margin-bottom: 5px;"><strong>Data Protection Officer</strong></p>
+            <p style="margin-bottom: 5px;">Department of Migrant Workers</p>
+            <p style="margin-bottom: 5px;">Email: dpo@dmw.gov.ph</p>
+            <p style="margin-bottom: 5px;">Phone: (02) 8722-1144</p>
+            <p style="margin-bottom: 5px;">Address: 2nd Floor, Blas F. Ople Building, Ortigas Avenue corner EDSA, Mandaluyong City</p>
+          </div>
+          
+          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
+            <p style="margin-bottom: 15px; line-height: 1.6;"><strong>Acknowledgment:</strong> By using this system, you acknowledge that you have read and understood this Privacy Policy and agree to comply with all its provisions, as well as all applicable data privacy laws and regulations.</p>
+            
+            <p style="margin-bottom: 15px; line-height: 1.6;">Last Updated: April 30, 2025</p>
+          </div>
         </div>
       </div>
     </div>
