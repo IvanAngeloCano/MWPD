@@ -4,19 +4,62 @@ require_once 'connection.php';
 
 use PhpOffice\PhpWord\TemplateProcessor;
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['record_id'])) {
-    $record_id = (int)$_GET['record_id'];
-    if ($record_id <= 0) {
-        die('Invalid record ID');
+// Function to log debug information
+function logDebug($message) {
+    file_put_contents('clearance_generation_debug.txt', date('Y-m-d H:i:s') . ': ' . $message . "\n", FILE_APPEND);
+}
+
+// Handle direct download of a previously generated file
+if (isset($_GET['download']) && !empty($_GET['download'])) {
+    $filename = basename($_GET['download']);
+    $filepath = 'uploads/direct_hire_clearance/' . $filename;
+    
+    if (file_exists($filepath) && is_file($filepath)) {
+        // Log the download request
+        logDebug("Serving existing document: $filepath");
+        
+        // Serve the file
+        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Content-Length: ' . filesize($filepath));
+        readfile($filepath);
+        exit;
+    } else {
+        logDebug("File not found: $filepath");
+        die('File not found');
     }
+}
+
+// Handle both GET and POST requests for generating new documents
+if ((($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['record_id'])) || 
+    ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['record_id'])))) {
+    
+    // Get record ID from either GET or POST
+    $record_id = ($_SERVER['REQUEST_METHOD'] === 'GET') ? (int)$_GET['record_id'] : (int)$_POST['record_id'];
+    
+    if ($record_id <= 0) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            echo json_encode(['success' => false, 'message' => 'Invalid record ID']);
+            exit;
+        } else {
+            die('Invalid record ID');
+        }
+    }
+    
     try {
         // Get record details
         $stmt = $pdo->prepare("SELECT * FROM direct_hire WHERE id = ?");
         $stmt->execute([$record_id]);
         $record = $stmt->fetch(PDO::FETCH_ASSOC);
         if (!$record) {
-            die('Record not found');
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                echo json_encode(['success' => false, 'message' => 'Record not found']);
+                exit;
+            } else {
+                die('Record not found');
+            }
         }
+        
         $template = new TemplateProcessor('Directhireclearance.docx');
         $template->setValue('control_no', $record['control_no']);
         $template->setValue('name', $record['name']);
@@ -30,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['record_id'])) {
         $template->setValue('received_from_dhad', !empty($record['received_from_dhad']) ? date('F j, Y', strtotime($record['received_from_dhad'])) : 'Not set');
         $template->setValue('current_date', date('F j, Y'));
         $template->setValue('comments', !empty($record['note']) ? $record['note'] : 'No additional comments.');
+        
         $isApproved = ($record['status'] === 'approved');
         if ($isApproved) {
             $signatureFile = 'signatures/Signature.png';
@@ -59,55 +103,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['record_id'])) {
         } else {
             $template->setValue('signature1_image', '');
         }
-        // Generate unique temp file names
-        $docName = 'Clearance_' . $record['control_no'] . '_' . date('Ymd_His');
-        $tempDocx = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $docName . '.docx';
-        $tempPdf = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $docName . '.pdf';
-        $template->saveAs($tempDocx);
-        // Find LibreOffice
-        $libreOfficePath = 'C:\\Program Files\\LibreOffice\\program\\soffice.exe';
-        $possiblePaths = [
-            'C:\\Program Files\\LibreOffice\\program\\soffice.exe',
-            'C:\\Program Files (x86)\\LibreOffice\\program\\soffice.exe',
-            'C:\\Program Files\\LibreOffice 7\\program\\soffice.exe',
-            'C:\\Program Files (x86)\\LibreOffice 7\\program\\soffice.exe',
-            'C:\\xampp\\LibreOffice\\program\\soffice.exe'
-        ];
-        if (!file_exists($libreOfficePath)) {
-            foreach ($possiblePaths as $path) {
-                if (file_exists($path)) {
-                    $libreOfficePath = $path;
-                    break;
-                }
+        
+        // Generate unique file name for DOCX
+        $docName = 'clearance_' . $record['control_no'] . '_' . date('Ymd_His');
+        
+        // Different handling based on request type
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // For AJAX requests, save to a directory and return URL
+            $outputDir = 'uploads/direct_hire_clearance';
+            
+            // Create directory if it doesn't exist
+            if (!file_exists($outputDir)) {
+                mkdir($outputDir, 0777, true);
             }
-        }
-        // Convert DOCX to PDF
-        $command = '"' . $libreOfficePath . '" --headless --convert-to pdf --outdir "' . sys_get_temp_dir() . '" "' . $tempDocx . '"';
-        $output = [];
-        $returnVar = 0;
-        exec($command, $output, $returnVar);
-        // Serve PDF if conversion succeeded
-        if ($returnVar === 0 && file_exists($tempPdf)) {
-            header('Content-Type: application/pdf');
-            header('Content-Disposition: inline; filename="' . $docName . '.pdf"');
-            header('Content-Length: ' . filesize($tempPdf));
-            readfile($tempPdf);
-            unlink($tempPdf);
-            if (file_exists($tempDocx)) unlink($tempDocx);
+            
+            $docFilename = $docName . '.docx';
+            $docPath = $outputDir . '/' . $docFilename;
+            $template->saveAs($docPath);
+            
+            logDebug("Document saved to: $docPath");
+            
+            // Return JSON response with document URL that includes the download parameter
+            $docUrl = 'generate_direct_hire_clearance.php?download=' . $docFilename;
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Document generated successfully',
+                'document_url' => $docUrl
+            ]);
+            
+            logDebug("Redirecting to: $docUrl");
             exit;
+            
         } else {
-            // Serve DOCX if PDF conversion failed
+            // For direct GET requests, serve file for download
+            $tempDocx = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $docName . '.docx';
+            $template->saveAs($tempDocx);
+            
+            // Serve DOCX file directly
             header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-            header('Content-Disposition: inline; filename="' . $docName . '.docx"');
+            header('Content-Disposition: attachment; filename="' . $docName . '.docx"');
             header('Content-Length: ' . filesize($tempDocx));
             readfile($tempDocx);
+            
+            // Clean up temporary file
             if (file_exists($tempDocx)) unlink($tempDocx);
             exit;
         }
+        
     } catch (Exception $e) {
-        die('Error: ' . $e->getMessage());
+        $errorMsg = 'Error: ' . $e->getMessage();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            echo json_encode(['success' => false, 'message' => $errorMsg]);
+        } else {
+            die($errorMsg);
+        }
     }
 } else {
-    die('Invalid request.');
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        echo json_encode(['success' => false, 'message' => 'Invalid request. Record ID is required.']);
+    } else {
+        die('Invalid request. Record ID is required.');
+    }
 }
 ?>

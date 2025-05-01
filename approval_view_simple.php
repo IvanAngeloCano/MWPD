@@ -90,10 +90,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Send notification to the user who submitted the record
         if ($submitted_by > 0) {
-          notifyApprovalDecision($direct_hire_id, $approval_id, $submitted_by, $name, $new_status, $comments);
-          logError("Notification sent to user $submitted_by about $name approval status: $new_status");
+          // Make sure notifications.php is included
+          require_once 'notifications.php';
+          
+          // Ensure notifications table exists
+          ensureNotificationsTableExists();
+          
+          // Log details about the notification being sent
+          logError("Sending approval notification to user ID: $submitted_by for record: $direct_hire_id with status: $new_status");
+          
+          // Send the notification
+          $notificationResult = notifyApprovalDecision($direct_hire_id, $approval_id, $submitted_by, $name, $new_status, $comments);
+          
+          if ($notificationResult) {
+            logError("Notification successfully sent to user $submitted_by about $name approval status: $new_status");
+          } else {
+            logError("Failed to send notification to user $submitted_by about $name approval status: $new_status");
+          }
         } else {
-          logError("No submitted_by user found for approval ID: $approval_id");
+          // Try to find the submitter from the direct_hire record if not in approval record
+          try {
+            $submitter_query = $pdo->prepare("SELECT created_by FROM direct_hire WHERE id = ?");
+            $submitter_query->execute([$direct_hire_id]);
+            $alt_submitted_by = $submitter_query->fetchColumn();
+            
+            if ($alt_submitted_by) {
+              require_once 'notifications.php';
+              ensureNotificationsTableExists();
+              
+              logError("Found alternative submitter (ID: $alt_submitted_by) from direct_hire record");
+              $notificationResult = notifyApprovalDecision($direct_hire_id, $approval_id, $alt_submitted_by, $name, $new_status, $comments);
+              
+              if ($notificationResult) {
+                logError("Notification sent to alternative submitter (ID: $alt_submitted_by)");
+              } else {
+                logError("Failed to send notification to alternative submitter (ID: $alt_submitted_by)");
+              }
+            } else {
+              logError("No submitter found for record ID: $direct_hire_id");
+            }
+          } catch (PDOException $e) {
+            logError("Error finding alternative submitter: " . $e->getMessage());
+          }
         }
 
         // Commit the transaction

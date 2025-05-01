@@ -1,26 +1,48 @@
-2025-04-25 13:21:40: Script started
-2025-04-25 13:21:40: Record ID: 9
-2025-04-25 13:21:40: Transaction started
-2025-04-25 13:21:40: Record found: {"id":9,"control_no":"DH-0040","name":"sdasdasdss","jobsite":"dsadsadh","evaluated":"9999-09-01","for_confirmation":"9999-09-09","emailed_to_dhad":"9999-09-09","received_from_dhad":"9999-09-09","evaluator":"sadsa","note":"","type":"household","status":null,"created_at":"2025-04-25 19:04:18","updated_at":"2025-04-25 19:21:38","submitted_by":1}
-2025-04-25 13:21:40: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
-2025-04-25 13:21:40: Update result: true, Rows affected: 1
-2025-04-25 13:21:40: Transaction committed
-2025-04-25 13:21:40: Success message set, redirecting to direct_hire_view.php?id=9
-2025-04-25 13:22:06: Script started
-2025-04-25 13:22:06: Record ID: 1
-2025-04-25 13:22:06: Transaction started
-2025-04-25 13:22:06: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-04-07","for_confirmation":"2025-05-07","emailed_to_dhad":"2025-04-08","received_from_dhad":"2025-02-25","evaluator":"Ivan Cano","note":"PS","type":"household","status":"","created_at":"2025-04-22 23:37:34","updated_at":"2025-04-25 17:49:03","submitted_by":null}
-2025-04-25 13:22:06: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
-2025-04-25 13:22:06: Update result: true, Rows affected: 1
-2025-04-25 13:22:06: Transaction committed
-2025-04-25 13:22:06: Success message set, redirecting to direct_hire_view.php?id=1
-2025-04-25 13:27:01: Script started
-2025-04-25 13:27:01: Record ID: 1
-2025-04-25 13:27:01: Transaction started
-2025-04-25 13:27:01: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-04-07","for_confirmation":"2025-05-07","emailed_to_dhad":"2025-04-08","received_from_dhad":"2025-02-25","evaluator":"Ivan Cano","note":"PS","type":"household","status":null,"created_at":"2025-04-22 23:37:34","updated_at":"2025-04-25 19:26:58","submitted_by":null}
-2025-04-25 13:27:01: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
-2025-04-25 13:27:01: Update result: true, Rows affected: 1
-2025-04-25 13:27:01: Attempting to insert into direct_hire_approvals table. User ID: 1
-2025-04-25 13:27:01: Error with approvals table: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct_hire_approvals' doesn't exist
-2025-04-25 13:27:01: Transaction committed
-2025-04-25 13:27:01: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-30 07:07:32: Script started
+2025-04-30 07:07:32: Record ID: 8
+2025-04-30 07:07:32: Transaction started
+2025-04-30 07:07:32: Record found: {"id":8,"control_no":"DH-004088","name":"JADEERD","jobsite":"GFSGF","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\njdsad","type":"professional","status":null,"created_at":"2025-04-28 16:11:18","updated_at":"2025-04-30 13:07:31","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 07:07:32: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 07:07:32: Update result: true, Rows affected: 1
+2025-04-30 07:07:32: Attempting to insert into direct_hire_clearance_approvals table. User ID: 2
+2025-04-30 07:07:32: No existing approval found, creating new one...
+2025-04-30 07:07:32: New approval inserted, ID: 81
+2025-04-30 07:07:32: Error sending notification to Regional Directors: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'first_name' in 'field list'
+2025-04-30 07:07:32: Transaction committed
+2025-04-30 07:07:32: Success message set, redirecting to direct_hire_view.php?id=8
+2025-04-30 07:15:37: Script started
+2025-04-30 07:15:37: Record ID: 7
+2025-04-30 07:15:37: Transaction started
+2025-04-30 07:15:37: Record found: {"id":7,"control_no":"DH-0099","name":"dsadsal","jobsite":"gjhfjgdgghshgs","evaluated":"2025-04-10","for_confirmation":"2025-04-10","emailed_to_dhad":"2025-04-20","received_from_dhad":"2025-04-08","evaluator":"ghdytd","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:10:09","updated_at":"2025-04-30 13:15:24","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 07:15:37: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 07:15:37: Update result: true, Rows affected: 1
+2025-04-30 07:15:37: Attempting to insert into direct_hire_clearance_approvals table. User ID: 1
+2025-04-30 07:15:37: No existing approval found, creating new one...
+2025-04-30 07:15:37: New approval inserted, ID: 82
+2025-04-30 07:15:37: Error sending notification to Regional Directors: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'first_name' in 'field list'
+2025-04-30 07:15:37: Transaction committed
+2025-04-30 07:15:37: Success message set, redirecting to direct_hire_view.php?id=7
+2025-04-30 07:16:37: Script started
+2025-04-30 07:16:37: Record ID: 10
+2025-04-30 07:16:37: Transaction started
+2025-04-30 07:16:37: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ncdcsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.[DENIAL NOTE - 2025-04-29 17:01:14 by Regional Director]\r\ndf\r\n\r\n[DENIAL NOTE - 2025-04-29 17:02:28 by Regional Director]\r\nhhh\r\n\r\n[DENIAL NOTE - 2025-04-29 17:02:44 by Regional Director]\r\nhhh\r\n\r\n[APPROVAL NOTE - 2025-04-30 05:26:54 by Regional Director]\r\nApproved without additional comments.\r\n\r\n[APPROVAL NOTE - 2025-04-30 05:29:42 by Regional Director]\r\nApproved without additional comments.\r\n\r\n","type":"professional","status":null,"created_at":"2025-04-28 16:12:20","updated_at":"2025-04-30 13:16:35","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 07:16:37: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 07:16:37: Update result: true, Rows affected: 1
+2025-04-30 07:16:37: Attempting to insert into direct_hire_clearance_approvals table. User ID: 1
+2025-04-30 07:16:37: No existing approval found, creating new one...
+2025-04-30 07:16:37: New approval inserted, ID: 83
+2025-04-30 07:16:37: Error sending notification to Regional Directors: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'first_name' in 'field list'
+2025-04-30 07:16:37: Transaction committed
+2025-04-30 07:16:37: Success message set, redirecting to direct_hire_view.php?id=10
+2025-04-30 07:24:58: Script started
+2025-04-30 07:24:58: Record ID: 10
+2025-04-30 07:24:58: Transaction started
+2025-04-30 07:24:58: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ncdcsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.[DENIAL NOTE - 2025-04-29 17:01:14 by Regional Director]\r\ndf\r\n\r\n[DENIAL NOTE - 2025-04-29 17:02:28 by Regional Director]\r\nhhh\r\n\r\n[DENIAL NOTE - 2025-04-29 17:02:44 by Regional Director]\r\nhhh\r\n\r\n[APPROVAL NOTE - 2025-04-30 05:26:54 by Regional Director]\r\nApproved without additional comments.\r\n\r\n[APPROVAL NOTE - 2025-04-30 05:29:42 by Regional Director]\r\nApproved without additional comments.\r\n\r\n","type":"professional","status":"denied","created_at":"2025-04-28 16:12:20","updated_at":"2025-04-30 13:16:51","submitted_by":null,"approved_by":1,"approved_at":"2025-04-30 13:16:51"}
+2025-04-30 07:24:58: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 07:24:58: Update result: true, Rows affected: 1
+2025-04-30 07:24:58: Attempting to insert into direct_hire_clearance_approvals table. User ID: 1
+2025-04-30 07:24:58: No existing approval found, creating new one...
+2025-04-30 07:24:58: New approval inserted, ID: 84
+2025-04-30 07:24:58: Error sending notification to Regional Directors: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'first_name' in 'field list'
+2025-04-30 07:24:58: Transaction committed
+2025-04-30 07:24:58: Success message set, redirecting to direct_hire_view.php?id=10

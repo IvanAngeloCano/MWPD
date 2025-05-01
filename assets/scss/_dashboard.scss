@@ -7,6 +7,7 @@
   height: 100%;
 }
 
+
 .bento-box {
   background-color: $neutral-light;
   border-radius: .5rem;
@@ -111,6 +112,33 @@
     li {
       font-size: 0.875rem;
       margin-bottom: 0.5rem;
+    }
+  }
+  
+  // This Month's Job Fairs styling
+  .activity-status {
+    margin-top: 5px;
+  }
+  
+  .status-badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    display: inline-block;
+    
+    &.planned {
+      background-color: #cff4fc;
+      color: #055160;
+    }
+    
+    &.confirmed {
+      background-color: #d1e7dd;
+      color: #0f5132;
+    }
+    
+    &.completed {
+      background-color: #e2e3e5;
+      color: #41464b;
     }
   }
 }
@@ -278,11 +306,10 @@
 }
 
   .calendar-grid {
-    position: relative;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: .5rem 0.4rem;
-    text-align: center;
+    grid-gap: 0.25rem;
+    margin-top: 0.5rem;
 
     .day {
       aspect-ratio: 1 / 1;
@@ -293,10 +320,11 @@
       border-radius: 0.5rem;
       background-color: #f5f5f5;
       position: relative;
+      cursor: default;
     }
 
     .event {
-      background-color: #2b7de9;
+      background-color: #007bff;
       color: white;
       border-radius: 50%;
       font-weight: bold;
@@ -306,6 +334,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        background-color: darken(#007bff, 10%);
+      }
     }
   }
 }

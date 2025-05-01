@@ -103,6 +103,9 @@ try {
                 logDebug("Notifying Regional Directors about submission from $submitter_name for record $record_id");
                 
                 try {
+                    // Include the alert system for session-based notifications
+                    require_once 'alert_system.php';
+                    
                     // Find all Regional Directors
                     $rd_stmt = $pdo->prepare("SELECT id FROM users WHERE role LIKE '%regional director%'");
                     $rd_stmt->execute();
@@ -110,12 +113,23 @@ try {
                     
                     if (!empty($rd_users)) {
                         $name = $record['name'] ?? 'Applicant';
+                        $record_type = isset($record_type) ? $record_type : 'direct_hire';
                         $message = "New approval request for $name submitted by $submitter_name";
-                        $link = "approval_detail_view.php?id=" . $approval_id;
+                        $link = "approval_view_simple.php";
                         
                         foreach ($rd_users as $rd_user_id) {
-                            addNotification($rd_user_id, $message, $record_id, 'direct_hire', $link);
-                            logDebug("Notification sent to Regional Director (ID: $rd_user_id)");
+                            // Try session-based notification first
+                            if (function_exists('addUserNotification')) {
+                                addUserNotification($rd_user_id, $message, $link);
+                                // Also add an alert for immediate visibility
+                                addAlert($rd_user_id, 'info', "New approval request", "$name requires your approval. <a href='$link'>View pending approvals</a>");
+                                logDebug("Session notification sent to Regional Director (ID: $rd_user_id)");
+                            } 
+                            // Fall back to database notification if session function doesn't exist
+                            else if (function_exists('addNotification')) {
+                                addNotification($rd_user_id, $message, $record_id, $record_type, $link);
+                                logDebug("Database notification sent to Regional Director (ID: $rd_user_id)");
+                            }
                         }
                     } else {
                         logDebug("No Regional Directors found in the system");

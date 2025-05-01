@@ -33,7 +33,11 @@ unset($_SESSION['show_loader']);
     </div>
     <script>
         setTimeout(function() {
+            <?php if (isset($_GET['redirect']) && !empty($_GET['redirect'])): ?>
+            window.location.href = '<?php echo htmlspecialchars($_GET['redirect']); ?>';
+            <?php else: ?>
             window.location.href = 'dashboard.php';
+            <?php endif; ?>
         }, 1500); // 1.5 seconds
     </script>
 </body>

@@ -1,0 +1,178 @@
+// Record View Styles
+.record-view-wrapper {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  
+  .record-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f9fa;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+  
+  .record-title {
+    h2 {
+      margin: 0 0 8px 0;
+      font-size: 24px;
+    }
+  }
+  
+  .record-subtitle {
+    display: flex;
+    gap: 15px;
+    color: #666;
+    
+    @media (max-width: 576px) {
+      flex-wrap: wrap;
+    }
+  }
+  
+  .record-actions {
+    display: flex;
+    gap: 10px;
+    
+    @media (max-width: 576px) {
+      flex-wrap: wrap;
+    }
+  }
+  
+  .record-details {
+    padding: 20px;
+  }
+  
+  .record-section {
+    margin-bottom: 30px;
+    
+    h3 {
+      font-size: 18px;
+      margin: 0 0 15px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    // Approval and Denial Note Styles
+    &.approval-note {
+      background-color: #f0f9f0;
+      border-radius: 6px;
+      padding: 15px;
+      border-left: 4px solid #28a745;
+      margin-top: 20px;
+      
+      h3 {
+        color: #0f5132;
+        border-bottom-color: #a3cfbb;
+      }
+      
+      .notes-container {
+        background-color: rgba(255, 255, 255, 0.7);
+        border-left-color: #28a745;
+      }
+    }
+    
+    &.denial-note {
+      background-color: #fdf7f7;
+      border-radius: 6px;
+      padding: 15px;
+      border-left: 4px solid #dc3545;
+      margin-top: 20px;
+      
+      h3 {
+        color: #842029;
+        border-bottom-color: #f5c2c7;
+      }
+      
+      .notes-container {
+        background-color: rgba(255, 255, 255, 0.7);
+        border-left-color: #dc3545;
+      }
+    }
+  }
+  
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 15px;
+    
+    @media (max-width: 992px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (max-width: 576px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .detail-label {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .detail-value {
+    font-size: 15px;
+  }
+  
+  .notes-container {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 3px solid #ddd;
+    
+    .note-content {
+      white-space: pre-line;
+      
+      &.approval {
+        color: #0f5132;
+      }
+      
+      &.denial {
+        color: #842029;
+      }
+    }
+  }
+  
+  .no-data {
+    color: #999;
+    font-style: italic;
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    
+    &.pending {
+      background-color: #ffeeba;
+      color: #856404;
+    }
+    
+    &.approved {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    
+    &.denied {
+      background-color: #e6f3ff;
+      border-left: 4px solid #1e88e5;
+      color: #0d47a1;
+    }
+  }
+}
