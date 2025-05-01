@@ -2519,6 +2519,94 @@ html.loader-page {
   color: white;
 }
 
+.info-sheet-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  position: relative;
+  gap: 2rem;
+}
+
+.charts {
+  display: inline-block;
+}
+
+.stat-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+}
+.stat-card .stat-item {
+  width: 240px;
+  height: 100px;
+  background: #246EE9;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+.stat-card .stat-item h4 {
+  font-size: 16px;
+  text-align: center;
+  color: white;
+}
+.stat-card .stat-item .stat-value {
+  font-size: 24px;
+  padding-top: 0.4rem;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.chart-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 1050px;
+}
+.chart-card .chart-item {
+  width: 350px;
+  height: 350px;
+  background: #fff;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.chart-card .chart-item h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.chart-card .chart-item canvas {
+  width: 330px !important;
+  height: 300px !important;
+}
+
 .profile-container {
   background-color: #FFFFFF;
   border-radius: 12px;
