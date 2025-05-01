@@ -85,7 +85,11 @@
       }
 
       tbody tr {
-        border-bottom: 1px solid #ddd;
+        border-bottom: 10px solid #ddd;
+
+        &:nth-child(even) {
+          background-color: #f9f9f9;
+        }
 
         td {
           padding: 0.75rem;

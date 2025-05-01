@@ -58,3 +58,15 @@
 2025-05-01 15:47:32: Error sending notification to Regional Directors: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'first_name' in 'field list'
 2025-05-01 15:47:32: Transaction committed
 2025-05-01 15:47:32: Success message set, redirecting to direct_hire_view.php?id=9
+2025-05-02 00:37:58: Script started
+2025-05-02 00:37:58: Record ID: 8
+2025-05-02 00:37:58: Transaction started
+2025-05-02 00:37:58: Record found: {"id":8,"control_no":"DH-004088","name":"JADEERD","jobsite":"GFSGF","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\njdsad","type":"professional","status":null,"created_at":"2025-04-28 16:11:18","updated_at":"2025-05-02 06:32:58","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-02 00:37:58: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-05-02 00:37:58: Update result: true, Rows affected: 1
+2025-05-02 00:37:58: Attempting to insert into direct_hire_clearance_approvals table. User ID: 3
+2025-05-02 00:37:58: No existing approval found, creating new one...
+2025-05-02 00:37:58: New approval inserted, ID: 86
+2025-05-02 00:37:58: Error sending notification to Regional Directors: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'first_name' in 'field list'
+2025-05-02 00:37:58: Transaction committed
+2025-05-02 00:37:58: Success message set, redirecting to direct_hire_view.php?id=8

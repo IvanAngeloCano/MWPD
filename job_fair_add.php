@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$pageTitle = "Add New Job Fair - MWPD Filing System";
+$pageTitle = "Add New Job Fair";
 include '_head.php';
 ?>
 
@@ -73,10 +73,10 @@ include '_head.php';
 
     <main class="main-content">
       <div class="job-fair-add-wrapper">
-        <div class="page-header">
+        <!-- <div class="page-header">
           <h1>Add New Job Fair</h1>
           <p>Create a new job fair event in the system</p>
-        </div>
+        </div> -->
         
         <?php if (!empty($success_message)): ?>
         <div class="alert alert-success">

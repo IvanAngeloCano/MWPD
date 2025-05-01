@@ -11,18 +11,18 @@ require_once 'alert_system.php';
 $unread_count = 0;
 $notifications = [];
 if (isset($_SESSION['user_id'])) {
-    // Always use database notifications for persistence across sessions
-    require_once 'notifications.php';
-    
-    // Ensure the notifications table exists
-    ensureNotificationsTableExists();
-    
-    // Get notifications from database
-    $unread_count = countUnreadNotifications($_SESSION['user_id']);
-    $notifications = getUserNotifications($_SESSION['user_id'], true, 10);
-    
-    // Debug log for troubleshooting
-    error_log("Fetched " . count($notifications) . " notifications for user ID: " . $_SESSION['user_id']);
+  // Always use database notifications for persistence across sessions
+  require_once 'notifications.php';
+
+  // Ensure the notifications table exists
+  ensureNotificationsTableExists();
+
+  // Get notifications from database
+  $unread_count = countUnreadNotifications($_SESSION['user_id']);
+  $notifications = getUserNotifications($_SESSION['user_id'], true, 10);
+
+  // Debug log for troubleshooting
+  error_log("Fetched " . count($notifications) . " notifications for user ID: " . $_SESSION['user_id']);
 }
 ?>
 <header class="header">
@@ -51,17 +51,17 @@ if (isset($_SESSION['user_id'])) {
             <div class="no-notifications">No notifications</div>
           <?php else: ?>
             <?php foreach ($notifications as $index => $notification): ?>
-              <?php 
-                // Format the notification time
-                $timeString = isset($notification['created_at']) ? $notification['created_at'] : date('Y-m-d H:i:s');
-                $timeStamp = strtotime($timeString);
-                
-                // Get read status
-                $isRead = isset($notification['is_read']) ? (int)$notification['is_read'] === 1 : false;
+              <?php
+              // Format the notification time
+              $timeString = isset($notification['created_at']) ? $notification['created_at'] : date('Y-m-d H:i:s');
+              $timeStamp = strtotime($timeString);
+
+              // Get read status
+              $isRead = isset($notification['is_read']) ? (int)$notification['is_read'] === 1 : false;
               ?>
-              <div class="notification-item <?= $isRead ? 'read' : 'unread' ?>" 
-                   data-id="<?= $notification['id'] ?>" 
-                   data-link="<?= htmlspecialchars($notification['link'] ?? '') ?>">
+              <div class="notification-item <?= $isRead ? 'read' : 'unread' ?>"
+                data-id="<?= $notification['id'] ?>"
+                data-link="<?= htmlspecialchars($notification['link'] ?? '') ?>">
                 <div class="notification-content">
                   <p><?= htmlspecialchars($notification['message']) ?></p>
                   <span class="notification-time"><?= date('M j, g:i a', $timeStamp) ?></span>
@@ -90,7 +90,7 @@ if (isset($_SESSION['user_id'])) {
       </div>
     </a>
 
-    <button class="fullscreen-toggle" id="fullscreenToggle" title="Toggle Fullscreen">
+    <button class="fullscreen-toggle" id="fullscreenToggle"  title="Toggle Fullscreen">
       <i class="fa fa-expand"></i>
     </button>
   </div>
@@ -98,19 +98,18 @@ if (isset($_SESSION['user_id'])) {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-  const fullscreenBtn = document.getElementById('fullscreenToggle');
+    const fullscreenBtn = document.getElementById('fullscreenToggle');
 
-  fullscreenBtn.addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-      fullscreenBtn.innerHTML = '<i class="fa fa-compress"></i>';
-    } else {
-      document.exitFullscreen();
-      fullscreenBtn.innerHTML = '<i class="fa fa-expand"></i>';
-    }
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+        fullscreenBtn.innerHTML = '<i class="fa fa-compress"></i>';
+      } else {
+        document.exitFullscreen();
+        fullscreenBtn.innerHTML = '<i class="fa fa-expand"></i>';
+      }
+    });
   });
-});
-
 </script>
 
 
@@ -181,31 +180,31 @@ if (isset($_SESSION['user_id'])) {
     padding: 0;
   }
 
-.notification-item {
-  display: flex;
-  padding: 12px 15px;
-  border-bottom: 1px solid #f1f5f9;
-  transition: all 0.2s;
-  align-items: flex-start;
-  justify-content: space-between;
-  cursor: pointer;
-}
+  .notification-item {
+    display: flex;
+    padding: 12px 15px;
+    border-bottom: 1px solid #f1f5f9;
+    transition: all 0.2s;
+    align-items: flex-start;
+    justify-content: space-between;
+    cursor: pointer;
+  }
 
-.notification-item:hover {
-  background-color: #f0f7ff;
-  transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
+  .notification-item:hover {
+    background-color: #f0f7ff;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
 
-.notification-item.unread {
-  background-color: #e6f3ff;
-  border-left: 3px solid #1e88e5;
-}
+  .notification-item.unread {
+    background-color: #e6f3ff;
+    border-left: 3px solid #1e88e5;
+  }
 
-.notification-item.read {
-  background-color: #ffffff;
-  border-left: 3px solid transparent;
-}
+  .notification-item.read {
+    background-color: #ffffff;
+    border-left: 3px solid transparent;
+  }
 
   .notification-content {
     flex: 1;
@@ -324,7 +323,7 @@ if (isset($_SESSION['user_id'])) {
         markNotificationsAsRead(ids);
       }
     });
-    
+
     // Handle notification item clicks for navigation
     document.addEventListener('click', function(e) {
       const notificationItem = e.target.closest('.notification-item');
@@ -382,45 +381,46 @@ if (isset($_SESSION['user_id'])) {
     // Dismiss notification via AJAX
     function dismissNotification(id) {
       if (!id) return;
-      
+
       fetch('notification_actions.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'action=delete&id=' + id
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          const item = document.querySelector(`.notification-item[data-id="${id}"]`);
-          if (item) {
-            item.style.height = '0';
-            item.style.padding = '0';
-            item.style.overflow = 'hidden';
-            setTimeout(() => {
-              item.remove();
-              
-              // Check if no notifications left
-              const list = document.getElementById('notificationList');
-              if (list && list.children.length === 0) {
-                list.innerHTML = '<div class="no-notifications">No notifications</div>';
-              }
-              
-              // Update the notification dot
-              const dot = document.getElementById('notificationDot');
-              if (dot) {
-                if (data.unread_count === 0) {
-                  dot.style.display = 'none';
-                } else {
-                  dot.textContent = data.unread_count > 9 ? '9+' : data.unread_count;
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: 'action=delete&id=' + id
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            const item = document.querySelector(`.notification-item[data-id="${id}"]`);
+            if (item) {
+              item.style.height = '0';
+              item.style.padding = '0';
+              item.style.overflow = 'hidden';
+              setTimeout(() => {
+                item.remove();
+
+                // Check if no notifications left
+                const list = document.getElementById('notificationList');
+                if (list && list.children.length === 0) {
+                  list.innerHTML = '<div class="no-notifications">No notifications</div>';
                 }
-              }
-            }, 300);
+
+                // Update the notification dot
+                const dot = document.getElementById('notificationDot');
+                if (dot) {
+                  if (data.unread_count === 0) {
+                    dot.style.display = 'none';
+                  } else {
+                    dot.textContent = data.unread_count > 9 ? '9+' : data.unread_count;
+                  }
+                }
+              }, 300);
+            }
           }
-        }
-      })
-      .catch(error => console.error('Error dismissing notification:', error));
+        })
+        .catch(error => console.error('Error dismissing notification:', error));
     }
   });
 </script>
+

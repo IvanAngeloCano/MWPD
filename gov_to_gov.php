@@ -169,7 +169,10 @@ try {
     display: inline-block;
     transition: background 0.2s;
   }
-  .go-btn:hover { background-color: #0056b3 !important; }
+
+  .go-btn:hover {
+    background-color: #0056b3 !important;
+  }
 
   .action-icons {
     display: flex;
@@ -177,6 +180,7 @@ try {
     justify-content: center;
     align-items: center;
   }
+
   .action-icons a {
     color: inherit;
     text-decoration: none;
@@ -190,15 +194,20 @@ try {
     border: none;
     background: none;
   }
+
   .action-icons a .fa-eye {
     color: #007bff;
   }
+
   .action-icons a .fa-edit {
     color: #28a745;
   }
-  .action-icons a .fa-trash-alt, .action-icons a .fa-trash {
+
+  .action-icons a .fa-trash-alt,
+  .action-icons a .fa-trash {
     color: #dc3545;
   }
+
   .action-icons a:hover {
     background: #f0f2f7;
   }
@@ -225,14 +234,15 @@ try {
     margin-top: 10px;
     width: 100%;
     border-collapse: collapse;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background-color: #fff;
   }
 
-  th, td {
+  th,
+  td {
     padding: 10px;
     text-align: center;
-    border: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
   }
 
   th {
@@ -243,6 +253,7 @@ try {
 
   td {
     color: #444;
+    font-weight: 600;
   }
 
   table thead {
@@ -257,7 +268,8 @@ try {
     background-color: #e9e9e9;
   }
 
-  table td, table th {
+  table td,
+  table th {
     word-wrap: break-word;
     max-width: 150px;
   }
@@ -288,10 +300,10 @@ try {
 
   <div class="content-wrapper">
     <?php
-      $currentFile = basename($_SERVER['PHP_SELF']);
-      $fileWithoutExtension = pathinfo($currentFile, PATHINFO_FILENAME);
-      $pageTitle = ucwords(str_replace(['-', '_'], ' ', $fileWithoutExtension));
-      include '_header.php';
+    $currentFile = basename($_SERVER['PHP_SELF']);
+    $fileWithoutExtension = pathinfo($currentFile, PATHINFO_FILENAME);
+    $pageTitle = ucwords(str_replace(['-', '_'], ' ', $fileWithoutExtension));
+    include '_header.php';
     ?>
 
     <main class="main-content">
@@ -304,7 +316,10 @@ try {
               <div class="form-group"><label>Last Name</label><input type="text" name="last_name" id="last_name" required></div>
               <div class="form-group"><label>First Name</label><input type="text" name="first_name" id="first_name" required></div>
               <div class="form-group"><label>Middle Name</label><input type="text" name="middle_name" id="middle_name"></div>
-              <div class="form-group"><label>Sex</label><select name="sex" id="sex"><option value="Male">Male</option><option value="Female">Female</option></select></div>
+              <div class="form-group"><label>Sex</label><select name="sex" id="sex">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select></div>
             </div>
             <div class="form-row">
               <div class="form-group"><label>Birth Date</label><input type="date" name="birth_date" id="birth_date"></div>
@@ -325,18 +340,24 @@ try {
               <div class="form-group"><label>ID Number</label><input type="text" name="id_number" id="id_number"></div>
             </div>
             <div class="form-row">
-              <div class="form-group"><label>With Job Experience</label><select name="with_job_experience" id="with_job_experience"><option>Yes</option><option>No</option></select></div>
+              <div class="form-group"><label>With Job Experience</label><select name="with_job_experience" id="with_job_experience">
+                  <option>Yes</option>
+                  <option>No</option>
+                </select></div>
               <div class="form-group"><label>Company Name/Year Started–Ended</label><input type="text" name="company_name_year_started_ended" id="company_name_year_started_ended"></div>
-              <div class="form-group"><label>With Other Experience</label><select name="with_job_experience_aside_from" id="with_job_experience_aside_from"><option>Yes</option><option>No</option></select></div>
+              <div class="form-group"><label>With Other Experience</label><select name="with_job_experience_aside_from" id="with_job_experience_aside_from">
+                  <option>Yes</option>
+                  <option>No</option>
+                </select></div>
               <div class="form-group"><label>Name/Company/Year Started–Ended</label><input type="text" name="name_company_year_started_ended" id="name_company_year_started_ended"></div>
             </div>
             <div class="form-row">
               <div class="form-group"><label>Remarks</label><input type="text" name="remarks" id="remarks"></div>
               <div class="form-group"><label>Date Received by Region</label><input type="date" name="date_received_by_region" id="date_received_by_region"></div>
             </div>
-            <div class="form-row">
+            <!-- <div class="form-row">
               <div class="form-group" style="flex: 1 1 100%;"><label>Upload Documents</label><input type="file" name="documents[]" id="documents" multiple></div>
-            </div>
+            </div> -->
             <div class="form-actions">
               <button type="submit" id="gtogFormSaveBtn" class="btn btn-primary">Save</button>
               <button type="button" class="btn btn-cancel" onclick="hideGtogForm()">Cancel</button>
@@ -362,28 +383,94 @@ try {
             <div class="record-section">
               <h3>Basic Information</h3>
               <div class="detail-grid">
-                <div class="detail-item"><div class="detail-label">Last Name</div><div class="detail-value" id="gtog_view_last_name"></div></div>
-                <div class="detail-item"><div class="detail-label">First Name</div><div class="detail-value" id="gtog_view_first_name"></div></div>
-                <div class="detail-item"><div class="detail-label">Middle Name</div><div class="detail-value" id="gtog_view_middle_name"></div></div>
-                <div class="detail-item"><div class="detail-label">Sex</div><div class="detail-value" id="gtog_view_sex"></div></div>
-                <div class="detail-item"><div class="detail-label">Birth Date</div><div class="detail-value" id="gtog_view_birth_date"></div></div>
-                <div class="detail-item"><div class="detail-label">Age</div><div class="detail-value" id="gtog_view_age"></div></div>
-                <div class="detail-item"><div class="detail-label">Height</div><div class="detail-value" id="gtog_view_height"></div></div>
-                <div class="detail-item"><div class="detail-label">Weight</div><div class="detail-value" id="gtog_view_weight"></div></div>
-                <div class="detail-item"><div class="detail-label">Educational Attainment</div><div class="detail-value" id="gtog_view_educational_attainment"></div></div>
-                <div class="detail-item"><div class="detail-label">Present Address</div><div class="detail-value" id="gtog_view_present_address"></div></div>
-                <div class="detail-item"><div class="detail-label">Email Address</div><div class="detail-value" id="gtog_view_email_address"></div></div>
-                <div class="detail-item"><div class="detail-label">Contact Number</div><div class="detail-value" id="gtog_view_contact_number"></div></div>
-                <div class="detail-item"><div class="detail-label">Passport Number</div><div class="detail-value" id="gtog_view_passport_number"></div></div>
-                <div class="detail-item"><div class="detail-label">Passport Validity</div><div class="detail-value" id="gtog_view_passport_validity"></div></div>
-                <div class="detail-item"><div class="detail-label">ID Presented</div><div class="detail-value" id="gtog_view_id_presented"></div></div>
-                <div class="detail-item"><div class="detail-label">ID Number</div><div class="detail-value" id="gtog_view_id_number"></div></div>
-                <div class="detail-item"><div class="detail-label">With Job Experience</div><div class="detail-value" id="gtog_view_with_job_experience"></div></div>
-                <div class="detail-item"><div class="detail-label">Company Name/Year Started–Ended</div><div class="detail-value" id="gtog_view_company_name_year_started_ended"></div></div>
-                <div class="detail-item"><div class="detail-label">With Other Experience</div><div class="detail-value" id="gtog_view_with_job_experience_aside_from"></div></div>
-                <div class="detail-item"><div class="detail-label">Name/Company/Year Started–Ended</div><div class="detail-value" id="gtog_view_name_company_year_started_ended"></div></div>
-                <div class="detail-item"><div class="detail-label">Remarks</div><div class="detail-value" id="gtog_view_remarks"></div></div>
-                <div class="detail-item"><div class="detail-label">Date Received by Region</div><div class="detail-value" id="gtog_view_date_received_by_region"></div></div>
+                <div class="detail-item">
+                  <div class="detail-label">Last Name</div>
+                  <div class="detail-value" id="gtog_view_last_name"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">First Name</div>
+                  <div class="detail-value" id="gtog_view_first_name"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Middle Name</div>
+                  <div class="detail-value" id="gtog_view_middle_name"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Sex</div>
+                  <div class="detail-value" id="gtog_view_sex"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Birth Date</div>
+                  <div class="detail-value" id="gtog_view_birth_date"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Age</div>
+                  <div class="detail-value" id="gtog_view_age"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Height</div>
+                  <div class="detail-value" id="gtog_view_height"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Weight</div>
+                  <div class="detail-value" id="gtog_view_weight"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Educational Attainment</div>
+                  <div class="detail-value" id="gtog_view_educational_attainment"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Present Address</div>
+                  <div class="detail-value" id="gtog_view_present_address"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Email Address</div>
+                  <div class="detail-value" id="gtog_view_email_address"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Contact Number</div>
+                  <div class="detail-value" id="gtog_view_contact_number"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Passport Number</div>
+                  <div class="detail-value" id="gtog_view_passport_number"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Passport Validity</div>
+                  <div class="detail-value" id="gtog_view_passport_validity"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">ID Presented</div>
+                  <div class="detail-value" id="gtog_view_id_presented"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">ID Number</div>
+                  <div class="detail-value" id="gtog_view_id_number"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">With Job Experience</div>
+                  <div class="detail-value" id="gtog_view_with_job_experience"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Company Name/Year Started–Ended</div>
+                  <div class="detail-value" id="gtog_view_company_name_year_started_ended"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">With Other Experience</div>
+                  <div class="detail-value" id="gtog_view_with_job_experience_aside_from"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Name/Company/Year Started–Ended</div>
+                  <div class="detail-value" id="gtog_view_name_company_year_started_ended"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Remarks</div>
+                  <div class="detail-value" id="gtog_view_remarks"></div>
+                </div>
+                <div class="detail-item">
+                  <div class="detail-label">Date Received by Region</div>
+                  <div class="detail-value" id="gtog_view_date_received_by_region"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -438,7 +525,7 @@ try {
                   while ($row = $stmt->fetch()) {
                     $row_json = htmlspecialchars(json_encode($row), ENT_QUOTES, 'UTF-8');
                     echo "<tr>";
-                    echo '<td><input type="checkbox" class="g2g-row-checkbox" name="selected_ids[]" value="'.htmlspecialchars($row['g2g']).'"></td>';
+                    echo '<td><input type="checkbox" class="g2g-row-checkbox" name="selected_ids[]" value="' . htmlspecialchars($row['g2g']) . '"></td>';
                     echo "<td style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>" . htmlspecialchars($row['last_name']) . "</td>";
                     echo "<td style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>" . htmlspecialchars($row['first_name']) . "</td>";
                     echo "<td style='white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'>" . htmlspecialchars($row['middle_name']) . "</td>";
@@ -465,36 +552,36 @@ try {
         <div class="gtog-bottom">
           <div class="pagination">
             <?php if ($page > 1): ?>
-              <a href="?page=<?= ($page-1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="prev-btn">
+              <a href="?page=<?= ($page - 1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="prev-btn">
                 <i class="fa fa-chevron-left"></i> Previous
               </a>
             <?php else: ?>
               <button class="prev-btn" disabled><i class="fa fa-chevron-left"></i> Previous</button>
             <?php endif; ?>
             <?php
-              $window = 5;
-              $half = floor($window / 2);
-              if ($total_pages <= $window) {
+            $window = 5;
+            $half = floor($window / 2);
+            if ($total_pages <= $window) {
+              $start_page = 1;
+              $end_page = $total_pages;
+            } else {
+              if ($page <= $half + 1) {
                 $start_page = 1;
+                $end_page = $window;
+              } elseif ($page >= $total_pages - $half) {
+                $start_page = $total_pages - $window + 1;
                 $end_page = $total_pages;
               } else {
-                if ($page <= $half + 1) {
-                  $start_page = 1;
-                  $end_page = $window;
-                } elseif ($page >= $total_pages - $half) {
-                  $start_page = $total_pages - $window + 1;
-                  $end_page = $total_pages;
-                } else {
-                  $start_page = $page - $half;
-                  $end_page = $page + $half;
-                }
+                $start_page = $page - $half;
+                $end_page = $page + $half;
               }
-              for ($i = $start_page; $i <= $end_page; $i++):
+            }
+            for ($i = $start_page; $i <= $end_page; $i++):
             ?>
               <a href="?page=<?= $i ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="page<?= $i == $page ? ' active' : '' ?>"> <?= $i ?> </a>
             <?php endfor; ?>
             <?php if ($page < $total_pages): ?>
-              <a href="?page=<?= ($page+1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="next-btn">
+              <a href="?page=<?= ($page + 1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="next-btn">
                 Next <i class="fa fa-chevron-right"></i>
               </a>
             <?php else: ?>
@@ -515,162 +602,167 @@ try {
         </div>
 
         <script>
-        function showGtogForm(mode, data) {
-          const wrapper = document.querySelector('.gtog-record-form-wrapper');
-          const form = document.getElementById('gtogRecordForm');
-          wrapper.style.display = 'block';
-          // Fill form if data provided
-          if (data) {
-            Object.keys(data).forEach(function(key) {
-              if (form[key]) form[key].value = data[key] ?? '';
-            });
-          } else {
-            form.reset();
-          }
-          // Set readonly for view mode
-          const editable = (mode !== 'view');
-          Array.from(form.elements).forEach(function(el) {
-            if (el.tagName === 'INPUT' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA') {
-              if (el.type !== 'hidden' && el.type !== 'file') {
-                el.readOnly = !editable;
-                el.disabled = !editable;
+          function showGtogForm(mode, data) {
+            const wrapper = document.querySelector('.gtog-record-form-wrapper');
+            const form = document.getElementById('gtogRecordForm');
+            wrapper.style.display = 'block';
+            // Fill form if data provided
+            if (data) {
+              Object.keys(data).forEach(function(key) {
+                if (form[key]) form[key].value = data[key] ?? '';
+              });
+            } else {
+              form.reset();
+            }
+            // Set readonly for view mode
+            const editable = (mode !== 'view');
+            Array.from(form.elements).forEach(function(el) {
+              if (el.tagName === 'INPUT' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA') {
+                if (el.type !== 'hidden' && el.type !== 'file') {
+                  el.readOnly = !editable;
+                  el.disabled = !editable;
+                }
               }
+            });
+            document.getElementById('gtogFormSaveBtn').style.display = editable ? '' : 'none';
+          }
+
+          function hideGtogForm() {
+            document.querySelector('.gtog-record-form-wrapper').style.display = 'none';
+            document.getElementById('gtogRecordForm').reset();
+          }
+
+          function showGtogView(data) {
+            // Hide form, show view
+            document.querySelector('.gtog-record-form-wrapper').style.display = 'none';
+            document.getElementById('gtogRecordViewWrapper').style.display = 'block';
+            // Fill fields
+            document.getElementById('gtog_view_fullname').textContent = `${data.last_name || ''}, ${data.first_name || ''} ${data.middle_name || ''}`;
+            [
+              'last_name', 'first_name', 'middle_name', 'sex', 'birth_date', 'age', 'height', 'weight', 'educational_attainment', 'present_address', 'email_address', 'contact_number', 'passport_number', 'passport_validity', 'id_presented', 'id_number', 'with_job_experience', 'company_name_year_started_ended', 'with_job_experience_aside_from', 'name_company_year_started_ended', 'remarks', 'date_received_by_region'
+            ].forEach(function(field) {
+              let el = document.getElementById('gtog_view_' + field);
+              if (el) el.textContent = data[field] || '';
+            });
+            // Attach Edit event
+            document.getElementById('gtogViewEditBtn').onclick = function() {
+              hideGtogView();
+              showGtogForm('edit', data);
+            };
+          }
+
+          function hideGtogView() {
+            document.getElementById('gtogRecordViewWrapper').style.display = 'none';
+          }
+          window.addEventListener('DOMContentLoaded', function() {
+            // Add New Record button
+            const addBtn = document.querySelector('.add-btn');
+            if (addBtn) {
+              addBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                hideGtogView();
+                showGtogForm('add');
+              });
             }
           });
-          document.getElementById('gtogFormSaveBtn').style.display = editable ? '' : 'none';
-        }
-        function hideGtogForm() {
-          document.querySelector('.gtog-record-form-wrapper').style.display = 'none';
-          document.getElementById('gtogRecordForm').reset();
-        }
-        function showGtogView(data) {
-          // Hide form, show view
-          document.querySelector('.gtog-record-form-wrapper').style.display = 'none';
-          document.getElementById('gtogRecordViewWrapper').style.display = 'block';
-          // Fill fields
-          document.getElementById('gtog_view_fullname').textContent = `${data.last_name || ''}, ${data.first_name || ''} ${data.middle_name || ''}`;
-          [
-            'last_name','first_name','middle_name','sex','birth_date','age','height','weight','educational_attainment','present_address','email_address','contact_number','passport_number','passport_validity','id_presented','id_number','with_job_experience','company_name_year_started_ended','with_job_experience_aside_from','name_company_year_started_ended','remarks','date_received_by_region'
-          ].forEach(function(field) {
-            let el = document.getElementById('gtog_view_' + field);
-            if (el) el.textContent = data[field] || '';
-          });
-          // Attach Edit event
-          document.getElementById('gtogViewEditBtn').onclick = function() {
-            hideGtogView();
-            showGtogForm('edit', data);
-          };
-        }
-        function hideGtogView() {
-          document.getElementById('gtogRecordViewWrapper').style.display = 'none';
-        }
-        window.addEventListener('DOMContentLoaded', function() {
-          // Add New Record button
-          const addBtn = document.querySelector('.add-btn');
-          if (addBtn) {
-            addBtn.addEventListener('click', function(e) {
-              e.preventDefault();
-              hideGtogView();
-              showGtogForm('add');
-            });
-          }
-        });
         </script>
 
         <script>
-        // CLIENT-SIDE PAGINATION & SEARCH FOR STATIC TABLE DATA
-        document.addEventListener('DOMContentLoaded', function() {
-          const table = document.querySelector('#g2g-tbody');
-          const rows = Array.from(table.querySelectorAll('tr'));
-          const searchInput = document.querySelector('.search-bar') || document.getElementById('searchInput');
-          const resultsCount = document.getElementById('resultsCount') || document.querySelector('.results-count');
-          const rowsInput = document.getElementById('rowsInput');
-          const resetRowsBtn = document.getElementById('resetRowsBtn');
-          let currentPage = 1;
-          let rowsPerPage = parseInt(rowsInput ? rowsInput.value : 6) || 6;
-          let filteredRows = rows;
-          
-          function renderTable(page = 1) {
-            // Hide all rows
-            rows.forEach(row => row.style.display = 'none');
-            // Paginate filteredRows
-            const total = filteredRows.length;
-            const totalPages = Math.ceil(total / rowsPerPage) || 1;
-            if (page > totalPages) page = totalPages;
-            currentPage = page;
-            const start = (page - 1) * rowsPerPage;
-            const end = Math.min(start + rowsPerPage, total);
-            for (let i = start; i < end; i++) {
-              filteredRows[i].style.display = '';
+          // CLIENT-SIDE PAGINATION & SEARCH FOR STATIC TABLE DATA
+          document.addEventListener('DOMContentLoaded', function() {
+            const table = document.querySelector('#g2g-tbody');
+            const rows = Array.from(table.querySelectorAll('tr'));
+            const searchInput = document.querySelector('.search-bar') || document.getElementById('searchInput');
+            const resultsCount = document.getElementById('resultsCount') || document.querySelector('.results-count');
+            const rowsInput = document.getElementById('rowsInput');
+            const resetRowsBtn = document.getElementById('resetRowsBtn');
+            let currentPage = 1;
+            let rowsPerPage = parseInt(rowsInput ? rowsInput.value : 6) || 6;
+            let filteredRows = rows;
+
+            function renderTable(page = 1) {
+              // Hide all rows
+              rows.forEach(row => row.style.display = 'none');
+              // Paginate filteredRows
+              const total = filteredRows.length;
+              const totalPages = Math.ceil(total / rowsPerPage) || 1;
+              if (page > totalPages) page = totalPages;
+              currentPage = page;
+              const start = (page - 1) * rowsPerPage;
+              const end = Math.min(start + rowsPerPage, total);
+              for (let i = start; i < end; i++) {
+                filteredRows[i].style.display = '';
+              }
+              // Update results count
+              if (resultsCount) {
+                resultsCount.textContent = `Showing ${total === 0 ? 0 : start + 1}-${end} out of ${total} results`;
+              }
+              // Update pagination controls
+              renderPagination(totalPages);
             }
-            // Update results count
-            if (resultsCount) {
-              resultsCount.textContent = `Showing ${total === 0 ? 0 : start + 1}-${end} out of ${total} results`;
+
+            function renderPagination(totalPages) {
+              const pagDiv = document.querySelector('.pagination');
+              if (!pagDiv) return;
+              pagDiv.innerHTML = '';
+              // Prev
+              const prevBtn = document.createElement('button');
+              prevBtn.textContent = '< Previous';
+              prevBtn.className = 'prev-btn';
+              prevBtn.disabled = (currentPage === 1);
+              prevBtn.onclick = () => renderTable(currentPage - 1);
+              pagDiv.appendChild(prevBtn);
+              // Page numbers
+              let windowSize = 5;
+              let start = Math.max(1, currentPage - Math.floor(windowSize / 2));
+              let end = Math.min(totalPages, start + windowSize - 1);
+              if (end - start < windowSize - 1) start = Math.max(1, end - windowSize + 1);
+              for (let i = start; i <= end; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.textContent = i;
+                pageBtn.className = 'page' + (i === currentPage ? ' active' : '');
+                pageBtn.disabled = (i === currentPage);
+                pageBtn.onclick = () => renderTable(i);
+                pagDiv.appendChild(pageBtn);
+              }
+              // Next
+              const nextBtn = document.createElement('button');
+              nextBtn.textContent = 'Next >';
+              nextBtn.className = 'next-btn';
+              nextBtn.disabled = (currentPage === totalPages);
+              nextBtn.onclick = () => renderTable(currentPage + 1);
+              pagDiv.appendChild(nextBtn);
             }
-            // Update pagination controls
-            renderPagination(totalPages);
-          }
-          function renderPagination(totalPages) {
-            const pagDiv = document.querySelector('.pagination');
-            if (!pagDiv) return;
-            pagDiv.innerHTML = '';
-            // Prev
-            const prevBtn = document.createElement('button');
-            prevBtn.textContent = '< Previous';
-            prevBtn.className = 'prev-btn';
-            prevBtn.disabled = (currentPage === 1);
-            prevBtn.onclick = () => renderTable(currentPage - 1);
-            pagDiv.appendChild(prevBtn);
-            // Page numbers
-            let windowSize = 5;
-            let start = Math.max(1, currentPage - Math.floor(windowSize/2));
-            let end = Math.min(totalPages, start + windowSize - 1);
-            if (end - start < windowSize - 1) start = Math.max(1, end - windowSize + 1);
-            for (let i = start; i <= end; i++) {
-              const pageBtn = document.createElement('button');
-              pageBtn.textContent = i;
-              pageBtn.className = 'page' + (i === currentPage ? ' active' : '');
-              pageBtn.disabled = (i === currentPage);
-              pageBtn.onclick = () => renderTable(i);
-              pagDiv.appendChild(pageBtn);
+
+            function applySearch() {
+              const q = (searchInput && searchInput.value.trim().toLowerCase()) || '';
+              if (!q) {
+                filteredRows = rows;
+              } else {
+                filteredRows = rows.filter(row => row.innerText.toLowerCase().includes(q));
+              }
+              renderTable(1);
             }
-            // Next
-            const nextBtn = document.createElement('button');
-            nextBtn.textContent = 'Next >';
-            nextBtn.className = 'next-btn';
-            nextBtn.disabled = (currentPage === totalPages);
-            nextBtn.onclick = () => renderTable(currentPage + 1);
-            pagDiv.appendChild(nextBtn);
-          }
-          function applySearch() {
-            const q = (searchInput && searchInput.value.trim().toLowerCase()) || '';
-            if (!q) {
-              filteredRows = rows;
-            } else {
-              filteredRows = rows.filter(row => row.innerText.toLowerCase().includes(q));
+            // Event listeners
+            if (searchInput) {
+              searchInput.addEventListener('input', applySearch);
             }
+            if (rowsInput) {
+              rowsInput.addEventListener('change', function() {
+                rowsPerPage = parseInt(this.value) || 6;
+                renderTable(1);
+              });
+            }
+            if (resetRowsBtn) {
+              resetRowsBtn.addEventListener('click', function() {
+                if (rowsInput) rowsInput.value = 6;
+                rowsPerPage = 6;
+                renderTable(1);
+              });
+            }
+            // Initial render
             renderTable(1);
-          }
-          // Event listeners
-          if (searchInput) {
-            searchInput.addEventListener('input', applySearch);
-          }
-          if (rowsInput) {
-            rowsInput.addEventListener('change', function() {
-              rowsPerPage = parseInt(this.value) || 6;
-              renderTable(1);
-            });
-          }
-          if (resetRowsBtn) {
-            resetRowsBtn.addEventListener('click', function() {
-              if (rowsInput) rowsInput.value = 6;
-              rowsPerPage = 6;
-              renderTable(1);
-            });
-          }
-          // Initial render
-          renderTable(1);
-        });
+          });
         </script>
 
       </div>
@@ -711,207 +803,209 @@ try {
 </div>
 
 <script>
-// Get the modal
-var modal = document.getElementById('popupMemoForm');
+  // Get the modal
+  var modal = document.getElementById('popupMemoForm');
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
   }
-}
 
-// New function to prepare memo generation
-function prepareMemoGeneration() {
-  // Clear previous selections
-  const hiddenIdsContainer = document.getElementById('hiddenIdsContainer');
-  hiddenIdsContainer.innerHTML = '';
-  
-  // Get all checked checkboxes
-  const checkboxes = document.querySelectorAll('input.g2g-row-checkbox:checked');
-  console.log("Number of checked checkboxes:", checkboxes.length);
-  
-  if (checkboxes.length === 0) {
-    alert("Please select at least one applicant before generating a memo.");
-    return;
-  }
-  
-  const selectedIds = [];
-  const selectedNames = [];
-  
-  // Process each checked checkbox
-  checkboxes.forEach(function(checkbox) {
-    const row = checkbox.closest('tr');
-    const id = checkbox.value;
-    
-    // Debug - log each checkbox value
-    console.log("Selected ID:", id);
-    
-    const name = row.querySelector('td:nth-child(2)').textContent + ', ' + 
-                row.querySelector('td:nth-child(3)').textContent;
-    
-    selectedIds.push(id);
-    selectedNames.push(name);
-    
-    // Create a hidden input for each selected ID
-    const hiddenInput = document.createElement('input');
-    hiddenInput.type = 'hidden';
-    hiddenInput.name = 'selected_ids[]';
-    hiddenInput.value = id;
-    hiddenIdsContainer.appendChild(hiddenInput);
-    
-    // Debug - log each hidden input
-    console.log("Created hidden input with value:", id);
-  });
-  
-  // Display selected applicants
-  const selectedApplicantsDiv = document.getElementById('selectedApplicants');
-  
-  if (selectedNames.length > 0) {
-    let html = '<ul>';
-    selectedNames.forEach(function(name) {
-      html += '<li>' + name + '</li>';
+  // New function to prepare memo generation
+  function prepareMemoGeneration() {
+    // Clear previous selections
+    const hiddenIdsContainer = document.getElementById('hiddenIdsContainer');
+    hiddenIdsContainer.innerHTML = '';
+
+    // Get all checked checkboxes
+    const checkboxes = document.querySelectorAll('input.g2g-row-checkbox:checked');
+    console.log("Number of checked checkboxes:", checkboxes.length);
+
+    if (checkboxes.length === 0) {
+      alert("Please select at least one applicant before generating a memo.");
+      return;
+    }
+
+    const selectedIds = [];
+    const selectedNames = [];
+
+    // Process each checked checkbox
+    checkboxes.forEach(function(checkbox) {
+      const row = checkbox.closest('tr');
+      const id = checkbox.value;
+
+      // Debug - log each checkbox value
+      console.log("Selected ID:", id);
+
+      const name = row.querySelector('td:nth-child(2)').textContent + ', ' +
+        row.querySelector('td:nth-child(3)').textContent;
+
+      selectedIds.push(id);
+      selectedNames.push(name);
+
+      // Create a hidden input for each selected ID
+      const hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.name = 'selected_ids[]';
+      hiddenInput.value = id;
+      hiddenIdsContainer.appendChild(hiddenInput);
+
+      // Debug - log each hidden input
+      console.log("Created hidden input with value:", id);
     });
-    html += '</ul>';
-    selectedApplicantsDiv.innerHTML = html;
-  } else {
-    selectedApplicantsDiv.innerHTML = '<p class="text-danger">No applicants selected. Please select at least one applicant.</p>';
-  }
-  
-  // Show the modal
-  document.getElementById('popupMemoForm').style.display = 'block';
-}
 
-// Add a submit event listener to the form
-document.getElementById('memoForm').addEventListener('submit', function(event) {
-  // Check if there are any hidden inputs for selected IDs
-  const hiddenInputs = document.querySelectorAll('input[name="selected_ids[]"]');
-  if (hiddenInputs.length === 0) {
-    event.preventDefault();
-    alert("Please select at least one applicant before generating a memo.");
-  } else {
-    console.log("Form submission with " + hiddenInputs.length + " selected IDs");
+    // Display selected applicants
+    const selectedApplicantsDiv = document.getElementById('selectedApplicants');
+
+    if (selectedNames.length > 0) {
+      let html = '<ul>';
+      selectedNames.forEach(function(name) {
+        html += '<li>' + name + '</li>';
+      });
+      html += '</ul>';
+      selectedApplicantsDiv.innerHTML = html;
+    } else {
+      selectedApplicantsDiv.innerHTML = '<p class="text-danger">No applicants selected. Please select at least one applicant.</p>';
+    }
+
+    // Show the modal
+    document.getElementById('popupMemoForm').style.display = 'block';
   }
-});
+
+  // Add a submit event listener to the form
+  document.getElementById('memoForm').addEventListener('submit', function(event) {
+    // Check if there are any hidden inputs for selected IDs
+    const hiddenInputs = document.querySelectorAll('input[name="selected_ids[]"]');
+    if (hiddenInputs.length === 0) {
+      event.preventDefault();
+      alert("Please select at least one applicant before generating a memo.");
+    } else {
+      console.log("Form submission with " + hiddenInputs.length + " selected IDs");
+    }
+  });
 </script>
 
 <script>
-// Function to submit selected applicants directly to the memo form
-function submitSelectedApplicants() {
-  // Get all checked checkboxes
-  const checkboxes = document.querySelectorAll('input.g2g-row-checkbox:checked');
-  console.log("Number of checked checkboxes:", checkboxes.length);
-  
-  if (checkboxes.length === 0) {
-    alert("Please select at least one applicant before generating a memo.");
-    return;
-  }
-  
-  // Clear previous selections
-  document.getElementById('hiddenIdsContainer').innerHTML = '';
-  document.getElementById('selectedApplicants').innerHTML = '';
-  
-  const selectedIds = [];
-  const selectedNames = [];
-  
-  // Process each checked checkbox
-  checkboxes.forEach(function(checkbox) {
-    const row = checkbox.closest('tr');
-    const id = checkbox.value;
-    
-    // Debug - log each checkbox value
-    console.log("Selected ID:", id);
-    
-    // Get all the required fields from the table
-    const lastName = row.querySelector('td:nth-child(2)').textContent.trim();
-    const firstName = row.querySelector('td:nth-child(3)').textContent.trim();
-    const middleName = row.querySelector('td:nth-child(4)').textContent.trim();
-    const passportNo = row.querySelector('td:nth-child(5)').textContent.trim();
-    const fullName = lastName + ', ' + firstName + ' ' + middleName;
-    
-    selectedIds.push(id);
-    selectedNames.push(fullName + ' (Passport: ' + passportNo + ')');
-    
-    // Create a hidden input for each selected ID
-    const hiddenInput = document.createElement('input');
-    hiddenInput.type = 'hidden';
-    hiddenInput.name = 'selected_ids[]';
-    hiddenInput.value = id;
-    document.getElementById('hiddenIdsContainer').appendChild(hiddenInput);
-  });
-  
-  // Display selected applicants in the form
-  const selectedApplicantsDiv = document.getElementById('selectedApplicants');
-  
-  if (selectedNames.length > 0) {
-    let html = '<ul>';
-    selectedNames.forEach(function(name) {
-      html += '<li>' + name + '</li>';
-    });
-    html += '</ul>';
-    selectedApplicantsDiv.innerHTML = html;
-    
-    // Show the memo form
-    document.getElementById('popupMemoForm').style.display = 'block';
-  } else {
-    selectedApplicantsDiv.innerHTML = '';
-    alert('No applicants selected. Please select at least one applicant.');
-  }
-}
+  // Function to submit selected applicants directly to the memo form
+  function submitSelectedApplicants() {
+    // Get all checked checkboxes
+    const checkboxes = document.querySelectorAll('input.g2g-row-checkbox:checked');
+    console.log("Number of checked checkboxes:", checkboxes.length);
 
-// Add event listener for the Generate Memo button
-document.addEventListener('DOMContentLoaded', function() {
-  const generateMemoBtn = document.getElementById('generateMemoBtn');
-  if (generateMemoBtn) {
-    generateMemoBtn.addEventListener('click', function() {
-      const form = document.getElementById('memoForm');
-      const formData = new FormData(form);
-      
-      // Show loading indicator
-      generateMemoBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Generating...';
-      generateMemoBtn.disabled = true;
-      
-      // Create a new XMLHttpRequest
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', 'generate_memo.php', true);
-      
-      // Set up a handler for when the request finishes
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          // Hide the modal
-          document.getElementById('popupMemoForm').style.display = 'none';
-          
-          // Reset the button
-          generateMemoBtn.innerHTML = 'Generate Memo';
-          generateMemoBtn.disabled = false;
-          
-          // Create a blob from the response
-          const blob = new Blob([xhr.response], { type: 'application/pdf' });
-          const url = URL.createObjectURL(blob);
-          
-          // Open the PDF in a new tab
-          window.open(url, '_blank');
-        } else {
-          alert('Error generating memo. Please try again.');
-          
-          // Reset the button
-          generateMemoBtn.innerHTML = 'Generate Memo';
-          generateMemoBtn.disabled = false;
-        }
-      };
-      
-      // Handle network errors
-      xhr.onerror = function() {
-        alert('Network error occurred while generating memo.');
-        
-        // Reset the button
-        generateMemoBtn.innerHTML = 'Generate Memo';
-        generateMemoBtn.disabled = false;
-      };
-      
-      // Send the form data
-      xhr.send(formData);
+    if (checkboxes.length === 0) {
+      alert("Please select at least one applicant before generating a memo.");
+      return;
+    }
+
+    // Clear previous selections
+    document.getElementById('hiddenIdsContainer').innerHTML = '';
+    document.getElementById('selectedApplicants').innerHTML = '';
+
+    const selectedIds = [];
+    const selectedNames = [];
+
+    // Process each checked checkbox
+    checkboxes.forEach(function(checkbox) {
+      const row = checkbox.closest('tr');
+      const id = checkbox.value;
+
+      // Debug - log each checkbox value
+      console.log("Selected ID:", id);
+
+      // Get all the required fields from the table
+      const lastName = row.querySelector('td:nth-child(2)').textContent.trim();
+      const firstName = row.querySelector('td:nth-child(3)').textContent.trim();
+      const middleName = row.querySelector('td:nth-child(4)').textContent.trim();
+      const passportNo = row.querySelector('td:nth-child(5)').textContent.trim();
+      const fullName = lastName + ', ' + firstName + ' ' + middleName;
+
+      selectedIds.push(id);
+      selectedNames.push(fullName + ' (Passport: ' + passportNo + ')');
+
+      // Create a hidden input for each selected ID
+      const hiddenInput = document.createElement('input');
+      hiddenInput.type = 'hidden';
+      hiddenInput.name = 'selected_ids[]';
+      hiddenInput.value = id;
+      document.getElementById('hiddenIdsContainer').appendChild(hiddenInput);
     });
+
+    // Display selected applicants in the form
+    const selectedApplicantsDiv = document.getElementById('selectedApplicants');
+
+    if (selectedNames.length > 0) {
+      let html = '<ul>';
+      selectedNames.forEach(function(name) {
+        html += '<li>' + name + '</li>';
+      });
+      html += '</ul>';
+      selectedApplicantsDiv.innerHTML = html;
+
+      // Show the memo form
+      document.getElementById('popupMemoForm').style.display = 'block';
+    } else {
+      selectedApplicantsDiv.innerHTML = '';
+      alert('No applicants selected. Please select at least one applicant.');
+    }
   }
-});
+
+  // Add event listener for the Generate Memo button
+  document.addEventListener('DOMContentLoaded', function() {
+    const generateMemoBtn = document.getElementById('generateMemoBtn');
+    if (generateMemoBtn) {
+      generateMemoBtn.addEventListener('click', function() {
+        const form = document.getElementById('memoForm');
+        const formData = new FormData(form);
+
+        // Show loading indicator
+        generateMemoBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Generating...';
+        generateMemoBtn.disabled = true;
+
+        // Create a new XMLHttpRequest
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'generate_memo.php', true);
+
+        // Set up a handler for when the request finishes
+        xhr.onload = function() {
+          if (xhr.status === 200) {
+            // Hide the modal
+            document.getElementById('popupMemoForm').style.display = 'none';
+
+            // Reset the button
+            generateMemoBtn.innerHTML = 'Generate Memo';
+            generateMemoBtn.disabled = false;
+
+            // Create a blob from the response
+            const blob = new Blob([xhr.response], {
+              type: 'application/pdf'
+            });
+            const url = URL.createObjectURL(blob);
+
+            // Open the PDF in a new tab
+            window.open(url, '_blank');
+          } else {
+            alert('Error generating memo. Please try again.');
+
+            // Reset the button
+            generateMemoBtn.innerHTML = 'Generate Memo';
+            generateMemoBtn.disabled = false;
+          }
+        };
+
+        // Handle network errors
+        xhr.onerror = function() {
+          alert('Network error occurred while generating memo.');
+
+          // Reset the button
+          generateMemoBtn.innerHTML = 'Generate Memo';
+          generateMemoBtn.disabled = false;
+        };
+
+        // Send the form data
+        xhr.send(formData);
+      });
+    }
+  });
 </script>

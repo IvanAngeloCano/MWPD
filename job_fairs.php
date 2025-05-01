@@ -13,88 +13,87 @@ $status_filter = isset($_GET['status']) ? $_GET['status'] : '';
 
 // Get total record count first to determine valid page numbers
 try {
-    // Build the query based on search and filters
-    $where_conditions = [];
-    $count_params = [];
-    
-    if (!empty($search_query)) {
-        $where_conditions[] = "(venue LIKE ? OR note LIKE ?)";
-        $count_params[] = "%$search_query%";
-        $count_params[] = "%$search_query%";
-    }
-    
-    if (!empty($status_filter)) {
-        $where_conditions[] = "status = ?";
-        $count_params[] = $status_filter;
-    }
-    
-    $where_clause = !empty($where_conditions) ? 'WHERE ' . implode(' AND ', $where_conditions) : '';
-    
-    $count_sql = "SELECT COUNT(*) FROM job_fairs $where_clause";
-    $count_stmt = $pdo->prepare($count_sql);
-    $count_stmt->execute($count_params);
-    $total_records = $count_stmt->fetchColumn();
-    $total_pages = ceil($total_records / $rows_per_page);
-    
-    // Now set the page number, ensuring it's within valid range
-    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-    if ($page > $total_pages && $total_pages > 0) {
-        $page = $total_pages;
-    } elseif ($page < 1) {
-        $page = 1;
-    }
-} catch (PDOException $e) {
-    $total_records = 0;
-    $total_pages = 0;
+  // Build the query based on search and filters
+  $where_conditions = [];
+  $count_params = [];
+
+  if (!empty($search_query)) {
+    $where_conditions[] = "(venue LIKE ? OR note LIKE ?)";
+    $count_params[] = "%$search_query%";
+    $count_params[] = "%$search_query%";
+  }
+
+  if (!empty($status_filter)) {
+    $where_conditions[] = "status = ?";
+    $count_params[] = $status_filter;
+  }
+
+  $where_clause = !empty($where_conditions) ? 'WHERE ' . implode(' AND ', $where_conditions) : '';
+
+  $count_sql = "SELECT COUNT(*) FROM job_fairs $where_clause";
+  $count_stmt = $pdo->prepare($count_sql);
+  $count_stmt->execute($count_params);
+  $total_records = $count_stmt->fetchColumn();
+  $total_pages = ceil($total_records / $rows_per_page);
+
+  // Now set the page number, ensuring it's within valid range
+  $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+  if ($page > $total_pages && $total_pages > 0) {
+    $page = $total_pages;
+  } elseif ($page < 1) {
     $page = 1;
+  }
+} catch (PDOException $e) {
+  $total_records = 0;
+  $total_pages = 0;
+  $page = 1;
 }
 
 $offset = ($page - 1) * $rows_per_page;
 
 try {
-    // Build the query based on search and filters
-    $where_conditions = [];
-    $params = [];
-    
-    if (!empty($search_query)) {
-        $where_conditions[] = "(venue LIKE ? OR note LIKE ?)";
-        $params[] = "%$search_query%";
-        $params[] = "%$search_query%";
-    }
-    
-    if (!empty($status_filter)) {
-        $where_conditions[] = "status = ?";
-        $params[] = $status_filter;
-    }
-    
-    $where_clause = !empty($where_conditions) ? 'WHERE ' . implode(' AND ', $where_conditions) : '';
-    
-    // Get total record count
-    $count_sql = "SELECT COUNT(*) FROM job_fairs $where_clause";
-    $count_stmt = $pdo->prepare($count_sql);
-    $count_stmt->execute($params);
-    $total_records = $count_stmt->fetchColumn();
-    $total_pages = ceil($total_records / $rows_per_page);
-    
-    // Get the records
-    $sql = "SELECT * FROM job_fairs $where_clause ORDER BY date ASC LIMIT ?, ?";
-    $stmt = $pdo->prepare($sql);
-    
-    // Add pagination parameters
-    foreach ($params as $key => $value) {
-        $stmt->bindValue($key + 1, $value);
-    }
-    $stmt->bindValue(count($params) + 1, $offset, PDO::PARAM_INT);
-    $stmt->bindValue(count($params) + 2, $rows_per_page, PDO::PARAM_INT);
-    
-    $stmt->execute();
-    $job_fairs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+  // Build the query based on search and filters
+  $where_conditions = [];
+  $params = [];
+
+  if (!empty($search_query)) {
+    $where_conditions[] = "(venue LIKE ? OR note LIKE ?)";
+    $params[] = "%$search_query%";
+    $params[] = "%$search_query%";
+  }
+
+  if (!empty($status_filter)) {
+    $where_conditions[] = "status = ?";
+    $params[] = $status_filter;
+  }
+
+  $where_clause = !empty($where_conditions) ? 'WHERE ' . implode(' AND ', $where_conditions) : '';
+
+  // Get total record count
+  $count_sql = "SELECT COUNT(*) FROM job_fairs $where_clause";
+  $count_stmt = $pdo->prepare($count_sql);
+  $count_stmt->execute($params);
+  $total_records = $count_stmt->fetchColumn();
+  $total_pages = ceil($total_records / $rows_per_page);
+
+  // Get the records
+  $sql = "SELECT * FROM job_fairs $where_clause ORDER BY date ASC LIMIT ?, ?";
+  $stmt = $pdo->prepare($sql);
+
+  // Add pagination parameters
+  foreach ($params as $key => $value) {
+    $stmt->bindValue($key + 1, $value);
+  }
+  $stmt->bindValue(count($params) + 1, $offset, PDO::PARAM_INT);
+  $stmt->bindValue(count($params) + 2, $rows_per_page, PDO::PARAM_INT);
+
+  $stmt->execute();
+  $job_fairs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    $error_message = "Database error: " . $e->getMessage();
-    $job_fairs = [];
-    $total_records = 0;
-    $total_pages = 0;
+  $error_message = "Database error: " . $e->getMessage();
+  $job_fairs = [];
+  $total_records = 0;
+  $total_pages = 0;
 }
 
 $pageTitle = "Job Fairs";
@@ -124,29 +123,29 @@ include '_head.php';
         <div class="job-fair-header">
           <h1>DMW Job Fairs Monitoring</h1>
           <p>List of scheduled job fairs across different regions</p>
-          
+
           <div class="contact-info">
             <p><strong>For concerns, you may contact the DMW Regional Office IV-A CALABARZON</strong></p>
             <p>Mobile & Telephone No.: 0962 671 9976 or (049) 548 1375</p>
             <p>Email address: <a href="mailto:dmw4a.processing@dmw.gov.ph">dmw4a.processing@dmw.gov.ph</a></p>
           </div>
         </div>
-        
+
         <!-- Controls Section -->
         <div class="job-fair-controls">
           <div class="search-filter">
             <form action="" method="GET" class="search-form">
-              <input type="text" name="search" placeholder="Search job fairs..." 
-                     class="search-bar" value="<?= htmlspecialchars($search_query) ?>">
+              <input type="text" name="search" placeholder="Search job fairs..."
+                class="search-bar" value="<?= htmlspecialchars($search_query) ?>">
               <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
             </form>
-            
+
             <div class="filter-group">
               <form action="" method="GET">
                 <?php if (!empty($search_query)): ?>
-                <input type="hidden" name="search" value="<?= htmlspecialchars($search_query) ?>">
+                  <input type="hidden" name="search" value="<?= htmlspecialchars($search_query) ?>">
                 <?php endif; ?>
-                
+
                 <select name="status" onchange="this.form.submit()">
                   <option value="">All Statuses</option>
                   <option value="planned" <?= $status_filter === 'planned' ? 'selected' : '' ?>>Planned</option>
@@ -157,14 +156,14 @@ include '_head.php';
               </form>
             </div>
           </div>
-          
+
           <div class="action-buttons">
             <a href="job_fair_add.php" class="btn btn-primary">
               <i class="fa fa-plus"></i> Add New Job Fair
             </a>
           </div>
         </div>
-        
+
         <!-- Controls Section with Rows Per Page -->
         <div class="job-fair-top">
           <div class="table-footer">
@@ -187,7 +186,7 @@ include '_head.php';
             </form>
           </div>
         </div>
-        
+
         <!-- Job Fairs Table -->
         <div class="direct-hire-table">
           <table>
@@ -203,50 +202,50 @@ include '_head.php';
             </thead>
             <tbody>
               <?php if (empty($job_fairs)): ?>
-              <tr>
-                <td colspan="6" class="no-records">No job fairs found</td>
-              </tr>
+                <tr>
+                  <td colspan="6" class="no-records">No job fairs found</td>
+                </tr>
               <?php else: ?>
                 <?php foreach ($job_fairs as $index => $fair): ?>
-                <tr>
-                  <td><?= $offset + $index + 1 ?></td>
-                  <td><?= date('F d, Y', strtotime($fair['date'])) ?></td>
-                  <td><?= htmlspecialchars($fair['venue']) ?></td>
-                  <td>
-                    <?php if (!empty($fair['contact_info'])): ?>
-                      <?= htmlspecialchars($fair['contact_info']) ?>
-                    <?php else: ?>
-                      <span class="text-muted">Not provided</span>
-                    <?php endif; ?>
-                  </td>
-                  <td>
-                    <span class="status <?= strtolower($fair['status']) ?>">
-                      <?= ucfirst(htmlspecialchars($fair['status'])) ?>
-                    </span>
-                  </td>
-                  <td class="action-icons">
-                    <a href="job_fair_view.php?id=<?= $fair['id'] ?>" title="View Job Fair">
-                      <i class="fa fa-eye"></i>
-                    </a>
-                    <a href="job_fair_edit.php?id=<?= $fair['id'] ?>" title="Edit Job Fair">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                    <a href="javascript:void(0)" onclick="confirmDelete(<?= $fair['id'] ?>)" title="Delete Job Fair">
-                      <i class="fa fa-trash-alt"></i>
-                    </a>
-                  </td>
-                </tr>
+                  <tr>
+                    <td><?= $offset + $index + 1 ?></td>
+                    <td><?= date('F d, Y', strtotime($fair['date'])) ?></td>
+                    <td><?= htmlspecialchars($fair['venue']) ?></td>
+                    <td>
+                      <?php if (!empty($fair['contact_info'])): ?>
+                        <?= htmlspecialchars($fair['contact_info']) ?>
+                      <?php else: ?>
+                        <span class="text-muted">Not provided</span>
+                      <?php endif; ?>
+                    </td>
+                    <td>
+                      <span class="status <?= strtolower($fair['status']) ?>">
+                        <?= ucfirst(htmlspecialchars($fair['status'])) ?>
+                      </span>
+                    </td>
+                    <td class="action-icons">
+                      <a href="job_fair_view.php?id=<?= $fair['id'] ?>" title="View Job Fair">
+                        <i class="fa fa-eye"></i>
+                      </a>
+                      <a href="job_fair_edit.php?id=<?= $fair['id'] ?>" title="Edit Job Fair">
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a href="javascript:void(0)" onclick="confirmDelete(<?= $fair['id'] ?>)" title="Delete Job Fair">
+                        <i class="fa fa-trash-alt"></i>
+                      </a>
+                    </td>
+                  </tr>
                 <?php endforeach; ?>
               <?php endif; ?>
             </tbody>
           </table>
         </div>
-        
+
         <!-- Bottom Section with Pagination and Go To Page -->
         <div class="direct-hire-bottom">
           <div class="pagination">
             <?php if ($page > 1): ?>
-              <a href="?page=<?= ($page-1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?><?= !empty($status_filter) ? '&status=' . urlencode($status_filter) : '' ?>" class="prev-btn">
+              <a href="?page=<?= ($page - 1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?><?= !empty($status_filter) ? '&status=' . urlencode($status_filter) : '' ?>" class="prev-btn">
                 <i class="fa fa-chevron-left"></i> Previous
               </a>
             <?php else: ?>
@@ -256,25 +255,25 @@ include '_head.php';
             <?php endif; ?>
 
             <?php
-              // Calculate start and end page for 3-page window
-              $window = 3;
-              $half = floor($window / 2);
-              if ($total_pages <= $window) {
+            // Calculate start and end page for 3-page window
+            $window = 3;
+            $half = floor($window / 2);
+            if ($total_pages <= $window) {
+              $start_page = 1;
+              $end_page = $total_pages;
+            } else {
+              if ($page <= $half + 1) {
                 $start_page = 1;
+                $end_page = $window;
+              } elseif ($page >= $total_pages - $half) {
+                $start_page = $total_pages - $window + 1;
                 $end_page = $total_pages;
               } else {
-                if ($page <= $half + 1) {
-                  $start_page = 1;
-                  $end_page = $window;
-                } elseif ($page >= $total_pages - $half) {
-                  $start_page = $total_pages - $window + 1;
-                  $end_page = $total_pages;
-                } else {
-                  $start_page = $page - $half;
-                  $end_page = $page + $half;
-                }
+                $start_page = $page - $half;
+                $end_page = $page + $half;
               }
-              for ($i = $start_page; $i <= $end_page; $i++):
+            }
+            for ($i = $start_page; $i <= $end_page; $i++):
             ?>
               <a href="?page=<?= $i ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?><?= !empty($status_filter) ? '&status=' . urlencode($status_filter) : '' ?>" class="page<?= $i == $page ? ' active' : '' ?>">
                 <?= $i ?>
@@ -282,7 +281,7 @@ include '_head.php';
             <?php endfor; ?>
 
             <?php if ($page < $total_pages): ?>
-              <a href="?page=<?= ($page+1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?><?= !empty($status_filter) ? '&status=' . urlencode($status_filter) : '' ?>" class="next-btn">
+              <a href="?page=<?= ($page + 1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?><?= !empty($status_filter) ? '&status=' . urlencode($status_filter) : '' ?>" class="next-btn">
                 Next <i class="fa fa-chevron-right"></i>
               </a>
             <?php else: ?>
@@ -333,21 +332,21 @@ include '_head.php';
   function confirmDelete(id) {
     const modal = document.getElementById('deleteModal');
     const confirmBtn = document.getElementById('confirmDeleteBtn');
-    
+
     // Set the onclick event for the confirm button
     confirmBtn.onclick = function() {
       window.location.href = 'job_fair_delete.php?id=' + id;
     };
-    
+
     // Show the modal
     modal.style.display = 'flex';
   }
-  
+
   function closeDeleteModal() {
     const modal = document.getElementById('deleteModal');
     modal.style.display = 'none';
   }
-  
+
   // Close modal when clicking outside
   window.onclick = function(event) {
     const modal = document.getElementById('deleteModal');
@@ -355,7 +354,7 @@ include '_head.php';
       closeDeleteModal();
     }
   };
-  
+
   // Auto-submit rows per page on input, with debounce
   document.addEventListener('DOMContentLoaded', function() {
     var rowsInput = document.getElementById('rowsInput');
@@ -385,70 +384,70 @@ include '_head.php';
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .job-fair-header {
     background-color: #f8f9fa;
     padding: 1.5rem;
     border-radius: 8px;
     border-left: 4px solid #007bff;
   }
-  
+
   .job-fair-header h1 {
     margin: 0 0 0.5rem 0;
     color: #343a40;
   }
-  
+
   .job-fair-header p {
     margin: 0 0 1rem 0;
     color: #6c757d;
   }
-  
+
   .contact-info {
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid #dee2e6;
   }
-  
+
   .contact-info p {
     margin: 0.25rem 0;
   }
-  
+
   .job-fair-controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
   }
-  
+
   .search-filter {
     display: flex;
     gap: 1rem;
     align-items: center;
   }
-  
+
   .search-form {
     display: flex;
     align-items: center;
   }
-  
+
   .search-bar {
     min-width: 300px;
     padding: 0.5rem;
     border: 1px solid #ced4da;
     border-radius: 4px;
   }
-  
+
   .filter-group select {
     padding: 0.5rem;
     border: 1px solid #ced4da;
     border-radius: 4px;
   }
-  
+
   .action-buttons {
     display: flex;
     gap: 0.5rem;
   }
-  
+
   .btn {
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -460,80 +459,84 @@ include '_head.php';
     text-decoration: none;
     font-weight: 500;
   }
-  
+
   .btn-primary {
     background-color: #28a745 !important;
     color: white !important;
   }
-  
+
   .btn-info {
     background-color: #17a2b8;
     color: white;
   }
-  
+
   .btn-danger {
     background-color: #dc3545;
     color: white;
   }
-  
+
   .btn-secondary {
     background-color: #6c757d;
     color: white;
   }
-  
+
   .btn-sm {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
   }
-  
+
   /* Rows Per Page and Table Footer Styles */
   .job-fair-top {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+
   .table-footer {
     display: flex;
     justify-content: space-between;
     font-size: 0.85rem;
     color: #666;
   }
-  
+
   .rows-input {
     width: 60px;
     padding: 0.2rem;
     margin-left: 0.3rem;
   }
-  
+
   /* Direct Hire Table Styles */
   .direct-hire-table {
     overflow-x: auto;
   }
-  
+
   .direct-hire-table table {
     width: 100%;
     border-collapse: collapse;
   }
-  
+
   .direct-hire-table thead {
     background-color: #007bff;
     color: white;
   }
-  
+
   .direct-hire-table th {
     padding: 0.75rem;
     text-align: left;
   }
-  
+
   .direct-hire-table tbody tr {
     border-bottom: 1px solid #ddd;
   }
-  
+
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
   .direct-hire-table td {
     padding: 0.75rem;
   }
-  
+
   .direct-hire-table .status {
     padding: 0.3rem 0.6rem;
     border-radius: 12px;
@@ -541,60 +544,60 @@ include '_head.php';
     font-weight: bold;
     display: inline-block;
   }
-  
+
   .direct-hire-table .status.planned {
     background-color: #cff4fc;
     color: #055160;
   }
-  
+
   .direct-hire-table .status.confirmed {
     background-color: #d1e7dd;
     color: #0f5132;
   }
-  
+
   .direct-hire-table .status.completed {
     background-color: #e2e3e5;
     color: #41464b;
   }
-  
+
   .direct-hire-table .status.cancelled {
     background-color: #f8d7da;
     color: #842029;
   }
-  
+
   .direct-hire-table .action-icons {
     display: flex;
     gap: 0.5rem;
     justify-content: center;
   }
-  
+
   .direct-hire-table .action-icons i {
     cursor: pointer;
   }
-  
+
   .direct-hire-table .action-icons a {
     color: inherit;
     text-decoration: none;
   }
-  
+
   .direct-hire-table .action-icons i.fa-eye {
     color: #007bff;
   }
-  
+
   .direct-hire-table .action-icons i.fa-edit {
     color: #28a745;
   }
-  
+
   .direct-hire-table .action-icons i.fa-trash-alt {
     color: #dc3545;
   }
-  
+
   .no-records {
     text-align: center;
     padding: 20px;
     color: #666;
   }
-  
+
   /* Pagination and Go to Page Styles */
   .direct-hire-bottom {
     display: flex;
@@ -602,17 +605,17 @@ include '_head.php';
     align-items: center;
     margin-top: 1rem;
   }
-  
+
   .pagination {
     display: flex;
     align-items: center;
     gap: 0.4rem;
   }
-  
+
   .pagination button {
     height: 2rem;
   }
-  
+
   .pagination button,
   .pagination a {
     display: flex;
@@ -626,40 +629,40 @@ include '_head.php';
     text-decoration: none;
     font-size: 0.9rem;
   }
-  
+
   .pagination a.active {
     background-color: #007bff;
     color: white;
     border-color: #007bff;
   }
-  
+
   .pagination button:disabled {
     color: #6c757d;
     cursor: not-allowed;
   }
-  
+
   .pagination .prev-btn,
   .pagination .next-btn {
     font-weight: 500;
   }
-  
+
   .go-to-page {
     display: flex;
     align-items: center;
     gap: 0.3rem;
   }
-  
+
   .go-to-page label {
     font-size: .9rem;
   }
-  
+
   .go-to-page input {
     font-size: .9rem;
     width: 50px;
     height: 1.5rem;
     padding: 0.3rem;
   }
-  
+
   .go-btn {
     border: 1px solid transparent;
     background-color: transparent;
@@ -673,7 +676,7 @@ include '_head.php';
     border: none;
     padding: .2rem;
   }
-  
+
   /* Modal styles */
   .modal {
     display: none;
@@ -687,7 +690,7 @@ include '_head.php';
     justify-content: center;
     z-index: 1000;
   }
-  
+
   .modal-content {
     background-color: white;
     border-radius: 8px;
@@ -695,7 +698,7 @@ include '_head.php';
     max-width: 500px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+
   .modal-header {
     display: flex;
     justify-content: space-between;
@@ -703,11 +706,11 @@ include '_head.php';
     padding: 1rem;
     border-bottom: 1px solid #dee2e6;
   }
-  
+
   .modal-header h3 {
     margin: 0;
   }
-  
+
   .modal-close {
     background: none;
     border: none;
@@ -715,11 +718,11 @@ include '_head.php';
     cursor: pointer;
     color: #6c757d;
   }
-  
+
   .modal-body {
     padding: 1rem;
   }
-  
+
   .modal-actions {
     display: flex;
     justify-content: flex-end;

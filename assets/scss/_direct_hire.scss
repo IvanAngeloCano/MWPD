@@ -189,6 +189,9 @@
           background-color: $neutral-light;
         }
 
+        &:nth-child(even) {
+          background-color: #f9f9f9;
+        }
 
 
         td {

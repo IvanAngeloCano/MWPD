@@ -186,12 +186,12 @@ include '_head.php';
               <input type="date" name="date_received_by_region">
             </div>
           </div>
-          <div class="form-row">
+          <!-- <div class="form-row">
             <div class="form-group" style="flex: 1 1 100%;">
               <label>Upload Documents</label>
               <input type="file" name="documents[]" multiple>
             </div>
-          </div>
+          </div> -->
           <div class="form-actions">
             <button type="submit" class="btn btn-primary">Save</button>
             <a href="gov_to_gov.php" class="btn btn-cancel">Cancel</a>
