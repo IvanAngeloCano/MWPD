@@ -135,6 +135,9 @@
 
       tbody tr {
         border-bottom: 1px solid #ddd;
+          &:hover {
+            background-color: $neutral-light;
+          }
 
         td {
           padding: 0.75rem;
@@ -172,6 +175,30 @@
           display: flex;
           gap: 0.5rem;
           justify-content: center;
+
+          .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: .75rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            height: 2rem;
+            border: none;
+          }
+
+          .approve-record{
+            background-color: $primary-green;
+            color: white;
+          }
+
+          .deny-record{
+            background-color: $primary-red;
+            color: white;
+          }
 
           i {
             cursor: pointer;
@@ -300,6 +327,10 @@
       }
     }
 
+    .modal-footer {
+      background-color: black !important;
+    }
+
     .modal-close {
       background: none;
       border: none;
@@ -311,6 +342,9 @@
     .modal-body {
       padding: 20px;
     }
+
+
+    
 
     .modal-actions {
       display: flex;
@@ -560,3 +594,10 @@
   }
 }
 
+
+
+.btn-success {
+  background-color: #28a745 !important;
+  color: white;
+  border: none;
+}

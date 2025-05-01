@@ -1,7 +1,7 @@
 <?php
 include 'session.php';
 require_once 'connection.php';
-$pageTitle = "Account Management - MWPD Filing System";
+$pageTitle = "Account Management";
 include '_head.php';
 
 // Check if user has Division Head role

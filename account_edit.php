@@ -1,7 +1,7 @@
 <?php
 include 'session.php';
 require_once 'connection.php';
-$pageTitle = "Edit User - MWPD Filing System";
+$pageTitle = "Edit User";
 include '_head.php';
 
 // Check if user has Division Head role

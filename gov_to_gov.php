@@ -399,7 +399,7 @@ try {
             </form>
             <button class="btn filter-btn" id="showFilterBarBtn"><i class="fa fa-filter"></i> Filter</button>
             <button class="btn add-btn" onclick="window.location.href='gov_to_gov_add.php'"><i class="fa fa-plus"></i> Add New Record</button>
-            <button type="button" onclick="submitSelectedApplicants()" class="btn go-btn create-memo"> <b>GENERATE MEMO</b> </button>
+            <button type="button" onclick="submitSelectedApplicants()" class="btn go-btn create-memo"> <b>Generate Memo</b> </button>
           </div>
         </div>
 

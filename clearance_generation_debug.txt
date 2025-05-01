@@ -540,3 +540,13 @@
 2025-04-30 03:30:52: PDF conversion successful
 2025-04-30 03:30:52: Document served without storing in database as requested
 2025-04-30 03:30:52: Cleaned up temporary DOCX file: temp/Clearance_DH-00109_20250430_033049.docx
+2025-05-01 16:07:23: Clearance generation script started
+2025-05-01 16:07:23: Direct hire ID: 9
+2025-05-01 16:07:23: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsdas\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.[APPROVAL NOTE - 2025-04-30 05:32:50 by Regional Director]\r\nApproved without additional comments.\r\n\r\n","type":"professional","status":"pending","created_at":"2025-04-28 16:11:42","updated_at":"2025-05-01 21:47:32","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-01 16:07:23: Record approval status: Not approved
+2025-05-01 16:07:23: Using template file: Directhireclearance.docx
+2025-05-01 16:07:23: Status is not approved - no signature
+2025-05-01 16:07:24: Document saved to: temp/Clearance_DH-001090_20250501_160723.docx
+2025-05-01 16:07:31: PDF conversion successful
+2025-05-01 16:07:31: Document served without storing in database as requested
+2025-05-01 16:07:31: Cleaned up temporary DOCX file: temp/Clearance_DH-001090_20250501_160723.docx

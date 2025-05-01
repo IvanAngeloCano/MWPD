@@ -14,7 +14,7 @@
   font-weight: 500;
 }
 
-a:visited{
+a:visited {
   color: inherit;
 }
 
@@ -33,7 +33,7 @@ body {
 .layout-wrapper {
   display: flex;
   height: 100vh; // full viewport height
-  width: 100vw;  // full viewport width
+  width: 100vw; // full viewport width
 
   //sidebar styles are within its own module
 
@@ -81,26 +81,66 @@ body {
   }
 }
 
+.tabs {
+  display: flex;
+  gap: 0.5rem;
 
 
+  .tab {
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-decoration: none;
+    height: 2rem;
+
+    &:hover {
+      transition: 200ms ease;
+      background-color: $neutral-dark;
+      color: white;
+    }
+
+    &.active {
+      background-color: $brand-primary;
+      color: white;
+    }
+  }
+}
+
+.btn {
 
 
-// .dashboard-header {
-//   height: 60px;
-//   background-color: #fff;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   padding: 0 1.5rem;
-//   border-bottom: 1px solid #ddd;
-//   flex-shrink: 0;
-// }
+  &.btn-primary {
+    background-color: $brand-primary;
+    color: white;
+    border: none;
+  }
 
+  &.btn-outline-primary {
+    background-color: white;
+    color: $brand-primary;
+    border: 2px solid $brand-primary;
+  }
 
-// .main-content {
-//   flex-grow: 1;
-//   padding: 1.5rem;
-//   overflow-y: auto;
-//   background-color: #f9f9f9;
-// }
+  &.btn-reset {
+    background-color: white;
+    color: $brand-primary;
+    border: 1px dashed $brand-primary;
+  }
 
+  &.btn-cancel {
+    background-color: white;
+    color: black;
+    border: 1px solid $neutral-dark;
+  }
+
+  &.btn-success {
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    color: white;
+  }
+}

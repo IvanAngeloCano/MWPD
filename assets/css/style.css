@@ -2032,6 +2032,24 @@ html.loader-page {
   border: 1px solid #ddd;
   color: #333;
 }
+.gtog-section .gtog-top .controls .create-memo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px !important;
+  background-color: #444;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  height: 2rem !important;
+}
 .gtog-section .gtog-top .search-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3265,7 +3283,7 @@ html.loader-page {
           align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background-color: #246EE9;
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 6px;
@@ -3280,13 +3298,9 @@ html.loader-page {
 }
 .account-management-wrapper .card {
   background-color: white;
-  border-radius: 8px;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   overflow: hidden;
-}
-.account-management-wrapper .card .card-body {
-  padding: 1.5rem;
 }
 .account-management-wrapper .card .table-responsive {
   overflow-x: auto;
@@ -3314,6 +3328,9 @@ html.loader-page {
 .account-management-wrapper .card table tbody tr td {
   padding: 0.75rem;
   font-size: 0.9rem;
+}
+.account-management-wrapper .card table tbody tr td .edit-link {
+  color: white;
 }
 .account-management-wrapper .card table tbody tr .badge {
   padding: 0.35rem 0.65rem;
@@ -3352,7 +3369,7 @@ html.loader-page {
   color: white;
 }
 .account-management-wrapper .card table tbody tr .btn.btn-info:hover {
-  background-color: #117a8b;
+  background-color: #F3F4F6;
 }
 .account-management-wrapper .card table tbody tr .btn.btn-danger {
   background-color: #dc3545;
@@ -3450,7 +3467,7 @@ html.loader-page {
   background-color: #545b62;
 }
 .modal .modal-footer .btn.btn-primary {
-  background-color: #246EE9;
+  background-color: #28a745;
   color: white;
   border: none;
 }
@@ -3636,6 +3653,9 @@ html.loader-page {
 .approvals-wrapper .approvals-table table tbody tr {
   border-bottom: 1px solid #ddd;
 }
+.approvals-wrapper .approvals-table table tbody tr:hover {
+  background-color: #F3F4F6;
+}
 .approvals-wrapper .approvals-table table tbody tr td {
   padding: 0.75rem;
 }
@@ -3670,6 +3690,31 @@ html.loader-page {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+.approvals-wrapper .approvals-table table tbody tr .action-icons .btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  height: 2rem;
+  border: none;
+}
+.approvals-wrapper .approvals-table table tbody tr .action-icons .approve-record {
+  background-color: #28a745;
+  color: white;
+}
+.approvals-wrapper .approvals-table table tbody tr .action-icons .deny-record {
+  background-color: #dc3545;
+  color: white;
 }
 .approvals-wrapper .approvals-table table tbody tr .action-icons i {
   cursor: pointer;
@@ -3802,6 +3847,9 @@ html.loader-page {
 .approvals-wrapper .modal .modal-header h3 {
   margin: 0;
   font-size: 18px;
+}
+.approvals-wrapper .modal .modal-footer {
+  background-color: black !important;
 }
 .approvals-wrapper .modal .modal-close {
   background: none;
@@ -4050,6 +4098,12 @@ html.loader-page {
   background-color: #f8f9fa;
   border-radius: 4px;
   text-align: center;
+}
+
+.btn-success {
+  background-color: #28a745 !important;
+  color: white;
+  border: none;
 }
 
 .record-view-wrapper {
@@ -4441,4 +4495,63 @@ body {
 .status.declined {
   background-color: #f8d7da;
   color: #721c24;
+}
+
+.tabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0.5rem;
+}
+.tabs .tab {
+  padding: 0 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-decoration: none;
+  height: 2rem;
+}
+.tabs .tab:hover {
+  -webkit-transition: 200ms ease;
+  transition: 200ms ease;
+  background-color: #737373;
+  color: white;
+}
+.tabs .tab.active {
+  background-color: #246EE9;
+  color: white;
+}
+
+.btn.btn-primary {
+  background-color: #246EE9;
+  color: white;
+  border: none;
+}
+.btn.btn-outline-primary {
+  background-color: white;
+  color: #246EE9;
+  border: 2px solid #246EE9;
+}
+.btn.btn-reset {
+  background-color: white;
+  color: #246EE9;
+  border: 1px dashed #246EE9;
+}
+.btn.btn-cancel {
+  background-color: white;
+  color: black;
+  border: 1px solid #737373;
+}
+.btn.btn-success {
+  background-color: #28a745;
+  border: 1px solid #28a745;
+  color: white;
 }/*# sourceMappingURL=style.css.map */

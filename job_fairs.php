@@ -462,7 +462,7 @@ include '_head.php';
   }
   
   .btn-primary {
-    background-color: #28a745;
+    background-color: #28a745 !important;
     color: white !important;
   }
   

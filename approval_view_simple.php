@@ -273,7 +273,7 @@ function format_date($date_string)
         <div class="approvals-wrapper">
           <div class="approvals-top">
             <div class="page-header mb-4">
-              <h1>Pending Approvals</h1>
+              <h2>Pending Approvals</h2>
             </div>
 
             <?php if (!empty($error_message)): ?>
