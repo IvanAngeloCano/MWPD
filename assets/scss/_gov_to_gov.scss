@@ -1,0 +1,367 @@
+.gtog-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .gtog-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    
+    
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      .tab {
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        border: none;
+        background-color: #eee;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 1rem;
+        text-decoration: none;
+        height: 2rem;
+        &.active {
+          background-color: $brand-primary;
+          color: white;
+        }
+      }
+    }
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      .search-form {
+        display: flex;
+        flex: 1;
+        gap: 0.5rem;
+        height: 2rem;
+      }
+      .search-bar {
+        flex: 1;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
+      .btn {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        background-color: #444;
+        color: #fff;
+        cursor: pointer;
+        font-size: 1rem;
+        text-decoration: none;
+        height: 2rem;
+        i { font-size: 1rem; }
+        &.add-btn { background-color: #28a745; }
+        &.filter-btn { background-color: #007bff; }
+        &.search-btn { margin-left: 5px; }
+        &.go-btn {
+          height: 1.5rem;
+          background-color: #444;
+          color: #fff;
+          border: none;
+          padding: 0.3rem 0.6rem;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        &.btn-danger {
+          background-color: #dc3545;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 4px;
+          cursor: pointer;
+          &:hover { background-color: #c82333; }
+        }
+        &.btn-cancel {
+          background-color: #f8f9fa;
+          border: 1px solid #ddd;
+          color: #333;
+        }
+      }
+    }
+    .search-form {
+      display: flex;
+      align-items: center;
+    }
+    .table-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #666;
+      .rows-input {
+        width: 60px;
+        padding: 0.2rem;
+        margin-left: 0.3rem;
+      }
+    }
+  }
+  .gtog-table {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      thead {
+        background-color: $brand-primary;
+        color: white;
+        th {
+          padding: 0.75rem;
+          text-align: left;
+        }
+      }
+      tbody tr {
+        border-bottom: 1px solid #ddd;
+        td {
+          padding: 0.75rem;
+        }
+        .status {
+          padding: 0.3rem 0.6rem;
+          border-radius: 12px;
+          font-size: 0.75rem;
+          font-weight: bold;
+          display: inline-block;
+          &.approved { background-color: #d4edda; color: #155724; }
+          &.pending { background-color: #fff3cd; color: #856404; }
+          &.denied, &.declined { background-color: #f8d7da; color: #721c24; }
+        }
+        .action-icons {
+          display: flex;
+          gap: 0.5rem;
+          justify-content: center;
+          i { cursor: pointer; }
+          a { color: inherit; text-decoration: none; }
+          i.fa-eye { color: #007bff; }
+          i.fa-edit { color: #28a745; }
+          i.fa-trash-alt { color: #dc3545; }
+        }
+      }
+      .no-records {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+      }
+    }
+  }
+  .gtog-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      button { height: 2rem; }
+      button, a {
+        padding: 0.4rem 0.8rem;
+        border: 1px solid transparent;
+        background-color: transparent;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 0.9rem;
+        text-decoration: none;
+        i { font-size: 0.85rem; }
+        &.prev-btn { background-color: $neutral-dark; color: #fff; border: none; }
+        &.next-btn { background-color: $brand-primary; color: #fff; border: none; }
+      }
+      .page {
+        padding: 0.4rem 0.8rem;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        cursor: pointer;
+        border-radius: 6px;
+        text-decoration: none;
+        &.active { background-color: $brand-primary; color: #fff; border-color: transparent; }
+      }
+    }
+    .go-to-page {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      label { font-size: .9rem; }
+      input { font-size: .9rem; width: 50px; height: 1.5rem; padding: 0.3rem; }
+    }
+    .go-btn {
+      border: 1px solid transparent;
+      background-color: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      align-items: center;
+      font-size: 0.9rem;
+      text-decoration: none;
+      background-color: $brand-primary;
+      color: #fff;
+      border: none;
+      padding: .2rem;
+    }
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    .modal-content {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      width: 100%;
+      max-width: 500px;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      h3 { margin: 0; font-size: 18px; }
+    }
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #888;
+    }
+    .modal-body {
+      padding: 20px;
+    }
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+  }
+}
+
+// Global style for links inside gov-to-gov pages
+.gtog-section a {
+  text-decoration: none;
+}
+
+// Gov-to-Gov Add (replica of Direct Hire Add)
+.gtog-add-record-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.gtog-record-tabs {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  h2 { font-size: 1rem; }
+  .tab {
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-decoration: none;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    &.active { background-color: $brand-primary; color: white; }
+  }
+}
+.gtog-record-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    label {
+      display: flex;
+      flex-direction: column;
+      font-weight: 600;
+      input, textarea {
+        padding: 0.5rem;
+        border: 1px solid $neutral-dark;
+        border-radius: 6px;
+        margin-top: 0.25rem;
+        &:focus { outline: 1px solid $brand-primary; }
+      }
+    }
+  }
+  .file-upload-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    .uploaded-files {
+      flex: 1;
+      min-width: 300px;
+      .file-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: $neutral-light;
+        padding: 0.5rem;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+        .drag-handle { cursor: grab; }
+        .file-name { flex: 1; margin: 0 1rem; }
+        .file-size { margin-right: 1rem; color: $neutral-dark; }
+        .delete-file { background: none; border: none; color: red; cursor: pointer; }
+      }
+    }
+    .upload-box {
+      flex: 1;
+      min-width: 300px;
+      border: 2px dashed $neutral-dark;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      .upload-placeholder {
+        text-align: center;
+        i { font-size: 2rem; margin-bottom: 0.5rem; }
+        .browse-btn { background: none; border: none; color: $brand-primary; font-weight: bold; cursor: pointer; }
+      }
+    }
+  }
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    font-size: 1rem;
+    a { font-size: 1rem; text-decoration: none; }
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      text-decoration: none;
+      &.btn-primary { background-color: $brand-primary; color: white; border: none; }
+      &.btn-outline-primary { background-color: white; color: $brand-primary; border: 2px solid $brand-primary; }
+      &.btn-reset { background-color: white; color: $brand-primary; border: 1px dashed $brand-primary; }
+      &.btn-cancel { background-color: white; color: black; border: 1px solid $neutral-dark; }
+      &.btn-success { background-color: #28a745; border: 1px solid #28a745; color: white; }
+    }
+  }
+}

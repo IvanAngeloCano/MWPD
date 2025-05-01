@@ -1,0 +1,791 @@
+2025-04-25 13:30:27: Script started - submit_clearance_approval_new.php
+2025-04-25 13:30:27: Record ID: 1
+2025-04-25 13:30:27: Transaction started
+2025-04-25 13:30:27: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-04-07","for_confirmation":"2025-05-07","emailed_to_dhad":"2025-04-08","received_from_dhad":"2025-02-25","evaluator":"Ivan Cano","note":"PS","type":"household","status":null,"created_at":"2025-04-22 23:37:34","updated_at":"2025-04-25 19:30:26","submitted_by":null}
+2025-04-25 13:30:27: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-25 13:30:27: Update result: true, Rows affected: 1
+2025-04-25 13:30:27: Existing approval found (ID: 1), updating...
+2025-04-25 13:30:27: Transaction committed successfully
+2025-04-25 13:30:27: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-25 13:31:02: Script started - submit_clearance_approval_new.php
+2025-04-25 13:31:02: Record ID: 4
+2025-04-25 13:31:02: Transaction started
+2025-04-25 13:31:02: Record found: {"id":4,"control_no":"DH-0013","name":"sdsds","jobsite":"dsadsa","evaluated":null,"for_confirmation":"9090-09-08","emailed_to_dhad":"0989-08-09","received_from_dhad":"9999-09-09","evaluator":"sbdjabdhas","note":"","type":"household","status":null,"created_at":"2025-04-25 18:04:28","updated_at":"2025-04-25 19:31:00","submitted_by":null}
+2025-04-25 13:31:02: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-25 13:31:02: Update result: true, Rows affected: 1
+2025-04-25 13:31:02: No existing approval found, creating new one...
+2025-04-25 13:31:02: New approval inserted, ID: 2
+2025-04-25 13:31:02: Transaction committed successfully
+2025-04-25 13:31:02: Success message set, redirecting to direct_hire_view.php?id=4
+2025-04-25 16:00:16: Script started - submit_clearance_approval_new.php
+2025-04-25 16:00:16: Record ID: 1
+2025-04-25 16:00:16: Transaction started
+2025-04-25 16:00:16: Record found: {"id":1,"control_no":"DH-001","name":"dsads","jobsite":"dsadsa","evaluated":"9999-09-09","for_confirmation":"9999-09-09","emailed_to_dhad":"0000-00-00","received_from_dhad":"0000-00-00","evaluator":"dsads","note":"","type":"household","status":null,"created_at":"2025-04-25 22:00:09","updated_at":"2025-04-25 22:00:09","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-25 16:00:16: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-25 16:00:16: Update result: true, Rows affected: 1
+2025-04-25 16:00:16: No existing approval found, creating new one...
+2025-04-25 16:00:16: New approval inserted, ID: 1
+2025-04-25 16:00:16: Transaction committed successfully
+2025-04-25 16:00:16: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-25 19:21:23: Script started - submit_clearance_approval_new.php
+2025-04-25 19:21:23: Record ID: 1
+2025-04-25 19:21:23: Transaction started
+2025-04-25 19:21:23: Record found: {"id":1,"control_no":"DH-001","name":"dsads","jobsite":"dsadsa","evaluated":"9999-09-09","for_confirmation":"9999-09-09","emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"dsads","note":"","type":"household","status":null,"created_at":"2025-04-25 22:00:09","updated_at":"2025-04-26 01:21:19","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-25 19:21:23: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-25 19:21:23: Update result: true, Rows affected: 1
+2025-04-25 19:21:23: No existing approval found, creating new one...
+2025-04-25 19:21:23: New approval inserted, ID: 2
+2025-04-25 19:21:23: Transaction committed successfully
+2025-04-25 19:21:23: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 08:45:58: Script started - submit_clearance_approval_new.php
+2025-04-26 08:45:58: Record ID: 1
+2025-04-26 08:45:58: Transaction started
+2025-04-26 08:45:58: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 14:45:51","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 08:45:58: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 08:45:58: Update result: true, Rows affected: 1
+2025-04-26 08:45:58: No existing approval found, creating new one...
+2025-04-26 08:45:58: New approval inserted, ID: 1
+2025-04-26 08:45:58: Transaction committed successfully
+2025-04-26 08:45:58: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 09:45:41: Script started - submit_clearance_approval_new.php
+2025-04-26 09:45:41: Record ID: 2
+2025-04-26 09:45:41: Transaction started
+2025-04-26 09:45:41: Record found: {"id":2,"control_no":"DH-0040","name":"tester justinte","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-26 15:20:54","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 09:45:41: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 09:45:41: Update result: true, Rows affected: 1
+2025-04-26 09:45:41: No existing approval found, creating new one...
+2025-04-26 09:45:41: New approval inserted, ID: 2
+2025-04-26 09:45:41: Transaction committed successfully
+2025-04-26 09:45:41: Success message set, redirecting to direct_hire_view.php?id=2
+2025-04-26 13:52:09: Script started - submit_clearance_approval_new.php
+2025-04-26 13:52:09: Record ID: 1
+2025-04-26 13:52:09: Transaction started
+2025-04-26 13:52:09: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 19:52:06","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 13:52:09: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 13:52:09: Update result: true, Rows affected: 1
+2025-04-26 13:52:09: No existing approval found, creating new one...
+2025-04-26 13:52:09: New approval inserted, ID: 3
+2025-04-26 13:52:09: Transaction committed successfully
+2025-04-26 13:52:09: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 14:06:52: Script started - submit_clearance_approval_new.php
+2025-04-26 14:06:52: Record ID: 3
+2025-04-26 14:06:52: Transaction started
+2025-04-26 14:06:52: Record found: {"id":3,"control_no":"DH-009","name":"dsadas","jobsite":"dsadasd","evaluated":"2020-08-09","for_confirmation":"2020-02-22","emailed_to_dhad":"2020-02-20","received_from_dhad":"2020-02-20","evaluator":"dsda","note":"","type":"household","status":null,"created_at":"2025-04-26 20:06:49","updated_at":"2025-04-26 20:06:49","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 14:06:52: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 14:06:52: Update result: true, Rows affected: 1
+2025-04-26 14:06:52: No existing approval found, creating new one...
+2025-04-26 14:06:52: New approval inserted, ID: 4
+2025-04-26 14:06:52: Transaction committed successfully
+2025-04-26 14:06:52: Success message set, redirecting to direct_hire_view.php?id=3
+2025-04-26 14:20:50: Script started - submit_clearance_approval_new.php
+2025-04-26 14:20:50: Record ID: 1
+2025-04-26 14:20:50: Transaction started
+2025-04-26 14:20:50: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 20:20:46","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 14:20:50: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 14:20:50: Update result: true, Rows affected: 1
+2025-04-26 14:20:50: No existing approval found, creating new one...
+2025-04-26 14:20:50: New approval inserted, ID: 5
+2025-04-26 14:20:50: Transaction committed successfully
+2025-04-26 14:20:50: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 14:32:58: Script started - submit_clearance_approval_new.php
+2025-04-26 14:32:58: Record ID: 1
+2025-04-26 14:32:58: Transaction started
+2025-04-26 14:32:58: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 20:32:56","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 14:32:58: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 14:32:58: Update result: true, Rows affected: 1
+2025-04-26 14:32:58: No existing approval found, creating new one...
+2025-04-26 14:32:58: New approval inserted, ID: 6
+2025-04-26 14:32:58: Transaction committed successfully
+2025-04-26 14:32:58: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 15:06:28: Script started - submit_clearance_approval_new.php
+2025-04-26 15:06:28: Record ID: 1
+2025-04-26 15:06:28: Transaction started
+2025-04-26 15:06:28: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 21:06:26","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 15:06:28: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 15:06:28: Update result: true, Rows affected: 1
+2025-04-26 15:06:28: No existing approval found, creating new one...
+2025-04-26 15:06:28: New approval inserted, ID: 7
+2025-04-26 15:06:28: Transaction committed successfully
+2025-04-26 15:06:28: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 15:10:53: Script started - submit_clearance_approval_new.php
+2025-04-26 15:10:53: Record ID: 1
+2025-04-26 15:10:53: Transaction started
+2025-04-26 15:10:53: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 21:10:51","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 15:10:53: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 15:10:53: Update result: true, Rows affected: 1
+2025-04-26 15:10:53: No existing approval found, creating new one...
+2025-04-26 15:10:53: New approval inserted, ID: 8
+2025-04-26 15:10:53: Transaction committed successfully
+2025-04-26 15:10:53: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 15:14:30: Script started - submit_clearance_approval_new.php
+2025-04-26 15:14:30: Record ID: 1
+2025-04-26 15:14:30: Transaction started
+2025-04-26 15:14:30: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 21:14:28","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 15:14:30: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 15:14:30: Update result: true, Rows affected: 1
+2025-04-26 15:14:30: No existing approval found, creating new one...
+2025-04-26 15:14:30: New approval inserted, ID: 9
+2025-04-26 15:14:30: Notifying Regional Directors about submission from Justine castanar for record 1
+2025-04-26 15:14:30: Notification sent to Regional Director (ID: 1)
+2025-04-26 15:14:30: Transaction committed successfully
+2025-04-26 15:14:30: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 15:15:33: Script started - submit_clearance_approval_new.php
+2025-04-26 15:15:33: Record ID: 4
+2025-04-26 15:15:33: Transaction started
+2025-04-26 15:15:33: Record found: {"id":4,"control_no":"DH-0013ds","name":"dsads","jobsite":"dsadsad","evaluated":"2020-09-09","for_confirmation":"2020-09-09","emailed_to_dhad":"2020-09-09","received_from_dhad":"2002-09-09","evaluator":"sadsa","note":"","type":"household","status":null,"created_at":"2025-04-26 21:15:27","updated_at":"2025-04-26 21:15:27","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 15:15:33: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 15:15:33: Update result: true, Rows affected: 1
+2025-04-26 15:15:33: No existing approval found, creating new one...
+2025-04-26 15:15:33: New approval inserted, ID: 10
+2025-04-26 15:15:33: Notifying Regional Directors about submission from Justine castanar for record 4
+2025-04-26 15:15:33: Notification sent to Regional Director (ID: 1)
+2025-04-26 15:15:33: Transaction committed successfully
+2025-04-26 15:15:33: Success message set, redirecting to direct_hire_view.php?id=4
+2025-04-26 15:20:03: Script started - submit_clearance_approval_new.php
+2025-04-26 15:20:03: Record ID: 1
+2025-04-26 15:20:03: Transaction started
+2025-04-26 15:20:03: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 21:20:01","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 15:20:03: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 15:20:03: Update result: true, Rows affected: 1
+2025-04-26 15:20:03: No existing approval found, creating new one...
+2025-04-26 15:20:03: New approval inserted, ID: 11
+2025-04-26 15:20:03: Notifying Regional Directors about submission from Justine castanar for record 1
+2025-04-26 15:20:03: Notification sent to Regional Director (ID: 1)
+2025-04-26 15:20:03: Transaction committed successfully
+2025-04-26 15:20:03: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 15:25:52: Script started - submit_clearance_approval_new.php
+2025-04-26 15:25:52: Record ID: 1
+2025-04-26 15:25:52: Transaction started
+2025-04-26 15:25:52: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 21:25:27","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 15:25:52: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 15:25:52: Update result: true, Rows affected: 1
+2025-04-26 15:25:52: No existing approval found, creating new one...
+2025-04-26 15:25:52: New approval inserted, ID: 12
+2025-04-26 15:25:52: Notifying Regional Directors about submission from Justine castanar for record 1
+2025-04-26 15:25:52: Notification sent to Regional Director (ID: 1)
+2025-04-26 15:25:52: Transaction committed successfully
+2025-04-26 15:25:52: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 15:27:19: Script started - submit_clearance_approval_new.php
+2025-04-26 15:27:19: Record ID: 1
+2025-04-26 15:27:19: Transaction started
+2025-04-26 15:27:19: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 21:27:18","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 15:27:19: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 15:27:19: Update result: true, Rows affected: 1
+2025-04-26 15:27:19: No existing approval found, creating new one...
+2025-04-26 15:27:19: New approval inserted, ID: 13
+2025-04-26 15:27:19: Notifying Regional Directors about submission from submitter for record 1
+2025-04-26 15:27:19: Notification sent to Regional Director (ID: 1)
+2025-04-26 15:27:19: Transaction committed successfully
+2025-04-26 15:27:19: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 15:56:08: Script started - submit_clearance_approval_new.php
+2025-04-26 15:56:08: Record ID: 1
+2025-04-26 15:56:08: Transaction started
+2025-04-26 15:56:08: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 21:56:06","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 15:56:08: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 15:56:08: Update result: true, Rows affected: 1
+2025-04-26 15:56:08: No existing approval found, creating new one...
+2025-04-26 15:56:08: New approval inserted, ID: 14
+2025-04-26 15:56:08: Notifying Regional Directors about submission from Justine castanar for record 1
+2025-04-26 15:56:08: Notification sent to Regional Director (ID: 1)
+2025-04-26 15:56:08: Transaction committed successfully
+2025-04-26 15:56:08: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 16:01:05: Script started - submit_clearance_approval_new.php
+2025-04-26 16:01:05: Record ID: 1
+2025-04-26 16:01:05: Transaction started
+2025-04-26 16:01:05: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 22:01:03","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 16:01:05: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 16:01:05: Update result: true, Rows affected: 1
+2025-04-26 16:01:05: No existing approval found, creating new one...
+2025-04-26 16:01:05: Storing submitter user ID: 1 for record ID: 1
+2025-04-26 16:01:05: New approval inserted, ID: 15
+2025-04-26 16:01:05: Notifying Regional Directors about submission from Justine castanar for record 1
+2025-04-26 16:01:06: Notification sent to Regional Director (ID: 1)
+2025-04-26 16:01:06: Transaction committed successfully
+2025-04-26 16:01:06: Success message set, redirecting to direct_hire_view.php?id=1
+2025-04-26 16:02:04: Script started - submit_clearance_approval_new.php
+2025-04-26 16:02:04: Record ID: 4
+2025-04-26 16:02:04: Transaction started
+2025-04-26 16:02:04: Record found: {"id":4,"control_no":"DH-0013ds","name":"dsads","jobsite":"dsadsad","evaluated":"2020-09-09","for_confirmation":"2020-09-09","emailed_to_dhad":"2020-09-09","received_from_dhad":"2002-09-09","evaluator":"sadsa","note":"","type":"household","status":null,"created_at":"2025-04-26 21:15:27","updated_at":"2025-04-26 22:02:03","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 16:02:04: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 16:02:04: Update result: true, Rows affected: 1
+2025-04-26 16:02:04: No existing approval found, creating new one...
+2025-04-26 16:02:04: Storing submitter user ID: 1 for record ID: 4
+2025-04-26 16:02:04: New approval inserted, ID: 16
+2025-04-26 16:02:04: Notifying Regional Directors about submission from Justine castanar for record 4
+2025-04-26 16:02:04: Notification sent to Regional Director (ID: 1)
+2025-04-26 16:02:04: Transaction committed successfully
+2025-04-26 16:02:04: Success message set, redirecting to direct_hire_view.php?id=4
+2025-04-26 16:02:18: Script started - submit_clearance_approval_new.php
+2025-04-26 16:02:18: Record ID: 3
+2025-04-26 16:02:18: Transaction started
+2025-04-26 16:02:18: Record found: {"id":3,"control_no":"DH-009","name":"dsadas","jobsite":"dsadasd","evaluated":"2020-08-09","for_confirmation":"2020-02-22","emailed_to_dhad":"2020-02-20","received_from_dhad":"2020-02-20","evaluator":"dsda","note":"","type":"household","status":null,"created_at":"2025-04-26 20:06:49","updated_at":"2025-04-26 22:02:16","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 16:02:18: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-26 16:02:18: Update result: true, Rows affected: 1
+2025-04-26 16:02:18: No existing approval found, creating new one...
+2025-04-26 16:02:18: Storing submitter user ID: 1 for record ID: 3
+2025-04-26 16:02:18: New approval inserted, ID: 17
+2025-04-26 16:02:18: Notifying Regional Directors about submission from Justine castanar for record 3
+2025-04-26 16:02:18: Notification sent to Regional Director (ID: 1)
+2025-04-26 16:02:18: Transaction committed successfully
+2025-04-26 16:02:18: Success message set, redirecting to direct_hire_view.php?id=3
+2025-04-28 09:13:24: Script started - submit_clearance_approval_new.php
+2025-04-28 09:13:24: Record ID: 2
+2025-04-28 09:13:24: Transaction started
+2025-04-28 09:13:24: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":null,"created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:04:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:13:24: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-28 09:13:24: Update result: true, Rows affected: 1
+2025-04-28 09:13:24: No existing approval found, creating new one...
+2025-04-28 09:13:24: Storing submitter user ID: 3 for record ID: 2
+2025-04-28 09:13:24: New approval inserted, ID: 44
+2025-04-28 09:13:24: Notifying Regional Directors about submission from Ivan Angelo S. Cano for record 2
+2025-04-28 09:13:24: Notification sent to Regional Director (ID: 1)
+2025-04-28 09:13:24: Notification sent to Regional Director (ID: 3)
+2025-04-28 09:13:24: Transaction committed successfully
+2025-04-28 09:13:24: Success message set, redirecting to direct_hire_view.php?id=2
+2025-04-28 13:22:30: Script started - submit_clearance_approval_new.php
+2025-04-28 13:22:30: Record ID: 5
+2025-04-28 13:22:30: Transaction started
+2025-04-28 13:22:30: Record found: {"id":5,"control_no":"sdasd","name":"dsadsa","jobsite":"dsdasn","evaluated":"2020-09-09","for_confirmation":"2020-02-02","emailed_to_dhad":"2020-02-20","received_from_dhad":"2020-02-20","evaluator":"ds","note":"","type":"professional","status":null,"created_at":"2025-04-26 23:05:47","updated_at":"2025-04-28 19:22:25","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 13:22:30: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-28 13:22:30: Update result: true, Rows affected: 1
+2025-04-28 13:22:30: No existing approval found, creating new one...
+2025-04-28 13:22:30: Storing submitter user ID: 3 for record ID: 5
+2025-04-28 13:22:30: New approval inserted, ID: 45
+2025-04-28 13:22:30: Notifying Regional Directors about submission from Ivan Angelo S. Cano for record 5
+2025-04-28 13:22:30: Notification sent to Regional Director (ID: 1)
+2025-04-28 13:22:30: Notification sent to Regional Director (ID: 3)
+2025-04-28 13:22:30: Transaction committed successfully
+2025-04-28 13:22:30: Success message set, redirecting to direct_hire_view.php?id=5
+2025-04-29 04:48:40: Script started - submit_clearance_approval_new.php
+2025-04-29 04:48:40: Record ID: 4
+2025-04-29 04:48:40: Transaction started
+2025-04-29 04:48:40: Record found: {"id":4,"control_no":"DH-0013ds","name":"dsads","jobsite":"dsadsad","evaluated":"2020-09-09","for_confirmation":"2020-09-09","emailed_to_dhad":"2020-09-09","received_from_dhad":"2002-09-09","evaluator":"sadsa","note":"","type":"household","status":null,"created_at":"2025-04-26 21:15:27","updated_at":"2025-04-29 10:48:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 04:48:40: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 04:48:40: Update result: true, Rows affected: 1
+2025-04-29 04:48:40: No existing approval found, creating new one...
+2025-04-29 04:48:40: Storing submitter user ID: 1 for record ID: 4
+2025-04-29 04:48:40: New approval inserted, ID: 46
+2025-04-29 04:48:40: Notifying Regional Directors about submission from Justine castanar for record 4
+2025-04-29 04:48:40: Notification sent to Regional Director (ID: 1)
+2025-04-29 04:48:40: Transaction committed successfully
+2025-04-29 04:48:40: Success message set, redirecting to direct_hire_view.php?id=4
+2025-04-29 05:05:03: Script started - submit_clearance_approval_new.php
+2025-04-29 05:05:03: Record ID: 12
+2025-04-29 05:05:03: Transaction started
+2025-04-29 05:05:03: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:13:03","updated_at":"2025-04-28 16:13:03","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:05:03: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:05:03: Update result: true, Rows affected: 1
+2025-04-29 05:05:03: No existing approval found, creating new one...
+2025-04-29 05:05:03: Storing submitter user ID: 1 for record ID: 12
+2025-04-29 05:05:03: New approval inserted, ID: 47
+2025-04-29 05:05:03: Notifying Regional Directors about submission from Justine castanar for record 12
+2025-04-29 05:05:03: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:05:03: Transaction committed successfully
+2025-04-29 05:05:03: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 05:09:27: Script started - submit_clearance_approval_new.php
+2025-04-29 05:09:27: Record ID: 12
+2025-04-29 05:09:27: Transaction started
+2025-04-29 05:09:27: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"denied","created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 11:05:11","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 11:05:11"}
+2025-04-29 05:09:27: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:09:27: Update result: true, Rows affected: 1
+2025-04-29 05:09:27: No existing approval found, creating new one...
+2025-04-29 05:09:27: Storing submitter user ID: 1 for record ID: 12
+2025-04-29 05:09:27: New approval inserted, ID: 48
+2025-04-29 05:09:27: Notifying Regional Directors about submission from Justine castanar for record 12
+2025-04-29 05:09:27: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:09:27: Transaction committed successfully
+2025-04-29 05:09:27: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 05:19:37: Script started - submit_clearance_approval_new.php
+2025-04-29 05:19:37: Record ID: 12
+2025-04-29 05:19:37: Transaction started
+2025-04-29 05:19:37: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 11:19:30","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:19:37: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:19:37: Update result: true, Rows affected: 1
+2025-04-29 05:19:37: No existing approval found, creating new one...
+2025-04-29 05:19:37: Storing submitter user ID: 1 for record ID: 12
+2025-04-29 05:19:37: New approval inserted, ID: 49
+2025-04-29 05:19:37: Notifying Regional Directors about submission from Justine castanar for record 12
+2025-04-29 05:19:37: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:19:37: Transaction committed successfully
+2025-04-29 05:19:37: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 05:31:24: Script started - submit_clearance_approval_new.php
+2025-04-29 05:31:24: Record ID: 11
+2025-04-29 05:31:24: Transaction started
+2025-04-29 05:31:24: Record found: {"id":11,"control_no":"DH-0090645","name":"JustinesTESTER","jobsite":"JULI","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:12:42","updated_at":"2025-04-28 16:12:42","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:31:24: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:31:24: Update result: true, Rows affected: 1
+2025-04-29 05:31:24: No existing approval found, creating new one...
+2025-04-29 05:31:24: Storing submitter user ID: 1 for record ID: 11
+2025-04-29 05:31:24: New approval inserted, ID: 50
+2025-04-29 05:31:24: Notifying Regional Directors about submission from Justine castanar for record 11
+2025-04-29 05:31:24: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:31:24: Transaction committed successfully
+2025-04-29 05:31:24: Success message set, redirecting to direct_hire_view.php?id=11
+2025-04-29 05:35:25: Script started - submit_clearance_approval_new.php
+2025-04-29 05:35:25: Record ID: 10
+2025-04-29 05:35:25: Transaction started
+2025-04-29 05:35:25: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:12:20","updated_at":"2025-04-28 16:12:20","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:35:25: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:35:25: Update result: true, Rows affected: 1
+2025-04-29 05:35:25: No existing approval found, creating new one...
+2025-04-29 05:35:25: Storing submitter user ID: 1 for record ID: 10
+2025-04-29 05:35:25: New approval inserted, ID: 51
+2025-04-29 05:35:25: Notifying Regional Directors about submission from Justine castanar for record 10
+2025-04-29 05:35:25: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:35:25: Transaction committed successfully
+2025-04-29 05:35:25: Success message set, redirecting to direct_hire_view.php?id=10
+2025-04-29 05:53:17: Script started - submit_clearance_approval_new.php
+2025-04-29 05:53:17: Record ID: 9
+2025-04-29 05:53:17: Transaction started
+2025-04-29 05:53:17: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:11:42","updated_at":"2025-04-28 16:11:42","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:53:17: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:53:17: Update result: true, Rows affected: 1
+2025-04-29 05:53:17: No existing approval found, creating new one...
+2025-04-29 05:53:17: Storing submitter user ID: 1 for record ID: 9
+2025-04-29 05:53:17: New approval inserted, ID: 52
+2025-04-29 05:53:17: Notifying Regional Directors about submission from Justine castanar for record 9
+2025-04-29 05:53:17: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:53:17: Transaction committed successfully
+2025-04-29 05:53:17: Success message set, redirecting to direct_hire_view.php?id=9
+2025-04-29 05:53:21: Script started - submit_clearance_approval_new.php
+2025-04-29 05:53:21: Record ID: 8
+2025-04-29 05:53:21: Transaction started
+2025-04-29 05:53:21: Record found: {"id":8,"control_no":"DH-004088","name":"JADEERD","jobsite":"GFSGF","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:11:18","updated_at":"2025-04-28 16:11:18","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:53:21: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:53:21: Update result: true, Rows affected: 1
+2025-04-29 05:53:21: No existing approval found, creating new one...
+2025-04-29 05:53:21: Storing submitter user ID: 1 for record ID: 8
+2025-04-29 05:53:21: New approval inserted, ID: 53
+2025-04-29 05:53:21: Notifying Regional Directors about submission from Justine castanar for record 8
+2025-04-29 05:53:21: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:53:21: Transaction committed successfully
+2025-04-29 05:53:21: Success message set, redirecting to direct_hire_view.php?id=8
+2025-04-29 05:56:40: Script started - submit_clearance_approval_new.php
+2025-04-29 05:56:40: Record ID: 7
+2025-04-29 05:56:40: Transaction started
+2025-04-29 05:56:40: Record found: {"id":7,"control_no":"DH-0099","name":"dsadsal","jobsite":"gjhfjgdgghshgs","evaluated":"2025-04-10","for_confirmation":"2025-04-10","emailed_to_dhad":"2025-04-20","received_from_dhad":"2025-04-08","evaluator":"ghdytd","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:10:09","updated_at":"2025-04-28 16:10:09","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:56:40: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:56:40: Update result: true, Rows affected: 1
+2025-04-29 05:56:40: No existing approval found, creating new one...
+2025-04-29 05:56:40: Storing submitter user ID: 1 for record ID: 7
+2025-04-29 05:56:40: New approval inserted, ID: 54
+2025-04-29 05:56:40: Notifying Regional Directors about submission from Justine castanar for record 7
+2025-04-29 05:56:40: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:56:40: Transaction committed successfully
+2025-04-29 05:56:40: Success message set, redirecting to direct_hire_view.php?id=7
+2025-04-29 05:58:11: Script started - submit_clearance_approval_new.php
+2025-04-29 05:58:11: Record ID: 6
+2025-04-29 05:58:11: Transaction started
+2025-04-29 05:58:11: Record found: {"id":6,"control_no":"DH-00401","name":"jamiwjap","jobsite":"joblist","evaluated":"2025-04-09","for_confirmation":"2025-04-14","emailed_to_dhad":"2025-04-17","received_from_dhad":"2025-04-18","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:09:33","updated_at":"2025-04-28 16:09:33","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:58:11: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:58:11: Update result: true, Rows affected: 1
+2025-04-29 05:58:11: No existing approval found, creating new one...
+2025-04-29 05:58:11: Storing submitter user ID: 1 for record ID: 6
+2025-04-29 05:58:11: New approval inserted, ID: 55
+2025-04-29 05:58:11: Notifying Regional Directors about submission from Justine castanar for record 6
+2025-04-29 05:58:11: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:58:11: Transaction committed successfully
+2025-04-29 05:58:11: Success message set, redirecting to direct_hire_view.php?id=6
+2025-04-29 05:58:49: Script started - submit_clearance_approval_new.php
+2025-04-29 05:58:49: Record ID: 12
+2025-04-29 05:58:49: Transaction started
+2025-04-29 05:58:49: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 11:58:47","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:58:49: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:58:49: Update result: true, Rows affected: 1
+2025-04-29 05:58:49: No existing approval found, creating new one...
+2025-04-29 05:58:49: Storing submitter user ID: 1 for record ID: 12
+2025-04-29 05:58:49: New approval inserted, ID: 56
+2025-04-29 05:58:49: Notifying Regional Directors about submission from Justine castanar for record 12
+2025-04-29 05:58:49: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:58:49: Transaction committed successfully
+2025-04-29 05:58:49: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 05:59:03: Script started - submit_clearance_approval_new.php
+2025-04-29 05:59:03: Record ID: 11
+2025-04-29 05:59:03: Transaction started
+2025-04-29 05:59:03: Record found: {"id":11,"control_no":"DH-0090645","name":"JustinesTESTER","jobsite":"JULI","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\njustine","type":"professional","status":null,"created_at":"2025-04-28 16:12:42","updated_at":"2025-04-29 11:59:01","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:59:03: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:59:03: Update result: true, Rows affected: 1
+2025-04-29 05:59:03: No existing approval found, creating new one...
+2025-04-29 05:59:03: Storing submitter user ID: 1 for record ID: 11
+2025-04-29 05:59:03: New approval inserted, ID: 57
+2025-04-29 05:59:03: Notifying Regional Directors about submission from Justine castanar for record 11
+2025-04-29 05:59:03: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:59:03: Transaction committed successfully
+2025-04-29 05:59:03: Success message set, redirecting to direct_hire_view.php?id=11
+2025-04-29 05:59:09: Script started - submit_clearance_approval_new.php
+2025-04-29 05:59:09: Record ID: 10
+2025-04-29 05:59:09: Transaction started
+2025-04-29 05:59:09: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ncdcsa","type":"professional","status":"denied","created_at":"2025-04-28 16:12:20","updated_at":"2025-04-29 11:35:32","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 11:35:32"}
+2025-04-29 05:59:09: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:59:09: Update result: true, Rows affected: 1
+2025-04-29 05:59:09: No existing approval found, creating new one...
+2025-04-29 05:59:09: Storing submitter user ID: 1 for record ID: 10
+2025-04-29 05:59:09: New approval inserted, ID: 58
+2025-04-29 05:59:09: Notifying Regional Directors about submission from Justine castanar for record 10
+2025-04-29 05:59:09: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:59:09: Transaction committed successfully
+2025-04-29 05:59:09: Success message set, redirecting to direct_hire_view.php?id=10
+2025-04-29 05:59:13: Script started - submit_clearance_approval_new.php
+2025-04-29 05:59:13: Record ID: 9
+2025-04-29 05:59:13: Transaction started
+2025-04-29 05:59:13: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsdas","type":"professional","status":"denied","created_at":"2025-04-28 16:11:42","updated_at":"2025-04-29 11:54:26","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 11:54:26"}
+2025-04-29 05:59:13: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:59:13: Update result: true, Rows affected: 1
+2025-04-29 05:59:13: No existing approval found, creating new one...
+2025-04-29 05:59:13: Storing submitter user ID: 1 for record ID: 9
+2025-04-29 05:59:13: New approval inserted, ID: 59
+2025-04-29 05:59:13: Notifying Regional Directors about submission from Justine castanar for record 9
+2025-04-29 05:59:13: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:59:13: Transaction committed successfully
+2025-04-29 05:59:13: Success message set, redirecting to direct_hire_view.php?id=9
+2025-04-29 05:59:24: Script started - submit_clearance_approval_new.php
+2025-04-29 05:59:24: Record ID: 8
+2025-04-29 05:59:24: Transaction started
+2025-04-29 05:59:24: Record found: {"id":8,"control_no":"DH-004088","name":"JADEERD","jobsite":"GFSGF","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:11:18","updated_at":"2025-04-29 11:59:23","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:59:24: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:59:24: Update result: true, Rows affected: 1
+2025-04-29 05:59:24: No existing approval found, creating new one...
+2025-04-29 05:59:24: Storing submitter user ID: 1 for record ID: 8
+2025-04-29 05:59:24: New approval inserted, ID: 60
+2025-04-29 05:59:24: Notifying Regional Directors about submission from Justine castanar for record 8
+2025-04-29 05:59:24: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:59:24: Transaction committed successfully
+2025-04-29 05:59:24: Success message set, redirecting to direct_hire_view.php?id=8
+2025-04-29 05:59:34: Script started - submit_clearance_approval_new.php
+2025-04-29 05:59:34: Record ID: 7
+2025-04-29 05:59:34: Transaction started
+2025-04-29 05:59:34: Record found: {"id":7,"control_no":"DH-0099","name":"dsadsal","jobsite":"gjhfjgdgghshgs","evaluated":"2025-04-10","for_confirmation":"2025-04-10","emailed_to_dhad":"2025-04-20","received_from_dhad":"2025-04-08","evaluator":"ghdytd","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:10:09","updated_at":"2025-04-29 11:59:32","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:59:34: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 05:59:34: Update result: true, Rows affected: 1
+2025-04-29 05:59:34: No existing approval found, creating new one...
+2025-04-29 05:59:34: Storing submitter user ID: 1 for record ID: 7
+2025-04-29 05:59:34: New approval inserted, ID: 61
+2025-04-29 05:59:34: Notifying Regional Directors about submission from Justine castanar for record 7
+2025-04-29 05:59:34: Notification sent to Regional Director (ID: 1)
+2025-04-29 05:59:34: Transaction committed successfully
+2025-04-29 05:59:34: Success message set, redirecting to direct_hire_view.php?id=7
+2025-04-29 06:22:34: Script started - submit_clearance_approval_new.php
+2025-04-29 06:22:34: Record ID: 11
+2025-04-29 06:22:34: Transaction started
+2025-04-29 06:22:34: Record found: {"id":11,"control_no":"DH-0090645","name":"JustinesTESTER","jobsite":"JULI","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\njustine\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:12:42","updated_at":"2025-04-29 12:22:32","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 06:22:34: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 06:22:34: Update result: true, Rows affected: 1
+2025-04-29 06:22:34: No existing approval found, creating new one...
+2025-04-29 06:22:34: Storing submitter user ID: 1 for record ID: 11
+2025-04-29 06:22:34: New approval inserted, ID: 62
+2025-04-29 06:22:34: Notifying Regional Directors about submission from Justine castanar for record 11
+2025-04-29 06:22:34: Notification sent to Regional Director (ID: 1)
+2025-04-29 06:22:34: Transaction committed successfully
+2025-04-29 06:22:34: Success message set, redirecting to direct_hire_view.php?id=11
+2025-04-29 06:24:14: Script started - submit_clearance_approval_new.php
+2025-04-29 06:24:14: Record ID: 12
+2025-04-29 06:24:14: Transaction started
+2025-04-29 06:24:14: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsad","type":"professional","status":"denied","created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 12:12:14","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 12:12:14"}
+2025-04-29 06:24:14: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 06:24:14: Update result: true, Rows affected: 1
+2025-04-29 06:24:14: No existing approval found, creating new one...
+2025-04-29 06:24:14: Storing submitter user ID: 1 for record ID: 12
+2025-04-29 06:24:14: New approval inserted, ID: 63
+2025-04-29 06:24:14: Notifying Regional Directors about submission from Justine castanar for record 12
+2025-04-29 06:24:14: Session notification sent to Regional Director (ID: 1)
+2025-04-29 06:24:14: Transaction committed successfully
+2025-04-29 06:24:14: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 06:25:53: Script started - submit_clearance_approval_new.php
+2025-04-29 06:25:53: Record ID: 10
+2025-04-29 06:25:53: Transaction started
+2025-04-29 06:25:53: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ncdcsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:12:20","updated_at":"2025-04-29 12:25:50","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 06:25:53: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 06:25:53: Update result: true, Rows affected: 1
+2025-04-29 06:25:53: No existing approval found, creating new one...
+2025-04-29 06:25:53: Storing submitter user ID: 1 for record ID: 10
+2025-04-29 06:25:53: New approval inserted, ID: 64
+2025-04-29 06:25:53: Notifying Regional Directors about submission from Justine castanar for record 10
+2025-04-29 06:25:53: Session notification sent to Regional Director (ID: 1)
+2025-04-29 06:25:53: Transaction committed successfully
+2025-04-29 06:25:53: Success message set, redirecting to direct_hire_view.php?id=10
+2025-04-29 09:20:48: Script started - submit_clearance_approval_new.php
+2025-04-29 09:20:48: Record ID: 12
+2025-04-29 09:20:48: Transaction started
+2025-04-29 09:20:48: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsad\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 15:20:18","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 09:20:48: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 09:20:48: Update result: true, Rows affected: 1
+2025-04-29 09:20:48: No existing approval found, creating new one...
+2025-04-29 09:20:48: Storing submitter user ID: 1 for record ID: 12
+2025-04-29 09:20:48: New approval inserted, ID: 65
+2025-04-29 09:20:48: Notifying Regional Directors about submission from Justine castanar for record 12
+2025-04-29 09:20:48: Session notification sent to Regional Director (ID: 1)
+2025-04-29 09:20:48: Transaction committed successfully
+2025-04-29 09:20:48: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 11:06:53: Script started - submit_clearance_approval_new.php
+2025-04-29 11:06:53: Record ID: 12
+2025-04-29 11:06:53: Transaction started
+2025-04-29 11:06:53: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsad\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 17:06:50","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 11:06:53: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 11:06:53: Update result: true, Rows affected: 1
+2025-04-29 11:06:53: Existing approval found (ID: 65), updating...
+2025-04-29 11:06:53: Transaction committed successfully
+2025-04-29 11:06:53: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 11:23:58: Script started - submit_clearance_approval_new.php
+2025-04-29 11:23:58: Record ID: 9
+2025-04-29 11:23:58: Transaction started
+2025-04-29 11:23:58: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsdas\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa","type":"professional","status":"denied","created_at":"2025-04-28 16:11:42","updated_at":"2025-04-29 12:10:34","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 12:10:34"}
+2025-04-29 11:23:58: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 11:23:58: Update result: true, Rows affected: 1
+2025-04-29 11:23:58: No existing approval found, creating new one...
+2025-04-29 11:23:58: Storing submitter user ID: 2 for record ID: 9
+2025-04-29 11:23:58: New approval inserted, ID: 66
+2025-04-29 11:23:58: Notifying Regional Directors about submission from submitter for record 9
+2025-04-29 11:23:58: Session notification sent to Regional Director (ID: 1)
+2025-04-29 11:23:58: Transaction committed successfully
+2025-04-29 11:23:58: Success message set, redirecting to direct_hire_view.php?id=9
+2025-04-29 11:25:42: Script started - submit_clearance_approval_new.php
+2025-04-29 11:25:42: Record ID: 6
+2025-04-29 11:25:42: Transaction started
+2025-04-29 11:25:42: Record found: {"id":6,"control_no":"DH-00401","name":"jamiwjap","jobsite":"joblist","evaluated":"2025-04-09","for_confirmation":"2025-04-14","emailed_to_dhad":"2025-04-17","received_from_dhad":"2025-04-18","evaluator":"Ivan Cano","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:09:33","updated_at":"2025-04-29 17:25:40","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 11:25:42: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 11:25:42: Update result: true, Rows affected: 1
+2025-04-29 11:25:42: No existing approval found, creating new one...
+2025-04-29 11:25:42: Storing submitter user ID: 1 for record ID: 6
+2025-04-29 11:25:42: New approval inserted, ID: 67
+2025-04-29 11:25:42: Notifying Regional Directors about submission from Justine castanar for record 6
+2025-04-29 11:25:42: Session notification sent to Regional Director (ID: 1)
+2025-04-29 11:25:42: Transaction committed successfully
+2025-04-29 11:25:42: Success message set, redirecting to direct_hire_view.php?id=6
+2025-04-29 12:04:03: Script started - submit_clearance_approval_new.php
+2025-04-29 12:04:03: Record ID: 10
+2025-04-29 12:04:03: Transaction started
+2025-04-29 12:04:03: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ncdcsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:12:20","updated_at":"2025-04-29 18:04:02","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 12:04:03: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 12:04:03: Update result: true, Rows affected: 1
+2025-04-29 12:04:03: No existing approval found, creating new one...
+2025-04-29 12:04:03: Storing submitter user ID: 1 for record ID: 10
+2025-04-29 12:04:03: New approval inserted, ID: 68
+2025-04-29 12:04:03: Notifying Regional Directors about submission from Justine castanar for record 10
+2025-04-29 12:04:03: Session notification sent to Regional Director (ID: 1)
+2025-04-29 12:04:03: Transaction committed successfully
+2025-04-29 12:04:03: Success message set, redirecting to direct_hire_view.php?id=10
+2025-04-29 12:05:31: Script started - submit_clearance_approval_new.php
+2025-04-29 12:05:31: Record ID: 12
+2025-04-29 12:05:31: Transaction started
+2025-04-29 12:05:31: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsad\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 18:05:29","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 12:05:31: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 12:05:31: Update result: true, Rows affected: 1
+2025-04-29 12:05:31: No existing approval found, creating new one...
+2025-04-29 12:05:31: Storing submitter user ID: 2 for record ID: 12
+2025-04-29 12:05:31: New approval inserted, ID: 69
+2025-04-29 12:05:31: Notifying Regional Directors about submission from submitter for record 12
+2025-04-29 12:05:31: Session notification sent to Regional Director (ID: 1)
+2025-04-29 12:05:31: Transaction committed successfully
+2025-04-29 12:05:31: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 12:08:15: Script started - submit_clearance_approval_new.php
+2025-04-29 12:08:15: Record ID: 12
+2025-04-29 12:08:15: Transaction started
+2025-04-29 12:08:15: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsad\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 18:08:13","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 12:08:15: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 12:08:15: Update result: true, Rows affected: 1
+2025-04-29 12:08:15: Existing approval found (ID: 69), updating...
+2025-04-29 12:08:15: Transaction committed successfully
+2025-04-29 12:08:15: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 12:38:12: Script started - submit_clearance_approval_new.php
+2025-04-29 12:38:12: Record ID: 12
+2025-04-29 12:38:12: Transaction started
+2025-04-29 12:38:12: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsad\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 18:38:09","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 12:38:12: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 12:38:12: Update result: true, Rows affected: 1
+2025-04-29 12:38:12: No existing approval found, creating new one...
+2025-04-29 12:38:12: Storing submitter user ID: 1 for record ID: 12
+2025-04-29 12:38:12: New approval inserted, ID: 70
+2025-04-29 12:38:12: Notifying Regional Directors about submission from Justine castanar for record 12
+2025-04-29 12:38:12: Session notification sent to Regional Director (ID: 1)
+2025-04-29 12:38:12: Transaction committed successfully
+2025-04-29 12:38:12: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 12:52:43: Script started - submit_clearance_approval_new.php
+2025-04-29 12:52:43: Record ID: 12
+2025-04-29 12:52:43: Transaction started
+2025-04-29 12:52:43: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsad\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 18:52:42","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 12:52:43: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 12:52:43: Update result: true, Rows affected: 1
+2025-04-29 12:52:43: No existing approval found, creating new one...
+2025-04-29 12:52:43: Storing submitter user ID: 1 for record ID: 12
+2025-04-29 12:52:43: New approval inserted, ID: 71
+2025-04-29 12:52:43: Notifying Regional Directors about submission from Justine castanar for record 12
+2025-04-29 12:52:43: Session notification sent to Regional Director (ID: 1)
+2025-04-29 12:52:43: Transaction committed successfully
+2025-04-29 12:52:43: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 16:37:52: Script started - submit_clearance_approval_new.php
+2025-04-29 16:37:52: Record ID: 11
+2025-04-29 16:37:52: Transaction started
+2025-04-29 16:37:52: Record found: {"id":11,"control_no":"DH-0090645","name":"JustinesTESTER","jobsite":"JULI","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\njustine\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:12:42","updated_at":"2025-04-29 22:37:50","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 16:37:52: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 16:37:52: Update result: true, Rows affected: 1
+2025-04-29 16:37:52: No existing approval found, creating new one...
+2025-04-29 16:37:52: Storing submitter user ID: 1 for record ID: 11
+2025-04-29 16:37:52: New approval inserted, ID: 72
+2025-04-29 16:37:52: Notifying Regional Directors about submission from Justine castanar for record 11
+2025-04-29 16:37:52: Session notification sent to Regional Director (ID: 1)
+2025-04-29 16:37:52: Transaction committed successfully
+2025-04-29 16:37:52: Success message set, redirecting to direct_hire_view.php?id=11
+2025-04-29 16:46:07: Script started - submit_clearance_approval_new.php
+2025-04-29 16:46:07: Record ID: 12
+2025-04-29 16:46:07: Transaction started
+2025-04-29 16:46:07: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsad\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.[APPROVAL NOTE - 2025-04-29 16:10:44 by Regional Director]\r\nApproved without additional comments.\r\n\r\n[APPROVAL NOTE - 2025-04-29 16:10:54 by Regional Director]\r\nApproved without additional comments.\r\n\r\n[DENIAL NOTE - 2025-04-29 16:11:11 by Regional Director]\r\ndsds\r\n\r\n[APPROVAL NOTE - 2025-04-29 16:36:54 by Regional Director]\r\nApproved without additional comments.\r\n\r\n[APPROVAL NOTE - 2025-04-29 16:43:04 by Regional Director]\r\nApproved without additional comments.\r\n\r\n","type":"professional","status":null,"created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 22:46:05","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 16:46:07: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 16:46:07: Update result: true, Rows affected: 1
+2025-04-29 16:46:07: Existing approval found (ID: 71), updating...
+2025-04-29 16:46:07: Transaction committed successfully
+2025-04-29 16:46:07: Success message set, redirecting to direct_hire_view.php?id=12
+2025-04-29 17:01:04: Script started - submit_clearance_approval_new.php
+2025-04-29 17:01:04: Record ID: 10
+2025-04-29 17:01:04: Transaction started
+2025-04-29 17:01:04: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ncdcsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:12:20","updated_at":"2025-04-29 23:01:02","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 17:01:04: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-29 17:01:04: Update result: true, Rows affected: 1
+2025-04-29 17:01:04: No existing approval found, creating new one...
+2025-04-29 17:01:04: Storing submitter user ID: 1 for record ID: 10
+2025-04-29 17:01:04: New approval inserted, ID: 73
+2025-04-29 17:01:04: Notifying Regional Directors about submission from Justine castanar for record 10
+2025-04-29 17:01:04: Session notification sent to Regional Director (ID: 1)
+2025-04-29 17:01:04: Transaction committed successfully
+2025-04-29 17:01:04: Success message set, redirecting to direct_hire_view.php?id=10
+2025-04-30 05:31:23: Script started - submit_clearance_approval_new.php
+2025-04-30 05:31:23: Record ID: 9
+2025-04-30 05:31:23: Transaction started
+2025-04-30 05:31:23: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsdas\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":null,"created_at":"2025-04-28 16:11:42","updated_at":"2025-04-30 11:31:21","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 05:31:23: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 05:31:23: Update result: true, Rows affected: 1
+2025-04-30 05:31:23: No existing approval found, creating new one...
+2025-04-30 05:31:23: Storing submitter user ID: 1 for record ID: 9
+2025-04-30 05:31:23: New approval inserted, ID: 74
+2025-04-30 05:31:23: Notifying Regional Directors about submission from Justine castanar for record 9
+2025-04-30 05:31:23: Session notification sent to Regional Director (ID: 1)
+2025-04-30 05:31:23: Transaction committed successfully
+2025-04-30 05:31:23: Success message set, redirecting to direct_hire_view.php?id=9
+2025-04-30 05:34:44: Script started - submit_clearance_approval_new.php
+2025-04-30 05:34:44: Record ID: 5
+2025-04-30 05:34:44: Transaction started
+2025-04-30 05:34:44: Record found: {"id":5,"control_no":"sdasd","name":"dsadsa","jobsite":"dsdasn","evaluated":"2020-09-09","for_confirmation":"2020-02-02","emailed_to_dhad":"2020-02-20","received_from_dhad":"2020-02-20","evaluator":"ds","note":"","type":"professional","status":"denied","created_at":"2025-04-26 23:05:47","updated_at":"2025-04-29 10:55:58","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 10:55:58"}
+2025-04-30 05:34:44: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 05:34:44: Update result: true, Rows affected: 1
+2025-04-30 05:34:44: No existing approval found, creating new one...
+2025-04-30 05:34:44: Storing submitter user ID: 1 for record ID: 5
+2025-04-30 05:34:44: New approval inserted, ID: 75
+2025-04-30 05:34:44: Notifying Regional Directors about submission from Justine castanar for record 5
+2025-04-30 05:34:44: Session notification sent to Regional Director (ID: 1)
+2025-04-30 05:34:44: Transaction committed successfully
+2025-04-30 05:34:44: Success message set, redirecting to direct_hire_view.php?id=5
+2025-04-30 06:19:24: Script started - submit_clearance_approval_new.php
+2025-04-30 06:19:24: Record ID: 10
+2025-04-30 06:19:24: Transaction started
+2025-04-30 06:19:24: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ncdcsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.[DENIAL NOTE - 2025-04-29 17:01:14 by Regional Director]\r\ndf\r\n\r\n[DENIAL NOTE - 2025-04-29 17:02:28 by Regional Director]\r\nhhh\r\n\r\n[DENIAL NOTE - 2025-04-29 17:02:44 by Regional Director]\r\nhhh\r\n\r\n[APPROVAL NOTE - 2025-04-30 05:26:54 by Regional Director]\r\nApproved without additional comments.\r\n\r\n[APPROVAL NOTE - 2025-04-30 05:29:42 by Regional Director]\r\nApproved without additional comments.\r\n\r\n","type":"professional","status":null,"created_at":"2025-04-28 16:12:20","updated_at":"2025-04-30 12:19:22","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 06:19:24: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 06:19:24: Update result: true, Rows affected: 1
+2025-04-30 06:19:24: No existing approval found, creating new one...
+2025-04-30 06:19:24: Storing submitter user ID: 1 for record ID: 10
+2025-04-30 06:19:24: New approval inserted, ID: 76
+2025-04-30 06:19:24: Notifying Regional Directors about submission from Justine castanar for record 10
+2025-04-30 06:19:24: Session notification sent to Regional Director (ID: 1)
+2025-04-30 06:19:24: Transaction committed successfully
+2025-04-30 06:19:24: Success message set, redirecting to direct_hire_view.php?id=10
+2025-04-30 06:20:29: Script started - submit_clearance_approval_new.php
+2025-04-30 06:20:29: Record ID: 9
+2025-04-30 06:20:29: Transaction started
+2025-04-30 06:20:29: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsdas\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.[APPROVAL NOTE - 2025-04-30 05:32:50 by Regional Director]\r\nApproved without additional comments.\r\n\r\n","type":"professional","status":null,"created_at":"2025-04-28 16:11:42","updated_at":"2025-04-30 12:20:26","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 06:20:29: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 06:20:29: Update result: true, Rows affected: 1
+2025-04-30 06:20:29: No existing approval found, creating new one...
+2025-04-30 06:20:29: Storing submitter user ID: 2 for record ID: 9
+2025-04-30 06:20:29: New approval inserted, ID: 77
+2025-04-30 06:20:29: Notifying Regional Directors about submission from submitter for record 9
+2025-04-30 06:20:29: Session notification sent to Regional Director (ID: 1)
+2025-04-30 06:20:29: Transaction committed successfully
+2025-04-30 06:20:29: Success message set, redirecting to direct_hire_view.php?id=9
+2025-04-30 06:35:22: Script started - submit_clearance_approval_new.php
+2025-04-30 06:35:22: Record ID: 9
+2025-04-30 06:35:22: Transaction started
+2025-04-30 06:35:22: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsdas\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsadsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.[APPROVAL NOTE - 2025-04-30 05:32:50 by Regional Director]\r\nApproved without additional comments.\r\n\r\n","type":"professional","status":null,"created_at":"2025-04-28 16:11:42","updated_at":"2025-04-30 12:35:20","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 06:35:22: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 06:35:22: Update result: true, Rows affected: 1
+2025-04-30 06:35:22: No existing approval found, creating new one...
+2025-04-30 06:35:22: Storing submitter user ID: 2 for record ID: 9
+2025-04-30 06:35:22: New approval inserted, ID: 78
+2025-04-30 06:35:22: Notifying Regional Directors about submission from submitter for record 9
+2025-04-30 06:35:22: Session notification sent to Regional Director (ID: 1)
+2025-04-30 06:35:22: Transaction committed successfully
+2025-04-30 06:35:22: Success message set, redirecting to direct_hire_view.php?id=9
+2025-04-30 06:58:58: Script started - submit_clearance_approval_new.php
+2025-04-30 06:58:58: Record ID: 10
+2025-04-30 06:58:58: Transaction started
+2025-04-30 06:58:58: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ncdcsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.[DENIAL NOTE - 2025-04-29 17:01:14 by Regional Director]\r\ndf\r\n\r\n[DENIAL NOTE - 2025-04-29 17:02:28 by Regional Director]\r\nhhh\r\n\r\n[DENIAL NOTE - 2025-04-29 17:02:44 by Regional Director]\r\nhhh\r\n\r\n[APPROVAL NOTE - 2025-04-30 05:26:54 by Regional Director]\r\nApproved without additional comments.\r\n\r\n[APPROVAL NOTE - 2025-04-30 05:29:42 by Regional Director]\r\nApproved without additional comments.\r\n\r\n","type":"professional","status":null,"created_at":"2025-04-28 16:12:20","updated_at":"2025-04-30 12:58:57","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 06:58:58: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 06:58:58: Update result: true, Rows affected: 1
+2025-04-30 06:58:58: No existing approval found, creating new one...
+2025-04-30 06:58:58: Storing submitter user ID: 2 for record ID: 10
+2025-04-30 06:58:58: New approval inserted, ID: 79
+2025-04-30 06:58:58: Notifying Regional Directors about submission from submitter for record 10
+2025-04-30 06:58:58: Session notification sent to Regional Director (ID: 1)
+2025-04-30 06:58:58: Transaction committed successfully
+2025-04-30 06:58:58: Success message set, redirecting to direct_hire_view.php?id=10
+2025-04-30 07:04:38: Script started - submit_clearance_approval_new.php
+2025-04-30 07:04:38: Record ID: 4
+2025-04-30 07:04:38: Transaction started
+2025-04-30 07:04:38: Record found: {"id":4,"control_no":"DH-0013ds","name":"dsads","jobsite":"dsadsad","evaluated":"2020-09-09","for_confirmation":"2020-09-09","emailed_to_dhad":"2020-09-09","received_from_dhad":"2002-09-09","evaluator":"sadsa","note":"","type":"household","status":"denied","created_at":"2025-04-26 21:15:27","updated_at":"2025-04-29 10:48:47","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 10:48:47"}
+2025-04-30 07:04:38: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 07:04:38: Update result: true, Rows affected: 1
+2025-04-30 07:04:38: No existing approval found, creating new one...
+2025-04-30 07:04:38: Storing submitter user ID: 2 for record ID: 4
+2025-04-30 07:04:38: New approval inserted, ID: 80
+2025-04-30 07:04:38: Notifying Regional Directors about submission from submitter for record 4
+2025-04-30 07:04:38: Session notification sent to Regional Director (ID: 1)
+2025-04-30 07:04:38: Transaction committed successfully
+2025-04-30 07:04:38: Success message set, redirecting to direct_hire_view.php?id=4
+2025-04-30 07:06:46: Script started - submit_clearance_approval_new.php
+2025-04-30 07:06:46: Record ID: 4
+2025-04-30 07:06:46: Transaction started
+2025-04-30 07:06:46: Record found: {"id":4,"control_no":"DH-0013ds","name":"dsads","jobsite":"dsadsad","evaluated":"2020-09-09","for_confirmation":"2020-09-09","emailed_to_dhad":"2020-09-09","received_from_dhad":"2002-09-09","evaluator":"sadsa","note":"","type":"household","status":null,"created_at":"2025-04-26 21:15:27","updated_at":"2025-04-30 13:06:45","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 07:06:46: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 07:06:46: Update result: true, Rows affected: 1
+2025-04-30 07:06:46: Existing approval found (ID: 80), updating...
+2025-04-30 07:06:46: Transaction committed successfully
+2025-04-30 07:06:46: Success message set, redirecting to direct_hire_view.php?id=4
+2025-04-28 18:12:07: Script started - submit_clearance_approval_new.php
+2025-04-28 18:12:07: Record ID: 6
+2025-04-28 18:12:07: Transaction started
+2025-04-28 18:12:07: Record found: {"id":6,"control_no":"wa","name":"wa","jobsite":"wa","evaluated":"2025-04-03","for_confirmation":"2025-04-16","emailed_to_dhad":"2025-04-17","received_from_dhad":"2025-04-17","evaluator":"wa","note":"wa","type":"professional","status":null,"created_at":"2025-04-29 00:08:47","updated_at":"2025-04-29 00:08:47","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 18:12:07: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-28 18:12:07: Update result: true, Rows affected: 1
+2025-04-28 18:12:07: No existing approval found, creating new one...
+2025-04-28 18:12:07: Storing submitter user ID: 4 for record ID: 6
+2025-04-28 18:12:07: New approval inserted, ID: 46
+2025-04-28 18:12:07: Notifying Regional Directors about submission from adminla for record 6
+2025-04-28 18:12:07: Notification sent to Regional Director (ID: 1)
+2025-04-28 18:12:07: Notification sent to Regional Director (ID: 3)
+2025-04-28 18:12:07: Transaction committed successfully
+2025-04-28 18:12:07: Success message set, redirecting to direct_hire_view.php?id=6
+2025-04-28 18:40:27: Script started - submit_clearance_approval_new.php
+2025-04-28 18:40:27: Record ID: 11
+2025-04-28 18:40:27: Transaction started
+2025-04-28 18:40:27: Record found: {"id":11,"control_no":"DH-0090645","name":"JustinesTESTER","jobsite":"JULI","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-04-28 16:12:42","updated_at":"2025-04-28 16:12:42","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 18:40:27: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-28 18:40:27: Update result: true, Rows affected: 1
+2025-04-28 18:40:27: No existing approval found, creating new one...
+2025-04-28 18:40:27: Storing submitter user ID: 4 for record ID: 11
+2025-04-28 18:40:27: New approval inserted, ID: 46
+2025-04-28 18:40:27: Notifying Regional Directors about submission from adminla for record 11
+2025-04-28 18:40:27: Notification sent to Regional Director (ID: 1)
+2025-04-28 18:40:27: Notification sent to Regional Director (ID: 4)
+2025-04-28 18:40:27: Transaction committed successfully
+2025-04-28 18:40:27: Success message set, redirecting to direct_hire_view.php?id=11
+2025-04-30 03:20:44: Script started - submit_clearance_approval_new.php
+2025-04-30 03:20:44: Record ID: 1
+2025-04-30 03:20:44: Transaction started
+2025-04-30 03:20:44: Record found: {"id":1,"control_no":"DH-001","name":"Justinesb","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":null,"created_at":"2025-04-26 14:45:51","updated_at":"2025-04-30 09:20:42","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-30 03:20:44: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-04-30 03:20:44: Update result: true, Rows affected: 1
+2025-04-30 03:20:44: No existing approval found, creating new one...
+2025-04-30 03:20:44: Storing submitter user ID: 3 for record ID: 1
+2025-04-30 03:20:44: New approval inserted, ID: 48
+2025-04-30 03:20:44: Notifying Regional Directors about submission from Staff A for record 1
+2025-04-30 03:20:44: Notification sent to Regional Director (ID: 1)
+2025-04-30 03:20:44: Notification sent to Regional Director (ID: 4)
+2025-04-30 03:20:44: Transaction committed successfully
+2025-04-30 03:20:44: Success message set, redirecting to direct_hire_view.php?id=1
