@@ -600,3 +600,11 @@
 2025-04-30 05:34:49: Transaction started
 2025-04-30 05:34:49: Status determined: approved
 2025-04-30 05:34:49: Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'approved_at' in 'field list'
+2025-05-01 05:53:34: Process approval script started
+2025-05-01 05:53:34: Form data: action=approve, record_id=9, approval_id=78
+2025-05-01 05:53:34: Transaction started
+2025-05-01 05:53:34: Status determined: approved
+2025-05-01 05:53:34: Approval record updated
+2025-05-01 05:53:34: Direct hire record updated
+2025-05-01 05:53:34: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-05-01 05:53:34: Transaction committed successfully

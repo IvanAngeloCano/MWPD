@@ -96,6 +96,24 @@ if (isset($_SESSION['user_id'])) {
   </div>
 </header>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  const fullscreenBtn = document.getElementById('fullscreenToggle');
+
+  fullscreenBtn.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      fullscreenBtn.innerHTML = '<i class="fa fa-compress"></i>';
+    } else {
+      document.exitFullscreen();
+      fullscreenBtn.innerHTML = '<i class="fa fa-expand"></i>';
+    }
+  });
+});
+
+</script>
+
+
 <!-- Display alerts -->
 <?php displayAlerts(); ?>
 
@@ -238,7 +256,7 @@ if (isset($_SESSION['user_id'])) {
         <i class="fa fa-sign-in-alt"></i>
         <span>Balik Manggagawa</span>
       </a>
-      <a href="gov_to_gov_form.php" class="quick-card">
+      <a href="gov_to_gov_add.php" class="quick-card">
         <i class="fa fa-university"></i>
         <span>Gov-to-Gov</span>
       </a>

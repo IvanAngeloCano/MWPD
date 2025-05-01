@@ -30,7 +30,7 @@
   }
   
   h1, h2 {
-    color: $primary-color;
+    color: $brand-primary;
     margin-bottom: 20px;
     text-align: center;
   }
@@ -42,7 +42,7 @@
   margin-top: 20px;
   
   h3 {
-    color: $primary-color;
+    color: $brand-primary;
     margin: 20px 0 10px;
     font-size: 1.2rem;
   }
@@ -100,12 +100,12 @@
     transition: all 0.3s ease;
     
     &.btn-primary {
-      background-color: $primary-color;
+      background-color: $brand-primary;
       color: white;
       border: none;
       
       &:hover {
-        background-color: darken($primary-color, 10%);
+        background-color: darken($brand-primary, 10%);
       }
     }
     

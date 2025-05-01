@@ -236,7 +236,7 @@ try {
       $count_sql = "SELECT COUNT(*) FROM direct_hire WHERE type = ? $filter_sql";
       $count_stmt = $pdo->prepare($count_sql);
       $count_stmt->execute(array_merge([$active_tab], $filter_params));
-      
+
       // Prepare the SQL but don't execute yet - we'll do that after calculating offset
       $sql = "SELECT * FROM direct_hire WHERE type = ? $filter_sql ORDER BY created_at DESC LIMIT ?, ?";
       $stmt = $pdo->prepare($sql);
@@ -246,7 +246,7 @@ try {
   // Get total records and pages
   $total_records = $count_stmt->fetchColumn();
   $total_pages = ceil($total_records / $rows_per_page);
-  
+
   // Now set the page number, ensuring it's within valid range
   $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
   if ($page > $total_pages && $total_pages > 0) {
@@ -254,10 +254,10 @@ try {
   } elseif ($page < 1) {
     $page = 1;
   }
-  
+
   // Calculate offset based on validated page number
   $offset = ($page - 1) * $rows_per_page;
-  
+
   // Now that we have the offset, execute the query with the proper parameters
   if (!empty($search_query)) {
     // For search queries, parameters were already bound and executed above
@@ -309,7 +309,7 @@ include '_head.php';
     <main class="main-content">
       <section class="direct-hire-wrapper">
         <!-- Top Section -->
-        <div class="direct-hire-top">
+        <div class="process-page-top">
           <div class="tabs">
             <a href="?tab=professional<?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="tab <?= $active_tab === 'professional' ? 'active' : '' ?>">Professional</a>
             <a href="?tab=household<?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="tab <?= $active_tab === 'household' ? 'active' : '' ?>">Household</a>
@@ -320,7 +320,7 @@ include '_head.php';
             <form action="" method="GET" class="search-form">
               <input type="hidden" name="tab" value="<?= htmlspecialchars($active_tab) ?>">
               <div class="search-form">
-                <input type="text" name="search" placeholder="Search or use name:John for exact match" class="search-bar" value="<?= htmlspecialchars($search_query) ?>">
+                <input type="text" name="search" placeholder="Search" class="search-bar" value="<?= htmlspecialchars($search_query) ?>">
                 <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
               </div>
 
@@ -330,9 +330,9 @@ include '_head.php';
               <p><strong>Search tips:</strong> Use <code>field:value</code> for exact match (e.g., <code>name:John</code>, <code>status:approved</code>)</p>
             </div> -->
 
-            <button class="btn filter-btn" id="showFilterBarBtn" style="margin-bottom:10px;"><i class="fa fa-filter"></i> Filter</button>
+            <button class="btn filter-btn" id="showFilterBarBtn" "><i class=" fa fa-filter"></i> Filter</button>
             <a href="direct_hire_add.php?type=<?= urlencode($active_tab) ?>" class="btn add-btn"><i class="fa fa-plus"></i> Add New Record</a>
-            <button onclick="document.getElementById('popupMemoForm').style.display='block'" class="btn go-btn create-memo" style="margin-left:10px;"><i class="fa fa-file-alt"></i> <b>GENERATE MEMO</b></button>
+            <!-- <button onclick="document.getElementById('popupMemoForm').style.display='block'" class="btn go-btn create-memo" style="margin-left:10px;"><i class="fa fa-file-alt"></i> <b>GENERATE MEMO</b></button> -->
           </div>
 
           <?php if (!empty($error_message)): ?>
@@ -341,7 +341,7 @@ include '_head.php';
             </div>
           <?php endif; ?>
 
-          <div class="table-footer">
+          <div class="process-page-top-additionals">
             <span class="results-count">
               Showing <?= min(($offset + 1), $total_records) ?>-<?= min(($offset + $rows_per_page), $total_records) ?> out of <?= $total_records ?> results
             </span>
@@ -355,7 +355,7 @@ include '_head.php';
                 Rows per page:
                 <input type="number" min="1" name="rows" class="rows-input" value="<?= $rows_per_page ?>" id="rowsInput">
               </label>
-              <button type="button" class="btn go-btn reset-btn" id="resetRowsBtn" style="background-color:#007bff;color:#fff;border:none;border-radius:16px;padding:3px 10px;">Reset</button>
+              <button type="button" class="btn" id="resetRowsBtn" style="background-color:#007bff;color:#fff;border:none;border-radius:6px;padding:3px 10px;">Reset</button>
             </form>
           </div>
         </div>
@@ -370,18 +370,20 @@ include '_head.php';
               align-items: center;
               background: #fff;
               border-radius: 16px;
-              box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
               padding: 16px 18px 8px 18px;
               margin-bottom: 12px;
             }
+
             .filter-bar label {
               margin-bottom: 0;
               font-weight: 500;
               color: #333;
             }
+
             .filter-bar input,
             .filter-bar select {
-              border-radius: 16px;
+              border-radius: 6px;
               border: 1px solid #ccc;
               padding: 6px 14px;
               outline: none;
@@ -390,26 +392,31 @@ include '_head.php';
               margin-left: 4px;
               margin-right: 10px;
             }
+
             .filter-bar input:focus,
             .filter-bar select:focus {
               box-shadow: 0 0 0 2px #007bff33;
               border-color: #007bff;
             }
+
             .filter-bar .btn {
-              border-radius: 16px;
+              border-radius: 6px;
               padding: 6px 18px;
               margin-left: 6px;
               font-weight: 500;
               border: none;
             }
+
             .filter-bar .btn.go-btn {
               background: #007bff;
               color: #fff;
             }
+
             .filter-bar .btn.clear-btn {
               background: #eee;
               color: #444;
             }
+
             .filter-chips {
               display: flex;
               flex-wrap: wrap;
@@ -417,17 +424,19 @@ include '_head.php';
               margin-top: 6px;
               margin-bottom: 10px;
             }
+
             .filter-chip {
               display: flex;
               align-items: center;
               background: #e7f1ff;
               color: #007bff;
-              border-radius: 16px;
+              border-radius: 6px;
               padding: 4px 12px 4px 10px;
               font-size: 14px;
               font-weight: 500;
               animation: chipIn 0.25s;
             }
+
             .filter-chip .chip-remove {
               margin-left: 6px;
               background: none;
@@ -437,12 +446,24 @@ include '_head.php';
               font-size: 16px;
               line-height: 1;
             }
+
             @keyframes chipIn {
-              from { opacity: 0; transform: translateY(-10px); }
-              to { opacity: 1; transform: translateY(0); }
+              from {
+                opacity: 0;
+                transform: translateY(-10px);
+              }
+
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
             }
+
             @media (max-width: 700px) {
-              .filter-bar { flex-direction: column; align-items: stretch; }
+              .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+              }
             }
           </style>
           <!-- Filter Bar Wrapper (hidden by default) -->
@@ -454,26 +475,26 @@ include '_head.php';
               <label>Status:
                 <select name="filter_status">
                   <option value="">All</option>
-                  <option value="approved" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='approved' ? 'selected' : '' ?>>Approved</option>
-                  <option value="pending" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='pending' ? 'selected' : '' ?>>Pending</option>
-                  <option value="denied" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='denied' ? 'selected' : '' ?>>Denied</option>
+                  <option value="approved" <?= isset($_GET['filter_status']) && $_GET['filter_status'] === 'approved' ? 'selected' : '' ?>>Approved</option>
+                  <option value="pending" <?= isset($_GET['filter_status']) && $_GET['filter_status'] === 'pending' ? 'selected' : '' ?>>Pending</option>
+                  <option value="denied" <?= isset($_GET['filter_status']) && $_GET['filter_status'] === 'denied' ? 'selected' : '' ?>>Denied</option>
                 </select>
               </label>
               <label>Jobsite:
-                <input type="text" name="filter_jobsite" placeholder="Jobsite" value="<?= isset($_GET['filter_jobsite']) ? htmlspecialchars($_GET['filter_jobsite']) : '' ?>">
+                <input type="text" name="filter_jobsite" class="input-filter" placeholder="Jobsite" value="<?= isset($_GET['filter_jobsite']) ? htmlspecialchars($_GET['filter_jobsite']) : '' ?>">
               </label>
               <label>Evaluator:
-                <input type="text" name="filter_evaluator" placeholder="Evaluator" value="<?= isset($_GET['filter_evaluator']) ? htmlspecialchars($_GET['filter_evaluator']) : '' ?>">
+                <input type="text" name="filter_evaluator" class="input-filter" placeholder="Evaluator" value="<?= isset($_GET['filter_evaluator']) ? htmlspecialchars($_GET['filter_evaluator']) : '' ?>">
               </label>
               <label>Date:
                 <input type="date" name="filter_date_from" value="<?= isset($_GET['filter_date_from']) ? htmlspecialchars($_GET['filter_date_from']) : '' ?>" style="width:130px;"> to
                 <input type="date" name="filter_date_to" value="<?= isset($_GET['filter_date_to']) ? htmlspecialchars($_GET['filter_date_to']) : '' ?>" style="width:130px;">
               </label>
               <label>Control No.:
-                <input type="text" name="filter_control_no" placeholder="Control No." value="<?= isset($_GET['filter_control_no']) ? htmlspecialchars($_GET['filter_control_no']) : '' ?>">
+                <input type="text" name="filter_control_no" class="input-filter" placeholder="Control No." value="<?= isset($_GET['filter_control_no']) ? htmlspecialchars($_GET['filter_control_no']) : '' ?>">
               </label>
               <label>Name:
-                <input type="text" name="filter_name" placeholder="Name" value="<?= isset($_GET['filter_name']) ? htmlspecialchars($_GET['filter_name']) : '' ?>">
+                <input type="text" name="filter_name" class="input-filter" placeholder="Name" value="<?= isset($_GET['filter_name']) ? htmlspecialchars($_GET['filter_name']) : '' ?>">
               </label>
               <button type="submit" class="btn go-btn">Apply</button>
               <button type="button" class="btn clear-btn" id="clearAllFiltersBtn">Clear All</button>
@@ -483,67 +504,67 @@ include '_head.php';
             </div>
           </div>
           <script>
-          // Use the existing filter button to toggle filter bar
-          const showBtn = document.getElementById('showFilterBarBtn');
-          const filterBarWrapper = document.getElementById('filterBarWrapper');
-          showBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (filterBarWrapper.style.display === 'none') {
-              filterBarWrapper.style.display = 'block';
-              showBtn.classList.add('active');
-            } else {
-              filterBarWrapper.style.display = 'none';
-              showBtn.classList.remove('active');
-            }
-          });
-          // Render filter chips for active filters
-          function renderFilterChips() {
-            const params = new URLSearchParams(window.location.search);
-            const chips = [];
-            const filterLabels = {
-              filter_status: 'Status',
-              filter_jobsite: 'Jobsite',
-              filter_evaluator: 'Evaluator',
-              filter_date_from: 'Date From',
-              filter_date_to: 'Date To',
-              filter_control_no: 'Control No.',
-              filter_name: 'Name',
-            };
-            for (const key in filterLabels) {
-              const value = params.get(key);
-              if (value) {
-                let label = filterLabels[key] + ': ' + value;
-                chips.push(`<span class='filter-chip' data-key='${key}'>${label}<button class='chip-remove' title='Remove'>&times;</button></span>`);
-              }
-            }
-            document.getElementById('filterChips').innerHTML = chips.join('');
-          }
-          document.addEventListener('DOMContentLoaded', function() {
-            renderFilterChips();
-            // Remove chip handler
-            document.getElementById('filterChips').addEventListener('click', function(e) {
-              if (e.target.classList.contains('chip-remove')) {
-                const chip = e.target.closest('.filter-chip');
-                const key = chip.getAttribute('data-key');
-                const params = new URLSearchParams(window.location.search);
-                params.delete(key);
-                window.location.search = params.toString();
+            // Use the existing filter button to toggle filter bar
+            const showBtn = document.getElementById('showFilterBarBtn');
+            const filterBarWrapper = document.getElementById('filterBarWrapper');
+            showBtn.addEventListener('click', function(e) {
+              e.preventDefault();
+              if (filterBarWrapper.style.display === 'none') {
+                filterBarWrapper.style.display = 'block';
+                showBtn.classList.add('active');
+              } else {
+                filterBarWrapper.style.display = 'none';
+                showBtn.classList.remove('active');
               }
             });
-            // Clear all filters
-            document.getElementById('clearAllFiltersBtn').addEventListener('click', function() {
-              const form = document.getElementById('inlineFilterForm');
-              Array.from(form.elements).forEach(function(el) {
-                if (el.name.startsWith('filter_')) el.value = '';
+            // Render filter chips for active filters
+            function renderFilterChips() {
+              const params = new URLSearchParams(window.location.search);
+              const chips = [];
+              const filterLabels = {
+                filter_status: 'Status',
+                filter_jobsite: 'Jobsite',
+                filter_evaluator: 'Evaluator',
+                filter_date_from: 'Date From',
+                filter_date_to: 'Date To',
+                filter_control_no: 'Control No.',
+                filter_name: 'Name',
+              };
+              for (const key in filterLabels) {
+                const value = params.get(key);
+                if (value) {
+                  let label = filterLabels[key] + ': ' + value;
+                  chips.push(`<span class='filter-chip' data-key='${key}'>${label}<button class='chip-remove' title='Remove'>&times;</button></span>`);
+                }
+              }
+              document.getElementById('filterChips').innerHTML = chips.join('');
+            }
+            document.addEventListener('DOMContentLoaded', function() {
+              renderFilterChips();
+              // Remove chip handler
+              document.getElementById('filterChips').addEventListener('click', function(e) {
+                if (e.target.classList.contains('chip-remove')) {
+                  const chip = e.target.closest('.filter-chip');
+                  const key = chip.getAttribute('data-key');
+                  const params = new URLSearchParams(window.location.search);
+                  params.delete(key);
+                  window.location.search = params.toString();
+                }
               });
-              form.submit();
+              // Clear all filters
+              document.getElementById('clearAllFiltersBtn').addEventListener('click', function() {
+                const form = document.getElementById('inlineFilterForm');
+                Array.from(form.elements).forEach(function(el) {
+                  if (el.name.startsWith('filter_')) el.value = '';
+                });
+                form.submit();
+              });
             });
-          });
           </script>
           <table>
             <thead>
               <tr>
-                <th><input type="checkbox" id="select-all-checkbox"></th>
+                <!-- <th><input type="checkbox" id="select-all-checkbox"></th> -->
                 <th>No.</th>
                 <th>Control No.</th>
                 <th>Name</th>
@@ -560,8 +581,7 @@ include '_head.php';
               <?php else: ?>
                 <?php foreach ($records as $index => $record): ?>
                   <tr data-id="<?= $record['id'] ?>">
-                  <tr>
-                    <td><input type="checkbox" class="record-checkbox" value="<?= $record['id'] ?>"></td>
+                    <!-- <td><input type="checkbox" class="record-checkbox" value="<?= $record['id'] ?>"></td> -->
                     <td><?= $offset + $index + 1 ?></td>
                     <td><?= htmlspecialchars($record['control_no']) ?></td>
                     <td><?= htmlspecialchars($record['name']) ?></td>
@@ -589,10 +609,26 @@ include '_head.php';
           </table>
         </div>
 
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            // Select all table rows with a data-id attribute
+            const tableRows = document.querySelectorAll("tr[data-id]");
+
+            tableRows.forEach(function(row) {
+              row.addEventListener("dblclick", function() {
+                const recordId = this.getAttribute("data-id");
+                if (recordId) {
+                  // Redirect to view page
+                  window.location.href = `direct_hire_view.php?id=${recordId}`;
+                }
+              });
+            });
+          });
+        </script>
 
 
         <!-- Bottom Section -->
-        <div class="direct-hire-bottom">
+        <div class="process-page-bot">
           <div class="pagination">
             <?php if ($page > 1): ?>
               <a href="?tab=<?= urlencode($active_tab) ?>&page=<?= ($page - 1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="prev-btn">
@@ -605,25 +641,25 @@ include '_head.php';
             <?php endif; ?>
 
             <?php
-              // Calculate start and end page for 3-page window
-              $window = 3;
-              $half = floor($window / 2);
-              if ($total_pages <= $window) {
+            // Calculate start and end page for 3-page window
+            $window = 3;
+            $half = floor($window / 2);
+            if ($total_pages <= $window) {
+              $start_page = 1;
+              $end_page = $total_pages;
+            } else {
+              if ($page <= $half + 1) {
                 $start_page = 1;
+                $end_page = $window;
+              } elseif ($page >= $total_pages - $half) {
+                $start_page = $total_pages - $window + 1;
                 $end_page = $total_pages;
               } else {
-                if ($page <= $half + 1) {
-                  $start_page = 1;
-                  $end_page = $window;
-                } elseif ($page >= $total_pages - $half) {
-                  $start_page = $total_pages - $window + 1;
-                  $end_page = $total_pages;
-                } else {
-                  $start_page = $page - $half;
-                  $end_page = $page + $half;
-                }
+                $start_page = $page - $half;
+                $end_page = $page + $half;
               }
-              for ($i = $start_page; $i <= $end_page; $i++):
+            }
+            for ($i = $start_page; $i <= $end_page; $i++):
             ?>
               <a href="?tab=<?= urlencode($active_tab) ?>&page=<?= $i ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="page<?= $i == $page ? ' active' : '' ?>">
                 <?= $i ?>
@@ -680,7 +716,7 @@ include '_head.php';
   </div>
 </div>
 
-<!-- Popup Memo Form -->
+<!-- Popup Memo Form
 <div id="popupMemoForm" class="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -710,12 +746,12 @@ include '_head.php';
       </form>
     </div>
   </div>
-</div>
+</div> -->
 
 <script>
   // Get the delete modal
   var deleteModal = document.getElementById('deleteModal');
-  
+
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == deleteModal) {
@@ -725,7 +761,7 @@ include '_head.php';
       document.getElementById('popupMemoForm').style.display = "none";
     }
   }
-  
+
   // Function to show delete confirmation modal
   function showDeleteModal(id) {
     document.getElementById('deleteId').value = id;
@@ -744,18 +780,18 @@ include '_head.php';
         });
       });
     }
-    
+
     document.querySelector('.create-memo').addEventListener('click', function(e) {
       e.preventDefault();
-      
+
       // Get all checkboxes in the table
       const checkboxes = document.querySelectorAll('input[type="checkbox"].record-checkbox:checked');
-      
+
       if (checkboxes.length === 0) {
         alert('No applicants selected. Please select at least one applicant.');
         return;
       }
-      
+
       const selectedIds = [];
       const selectedNames = [];
 
@@ -764,7 +800,7 @@ include '_head.php';
         const id = checkbox.value;
         // Get the name from the 4th cell (index 3) which contains the name
         const name = row.cells[3].textContent.trim();
-        
+
         selectedIds.push(id);
         selectedNames.push(name);
       });
@@ -772,7 +808,7 @@ include '_head.php';
       // Display selected applicants
       const selectedApplicantsDiv = document.getElementById('selectedApplicants');
       const selectedApplicantsIdsDiv = document.getElementById('selectedApplicantsIds');
-      
+
       if (selectedNames.length > 0) {
         let html = '<ul>';
         selectedNames.forEach(function(name) {
@@ -780,14 +816,14 @@ include '_head.php';
         });
         html += '</ul>';
         selectedApplicantsDiv.innerHTML = html;
-        
+
         // Add hidden inputs for selected IDs
         let idsHtml = '';
         selectedIds.forEach(function(id) {
           idsHtml += '<input type="hidden" name="selected_ids[]" value="' + id + '">';
         });
         selectedApplicantsIdsDiv.innerHTML = idsHtml;
-        
+
         document.getElementById('popupMemoForm').style.display = 'block';
       } else {
         selectedApplicantsDiv.innerHTML = '';

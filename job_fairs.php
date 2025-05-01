@@ -97,7 +97,7 @@ try {
     $total_pages = 0;
 }
 
-$pageTitle = "Job Fairs - MWPD Filing System";
+$pageTitle = "Job Fairs";
 include '_head.php';
 ?>
 

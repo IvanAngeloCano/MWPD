@@ -536,7 +536,7 @@ include '_head.php';
   
   .btn {
     padding: 8px 16px;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: 500;
     display: inline-flex;

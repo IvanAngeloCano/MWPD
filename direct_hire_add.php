@@ -426,7 +426,7 @@ include '_head.php';
             </div>
 
             <div class="uploaded-files">
-              <h3>Selected Files</h3>
+              <h3>Supporting Files</h3>
               <div id="fileList"></div>
             </div>
           </div>

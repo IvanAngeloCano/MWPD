@@ -5,7 +5,13 @@
   gap: 1rem;
   min-height: 600px;
   height: 100%;
+
+  h2 {
+    font-weight: 600 !important;
+  }
 }
+
+
 
 
 .bento-box {
@@ -334,7 +340,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      cursor: pointer;
       transition: background-color 0.2s ease;
       
       &:hover {
