@@ -32,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
 
   <div class="header-right">
     <button class="quick-add">+ Quick Add</button>
-
+    
     <div class="notif-icon" id="notificationIcon">
       <i class="fa fa-bell"></i>
       <?php if ($unread_count > 0): ?>
@@ -89,6 +89,10 @@ if (isset($_SESSION['user_id'])) {
         </div>
       </div>
     </a>
+    
+    <button class="fullscreen-toggle" id="fullscreenToggle">
+      <i class="fa fa-expand"></i>
+    </button>
   </div>
 </header>
 
@@ -391,6 +395,62 @@ if (isset($_SESSION['user_id'])) {
         }
       })
       .catch(error => console.error('Error dismissing notification:', error));
+    }
+    
+    // Fullscreen toggle functionality
+    const fullscreenToggle = document.getElementById('fullscreenToggle');
+    if (fullscreenToggle) {
+      fullscreenToggle.addEventListener('click', function() {
+        toggleFullscreen();
+      });
+      
+      function toggleFullscreen() {
+        if (!document.fullscreenElement && 
+            !document.mozFullScreenElement && 
+            !document.webkitFullscreenElement && 
+            !document.msFullscreenElement) {
+          // Enter fullscreen
+          if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+          } else if (document.documentElement.msRequestFullscreen) {
+            document.documentElement.msRequestFullscreen();
+          } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen();
+          } else if (document.documentElement.webkitRequestFullscreen) {
+            document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+          }
+          fullscreenToggle.innerHTML = '<i class="fa fa-compress"></i>';
+        } else {
+          // Exit fullscreen
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
+          fullscreenToggle.innerHTML = '<i class="fa fa-expand"></i>';
+        }
+      }
+      
+      // Update icon when fullscreen state changes
+      document.addEventListener('fullscreenchange', updateFullscreenIcon);
+      document.addEventListener('webkitfullscreenchange', updateFullscreenIcon);
+      document.addEventListener('mozfullscreenchange', updateFullscreenIcon);
+      document.addEventListener('MSFullscreenChange', updateFullscreenIcon);
+      
+      function updateFullscreenIcon() {
+        if (document.fullscreenElement || 
+            document.webkitFullscreenElement || 
+            document.mozFullScreenElement || 
+            document.msFullscreenElement) {
+          fullscreenToggle.innerHTML = '<i class="fa fa-compress"></i>';
+        } else {
+          fullscreenToggle.innerHTML = '<i class="fa fa-expand"></i>';
+        }
+      }
     }
   });
 </script>

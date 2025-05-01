@@ -341,6 +341,44 @@ include '_head.php';
             </div>
           <?php endif; ?>
 
+          <!-- Filter Bar Wrapper (hidden by default) -->
+          <div id="filterBarWrapper">
+            <form class="filter-bar" method="GET" id="inlineFilterForm">
+              <input type="hidden" name="tab" value="<?= htmlspecialchars($active_tab) ?>">
+              <input type="hidden" name="rows" value="<?= $rows_per_page ?>">
+              <input type="hidden" name="page" value="1">
+              <label>Status:
+                <select name="filter_status">
+                  <option value="">All</option>
+                  <option value="approved" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='approved' ? 'selected' : '' ?>>Approved</option>
+                  <option value="pending" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='pending' ? 'selected' : '' ?>>Pending</option>
+                  <option value="denied" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='denied' ? 'selected' : '' ?>>Denied</option>
+                </select>
+              </label>
+              <label>Jobsite:
+                <input type="text" name="filter_jobsite" placeholder="Jobsite" value="<?= isset($_GET['filter_jobsite']) ? htmlspecialchars($_GET['filter_jobsite']) : '' ?>">
+              </label>
+              <label>Evaluator:
+                <input type="text" name="filter_evaluator" placeholder="Evaluator" value="<?= isset($_GET['filter_evaluator']) ? htmlspecialchars($_GET['filter_evaluator']) : '' ?>">
+              </label>
+              <label>Date:
+                <input type="date" name="filter_date_from" value="<?= isset($_GET['filter_date_from']) ? htmlspecialchars($_GET['filter_date_from']) : '' ?>" style="width:130px;"> to
+                <input type="date" name="filter_date_to" value="<?= isset($_GET['filter_date_to']) ? htmlspecialchars($_GET['filter_date_to']) : '' ?>" style="width:130px;">
+              </label>
+              <label>Control No.:
+                <input type="text" name="filter_control_no" placeholder="Control No." value="<?= isset($_GET['filter_control_no']) ? htmlspecialchars($_GET['filter_control_no']) : '' ?>">
+              </label>
+              <label>Name:
+                <input type="text" name="filter_name" placeholder="Name" value="<?= isset($_GET['filter_name']) ? htmlspecialchars($_GET['filter_name']) : '' ?>">
+              </label>
+              <button type="submit" class="btn go-btn">Apply</button>
+              <button type="button" class="btn clear-btn" id="clearAllFiltersBtn">Clear All</button>
+            </form>
+            <div class="filter-chips" id="filterChips">
+              <!-- Chips will be rendered here by JS -->
+            </div>
+          </div>
+
           <div class="table-footer">
             <span class="results-count">
               Showing <?= min(($offset + 1), $total_records) ?>-<?= min(($offset + $rows_per_page), $total_records) ?> out of <?= $total_records ?> results
@@ -444,102 +482,32 @@ include '_head.php';
             @media (max-width: 700px) {
               .filter-bar { flex-direction: column; align-items: stretch; }
             }
+            
+            .warning-modal .modal-header {
+              background-color: #add8e6;
+              color: #007bff;
+              border-bottom: 1px solid #add8e6;
+            }
+            
+            .warning-modal .modal-header h3 {
+              color: #007bff;
+            }
+            
+            .warning-modal .modal-header .fa-info-circle {
+              margin-right: 10px;
+              color: #007bff;
+            }
+            
+            .warning-modal .modal-body {
+              padding: 20px;
+              font-size: 16px;
+            }
+            
+            .warning-modal .modal-footer {
+              border-top: 1px solid #add8e6;
+              background-color: #f8f9fa;
+            }
           </style>
-          <!-- Filter Bar Wrapper (hidden by default) -->
-          <div id="filterBarWrapper" style="display:none;">
-            <form class="filter-bar" method="GET" id="inlineFilterForm">
-              <input type="hidden" name="tab" value="<?= htmlspecialchars($active_tab) ?>">
-              <input type="hidden" name="rows" value="<?= $rows_per_page ?>">
-              <input type="hidden" name="page" value="1">
-              <label>Status:
-                <select name="filter_status">
-                  <option value="">All</option>
-                  <option value="approved" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='approved' ? 'selected' : '' ?>>Approved</option>
-                  <option value="pending" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='pending' ? 'selected' : '' ?>>Pending</option>
-                  <option value="denied" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='denied' ? 'selected' : '' ?>>Denied</option>
-                </select>
-              </label>
-              <label>Jobsite:
-                <input type="text" name="filter_jobsite" placeholder="Jobsite" value="<?= isset($_GET['filter_jobsite']) ? htmlspecialchars($_GET['filter_jobsite']) : '' ?>">
-              </label>
-              <label>Evaluator:
-                <input type="text" name="filter_evaluator" placeholder="Evaluator" value="<?= isset($_GET['filter_evaluator']) ? htmlspecialchars($_GET['filter_evaluator']) : '' ?>">
-              </label>
-              <label>Date:
-                <input type="date" name="filter_date_from" value="<?= isset($_GET['filter_date_from']) ? htmlspecialchars($_GET['filter_date_from']) : '' ?>" style="width:130px;"> to
-                <input type="date" name="filter_date_to" value="<?= isset($_GET['filter_date_to']) ? htmlspecialchars($_GET['filter_date_to']) : '' ?>" style="width:130px;">
-              </label>
-              <label>Control No.:
-                <input type="text" name="filter_control_no" placeholder="Control No." value="<?= isset($_GET['filter_control_no']) ? htmlspecialchars($_GET['filter_control_no']) : '' ?>">
-              </label>
-              <label>Name:
-                <input type="text" name="filter_name" placeholder="Name" value="<?= isset($_GET['filter_name']) ? htmlspecialchars($_GET['filter_name']) : '' ?>">
-              </label>
-              <button type="submit" class="btn go-btn">Apply</button>
-              <button type="button" class="btn clear-btn" id="clearAllFiltersBtn">Clear All</button>
-            </form>
-            <div class="filter-chips" id="filterChips">
-              <!-- Chips will be rendered here by JS -->
-            </div>
-          </div>
-          <script>
-          // Use the existing filter button to toggle filter bar
-          const showBtn = document.getElementById('showFilterBarBtn');
-          const filterBarWrapper = document.getElementById('filterBarWrapper');
-          showBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (filterBarWrapper.style.display === 'none') {
-              filterBarWrapper.style.display = 'block';
-              showBtn.classList.add('active');
-            } else {
-              filterBarWrapper.style.display = 'none';
-              showBtn.classList.remove('active');
-            }
-          });
-          // Render filter chips for active filters
-          function renderFilterChips() {
-            const params = new URLSearchParams(window.location.search);
-            const chips = [];
-            const filterLabels = {
-              filter_status: 'Status',
-              filter_jobsite: 'Jobsite',
-              filter_evaluator: 'Evaluator',
-              filter_date_from: 'Date From',
-              filter_date_to: 'Date To',
-              filter_control_no: 'Control No.',
-              filter_name: 'Name',
-            };
-            for (const key in filterLabels) {
-              const value = params.get(key);
-              if (value) {
-                let label = filterLabels[key] + ': ' + value;
-                chips.push(`<span class='filter-chip' data-key='${key}'>${label}<button class='chip-remove' title='Remove'>&times;</button></span>`);
-              }
-            }
-            document.getElementById('filterChips').innerHTML = chips.join('');
-          }
-          document.addEventListener('DOMContentLoaded', function() {
-            renderFilterChips();
-            // Remove chip handler
-            document.getElementById('filterChips').addEventListener('click', function(e) {
-              if (e.target.classList.contains('chip-remove')) {
-                const chip = e.target.closest('.filter-chip');
-                const key = chip.getAttribute('data-key');
-                const params = new URLSearchParams(window.location.search);
-                params.delete(key);
-                window.location.search = params.toString();
-              }
-            });
-            // Clear all filters
-            document.getElementById('clearAllFiltersBtn').addEventListener('click', function() {
-              const form = document.getElementById('inlineFilterForm');
-              Array.from(form.elements).forEach(function(el) {
-                if (el.name.startsWith('filter_')) el.value = '';
-              });
-              form.submit();
-            });
-          });
-          </script>
           <table>
             <thead>
               <tr>
@@ -656,6 +624,97 @@ include '_head.php';
   </div>
 </div>
 
+<script>
+// Use the existing filter button to toggle filter bar
+document.addEventListener('DOMContentLoaded', function() {
+  const showBtn = document.getElementById('showFilterBarBtn');
+  const filterBarWrapper = document.getElementById('filterBarWrapper');
+  
+  // Filter bar is hidden by default
+  filterBarWrapper.style.display = 'none';
+  
+  showBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    if (filterBarWrapper.style.display === 'none') {
+      filterBarWrapper.style.display = 'block';
+      showBtn.classList.add('active');
+    } else {
+      filterBarWrapper.style.display = 'none';
+      showBtn.classList.remove('active');
+    }
+  });
+  
+  // Close filter dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!filterBarWrapper.contains(e.target) && e.target !== showBtn && !showBtn.contains(e.target)) {
+      filterBarWrapper.style.display = 'none';
+      showBtn.classList.remove('active');
+    }
+  });
+  
+  // Render filter chips for active filters
+  function renderFilterChips() {
+    const params = new URLSearchParams(window.location.search);
+    const chips = [];
+    const filterLabels = {
+      filter_status: 'Status',
+      filter_jobsite: 'Jobsite',
+      filter_evaluator: 'Evaluator',
+      filter_date_from: 'Date From',
+      filter_date_to: 'Date To',
+      filter_control_no: 'Control No.',
+      filter_name: 'Name',
+    };
+    for (const key in filterLabels) {
+      const value = params.get(key);
+      if (value) {
+        let label = filterLabels[key] + ': ' + value;
+        chips.push(`<span class='filter-chip' data-key='${key}'>${label}<button class='chip-remove' title='Remove'>&times;</button></span>`);
+      }
+    }
+    document.getElementById('filterChips').innerHTML = chips.join('');
+  }
+  
+  renderFilterChips();
+  
+  // Remove chip handler
+  document.getElementById('filterChips').addEventListener('click', function(e) {
+    if (e.target.classList.contains('chip-remove')) {
+      const chip = e.target.closest('.filter-chip');
+      const key = chip.getAttribute('data-key');
+      const params = new URLSearchParams(window.location.search);
+      params.delete(key);
+      window.location.search = params.toString();
+    }
+  });
+  
+  // Clear all filters
+  document.getElementById('clearAllFiltersBtn').addEventListener('click', function() {
+    const form = document.getElementById('inlineFilterForm');
+    Array.from(form.elements).forEach(function(el) {
+      if (el.name.startsWith('filter_')) el.value = '';
+    });
+    form.submit();
+  });
+});
+</script>
+
+<!-- Warning Modal for No Selection -->
+<div id="warningModal" class="modal">
+  <div class="modal-content warning-modal">
+    <div class="modal-header">
+      <h3><i class="fa fa-info-circle"></i> Information</h3>
+      <span class="close" onclick="document.getElementById('warningModal').style.display='none'">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p>No selected</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" onclick="document.getElementById('warningModal').style.display='none'">OK</button>
+    </div>
+  </div>
+</div>
+
 <!-- Delete Confirmation Modal -->
 <div id="deleteModal" class="modal" style="display: none;">
   <div class="modal-content" style="max-width: 400px;">
@@ -678,7 +737,7 @@ include '_head.php';
 </div>
 
 <!-- Popup Memo Form -->
-<div id="popupMemoForm" class="modal">
+<div id="popupMemoForm" class="modal" style="display: none;">
   <div class="modal-content">
     <div class="modal-header">
       <span class="close" onclick="document.getElementById('popupMemoForm').style.display='none'">&times;</span>
@@ -712,6 +771,7 @@ include '_head.php';
 <script>
   // Get the delete modal
   var deleteModal = document.getElementById('deleteModal');
+  var warningModal = document.getElementById('warningModal');
   
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
@@ -721,12 +781,24 @@ include '_head.php';
     if (event.target == document.getElementById('popupMemoForm')) {
       document.getElementById('popupMemoForm').style.display = "none";
     }
+    if (event.target == warningModal) {
+      warningModal.style.display = "none";
+    }
   }
   
   // Function to show delete confirmation modal
   function showDeleteModal(id) {
     document.getElementById('deleteId').value = id;
     deleteModal.style.display = "block";
+  }
+
+  // Function to show warning modal
+  function showWarningModal(message) {
+    const modalBody = warningModal.querySelector('.modal-body p');
+    if (modalBody && message) {
+      modalBody.textContent = message;
+    }
+    warningModal.style.display = "block";
   }
 
   // Update the memo form with selected applicants
@@ -748,9 +820,13 @@ include '_head.php';
       // Get all checkboxes in the table
       const checkboxes = document.querySelectorAll('input[type="checkbox"].record-checkbox:checked');
       
+      // Always ensure the memo modal is hidden first
+      document.getElementById('popupMemoForm').style.display = 'none';
+      
       if (checkboxes.length === 0) {
-        alert('No applicants selected. Please select at least one applicant.');
-        return;
+        // Show warning modal if no checkboxes are selected
+        showWarningModal('No selected');
+        return; // Stop execution here
       }
       
       const selectedIds = [];
@@ -770,27 +846,23 @@ include '_head.php';
       const selectedApplicantsDiv = document.getElementById('selectedApplicants');
       const selectedApplicantsIdsDiv = document.getElementById('selectedApplicantsIds');
       
-      if (selectedNames.length > 0) {
-        let html = '<ul>';
-        selectedNames.forEach(function(name) {
-          html += '<li>' + name + '</li>';
-        });
-        html += '</ul>';
-        selectedApplicantsDiv.innerHTML = html;
-        
-        // Add hidden inputs for selected IDs
-        let idsHtml = '';
-        selectedIds.forEach(function(id) {
-          idsHtml += '<input type="hidden" name="selected_ids[]" value="' + id + '">';
-        });
-        selectedApplicantsIdsDiv.innerHTML = idsHtml;
-        
-        document.getElementById('popupMemoForm').style.display = 'block';
-      } else {
-        selectedApplicantsDiv.innerHTML = '';
-        selectedApplicantsIdsDiv.innerHTML = '';
-        alert('No applicants selected. Please select at least one applicant.');
-      }
+      // Add selected applicants to the form and show it
+      let html = '<ul>';
+      selectedNames.forEach(function(name) {
+        html += '<li>' + name + '</li>';
+      });
+      html += '</ul>';
+      selectedApplicantsDiv.innerHTML = html;
+      
+      // Add hidden inputs for selected IDs
+      let idsHtml = '';
+      selectedIds.forEach(function(id) {
+        idsHtml += '<input type="hidden" name="selected_ids[]" value="' + id + '">';
+      });
+      selectedApplicantsIdsDiv.innerHTML = idsHtml;
+      
+      // Only show the memo form if we have selections
+      document.getElementById('popupMemoForm').style.display = 'block';
     });
   });
 </script>

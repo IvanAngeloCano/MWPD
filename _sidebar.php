@@ -47,6 +47,10 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <i class="fa fa-check-circle"></i>
         <span>Approval</span>
       </a>
+      <a href="g2g_pending_approvals.php" class="nav-item <?= ($currentPage == 'g2g_pending_approvals.php') ? 'active' : '' ?>">
+        <i class="fa fa-university"></i>
+        <span>Gov-to-Gov Approvals</span>
+      </a>
       <?php endif; ?>
     </nav>
   </div>
