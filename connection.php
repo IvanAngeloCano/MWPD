@@ -1,7 +1,7 @@
 <?php
 
 $host = 'localhost';
-$db   = 'MWPD';
+$db = 'mwpd';
 $user = 'root'; 
 $pass = '';     
 $charset = 'utf8mb4';

@@ -1,67 +1,37 @@
 .direct-hire-wrapper {
   width: 100%;
-  position: relative;
   
   .direct-hire-top {
-    margin-bottom: 0rem;
-    
-    .tabs {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    
-      
-      .tab {
-        padding: 0.5rem 1rem;
-        background-color: #eee;
-        border-radius: 6px;
-        text-decoration: none;
-        color: #333;
-        font-size: 1rem;
-        
-        &.active {
-          background-color: $brand-primary;
-          color: white;
-        }
-        
-        &:hover:not(.active) {
-          background-color: darken(#eee, 5%);
-        }
-      }
-    }
+    margin-bottom: 0.5rem;
     
     .controls {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      margin-bottom: 0.2rem;
-      position: relative;
+      margin-bottom: 0.5rem;
       
       .search-form {
         display: flex;
+        align-items: center;
         flex: 1;
-        min-width: 200px;
+        
         
         .search-bar {
           flex: 1;
           padding: 0.5rem;
-          border: 1px solid #ccc;
-          border-radius: 6px 0 0 6px;
-          font-size: 1rem;
-          
-          &:focus {
-            outline: none;
-            border-color: $brand-primary;
-          }
+          border: 1px solid #ced4da;
+          border-radius: 4px 0 0 4px;
+          font-size: 0.9rem;
         }
         
-        .btn.search-btn {
-          border-radius: 0 6px 6px 0;
+        .search-btn {
           background-color: $brand-primary;
           color: white;
           border: none;
-          padding: 0.5rem 1rem;
+          border-radius: 0 4px 4px 0;
+          padding: 0.5rem 0.75rem;
           cursor: pointer;
+          height: 38px;
           
           &:hover {
             background-color: darken($brand-primary, 10%);
@@ -69,57 +39,42 @@
         }
       }
       
-      .btn {
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
+      .filter-btn, .add-btn {
         display: flex;
         align-items: center;
         gap: 0.3rem;
-        text-decoration: none;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+        border-radius: 4px;
+        cursor: pointer;
+        height: 38px;
+      }
+      
+      .filter-btn {
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        color: #495057;
         
-        &.filter-btn {
-          background-color: $brand-primary;
-          color: white;
-          
-          &:hover {
-            background-color: darken($brand-primary, 10%);
-          }
-          
-          &.active {
-            background-color: darken($brand-primary, 15%);
-          }
+        &:hover {
+          background-color: #e9ecef;
         }
         
-        &.add-btn {
-          background-color: $primary-green;
-          color: white;
-          
-          &:hover {
-            background-color: darken($primary-green, 10%);
-          }
+        &.active {
+          background-color: #e9ecef;
+          border-color: #adb5bd;
         }
         
-        &.go-btn {
-          background-color: $brand-primary;
-          color: white;
-          
-          &:hover {
-            background-color: darken($brand-primary, 10%);
-          }
-          
-          &.reset-btn {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            border-radius: 16px;
-            padding: 3px 10px;
-            
-            &:hover {
-              background-color: darken(#6c757d, 10%);
-            }
-          }
+        i {
+          font-size: 0.8rem;
+        }
+      }
+      
+      .add-btn {
+        background-color: $primary-green;
+        color: white;
+        
+        &:hover {
+          background-color: darken($primary-green, 10%);
         }
       }
     }
@@ -136,93 +91,128 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-top: 0rem;
-      margin-bottom: 0rem;
-      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
       
       .results-count {
-        color: #666;
+        font-size: 0.9rem;
+        color: #6c757d;
       }
       
-      #rowsPerPageForm {
-        display: inline-block;
+      form {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        
+        .rows-control {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
         
         label {
-          margin-right: 0.5rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-size: 0.9rem;
+          color: #495057;
         }
         
         .rows-input {
-          width: 60px;
-          padding: 0.25rem;
-          border: 1px solid #ccc;
+          width: 3rem;
+          padding: 0.4rem;
+          border: 1px solid #ced4da;
           border-radius: 4px;
+          font-size: 0.9rem;
+        }
+        
+        .go-btn, .reset-btn {
+          padding: 0.4rem 0.6rem;
+          background-color: $brand-primary;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 0.9rem;
+          cursor: pointer;
+          
+          &:hover {
+            background-color: darken($brand-primary, 10%);
+          }
         }
       }
     }
   }
   
   .direct-hire-table {
-    margin-top: 0;
+    margin-bottom: 0; // Remove bottom margin completely
     
     .filter-bar-wrapper {
-      display: none;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
       
       .filter-bar {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-        background: #fff;
-        border-radius: 16px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-        padding: 16px 18px 8px 18px;
-        margin-bottom: 12px;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
         
         label {
-          margin-bottom: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          font-size: 0.85rem;
           font-weight: 500;
-          color: #333;
+          color: #495057;
           
-          input, select {
-            border-radius: 16px;
-            border: 1px solid #ccc;
-            padding: 6px 14px;
-            outline: none;
-            box-shadow: none;
-            transition: box-shadow 0.2s;
-            margin-left: 4px;
-            margin-right: 10px;
+          select, input {
+            padding: 0.4rem;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 0.9rem;
             
             &:focus {
-              box-shadow: 0 0 0 2px rgba($brand-primary, 0.2);
+              outline: none;
               border-color: $brand-primary;
+              box-shadow: 0 0 0 0.2rem rgba($brand-primary, 0.25);
             }
+          }
+          
+          input[type="date"] {
+            width: 130px;
           }
         }
         
-        .btn {
-          border-radius: 16px;
-          padding: 6px 18px;
-          margin-left: 6px;
-          font-weight: 500;
-          border: none;
+        .filter-actions {
+          display: flex;
+          align-items: flex-end;
+          gap: 0.5rem;
+          margin-left: auto;
           
-          &.go-btn {
-            background: $brand-primary;
-            color: #fff;
+          .btn {
+            padding: 0.4rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
             
-            &:hover {
-              background-color: darken($brand-primary, 10%);
+            &.go-btn {
+              background-color: $brand-primary;
+              color: white;
+              
+              &:hover {
+                background-color: darken($brand-primary, 10%);
+              }
             }
-          }
-          
-          &.clear-btn {
-            background: #eee;
-            color: #444;
             
-            &:hover {
-              background-color: darken(#eee, 10%);
+            &.clear-btn {
+              background-color: #6c757d;
+              color: white;
+              
+              &:hover {
+                background-color: darken(#6c757d, 10%);
+              }
             }
           }
         }
@@ -231,29 +221,32 @@
       .filter-chips {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 6px;
-        margin-bottom: 10px;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
         
         .filter-chip {
           display: flex;
           align-items: center;
-          background: #e7f1ff;
+          gap: 0.25rem;
+          padding: 0.25rem 0.5rem;
+          background-color: #e7f1ff;
           color: $brand-primary;
-          border-radius: 16px;
-          padding: 4px 12px 4px 10px;
-          font-size: 14px;
-          font-weight: 500;
-          animation: chipIn 0.25s;
+          border-radius: 4px;
+          font-size: 0.85rem;
           
           .chip-remove {
-            margin-left: 6px;
             background: none;
             border: none;
             color: $brand-primary;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1rem;
             line-height: 1;
+            padding: 0;
+            margin-left: 0.25rem;
+            
+            &:hover {
+              color: darken($brand-primary, 15%);
+            }
           }
         }
       }
@@ -262,8 +255,8 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 0;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0; // Remove bottom margin from table
+      border-bottom: 1px solid #dee2e6; // Add bottom border to table
       
       th, td {
         padding: 0.75rem;
@@ -271,10 +264,34 @@
         border: 1px solid #dee2e6;
       }
       
+      
       th {
         background-color: $brand-primary;
         color: white;
         font-weight: 600;
+        
+        &.select-all-header {
+          cursor: pointer;
+          user-select: none;
+          text-align: left;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+          
+          
+          input[type="checkbox"] {
+            vertical-align: middle;
+            margin-right: 0.1rem;
+            cursor: pointer;
+          }
+          
+          &:hover {
+            background-color: darken($brand-primary, 5%);
+          }
+          
+          &.all-selected {
+            background-color: darken($brand-primary, 10%);
+          }
+        }
       }
       
       tbody {
@@ -358,85 +375,638 @@
     }
   }
   
-  .direct-hire-bottom {
-    .pagination {
+  .pagination-controls-wrapper {
+    margin-top: -1px; // Negative margin to overlap with table border
+    
+    .direct-hire-bottom {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 0.4rem;
-      justify-content: center;
+      margin-top: 0; // No top margin
+      margin-bottom: 0.5rem;
+      padding-top: 2px; // Minimal padding instead of margin
       
-      .page-link {
+      .pagination {
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: 2rem;
-        height: 2rem;
-        border: 1px solid #dee2e6;
-        border-radius: 4px;
-        text-decoration: none;
-        color: $brand-primary;
+        gap: 0.4rem;
         
-        &:hover {
-          background-color: #e9ecef;
+        .prev-btn, .next-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.3rem;
+          padding: 0.4rem 0.6rem;
+          background-color: #f8f9fa;
+          border: 1px solid #ced4da;
+          border-radius: 4px;
+          color: #495057;
+          font-size: 0.9rem;
+          cursor: pointer;
+          
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+          
+          &:hover:not(:disabled) {
+            background-color: #e9ecef;
+          }
         }
         
-        &.active {
+        .page {
+          padding: 0.4rem 0.6rem;
+          background-color: #f8f9fa;
+          border: 1px solid #ced4da;
+          border-radius: 4px;
+          color: #495057;
+          font-size: 0.9rem;
+          text-decoration: none;
+          
+          &:hover {
+            background-color: #e9ecef;
+          }
+          
+          &.active {
+            background-color: $brand-primary;
+            color: white;
+            border-color: $brand-primary;
+          }
+        }
+      }
+      
+      .go-to-page {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        
+        label {
+          font-size: 0.9rem;
+          color: #495057;
+        }
+        
+        input {
+          width: 3rem;
+          padding: 0.4rem;
+          border: 1px solid #ced4da;
+          border-radius: 4px;
+        }
+        
+        .go-btn {
+          padding: 0.4rem 0.6rem;
           background-color: $brand-primary;
-          color: #fff;
-          border-color: $brand-primary;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 0.9rem;
+          cursor: pointer;
+          
+          &:hover {
+            background-color: darken($brand-primary, 10%);
+          }
+        }
+      }
+    }
+  }
+}
+
+.approvals-wrapper {
+  width: 100%;
+  
+  .approvals-top {
+    margin-bottom: 0.5rem;
+    
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      
+      .search-form {
+        display: flex;
+        flex: 1;
+        min-width: 200px;
+        
+        .search-bar {
+          flex: 1;
+          padding: 0.5rem;
+          border: 1px solid #ccc;
+          border-radius: 6px 0 0 6px;
+          font-size: 1rem;
+          
+          &:focus {
+            outline: none;
+            border-color: $brand-primary;
+          }
+        }
+        
+        .btn.search-btn {
+          border-radius: 0 6px 6px 0;
+          background-color: $brand-primary;
+          color: white;
+          border: none;
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          
+          &:hover {
+            background-color: darken($brand-primary, 10%);
+          }
+        }
+      }
+      
+      .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        text-decoration: none;
+        
+        &.filter-btn {
+          background-color: $brand-primary;
+          color: white;
+          
+          &:hover {
+            background-color: darken($brand-primary, 10%);
+          }
+          
+          &.active {
+            background-color: darken($brand-primary, 15%);
+          }
+        }
+        
+        &.add-btn {
+          background-color: #28a745;
+          color: white;
+          
+          &:hover {
+            background-color: darken(#28a745, 10%);
+          }
+        }
+        
+
+        &.btn-primary {
+          background-color: #ffc107;
+          color: #212529;
+          border: none;
+          
+          &:hover {
+            background-color: darken(#ffc107, 10%);
+          }
+        }
+      }
+    }
+    
+    .table-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      
+      .results-count {
+        color: #666;
+      }
+      
+      .rows-input {
+        width: 60px;
+        padding: 0.2rem;
+        margin-left: 0.3rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      
+      .reset-btn {
+        background-color: $brand-primary;
+        color: white;
+        border: none;
+        border-radius: 16px;
+        padding: 3px 10px;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: darken($brand-primary, 10%);
         }
       }
     }
   }
   
-  #filterBarWrapper {
-    position: absolute;
-    z-index: 100;
-    width: 600px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    padding: 15px;
-    top: 40px;
-    right: auto;
-    left: 180px;
-    display: none;
-    
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
+  .approvals-table {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
       
-      label {
-        margin-bottom: 8px;
-        font-weight: 500;
-        color: #333;
+      th, td {
+        padding: 0.75rem;
+        text-align: left;
+        border: 1px solid #dee2e6;
+      }
+      
+      th {
+        background-color: $brand-primary;
+        color: white;
+        font-weight: 600;
+      }
+      
+      tbody {
+        tr {
+          &:nth-child(odd) {
+            background-color: #f8f9fa;
+          }
+          
+          &:hover {
+            background-color: #f1f1f1;
+          }
+          
+          .status-badge {
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            
+            &.approved {
+              background-color: #d1fae5; 
+              color: #065f46;
+            }
+            
+            &.pending {
+              background-color: #fef3c7; 
+              color: #92400e;
+            }
+            
+            &.denied, &.rejected, &.declined {
+              background-color: #fee2e2; 
+              color: #991b1b;
+            }
+          }
+          
+          /*.status {
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            display: inline-block;
+            
+            &.approved {
+              background-color: #d4edda;
+              color: #155724;
+            }
+            
+            &.pending {
+              background-color: #fff3cd;
+              color: #856404;
+            }
+            
+            &.denied, &.rejected {
+              background-color: #f8d7da;
+              color: #721c24;
+            }
+          }*/
+          
+          .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            
+            .btn {
+              padding: 0.25rem 0.5rem;
+              font-size: 0.875rem;
+              border-radius: 4px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              gap: 0.3rem;
+              border: none;
+              
+              &.btn-approve {
+                background-color: #28a745 !important;
+                color: white !important;
+                
+                &:hover {
+                  background-color: darken(#28a745, 10%) !important;
+                }
+              }
+              
+              &.btn-reject {
+                background-color: #dc3545 !important;
+                color: white !important;
+                
+                &:hover {
+                  background-color: darken(#dc3545, 10%) !important;
+                }
+              }
+              
+              &.btn-sm {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
+              }
+            }
+          }
+          
+          .action-icons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            
+            a {
+              color: inherit;
+              text-decoration: none;
+            }
+            
+            i.fa-eye {
+              color: $brand-primary;
+            }
+            
+            i.fa-edit {
+              color: #28a745;
+            }
+            
+            i.fa-trash-alt {
+              color: #dc3545;
+            }
+          }
+        }
+        
+        .no-records {
+          text-align: center;
+          padding: 20px;
+          color: #666;
+        }
+      }
+    }
+  }
+  
+  .approvals-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      
+      button, a {
+        padding: 0.4rem 0.8rem;
+        border: 1px solid transparent;
+        background-color: transparent;
+        border-radius: 6px;
+        cursor: pointer;
         display: flex;
         align-items: center;
-        flex: 1 0 200px;
-      }
-      
-      input, select {
-        border-radius: 16px;
-        border: 1px solid #ccc;
-        padding: 6px 14px;
-        outline: none;
-        margin-left: 4px;
-        flex: 1;
-        min-width: 120px;
-      }
-      
-      .btn {
-        margin-top: 10px;
+        gap: 0.3rem;
+        font-size: 0.9rem;
+        text-decoration: none;
+        
+        &.prev-btn {
+          background-color: $neutral-dark;
+          color: #fff;
+          border: none;
+          
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+        
+        &.next-btn {
+          background-color: $brand-primary;
+          color: #fff;
+          border: none;
+          
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+        
+        &.page {
+          padding: 0.4rem 0.8rem;
+          border: 1px solid #ccc;
+          background-color: #fff;
+          color: #333;
+          
+          &.active {
+            background-color: $brand-primary;
+            color: #fff;
+            border-color: transparent;
+          }
+        }
       }
     }
     
-    .filter-chips {
+    .go-to-page {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
+      align-items: center;
+      gap: 0.5rem;
+      
+      label {
+        font-size: 0.9rem;
+        color: #666;
+      }
+      
+      input {
+        width: 60px;
+        padding: 0.4rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      
+      .go-btn {
+        background-color: $brand-primary;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 0.4rem 0.8rem;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: darken($brand-primary, 10%);
+        }
+      }
+    }
+  }
+}
+
+// Modal styles for both Direct Hire and Gov-to-Gov pages
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 500px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    
+    .modal-header {
+      padding: 1rem;
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #dee2e6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        
+        i {
+          color: $brand-primary;
+        }
+      }
+      
+      .close {
+        color: #aaa;
+        font-size: 1.75rem;
+        font-weight: bold;
+        cursor: pointer;
+        
+        &:hover {
+          color: black;
+        }
+      }
+    }
+    
+    .modal-body {
+      padding: 1rem;
+      
+      p {
+        margin-bottom: 1rem;
+      }
+      
+      .form-group {
+        margin-bottom: 1rem;
+        
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+        }
+        
+        .form-control {
+          width: 100%;
+          padding: 0.5rem;
+          border: 1px solid #ced4da;
+          border-radius: 4px;
+          
+          &:focus {
+            outline: none;
+            border-color: $brand-primary;
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+          }
+        }
+      }
+    }
+    
+    .modal-footer {
+      padding: 1rem;
+      background-color: #f8f9fa;
+      border-top: 1px solid #dee2e6;
+      text-align: right;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      
+      .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        
+        &.btn-secondary {
+          background-color: #6c757d;
+          color: white;
+          border: none;
+          
+          &:hover {
+            background-color: darken(#6c757d, 10%);
+          }
+        }
+        
+        &.btn-approve {
+          background-color: #28a745;
+          color: white;
+          border: none;
+          
+          &:hover {
+            background-color: darken(#28a745, 10%);
+          }
+        }
+        
+        &.btn-reject {
+          background-color: #dc3545;
+          color: white;
+          border: none;
+          
+          &:hover {
+            background-color: darken(#dc3545, 10%);
+          }
+        }
+        
+        &.btn-primary {
+          background-color: #ffc107;
+          color: #212529;
+          border: none;
+          
+          &:hover {
+            background-color: darken(#ffc107, 10%);
+          }
+        }
+      }
+    }
+  }
+  
+  &.warning-modal {
+    .modal-header {
+      background-color: #add8e6;
+      color: $brand-primary;
+      border-bottom: 1px solid #add8e6;
+      
+      h3 {
+        color: $brand-primary;
+      }
+      
+      .fa-info-circle, .fa-check-circle, .fa-times-circle {
+        margin-right: 10px;
+        color: $brand-primary;
+      }
+    }
+    
+    .modal-body {
+      padding: 20px;
+      font-size: 16px;
+    }
+    
+    .modal-footer {
+      border-top: 1px solid #add8e6;
+      background-color: #f8f9fa;
     }
   }
 }

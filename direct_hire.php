@@ -14,7 +14,7 @@ $exact_field = '';
 $exact_value = '';
 
 // Parse search query to check for special format "field:value" for exact matching
-if (preg_match('/^(name|control_no|jobsite|status|evaluator):(.+)$/i', $search_query, $matches)) {
+if (preg_match('/^(name|control_no|remarks|status|evaluator):(.+)$/i', $search_query, $matches)) {
   $exact_match = true;
   $exact_field = strtolower($matches[1]);
   $exact_value = trim($matches[2]);
@@ -26,7 +26,7 @@ $success_message = isset($_GET['success']) ? $_GET['success'] : '';
 $error_message = isset($_GET['error']) ? $_GET['error'] : '';
 
 // Handle pagination
-$rows_per_page = isset($_GET['rows']) ? (int)$_GET['rows'] : 8;
+$rows_per_page = isset($_GET['rows']) ? (int)$_GET['rows'] : 5;
 if ($rows_per_page < 1) $rows_per_page = 1;
 
 // --- FILTER LOGIC ---
@@ -36,9 +36,9 @@ if (!empty($_GET['filter_status'])) {
   $filter_sql .= ' AND status = ?';
   $filter_params[] = $_GET['filter_status'];
 }
-if (!empty($_GET['filter_jobsite'])) {
-  $filter_sql .= ' AND jobsite LIKE ?';
-  $filter_params[] = '%' . $_GET['filter_jobsite'] . '%';
+if (!empty($_GET['filter_remarks'])) {
+  $filter_sql .= ' AND remarks LIKE ?';
+  $filter_params[] = '%' . $_GET['filter_remarks'] . '%';
 }
 if (!empty($_GET['filter_evaluator'])) {
   $filter_sql .= ' AND evaluator LIKE ?';
@@ -80,7 +80,7 @@ try {
         $search_condition = "(
                     control_no LIKE ? OR
                     name LIKE ? OR
-                    jobsite LIKE ? OR
+                    remarks LIKE ? OR
                     evaluator LIKE ? OR
                     status LIKE ?
                 )";
@@ -168,7 +168,7 @@ try {
         $search_condition = "(
                     control_no LIKE ? OR
                     name LIKE ? OR
-                    jobsite LIKE ? OR
+                    remarks LIKE ? OR
                     evaluator LIKE ? OR
                     status LIKE ?
                 )";
@@ -319,20 +319,14 @@ include '_head.php';
           <div class="controls">
             <form action="" method="GET" class="search-form">
               <input type="hidden" name="tab" value="<?= htmlspecialchars($active_tab) ?>">
-              <div class="search-form">
-                <input type="text" name="search" placeholder="Search or use name:John for exact match" class="search-bar" value="<?= htmlspecialchars($search_query) ?>">
-                <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
-              </div>
-
+              <input type="hidden" name="rows" value="<?= $rows_per_page ?>">
+              <input type="text" name="search" placeholder="Search..." class="search-bar" value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+              <button type="submit" class="search-btn"><i class="fa fa-search"></i></button>
             </form>
-
-            <!-- <div class="search-help">
-              <p><strong>Search tips:</strong> Use <code>field:value</code> for exact match (e.g., <code>name:John</code>, <code>status:approved</code>)</p>
-            </div> -->
-
-            <button class="btn filter-btn" id="showFilterBarBtn" style="margin-bottom:10px;"><i class="fa fa-filter"></i> Filter</button>
-            <a href="direct_hire_add.php?type=<?= urlencode($active_tab) ?>" class="btn add-btn"><i class="fa fa-plus"></i> Add New Record</a>
-            <button onclick="document.getElementById('popupMemoForm').style.display='block'" class="btn go-btn create-memo" style="margin-left:10px;"><i class="fa fa-file-alt"></i> <b>GENERATE MEMO</b></button>
+            
+            <button class="btn filter-btn" id="showFilterBarBtn"><i class="fa fa-filter"></i> Filter</button>
+            
+            <a href="direct_hire_add.php" class="btn add-btn"><i class="fa fa-plus"></i> Add New Record</a>
           </div>
 
           <?php if (!empty($error_message)): ?>
@@ -342,7 +336,7 @@ include '_head.php';
           <?php endif; ?>
 
           <!-- Filter Bar Wrapper (hidden by default) -->
-          <div id="filterBarWrapper">
+          <div class="filter-bar-wrapper" id="filterBarWrapper" style="display:none;">
             <form class="filter-bar" method="GET" id="inlineFilterForm">
               <input type="hidden" name="tab" value="<?= htmlspecialchars($active_tab) ?>">
               <input type="hidden" name="rows" value="<?= $rows_per_page ?>">
@@ -350,29 +344,31 @@ include '_head.php';
               <label>Status:
                 <select name="filter_status">
                   <option value="">All</option>
-                  <option value="approved" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='approved' ? 'selected' : '' ?>>Approved</option>
                   <option value="pending" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='pending' ? 'selected' : '' ?>>Pending</option>
+                  <option value="approved" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='approved' ? 'selected' : '' ?>>Approved</option>
                   <option value="denied" <?= isset($_GET['filter_status']) && $_GET['filter_status']==='denied' ? 'selected' : '' ?>>Denied</option>
                 </select>
               </label>
-              <label>Jobsite:
-                <input type="text" name="filter_jobsite" placeholder="Jobsite" value="<?= isset($_GET['filter_jobsite']) ? htmlspecialchars($_GET['filter_jobsite']) : '' ?>">
+              <label>Remarks:
+                <input type="text" name="filter_remarks" placeholder="Remarks" value="<?= isset($_GET['filter_remarks']) ? htmlspecialchars($_GET['filter_remarks']) : '' ?>">
               </label>
               <label>Evaluator:
                 <input type="text" name="filter_evaluator" placeholder="Evaluator" value="<?= isset($_GET['filter_evaluator']) ? htmlspecialchars($_GET['filter_evaluator']) : '' ?>">
               </label>
-              <label>Date:
-                <input type="date" name="filter_date_from" value="<?= isset($_GET['filter_date_from']) ? htmlspecialchars($_GET['filter_date_from']) : '' ?>" style="width:130px;"> to
-                <input type="date" name="filter_date_to" value="<?= isset($_GET['filter_date_to']) ? htmlspecialchars($_GET['filter_date_to']) : '' ?>" style="width:130px;">
+              <label>Date Range:
+                <input type="date" name="filter_date_from" value="<?= isset($_GET['filter_date_from']) ? htmlspecialchars($_GET['filter_date_from']) : '' ?>"> to
+                <input type="date" name="filter_date_to" value="<?= isset($_GET['filter_date_to']) ? htmlspecialchars($_GET['filter_date_to']) : '' ?>">
               </label>
-              <label>Control No.:
+              <label>Control No:
                 <input type="text" name="filter_control_no" placeholder="Control No." value="<?= isset($_GET['filter_control_no']) ? htmlspecialchars($_GET['filter_control_no']) : '' ?>">
               </label>
               <label>Name:
                 <input type="text" name="filter_name" placeholder="Name" value="<?= isset($_GET['filter_name']) ? htmlspecialchars($_GET['filter_name']) : '' ?>">
               </label>
-              <button type="submit" class="btn go-btn">Apply</button>
-              <button type="button" class="btn clear-btn" id="clearAllFiltersBtn">Clear All</button>
+              <div class="filter-actions">
+                <button type="submit" class="btn go-btn">Apply</button>
+                <button type="button" class="btn clear-btn" id="clearAllFiltersBtn">Clear All</button>
+              </div>
             </form>
             <div class="filter-chips" id="filterChips">
               <!-- Chips will be rendered here by JS -->
@@ -383,17 +379,19 @@ include '_head.php';
             <span class="results-count">
               Showing <?= min(($offset + 1), $total_records) ?>-<?= min(($offset + $rows_per_page), $total_records) ?> out of <?= $total_records ?> results
             </span>
-            <form action="" method="GET" id="rowsPerPageForm" style="display:inline-block;">
+            <form action="" method="GET" id="rowsPerPageForm">
               <input type="hidden" name="tab" value="<?= htmlspecialchars($active_tab) ?>">
               <input type="hidden" name="page" value="<?= $page ?>">
               <?php if (!empty($search_query)): ?>
                 <input type="hidden" name="search" value="<?= htmlspecialchars($search_query) ?>">
               <?php endif; ?>
-              <label>
-                Rows per page:
-                <input type="number" min="1" name="rows" class="rows-input" value="<?= $rows_per_page ?>" id="rowsInput">
-              </label>
-              <button type="button" class="btn go-btn reset-btn" id="resetRowsBtn" style="background-color:#007bff;color:#fff;border:none;border-radius:16px;padding:3px 10px;">Reset</button>
+              <div class="rows-control">
+                <label>
+                  Rows per page:
+                  <input type="number" min="1" name="rows" class="rows-input" value="<?= $rows_per_page ?>" id="rowsInput">
+                </label>
+                <button type="button" class="btn reset-btn" id="resetRowsBtn">Reset</button>
+              </div>
             </form>
           </div>
         </div>
@@ -511,11 +509,10 @@ include '_head.php';
           <table>
             <thead>
               <tr>
-                <th><input type="checkbox" id="select-all-checkbox"></th>
                 <th>No.</th>
                 <th>Control No.</th>
                 <th>Name</th>
-                <th>Jobsite</th>
+                <th>Remarks</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
@@ -523,18 +520,17 @@ include '_head.php';
             <tbody>
               <?php if (count($records) == 0): ?>
                 <tr>
-                  <td colspan="7" class="no-records">No records found</td>
+                  <td colspan="6" class="no-records">No records found</td>
                 </tr>
               <?php else: ?>
                 <?php foreach ($records as $index => $record): ?>
                   <tr>
-                    <td><input type="checkbox" class="record-checkbox" value="<?= $record['id'] ?>"></td>
                     <td><?= $offset + $index + 1 ?></td>
                     <td><?= htmlspecialchars($record['control_no']) ?></td>
                     <td><?= htmlspecialchars($record['name']) ?></td>
-                    <td><?= htmlspecialchars($record['jobsite']) ?></td>
+                    <td><?= htmlspecialchars($record['remarks'] ?? 'N/A') ?></td>
                     <td>
-                      <span class="status <?= strtolower($record['status']) ?>">
+                      <span class="status-badge <?= strtolower($record['status']) ?>">
                         <?= ucfirst(htmlspecialchars($record['status'])) ?>
                       </span>
                     </td>
@@ -556,67 +552,70 @@ include '_head.php';
           </table>
         </div>
 
-        <!-- Bottom Section -->
-        <div class="direct-hire-bottom">
-          <div class="pagination">
-            <?php if ($page > 1): ?>
-              <a href="?tab=<?= urlencode($active_tab) ?>&page=<?= ($page - 1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="prev-btn">
-                <i class="fa fa-chevron-left"></i> Previous
-              </a>
-            <?php else: ?>
-              <button class="prev-btn" disabled>
-                <i class="fa fa-chevron-left"></i> Previous
-              </button>
-            <?php endif; ?>
+        <!-- Pagination Controls Wrapper -->
+        <div class="pagination-controls-wrapper" style="margin-top:-1px;">
+          <!-- Bottom Section -->
+          <div class="direct-hire-bottom">
+            <div class="pagination">
+              <?php if ($page > 1): ?>
+                <a href="?tab=<?= urlencode($active_tab) ?>&page=<?= ($page - 1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="prev-btn">
+                  <i class="fa fa-chevron-left"></i> Previous
+                </a>
+              <?php else: ?>
+                <button class="prev-btn" disabled>
+                  <i class="fa fa-chevron-left"></i> Previous
+                </button>
+              <?php endif; ?>
 
-            <?php
-              // Calculate start and end page for 3-page window
-              $window = 3;
-              $half = floor($window / 2);
-              if ($total_pages <= $window) {
-                $start_page = 1;
-                $end_page = $total_pages;
-              } else {
-                if ($page <= $half + 1) {
+              <?php
+                // Calculate start and end page for 3-page window
+                $window = 3;
+                $half = floor($window / 2);
+                if ($total_pages <= $window) {
                   $start_page = 1;
-                  $end_page = $window;
-                } elseif ($page >= $total_pages - $half) {
-                  $start_page = $total_pages - $window + 1;
                   $end_page = $total_pages;
                 } else {
-                  $start_page = $page - $half;
-                  $end_page = $page + $half;
+                  if ($page <= $half + 1) {
+                    $start_page = 1;
+                    $end_page = $window;
+                  } elseif ($page >= $total_pages - $half) {
+                    $start_page = $total_pages - $window + 1;
+                    $end_page = $total_pages;
+                  } else {
+                    $start_page = $page - $half;
+                    $end_page = $page + $half;
+                  }
                 }
-              }
-              for ($i = $start_page; $i <= $end_page; $i++):
-            ?>
-              <a href="?tab=<?= urlencode($active_tab) ?>&page=<?= $i ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="page<?= $i == $page ? ' active' : '' ?>">
-                <?= $i ?>
-              </a>
-            <?php endfor; ?>
+                for ($i = $start_page; $i <= $end_page; $i++):
+              ?>
+                <a href="?tab=<?= urlencode($active_tab) ?>&page=<?= $i ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="page<?= $i == $page ? ' active' : '' ?>">
+                  <?= $i ?>
+                </a>
+              <?php endfor; ?>
 
-            <?php if ($page < $total_pages): ?>
-              <a href="?tab=<?= urlencode($active_tab) ?>&page=<?= ($page + 1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="next-btn">
-                Next <i class="fa fa-chevron-right"></i>
-              </a>
-            <?php else: ?>
-              <button class="next-btn" disabled>
-                Next <i class="fa fa-chevron-right"></i>
-              </button>
-            <?php endif; ?>
-          </div>
-
-          <div class="go-to-page">
-            <form action="" method="GET">
-              <input type="hidden" name="tab" value="<?= htmlspecialchars($active_tab) ?>">
-              <input type="hidden" name="rows" value="<?= $rows_per_page ?>">
-              <?php if (!empty($search_query)): ?>
-                <input type="hidden" name="search" value="<?= htmlspecialchars($search_query) ?>">
+              <?php if ($page < $total_pages): ?>
+                <a href="?tab=<?= urlencode($active_tab) ?>&page=<?= ($page + 1) ?>&rows=<?= $rows_per_page ?><?= !empty($search_query) ? '&search=' . urlencode($search_query) : '' ?>" class="next-btn">
+                  Next <i class="fa fa-chevron-right"></i>
+                </a>
+              <?php else: ?>
+                <button class="next-btn" disabled>
+                  Next <i class="fa fa-chevron-right"></i>
+                </button>
               <?php endif; ?>
-              <label>Go to Page:</label>
-              <input type="number" name="page" min="1" max="<?= $total_pages ?>" value="<?= $page ?>">
-              <button type="submit" class="btn go-btn">Go</button>
-            </form>
+            </div>
+
+            <div class="go-to-page">
+              <form action="" method="GET">
+                <input type="hidden" name="tab" value="<?= htmlspecialchars($active_tab) ?>">
+                <input type="hidden" name="rows" value="<?= $rows_per_page ?>">
+                <?php if (!empty($search_query)): ?>
+                  <input type="hidden" name="search" value="<?= htmlspecialchars($search_query) ?>">
+                <?php endif; ?>
+                <label>Go to Page:</label>
+                <input type="number" name="page" min="1" max="<?= $total_pages ?>" value="<?= $page ?>">
+                <button type="submit" class="btn go-btn">Go</button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -625,6 +624,28 @@ include '_head.php';
 </div>
 
 <script>
+// Double-click functionality for table rows
+document.addEventListener('DOMContentLoaded', function() {
+  const tableRows = document.querySelectorAll('tbody tr');
+  tableRows.forEach(row => {
+    row.addEventListener('dblclick', function(e) {
+      // Don't trigger if clicking on checkbox or action buttons
+      if (e.target.closest('input[type="checkbox"]') || e.target.closest('.action-icons')) {
+        return;
+      }
+      
+      // Get the record ID from the row
+      const viewLink = row.querySelector('a[href*="direct_hire_view.php"]');
+      if (viewLink) {
+        window.location.href = viewLink.getAttribute('href');
+      }
+    });
+    
+    // Add cursor style to indicate clickable
+    row.style.cursor = 'pointer';
+  });
+});
+
 // Use the existing filter button to toggle filter bar
 document.addEventListener('DOMContentLoaded', function() {
   const showBtn = document.getElementById('showFilterBarBtn');
@@ -644,21 +665,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
   
-  // Close filter dropdown when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!filterBarWrapper.contains(e.target) && e.target !== showBtn && !showBtn.contains(e.target)) {
-      filterBarWrapper.style.display = 'none';
-      showBtn.classList.remove('active');
-    }
-  });
-  
   // Render filter chips for active filters
   function renderFilterChips() {
     const params = new URLSearchParams(window.location.search);
     const chips = [];
     const filterLabels = {
       filter_status: 'Status',
-      filter_jobsite: 'Jobsite',
+      filter_remarks: 'Remarks',
       filter_evaluator: 'Evaluator',
       filter_date_from: 'Date From',
       filter_date_to: 'Date To',

@@ -46,3 +46,15 @@
 2025-04-30 07:24:58: Error sending notification to Regional Directors: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'first_name' in 'field list'
 2025-04-30 07:24:58: Transaction committed
 2025-04-30 07:24:58: Success message set, redirecting to direct_hire_view.php?id=10
+2025-05-01 09:11:50: Script started
+2025-05-01 09:11:50: Record ID: 10
+2025-05-01 09:11:50: Transaction started
+2025-05-01 09:11:50: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ncdcsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.[DENIAL NOTE - 2025-04-29 17:01:14 by Regional Director]\r\ndf\r\n\r\n[DENIAL NOTE - 2025-04-29 17:02:28 by Regional Director]\r\nhhh\r\n\r\n[DENIAL NOTE - 2025-04-29 17:02:44 by Regional Director]\r\nhhh\r\n\r\n[APPROVAL NOTE - 2025-04-30 05:26:54 by Regional Director]\r\nApproved without additional comments.\r\n\r\n[APPROVAL NOTE - 2025-04-30 05:29:42 by Regional Director]\r\nApproved without additional comments.\r\n\r\n","type":"professional","status":"denied","created_at":"2025-04-28 16:12:20","updated_at":"2025-04-30 13:25:15","submitted_by":null,"approved_by":1,"approved_at":"2025-04-30 13:25:15"}
+2025-05-01 09:11:50: SQL: UPDATE direct_hire SET status = 'pending' WHERE id = ?
+2025-05-01 09:11:50: Update result: true, Rows affected: 1
+2025-05-01 09:11:50: Attempting to insert into direct_hire_clearance_approvals table. User ID: 1
+2025-05-01 09:11:50: No existing approval found, creating new one...
+2025-05-01 09:11:50: New approval inserted, ID: 85
+2025-05-01 09:11:50: Error sending notification to Regional Directors: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'first_name' in 'field list'
+2025-05-01 09:11:50: Transaction committed
+2025-05-01 09:11:50: Success message set, redirecting to direct_hire_view.php?id=10

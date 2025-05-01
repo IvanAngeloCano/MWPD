@@ -347,7 +347,7 @@ include '_head.php';
                         </div>
                       </td>
                       <td class='action-icons'>
-                        <a href='javascript:void(0)' onclick='updateRecord(" . $row['bmid'] . ")' title='Edit Record'>
+                        <a href='javascript:void(0)' onclick='openUpdateModal(" . $row['bmid'] . ")' title='Edit Record'>
                           <i class='fa fa-edit'></i>
                         </a>
                         <a href='javascript:void(0)' onclick='deleteRecord(" . $row['bmid'] . ")' title='Delete Record'>
@@ -415,6 +415,55 @@ include '_head.php';
           <button type="submit" class="action-button">Save</button>
           <button type="button" class="action-button cancel-button" onclick="closeAddModal()">Cancel</button>
         </form>
+      </div>
+
+      <!-- Update Modal -->
+      <div id="updateModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close" onclick="closeUpdateModal()">&times;</span>
+            <h2>Update Balik Manggagawa Record</h2>
+          </div>
+          <form id="updateForm" method="post">
+            <input type="hidden" name="bmid" id="update_bmid">
+            <div class="form-group">
+              <input type="text" name="last_name" id="update_last_name" placeholder="Last Name" required>
+              <input type="text" name="given_name" id="update_given_name" placeholder="Given Name" required>
+              <input type="text" name="middle_name" id="update_middle_name" placeholder="Middle Name" required>
+            </div>
+            <div class="form-group">
+              <select name="sex" id="update_sex" required>
+                <option value="">Select Sex</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <input type="text" name="address" id="update_address" placeholder="Address" required>
+              <input type="text" name="destination" id="update_destination" placeholder="Destination" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="remarks" id="update_remarks" placeholder="Remarks" required>
+              <input type="text" name="nameoftheagency" id="update_nameoftheagency" placeholder="Name of the Agency" required>
+              <input type="text" name="nameoftheprincipal" id="update_nameoftheprincipal" placeholder="Name of the Principal" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="nameofthenewagency" id="update_nameofthenewagency" placeholder="Name of the New Agency" required>
+              <input type="text" name="nameofthenewprincipal" id="update_nameofthenewprincipal" placeholder="Name of the New Principal" required>
+            </div>
+            <div>
+              <h6 style="display: inline-block; margin-left: 255px;">Date of Arrival:</h6>
+              <h6 style="display: inline-block; margin-left: 165px;">Date of Departure:</h6>
+            </div>
+            <div class="employment-group">
+              <input type="date" name="employmentdurationstart" id="update_employmentdurationstart" placeholder="Employment Duration Start" required>
+              <input type="date" name="employmentdurationend" id="update_employmentdurationend" placeholder="Employment Duration End" required>
+              <input type="date" name="dateofarrival" id="update_dateofarrival" placeholder="Date of Arrival" required>
+              <input type="date" name="dateofdeparture" id="update_dateofdeparture" placeholder="Date of Departure" required>
+            </div>
+            
+            <button type="submit" class="action-button">Update</button>
+            <button type="button" class="action-button cancel-button" onclick="closeUpdateModal()">Cancel</button>
+          </form>
+        </div>
       </div>
 
       <!-- Generate Documents Modal -->
@@ -512,7 +561,7 @@ document.getElementById('addForm').addEventListener('submit', function(e) {
           </div>
         </td>
         <td class='action-icons'>
-          <a href='javascript:void(0)' onclick='updateRecord(${data.bmid})' title='Edit Record'>
+          <a href='javascript:void(0)' onclick='openUpdateModal(${data.bmid})' title='Edit Record'>
             <i class='fa fa-edit'></i>
           </a>
           <a href='javascript:void(0)' onclick='deleteRecord(${data.bmid})' title='Delete Record'>
@@ -592,9 +641,63 @@ function GenerateWEC(bmid) {
   window.location.href = `generate_wec.php?bmid=${bmid}`;
 }
 
-function updateRecord(bmid) {
-  alert("Update function is disabled.");
+function openUpdateModal(bmid) {
+  fetch(`get_bm.php?bmid=${bmid}`)
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('update_bmid').value = data.bmid;
+    document.getElementById('update_last_name').value = data.last_name;
+    document.getElementById('update_given_name').value = data.given_name;
+    document.getElementById('update_middle_name').value = data.middle_name;
+    document.getElementById('update_sex').value = data.sex;
+    document.getElementById('update_address').value = data.address;
+    document.getElementById('update_destination').value = data.destination;
+    document.getElementById('update_remarks').value = data.remarks;
+    document.getElementById('update_nameoftheagency').value = data.nameoftheagency;
+    document.getElementById('update_nameoftheprincipal').value = data.nameoftheprincipal;
+    document.getElementById('update_nameofthenewagency').value = data.nameofthenewagency;
+    document.getElementById('update_nameofthenewprincipal').value = data.nameofthenewprincipal;
+    document.getElementById('update_employmentdurationstart').value = data.employmentdurationstart;
+    document.getElementById('update_employmentdurationend').value = data.employmentdurationend;
+    document.getElementById('update_dateofarrival').value = data.dateofarrival;
+    document.getElementById('update_dateofdeparture').value = data.dateofdeparture;
+
+    document.getElementById('updateModal').style.display = 'block';
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert("Error fetching data.");
+  });
 }
+
+function closeUpdateModal() {
+  document.getElementById('updateModal').style.display = 'none';
+}
+
+document.getElementById('updateForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const formData = new FormData(this);
+
+  fetch('update_bm.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert("Record updated successfully!");
+      closeUpdateModal();
+      location.reload();
+    } else {
+      alert("Error updating record.");
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert("Error updating data.");
+  });
+});
 
 function deleteRecord(bmid) {
   if (confirm("Are you sure you want to delete this record?")) {
@@ -676,7 +779,7 @@ function toggleTable() {
             </div>
           </td>
           <td class='action-icons'>
-            <a href='javascript:void(0)' onclick='updateRecord(${row.bmid})' title='Edit Record'>
+            <a href='javascript:void(0)' onclick='openUpdateModal(${row.bmid})' title='Edit Record'>
               <i class='fa fa-edit'></i>
             </a>
             <a href='javascript:void(0)' onclick='deleteRecord(${row.bmid})' title='Delete Record'>

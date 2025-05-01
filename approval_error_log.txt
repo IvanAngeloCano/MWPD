@@ -26,3 +26,6 @@
 2025-04-26 15:56:14: Approval action: approve for Justine (ID: 1) by user 1 with status approved
 2025-04-30 03:21:04: Notification sent to user 3 about Justinesb approval status: denied
 2025-04-30 03:21:04: Approval action: deny for Justinesb (ID: 1) by user 4 with status denied
+2025-05-01 09:03:39: Sending approval notification to user ID: 2 for record: 9 with status: approved
+2025-05-01 09:03:39: Notification successfully sent to user 2 about JOLY approval status: approved
+2025-05-01 09:03:39: Approval action: approve for JOLY (ID: 9) by user 1 with status approved

@@ -1,7 +1,39 @@
 <?php
 include 'session.php';
+include 'connection.php'; // Your PDO connection file
 $pageTitle = "Information Sheet - MWPD Filing System";
 include '_head.php';
+
+// Handle file upload
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
+    $fileName = $_FILES['file']['name'];
+    $fileData = file_get_contents($_FILES['file']['tmp_name']);
+
+    $stmt = $pdo->prepare("INSERT INTO documents (file_name, file_data) VALUES (?, ?)");
+    $stmt->execute([$fileName, $fileData]);
+
+    echo "<script>alert('File uploaded successfully!');</script>";
+}
+
+// Handle file download
+if (isset($_GET['download_id'])) {
+    $id = (int)$_GET['download_id'];
+
+    $stmt = $pdo->prepare("SELECT file_name, file_data FROM documents WHERE id = ?");
+    $stmt->execute([$id]);
+    $file = $stmt->fetch();
+
+    if ($file) {
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        header('Content-Disposition: attachment; filename="' . $file['file_name'] . '"');
+        header('Content-Length: ' . strlen($file['file_data']));
+        echo $file['file_data'];
+        exit;
+    } else {
+        echo "<script>alert('File not found.');</script>";
+    }
+}
 ?>
 
 <div class="layout-wrapper">
@@ -11,19 +43,31 @@ include '_head.php';
     <?php
     // Get current filename like 'dashboard-eme.php'
     $currentFile = basename($_SERVER['PHP_SELF']);
-
-    // Remove the file extension
     $fileWithoutExtension = pathinfo($currentFile, PATHINFO_FILENAME);
-
-    // Replace dashes with spaces
     $pageTitle = ucwords(str_replace(['-', '_'], ' ', $fileWithoutExtension));
-
     include '_header.php';
     ?>
 
     <main class="main-content">
-      <!-- Your page content here -->
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde quos vitae aspernatur, commodi illo laborum, voluptatum maiores totam ut suscipit rerum! Ducimus soluta architecto doloribus provident sed inventore delectus dignissimos labore hic reiciendis corrupti in natus perferendis reprehenderit repellat enim rem, impedit fugit placeat aliquid quod nam ratione voluptates odio? Incidunt nobis tempora molestiae deleniti reiciendis. Sed repellat quod aperiam, molestias excepturi impedit adipisci. Enim sapiente nemo saepe explicabo vero at facere perspiciatis ut similique nisi quibusdam fugit ea, impedit sunt, nobis eos incidunt. Quasi expedita placeat, ipsum perferendis, in fuga libero facilis impedit, vel itaque consequuntur. Assumenda distinctio beatae incidunt commodi aspernatur dolorum voluptatibus repellat totam provident sed quidem, reiciendis sapiente error obcaecati optio. Nesciunt distinctio odit beatae perspiciatis voluptates numquam reiciendis ea, eum doloribus mollitia, repellendus deserunt quo expedita ex, esse delectus at cumque! Sunt repellendus natus, soluta hic consectetur qui voluptas officiis nam. Ad distinctio harum magnam dolorem similique vero. Accusantium incidunt sint ex culpa et, adipisci veniam nam aliquam quisquam eligendi, ipsa similique aperiam sequi quam numquam praesentium illum quae quasi veritatis voluptatibus corrupti qui. Quae exercitationem iusto et. Voluptatem amet nesciunt molestias explicabo deserunt culpa consequatur, voluptatibus reprehenderit dicta corporis odio. Recusandae vitae iusto veritatis!</p>
+      <div class="container">
+        <!-- Upload Form -->
+        <form method="post" enctype="multipart/form-data">
+          <button type="button" onclick="document.getElementById('fileInput').click()">Upload DOCX</button>
+          <input type="file" id="fileInput" name="file" style="display:none;" accept=".docx" onchange="this.form.submit()">
+        </form>
+
+        <!-- Uploaded Files List -->
+        <h3 class="mt-4">Uploaded Files</h3>
+        <ul>
+          <?php
+          $stmt = $pdo->query("SELECT id, file_name FROM documents ORDER BY id DESC");
+          while ($row = $stmt->fetch()) {
+              echo '<li><a href="?download_id=' . $row['id'] . '">' . htmlspecialchars($row['file_name']) . '</a></li>';
+          }
+          ?>
+        </ul>
+      </div>
     </main>
+
   </div>
 </div>

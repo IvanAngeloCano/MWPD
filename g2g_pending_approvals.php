@@ -169,7 +169,6 @@ include '_head.php';
 <div class="layout-wrapper">
   <?php include '_sidebar.php'; ?>
   <div class="content-wrapper">
-    <?php include '_header.php'; ?>
     <main class="main-content">
       <div class="container">
         <h1 class="page-title">Pending Gov-to-Gov Approvals</h1>
@@ -197,38 +196,54 @@ include '_head.php';
         <div class="approvals-wrapper">
           <div class="approvals-top">
             <h2 class="section-title">Pending Approvals</h2>
+            
+            <div class="table-footer">
+              <span class="results-count">
+                Showing <?= count($pending_approvals) ?> pending approval<?= count($pending_approvals) != 1 ? 's' : '' ?>
+              </span>
+            </div>
           </div>
           
           <div class="approvals-table">
-            <table class="data-table">
+            <table>
               <thead>
                 <tr>
+                  <th>No.</th>
                   <th>Applicant Name</th>
                   <th>Passport Number</th>
                   <th>Submitted By</th>
                   <th>Submission Date</th>
-                  <th>Employer</th>
+                  <th>Remarks</th>
                   <th>Reference</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <?php $loop = 0; foreach ($pending_approvals as $approval): ?>
-                <tr class="<?= $loop % 2 == 0 ? 'even-row' : 'odd-row' ?>">
-                  <td><?= htmlspecialchars($approval['last_name'] . ', ' . $approval['first_name'] . ' ' . $approval['middle_name']) ?></td>
-                  <td><?= htmlspecialchars($approval['passport_number']) ?></td>
-                  <td><?= htmlspecialchars($approval['submitter_name']) ?></td>
-                  <td><?= date('M d, Y', strtotime($approval['submitted_date'])) ?></td>
-                  <td><?= htmlspecialchars($approval['employer']) ?></td>
-                  <td><?= htmlspecialchars($approval['memo_reference']) ?></td>
-                  <td>
-                    <div class="action-buttons">
-                      <button class="btn btn-sm btn-approve" onclick="showApproveModal(<?= $approval['approval_id'] ?>)"><i class="fa fa-check"></i> Approve</button>
-                      <button class="btn btn-sm btn-reject" onclick="showRejectModal(<?= $approval['approval_id'] ?>)"><i class="fa fa-times"></i> Reject</button>
-                    </div>
-                  </td>
+                <?php if (count($pending_approvals) == 0): ?>
+                <tr>
+                  <td colspan="8" class="no-records">No records found</td>
                 </tr>
-                <?php $loop++; endforeach; ?>
+                <?php else: ?>
+                  <?php foreach ($pending_approvals as $index => $approval): ?>
+                  <tr>
+                    <td><?= $index + 1 ?></td>
+                    <td><?= htmlspecialchars($approval['last_name'] . ', ' . $approval['first_name'] . ' ' . $approval['middle_name']) ?></td>
+                    <td><?= htmlspecialchars($approval['passport_number']) ?></td>
+                    <td><?= htmlspecialchars($approval['submitter_name']) ?></td>
+                    <td><?= date('M d, Y', strtotime($approval['submitted_date'])) ?></td>
+                    <td><?= htmlspecialchars($approval['remarks'] ?? 'N/A') ?></td>
+                    <td><?= htmlspecialchars($approval['memo_reference']) ?></td>
+                    <td class="action-icons">
+                      <button class="btn btn-sm btn-approve" onclick="showApproveModal(<?= $approval['approval_id'] ?>)" title="Approve Record">
+                        <i class="fa fa-check"></i> Approve
+                      </button>
+                      <button class="btn btn-sm btn-reject" onclick="showRejectModal(<?= $approval['approval_id'] ?>)" title="Reject Record">
+                        <i class="fa fa-times"></i> Reject
+                      </button>
+                    </td>
+                  </tr>
+                  <?php endforeach; ?>
+                <?php endif; ?>
               </tbody>
             </table>
           </div>
@@ -241,7 +256,7 @@ include '_head.php';
 
 <!-- Approve Modal -->
 <div id="approveModal" class="modal">
-  <div class="modal-content">
+  <div class="modal-content warning-modal">
     <div class="modal-header">
       <h3><i class="fa fa-check-circle"></i> Approve Record</h3>
       <span class="close" onclick="document.getElementById('approveModal').style.display='none'">&times;</span>
@@ -262,7 +277,7 @@ include '_head.php';
 
 <!-- Reject Modal -->
 <div id="rejectModal" class="modal">
-  <div class="modal-content">
+  <div class="modal-content warning-modal">
     <div class="modal-header">
       <h3><i class="fa fa-times-circle"></i> Reject Record</h3>
       <span class="close" onclick="document.getElementById('rejectModal').style.display='none'">&times;</span>
@@ -295,9 +310,36 @@ function showRejectModal(approvalId) {
   document.getElementById('rejectModal').style.display = 'block';
 }
 
+// Double-click functionality for table rows
+document.addEventListener('DOMContentLoaded', function() {
+  const tableRows = document.querySelectorAll('tbody tr');
+  tableRows.forEach(row => {
+    row.addEventListener('dblclick', function(e) {
+      // Don't trigger if clicking on action buttons
+      if (e.target.closest('.action-icons')) {
+        return;
+      }
+      
+      // Get the approval ID from the approve button
+      const approveBtn = row.querySelector('button[onclick*="showApproveModal"]');
+      if (approveBtn) {
+        const onclickAttr = approveBtn.getAttribute('onclick');
+        const approvalId = onclickAttr.match(/showApproveModal\((\d+)\)/)[1];
+        if (approvalId) {
+          // Open the approve modal on double-click
+          showApproveModal(approvalId);
+        }
+      }
+    });
+    
+    // Add cursor style to indicate clickable
+    row.style.cursor = 'pointer';
+  });
+});
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  if (event.target.className === 'modal') {
+  if (event.target.classList.contains('modal')) {
     event.target.style.display = 'none';
   }
 }

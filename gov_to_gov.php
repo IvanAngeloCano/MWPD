@@ -130,7 +130,7 @@ try {
           <?php endif; ?>
 
           <!-- Filter Bar Wrapper (hidden by default) -->
-          <div id="filterBarWrapper" style="display: none;">
+          <div id="filterBarWrapper" style="display:none;">
             <form class="filter-bar" method="GET" id="inlineFilterForm">
               <input type="hidden" name="tab" value="<?= htmlspecialchars($active_tab) ?>">
               <input type="hidden" name="rows" value="<?= $rows_per_page ?>">
@@ -169,7 +169,7 @@ try {
               <?php endif; ?>
               <label>
                 Rows per page:
-                <input type="number" min="1" name="rows" class="rows-input" value="<?= $rows_per_page ?>" id="rowsInput">
+                <input type="number" name="rows" min="1" max="<?= $total_pages ?>" value="<?= $rows_per_page ?>" id="rowsInput">
               </label>
               <button type="button" class="btn go-btn reset-btn" id="resetRowsBtn">Reset</button>
             </form>
@@ -182,14 +182,14 @@ try {
             <thead>
               <tr>
                 <?php if ($active_tab !== 'endorsed'): ?>
-                <th><input type="checkbox" id="select-all-checkbox"></th>
+                <th class="select-all-header" id="select-all-label"><input type="checkbox" id="select-all-checkbox">All</th>
                 <?php endif; ?>
                 <th>No.</th>
                 <th>Last Name</th>
                 <th>First Name</th>
                 <th>Middle Name</th>
                 <th>Passport No.</th>
-                <th>Jobsite</th>
+                <th>Remarks</th>
                 <?php if ($active_tab === 'endorsed'): ?>
                 <th>Endorsement Info</th>
                 <?php endif; ?>
@@ -244,7 +244,7 @@ try {
                     echo "<td>" . htmlspecialchars($row['first_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['middle_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['passport_number']) . "</td>";
-                    echo "<td>" . htmlspecialchars(isset($row['jobsite']) ? $row['jobsite'] : 'N/A') . "</td>";
+                    echo "<td>" . htmlspecialchars(isset($row['remarks']) ? $row['remarks'] : 'N/A') . "</td>";
                     
                     // Show endorsement info in the endorsed tab
                     if ($active_tab === 'endorsed') {
@@ -738,28 +738,75 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-// Use the existing filter button to toggle filter bar
+// Double-click functionality for table rows
+document.addEventListener('DOMContentLoaded', function() {
+  const tableRows = document.querySelectorAll('#g2g-tbody tr');
+  tableRows.forEach(row => {
+    row.addEventListener('dblclick', function(e) {
+      // Don't trigger if clicking on checkbox or action buttons
+      if (e.target.closest('input[type="checkbox"]') || e.target.closest('.action-icons')) {
+        return;
+      }
+      
+      // Get the record ID from the row
+      const viewLink = row.querySelector('a[href*="gov_to_gov_view.php"]');
+      if (viewLink) {
+        window.location.href = viewLink.getAttribute('href');
+      }
+    });
+    
+    // Add cursor style to indicate clickable
+    row.style.cursor = 'pointer';
+  });
+  
+  // Select All functionality
+  const selectAllLabel = document.getElementById('select-all-label');
+  const selectAllCheckbox = document.getElementById('select-all-checkbox');
+  
+  if (selectAllLabel && selectAllCheckbox) {
+    // Make the entire header cell clickable
+    selectAllLabel.addEventListener('click', function(e) {
+      // Prevent triggering twice when clicking directly on the checkbox
+      if (e.target !== selectAllCheckbox) {
+        selectAllCheckbox.checked = !selectAllCheckbox.checked;
+        toggleAllCheckboxes(selectAllCheckbox.checked);
+      }
+    });
+    
+    // Handle checkbox click
+    selectAllCheckbox.addEventListener('change', function() {
+      toggleAllCheckboxes(this.checked);
+    });
+    
+    // Function to toggle all checkboxes
+    function toggleAllCheckboxes(checked) {
+      const checkboxes = document.querySelectorAll('#g2g-tbody input[type="checkbox"]');
+      checkboxes.forEach(checkbox => {
+        checkbox.checked = checked;
+      });
+      
+      // Update visual indication
+      if (checked) {
+        selectAllLabel.classList.add('all-selected');
+      } else {
+        selectAllLabel.classList.remove('all-selected');
+      }
+    }
+  }
+});
+
+// Filter bar toggle functionality
 document.addEventListener('DOMContentLoaded', function() {
   const showBtn = document.getElementById('showFilterBarBtn');
   const filterBarWrapper = document.getElementById('filterBarWrapper');
   
   // Filter bar is hidden by default
-  filterBarWrapper.style.display = 'none';
-  
   showBtn.addEventListener('click', function(e) {
     e.preventDefault();
     if (filterBarWrapper.style.display === 'none') {
       filterBarWrapper.style.display = 'block';
       showBtn.classList.add('active');
     } else {
-      filterBarWrapper.style.display = 'none';
-      showBtn.classList.remove('active');
-    }
-  });
-  
-  // Close filter dropdown when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!filterBarWrapper.contains(e.target) && e.target !== showBtn && !showBtn.contains(e.target)) {
       filterBarWrapper.style.display = 'none';
       showBtn.classList.remove('active');
     }
@@ -876,22 +923,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const filterBarWrapper = document.getElementById('filterBarWrapper');
   
   // Filter bar is hidden by default
-  filterBarWrapper.style.display = 'none';
-  
   showBtn.addEventListener('click', function(e) {
     e.preventDefault();
     if (filterBarWrapper.style.display === 'none') {
       filterBarWrapper.style.display = 'block';
       showBtn.classList.add('active');
     } else {
-      filterBarWrapper.style.display = 'none';
-      showBtn.classList.remove('active');
-    }
-  });
-  
-  // Close filter dropdown when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!filterBarWrapper.contains(e.target) && e.target !== showBtn && !showBtn.contains(e.target)) {
       filterBarWrapper.style.display = 'none';
       showBtn.classList.remove('active');
     }
