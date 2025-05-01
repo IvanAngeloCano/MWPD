@@ -82,9 +82,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 mkdir($upload_dir, 0755, true);
             }
             
+            // For regular documents
             $allowed_types = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
-                             'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                             'image/jpeg', 'image/png', 'image/gif', 'text/plain'];
+                              'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                              'text/plain'];
+            
+            // For images, only allow jpg, jpeg, png
+            $allowed_image_types = ['image/jpeg', 'image/png', 'image/jpg'];
             
             foreach ($_FILES['documents']['name'] as $key => $name) {
                 if ($_FILES['documents']['error'][$key] === UPLOAD_ERR_OK) {
@@ -93,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $file_size = $_FILES['documents']['size'][$key];
                     
                     // Validate file type
-                    if (!in_array($file_type, $allowed_types)) {
+                    if (!in_array($file_type, $allowed_types) && !in_array($file_type, $allowed_image_types)) {
                         throw new Exception("File type not allowed: $name");
                     }
                     
@@ -119,6 +123,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ]);
                 } elseif ($_FILES['documents']['error'][$key] !== UPLOAD_ERR_NO_FILE) {
                     $error_code = $_FILES['documents']['error'][$key];
+                    throw new Exception("File upload error: $name, Code: $error_code");
+                }
+            }
+        }
+        
+        // Handle image uploads
+        if (!empty($_FILES['images']['name'][0])) {
+            // Check if direct_hire_documents table has file_content column
+            try {
+                $check_column = $pdo->query("SHOW COLUMNS FROM direct_hire_documents LIKE 'file_content'");
+                if ($check_column->rowCount() == 0) {
+                    // Add file_content column if it doesn't exist
+                    $pdo->exec("ALTER TABLE direct_hire_documents ADD COLUMN file_content LONGBLOB");
+                }
+            } catch (PDOException $e) {
+                // If error, continue without adding column (it might already exist)
+                error_log("Error checking/adding file_content column: " . $e->getMessage());
+            }
+            
+            foreach ($_FILES['images']['name'] as $key => $name) {
+                if ($_FILES['images']['error'][$key] === UPLOAD_ERR_OK) {
+                    $tmp_name = $_FILES['images']['tmp_name'][$key];
+                    $file_type = $_FILES['images']['type'][$key];
+                    $file_size = $_FILES['images']['size'][$key];
+                    
+                    // Validate file type
+                    if (!in_array($file_type, $allowed_image_types)) {
+                        throw new Exception("File type not allowed: $name. Only JPG, JPEG, and PNG are allowed.");
+                    }
+                    
+                    // Read file content as binary
+                    $file_content = file_get_contents($tmp_name);
+                    if ($file_content === false) {
+                        throw new Exception("Failed to read file content: $name");
+                    }
+                    
+                    // Insert into direct_hire_documents table with binary content
+                    $doc_sql = "INSERT INTO direct_hire_documents (direct_hire_id, filename, original_filename, file_type, file_size, file_content)
+                                VALUES (?, ?, ?, ?, ?, ?)"; 
+                    $doc_stmt = $pdo->prepare($doc_sql);
+                    $doc_stmt->execute([
+                        $direct_hire_id,
+                        $name, // Just use original filename as identifier
+                        $name,
+                        $file_type,
+                        $file_size,
+                        $file_content
+                    ]);
+                } elseif ($_FILES['images']['error'][$key] !== UPLOAD_ERR_NO_FILE) {
+                    $error_code = $_FILES['images']['error'][$key];
                     throw new Exception("File upload error: $name, Code: $error_code");
                 }
             }
@@ -429,6 +483,34 @@ include '_head.php';
               <h3>Selected Files</h3>
               <div id="fileList"></div>
             </div>
+            
+            <!-- Image Upload Section -->
+            <div class="image-upload-section">
+              <h3>Image Attachments</h3>
+              <p class="image-upload-info">Only JPG, JPEG, and PNG files are allowed</p>
+              <div class="upload-box">
+                <div class="upload-placeholder">
+                  <i class="fa fa-image"></i>
+                  <p>Drag images here or <button type="button" onclick="document.getElementById('imageInput').click()" class="browse-btn">Browse</button></p>
+                  <input type="file" id="imageInput" name="images[]" multiple accept=".jpg,.jpeg,.png" style="display: none;">
+                </div>
+              </div>
+              <div class="image-preview-container">
+                <div id="imagePreviewList" class="image-preview-list"></div>
+              </div>
+              <div class="selected-images-list" id="selectedImagesList">
+                <h4>Selected Images</h4>
+                <div class="no-images-message" id="noImagesMessage">No images selected</div>
+                <ul id="imagesList"></ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Image Preview Modal -->
+          <div id="imagePreviewModal" class="image-modal">
+            <span class="close-modal">&times;</span>
+            <img class="modal-content" id="modalImage">
+            <div id="imageCaption"></div>
           </div>
 
           <!-- Action Buttons -->
@@ -541,11 +623,204 @@ include '_head.php';
     padding: 15px;
   }
   
-  .uploaded-files h3 {
+  .uploaded-files h3, .image-upload-section h3 {
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 16px;
     font-weight: 600;
+  }
+  
+  .image-upload-section {
+    margin-top: 25px;
+    margin-bottom: 25px;
+  }
+  
+  .image-upload-info {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .image-preview-container {
+    margin-top: 15px;
+  }
+  
+  .image-preview-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .selected-images-list {
+    margin-top: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 15px;
+  }
+  
+  .selected-images-list h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .no-images-message {
+    color: #666;
+    font-style: italic;
+    padding: 10px 0;
+  }
+  
+  #imagesList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #imagesList li {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    background-color: white;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+  }
+  
+  .image-file-name {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .image-file-name i {
+    color: #007bff;
+  }
+  
+  .image-file-name a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .image-file-name a:hover {
+    color: #007bff;
+    text-decoration: underline;
+  }
+  
+  .image-file-size {
+    color: #888;
+    margin-right: 15px;
+    font-size: 12px;
+  }
+  
+  .remove-image-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .image-preview-item {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+  }
+  
+  .image-preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+  }
+  
+  .image-preview-item .delete-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #dc3545;
+    cursor: pointer;
+  }
+  
+  .image-preview-item .image-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Modal styles */
+  .image-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  
+  .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+  }
+  
+  #imageCaption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: white;
+    padding: 10px 0;
+  }
+  
+  .close-modal {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  
+  .close-modal:hover,
+  .close-modal:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
   }
   
   .file-item {
@@ -662,6 +937,63 @@ include '_head.php';
     }
   });
   
+  // Handle image input
+  document.getElementById('imageInput').addEventListener('change', function(e) {
+    const imagePreviewList = document.getElementById('imagePreviewList');
+    const imagesList = document.getElementById('imagesList');
+    const noImagesMessage = document.getElementById('noImagesMessage');
+    
+    // Hide the no images message if files are selected
+    if (this.files.length > 0) {
+      noImagesMessage.style.display = 'none';
+    }
+    
+    // Display selected images
+    for (let i = 0; i < this.files.length; i++) {
+      const file = this.files[i];
+      const fileId = 'image-' + Date.now() + '-' + i;
+      
+      // Validate file type
+      const fileType = file.type;
+      if (!['image/jpeg', 'image/png', 'image/jpg'].includes(fileType)) {
+        alert(`File ${file.name} is not a valid image type. Only JPG, JPEG, and PNG are allowed.`);
+        continue;
+      }
+      
+      // Add to the text list
+      const listItem = document.createElement('li');
+      listItem.id = fileId + '-item';
+      listItem.innerHTML = `
+        <span class="image-file-name">
+          <i class="fa fa-image"></i> 
+          <a href="javascript:void(0)" onclick="previewImageFromList('${fileId}')">${file.name}</a>
+        </span>
+        <span class="image-file-size">${(file.size / 1024).toFixed(1)} KB</span>
+        <button type="button" class="remove-image-btn" onclick="removeImageFromList('${fileId}')"><i class="fa fa-times"></i></button>
+      `;
+      imagesList.appendChild(listItem);
+      
+      // Create preview (hidden initially)
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        const imageItem = document.createElement('div');
+        imageItem.className = 'image-preview-item';
+        imageItem.id = fileId;
+        imageItem.style.display = 'none'; // Hidden initially
+        imageItem.innerHTML = `
+          <img src="${e.target.result}" alt="${file.name}" onclick="openImageModal(this)">
+          <button type="button" class="delete-image" onclick="removeImage('${fileId}')"><i class="fa fa-times"></i></button>
+          <div class="image-name">${file.name}</div>
+        `;
+        
+        imagePreviewList.appendChild(imageItem);
+      }
+      
+      reader.readAsDataURL(file);
+    }
+  });
+  
   // Remove file from list
   function removeFile(button, index) {
     // Note: This only removes it from the display, not from the actual FileList
@@ -671,31 +1003,94 @@ include '_head.php';
     fileItem.parentNode.removeChild(fileItem);
   }
   
-  // Handle drag and drop
-  const uploadBox = document.querySelector('.upload-box');
-  
-  uploadBox.addEventListener('dragover', function(e) {
-    e.preventDefault();
-    this.style.backgroundColor = '#e9f7fe';
-    this.style.borderColor = '#007bff';
-  });
-  
-  uploadBox.addEventListener('dragleave', function(e) {
-    e.preventDefault();
-    this.style.backgroundColor = '#f9f9f9';
-    this.style.borderColor = '#ccc';
-  });
-  
-  uploadBox.addEventListener('drop', function(e) {
-    e.preventDefault();
-    this.style.backgroundColor = '#f9f9f9';
-    this.style.borderColor = '#ccc';
+  // Remove image from preview
+  function removeImage(imageId) {
+    const imageItem = document.getElementById(imageId);
+    if (imageItem) {
+      imageItem.parentNode.removeChild(imageItem);
+    }
     
-    const fileInput = document.getElementById('fileInput');
-    fileInput.files = e.dataTransfer.files;
+    const listItem = document.getElementById(imageId + '-item');
+    if (listItem) {
+      listItem.parentNode.removeChild(listItem);
+    }
     
-    // Trigger change event
-    const event = new Event('change');
-    fileInput.dispatchEvent(event);
+    // Show 'no images' message if no images left
+    const imagesList = document.getElementById('imagesList');
+    if (imagesList.children.length === 0) {
+      document.getElementById('noImagesMessage').style.display = 'block';
+    }
+  }
+  
+  // Remove image from list
+  function removeImageFromList(imageId) {
+    removeImage(imageId);
+  }
+  
+  // Preview image from list
+  function previewImageFromList(imageId) {
+    const imageItem = document.getElementById(imageId);
+    if (imageItem) {
+      const img = imageItem.querySelector('img');
+      openImageModal(img);
+    }
+  }
+  
+  // Open image modal
+  function openImageModal(img) {
+    const modal = document.getElementById('imagePreviewModal');
+    const modalImg = document.getElementById('modalImage');
+    const captionText = document.getElementById('imageCaption');
+    
+    modal.style.display = 'block';
+    modalImg.src = img.src;
+    captionText.innerHTML = img.alt;
+  }
+  
+  // Close image modal
+  const modal = document.getElementById('imagePreviewModal');
+  const closeBtn = document.getElementsByClassName('close-modal')[0];
+  
+  closeBtn.onclick = function() {
+    modal.style.display = 'none';
+  }
+  
+  // Close modal when clicking outside the image
+  modal.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+  
+  // Handle drag and drop for regular files
+  const uploadBoxes = document.querySelectorAll('.upload-box');
+  
+  uploadBoxes.forEach(function(uploadBox, index) {
+    uploadBox.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      this.style.backgroundColor = '#e9f7fe';
+      this.style.borderColor = '#007bff';
+    });
+    
+    uploadBox.addEventListener('dragleave', function(e) {
+      e.preventDefault();
+      this.style.backgroundColor = '#f9f9f9';
+      this.style.borderColor = '#ccc';
+    });
+    
+    uploadBox.addEventListener('drop', function(e) {
+      e.preventDefault();
+      this.style.backgroundColor = '#f9f9f9';
+      this.style.borderColor = '#ccc';
+      
+      // Determine which input to use based on the drop target
+      const inputId = index === 0 ? 'fileInput' : 'imageInput';
+      const fileInput = document.getElementById(inputId);
+      fileInput.files = e.dataTransfer.files;
+      
+      // Trigger change event
+      const event = new Event('change');
+      fileInput.dispatchEvent(event);
+    });
   });
 </script>

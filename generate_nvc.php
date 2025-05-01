@@ -20,12 +20,12 @@ try {
     }
 
     $template = new TemplateProcessor('NO_VERIFIED_CONTRACT_CLEARANCE_TEMPLATE.docx');
+
     $template->setValue('Name of worker', $data['last_name'] . ', ' . $data['given_name'] . ' ' . $data['middle_name']);
     $template->setValue('Position', $data['position']);
     $template->setValue('Salary', $data['salary']);
     $template->setValue('Destination', $data['destination']);
     $template->setValue('Name of the new principal', $data['nameofthenewprincipal']);
-    //$template->setValue('Employment duration', $data['employmentduration'])
     $template->setValue('Employment duration', date('F j, Y', strtotime($data['employmentdurationstart'])) . ' to ' . date('F j, Y', strtotime($data['employmentdurationend'])));
     $template->setValue('datearrival',  date('F j, Y', strtotime($data['datearrival'])));
     $template->setValue('datedeparture',  date('F j, Y', strtotime($data['datedeparture'])));
@@ -35,9 +35,10 @@ try {
     $template->setValue('employmentdurationstart', date('F j, Y', strtotime($data['employmentdurationstart'])));
     $template->setValue('employmentdurationend', date('F j, Y', strtotime($data['employmentdurationend'])));
 
-    // Make sure the folder exists
-    if (!is_dir(__DIR__ . '/generated_files')) {
-        mkdir(__DIR__ . '/generated_files', 0777, true);
+    // Ensure the folder exists
+    $generatedFilesDir = __DIR__ . '/generated_files';
+    if (!is_dir($generatedFilesDir)) {
+        mkdir($generatedFilesDir, 0777, true);
     }
 
     // Check if a file already exists for the bmid
@@ -50,8 +51,8 @@ try {
         $filename = $existingFile['filename'];
         $savePath = $existingFile['filepath'];
 
-        // Save to a temporary file first
-        $tempFile = __DIR__ . '/generated_files/temp_' . uniqid() . '.docx';
+        // Save to a temporary file first in the generated_files folder
+        $tempFile = $generatedFilesDir . '/temp_' . uniqid() . '.docx';
         $template->saveAs($tempFile);
 
         // Delete old file
@@ -67,9 +68,9 @@ try {
         $stmtUpdate->execute([$savePath, $bmid]);
 
     } else {
-        // If no file exists, create a new one
+        // If no file exists, create a new one in the generated_files folder
         $filename = $data['last_name'] . "_NO_VERIFIED_CONTRACT_CLEARANCE" . ".docx";
-        $savePath = __DIR__ . '/generated_files/' . $filename;
+        $savePath = $generatedFilesDir . '/' . $filename;
 
         $template->saveAs($savePath);
 
@@ -77,11 +78,55 @@ try {
         $stmtInsert->execute([$bmid, $filename, $savePath]);
     }
 
-    // Open the file in a new tab
-    $relativePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath($savePath));
-    $relativePath = str_replace('\\', '/', $relativePath); // fix slashes on Windows
+    // Convert DOCX to PDF using LibreOffice
+    $sofficePath = 'C:\\Program Files\\LibreOffice\\program\\soffice.exe'; // Update the path as needed
+    $outputDir = $generatedFilesDir; // Ensure PDF is saved in generated_files folder
+    $command = "\"$sofficePath\" --headless --convert-to pdf --outdir \"$outputDir\" \"$savePath\"";
 
-    echo "<script>window.open('$relativePath', '_blank');</script>";
+    // Execute the command to convert DOCX to PDF
+    exec($command, $output, $return_var);
+
+    if ($return_var === 0) {
+        // PDF conversion was successful, get the PDF file path
+        $pdfFile = str_replace('.docx', '.pdf', $filename);
+
+        // Send PDF file directly to the browser
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: inline; filename="' . $pdfFile . '"');
+        header('Content-Length: ' . filesize($outputDir . '\\' . $pdfFile));
+
+        // Output the PDF file content
+        readfile($outputDir . '\\' . $pdfFile);
+
+        // Clean up files after sending
+        register_shutdown_function(function() use ($savePath, $pdfFile) {
+            // Wait a moment to ensure the file has been sent
+            sleep(1);
+            if (file_exists($savePath)) {
+                unlink($savePath); // Delete DOCX file
+            }
+            if (file_exists($pdfFile)) {
+                unlink($pdfFile); // Delete PDF file
+            }
+        });
+
+        exit;
+    } else {
+        // If conversion failed, provide the DOCX file as a fallback
+        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Content-Length: ' . filesize($savePath));
+        readfile($savePath);
+
+        // Clean up the DOCX file after sending
+        register_shutdown_function(function() use ($savePath) {
+            if (file_exists($savePath)) {
+                unlink($savePath);
+            }
+        });
+
+        exit;
+    }
 
 } catch (PDOException $e) {
     die("Database error: " . $e->getMessage());

@@ -618,27 +618,27 @@ function closeGenerateModal() {
 
 function GenerateAC(bmid) {
   //alert("For Generating Assessment Country chuchu.");
-  window.location.href = `generate_ac.php?bmid=${bmid}`;
+  window.open(`generate_ac.php?bmid=${bmid}`, '_blank');
 }
 function GenerateNVC(bmid) {
   //alert("For Generating No Verified Contract Clearance chuchu.");
-  window.location.href = `generate_nvc.php?bmid=${bmid}`;
+  window.open(`generate_nvc.php?bmid=${bmid}`, '_blank');
 }
 function GenerateCS(bmid) {
   //alert("For Generating Critical Skills chuchu");
-  window.location.href = `generate_cs.php?bmid=${bmid}`;
+  window.open(`generate_cs.php?bmid=${bmid}`, '_blank');
 }
 function GenerateNCC(bmid) {
   //alert("For Generating Non compliant country clearnce acheche.");
-  window.location.href = `generate_ncc.php?bmid=${bmid}`;
+  window.open(`generate_ncc.php?bmid=${bmid}`, '_blank');
 }
 function GenerateSP(bmid) {
   //alert("For Generating Seaferer's Position chuchu");
-  window.location.href = `generate_sp.php?bmid=${bmid}`;
+  window.open(`generate_sp.php?bmid=${bmid}`, '_blank');
 }
 function GenerateWEC(bmid) {
   //alert("For Generating Watch Listed employer clearance chuchu.");
-  window.location.href = `generate_wec.php?bmid=${bmid}`;
+  window.open(`generate_wec.php?bmid=${bmid}`, '_blank');
 }
 
 function openUpdateModal(bmid) {

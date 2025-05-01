@@ -17,6 +17,18 @@ try {
     $direct_hire_pending_stmt = $pdo->query("SELECT COUNT(*) FROM direct_hire WHERE status = 'pending'");
     $direct_hire_pending = $direct_hire_pending_stmt->fetchColumn();
     
+    // Total Balik Manggagawa records count
+    $bm_total_stmt = $pdo->query("SELECT COUNT(*) FROM bm");
+    $bm_total = $bm_total_stmt->fetchColumn();
+    
+    // Total Gov-to-Gov records count
+    $g2g_total_stmt = $pdo->query("SELECT COUNT(*) FROM gov_to_gov");
+    $g2g_total = $g2g_total_stmt->fetchColumn();
+    
+    // Total Job Fairs records count
+    $job_fairs_total_stmt = $pdo->query("SELECT COUNT(*) FROM job_fairs");
+    $job_fairs_total = $job_fairs_total_stmt->fetchColumn();
+    
     // Get recent pending approvals
     $pending_stmt = $pdo->query("
         SELECT 'Direct Hire' as process_type, name, status, created_at 
@@ -75,6 +87,9 @@ try {
     // Set defaults in case of database error
     $direct_hire_total = 0;
     $direct_hire_pending = 0;
+    $bm_total = 0;
+    $g2g_total = 0;
+    $job_fairs_total = 0;
     $pending_approvals = [];
     $activity_logs = [];
     $job_fairs = [];
@@ -209,7 +224,7 @@ function time_elapsed_string($datetime, $full = false) {
               <!-- Card 2: Balik Manggagawa -->
               <div class="record-card">
                 <div class="card-text">
-                  <span class="record-count">0</span>
+                  <span class="record-count"><?= number_format($bm_total) ?></span>
                   <span class="record-label">Balik Manggagawa</span>
                 </div>
                 <div class="card-icon">
@@ -220,7 +235,7 @@ function time_elapsed_string($datetime, $full = false) {
               <!-- Card 3: Gov-to-Gov -->
               <div class="record-card">
                 <div class="card-text">
-                  <span class="record-count">0</span>
+                  <span class="record-count"><?= number_format($g2g_total) ?></span>
                   <span class="record-label">Gov-to-Gov</span>
                 </div>
                 <div class="card-icon">
@@ -231,7 +246,7 @@ function time_elapsed_string($datetime, $full = false) {
               <!-- Card 4: Job Fairs -->
               <div class="record-card">
                 <div class="card-text">
-                  <span class="record-count">0</span>
+                  <span class="record-count"><?= number_format($job_fairs_total) ?></span>
                   <span class="record-label">Job Fairs</span>
                 </div>
                 <div class="card-icon">
