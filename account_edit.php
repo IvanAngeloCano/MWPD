@@ -79,8 +79,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <main class="main-content">
         <div class="account-management-wrapper">
-          <div class="page-header">
-            <h2>Edit User: <?= htmlspecialchars($user['username']) ?></h2>
+          <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h1 style="margin: 0; font-size: 24px; color: #333;">Edit User: <?= htmlspecialchars($user['username']) ?></h1>
+            <a href="accounts.php" style="display: inline-flex; align-items: center; gap: 5px; background-color: #6c757d; color: white; border: none; border-radius: 4px; padding: 8px 12px; text-decoration: none; font-weight: 500;">
+              <i class="fa fa-arrow-left"></i> Back to Users
+            </a>
           </div>
 
           <?php if (!empty($error_message)): ?>
@@ -89,40 +92,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
           <?php endif; ?>
 
-          <div class="card">
-            <div class="card-body">
+          <div class="card" style="border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px;">
+            <div class="card-body" style="padding: 20px;">
               <form method="POST" action="" class="record-form">
-                <div class="form-grid">
-                  <label>
-                    Username
-                    <input type="text" value="<?= htmlspecialchars($user['username']) ?>" disabled>
-                  </label>
+                <div class="form-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                  <div style="display: flex; flex-direction: column;">
+                    <label style="font-weight: 500; margin-bottom: 8px;">Username</label>
+                    <input type="text" value="<?= htmlspecialchars($user['username']) ?>" style="padding: 10px; border: 1px solid #ced4da; border-radius: 4px; background-color: #e9ecef;" disabled>
+                  </div>
                   
-                  <label>
-                    Password
-                    <input type="password" name="password" placeholder="Leave blank to keep current password">
-                  </label>
+                  <div style="display: flex; flex-direction: column;">
+                    <label style="font-weight: 500; margin-bottom: 8px;">Password</label>
+                    <input type="password" name="password" placeholder="Leave blank to keep current password" style="padding: 10px; border: 1px solid #ced4da; border-radius: 4px;">
+                  </div>
                   
-                  <label>
-                    Full Name
-                    <input type="text" name="full_name" value="<?= htmlspecialchars($user['full_name']) ?>" required>
-                  </label>
+                  <div style="display: flex; flex-direction: column;">
+                    <label style="font-weight: 500; margin-bottom: 8px;">Full Name</label>
+                    <input type="text" name="full_name" value="<?= htmlspecialchars($user['full_name']) ?>" style="padding: 10px; border: 1px solid #ced4da; border-radius: 4px;" required>
+                  </div>
                   
-                  <label>
-                    Role
-                    <select name="role" required>
+                  <div style="display: flex; flex-direction: column;">
+                    <label style="font-weight: 500; margin-bottom: 8px;">Role</label>
+                    <select name="role" style="padding: 10px; border: 1px solid #ced4da; border-radius: 4px; height: 42px;" required>
                       <option value="Staff" <?= $user['role'] === 'Staff' || $user['role'] === 'staff' ? 'selected' : '' ?>>Staff</option>
                       <option value="Division Head" <?= $user['role'] === 'Division Head' || $user['role'] === 'div head' ? 'selected' : '' ?>>Division Head</option>
                       <option value="Regional Director" <?= $user['role'] === 'Regional Director' || $user['role'] === 'regional director' ? 'selected' : '' ?>>Regional Director</option>
                     </select>
-                  </label>
+                  </div>
                 </div>
                 
-                <div class="form-actions">
-                  <a href="accounts.php" class="btn btn-cancel">
-                    <i class="fa fa-times"></i> Cancel
-                  </a>
-                  <button type="submit" class="btn btn-primary">
+                <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 10px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                  <button type="reset" style="display: inline-flex; align-items: center; gap: 5px; background-color: #6c757d; color: white; border: none; border-radius: 4px; padding: 10px 15px; cursor: pointer; font-weight: 500;">
+                    <i class="fa fa-refresh"></i> Reset
+                  </button>
+                  <button type="submit" style="display: inline-flex; align-items: center; gap: 5px; background-color: #28a745; color: white; border: none; border-radius: 4px; padding: 10px 15px; cursor: pointer; font-weight: 500;">
                     <i class="fa fa-save"></i> Save Changes
                   </button>
                 </div>

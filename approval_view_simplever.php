@@ -192,17 +192,8 @@ function format_date($date_string) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $pageTitle ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        /* Fix Bootstrap modal backdrop and z-index issues */
-        .modal-backdrop.show {
-          opacity: 0.5 !important;
-          z-index: 1050 !important;
-        }
-        .modal {
-          z-index: 1060 !important;
-        }
         /* Ensure modal is above sidebar/header if custom z-indexes are used */
         .modal-dialog {
           z-index: 1061 !important;
@@ -262,26 +253,20 @@ function format_date($date_string) {
                         <td><?= htmlspecialchars($approval['jobsite']) ?></td>
                         <td><?= htmlspecialchars(ucfirst($approval['type'])) ?></td>
                         <td><?= format_date($approval['created_at']) ?></td>
-                        <td class="action-icons">
-                          <a href="approval_detail_view.php?id=<?= $approval['approval_id'] ?>" class="btn btn-sm btn-primary">
-                            <i class="fas fa-eye"></i> View
-                          </a>
-                          <button class="btn btn-sm btn-success approve-record" 
-                                  data-bs-toggle="modal" 
-                                  data-bs-target="#approveModal"
-                                  data-id="<?= $approval['approval_id'] ?>"
-                                  data-direct-hire-id="<?= $approval['direct_hire_id'] ?>"
-                                  data-name="<?= htmlspecialchars($approval['name']) ?>">
-                            <i class="fas fa-check"></i> Approve
-                          </button>
-                          <button class="btn btn-sm btn-danger deny-record" 
-                                  data-bs-toggle="modal" 
-                                  data-bs-target="#denyModal"
-                                  data-id="<?= $approval['approval_id'] ?>"
-                                  data-direct-hire-id="<?= $approval['direct_hire_id'] ?>"
-                                  data-name="<?= htmlspecialchars($approval['name']) ?>">
-                            <i class="fas fa-times"></i> Deny
-                          </button>
+                        <td style="padding: 12px 15px; vertical-align: middle;">
+                          <div style="display: flex; gap: 8px;">
+                            <a href="approval_detail_view.php?id=<?= $approval['approval_id'] ?>" style="display: inline-flex; align-items: center; gap: 5px; background-color: #007bff; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer; font-size: 14px; text-decoration: none;">
+                              <i class="fas fa-eye"></i> View
+                            </a>
+                            <button onclick="showApproveModal('<?= $approval['approval_id'] ?>', '<?= $approval['direct_hire_id'] ?>', '<?= htmlspecialchars(addslashes($approval['name'])) ?>')" 
+                              style="display: inline-flex; align-items: center; gap: 5px; background-color: #28a745; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer; font-size: 14px;">
+                              <i class="fas fa-check"></i> Approve
+                            </button>
+                            <button onclick="showDenyModal('<?= $approval['approval_id'] ?>', '<?= $approval['direct_hire_id'] ?>', '<?= htmlspecialchars(addslashes($approval['name'])) ?>')" 
+                              style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer; font-size: 14px;">
+                              <i class="fas fa-times"></i> Deny
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     <?php endforeach; ?>
@@ -300,62 +285,57 @@ function format_date($date_string) {
   </div>
 
   <!-- Approve Modal -->
-  <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="approveModalLabel">Approve Record</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form method="POST" action="">
-          <div class="modal-body">
-            <p>Are you sure you want to approve the record for <strong id="approve_name"></strong>?</p>
-            <input type="hidden" name="action" value="approve">
-            <input type="hidden" name="approval_id" id="approve_approval_id">
-            <input type="hidden" name="direct_hire_id" id="approve_direct_hire_id">
-            <div class="mb-3">
-              <label for="approve_comments" class="form-label">Comments (Optional)</label>
-              <textarea class="form-control" id="approve_comments" name="comments" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-success">Approve</button>
-          </div>
-        </form>
+  <div id="approveModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+    <div class="modal-content" style="background-color: #fefefe; margin: 10% auto; padding: 0; border: 1px solid #888; width: 50%; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+      <div class="modal-header" style="padding: 15px; border-bottom: 1px solid #e9ecef; background-color: #f8f9fa;">
+        <h3 style="margin: 0; color: #333;"><i class="fa fa-check-circle" style="color: #28a745;"></i> Approve Record</h3>
+        <span class="close-modal" data-modal-id="approveModal" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
       </div>
+      <form method="POST" action="">
+        <div class="modal-body" style="padding: 15px;">
+          <p>Are you sure you want to approve the record for <strong id="approve_name"></strong>?</p>
+          <input type="hidden" name="action" value="approve">
+          <input type="hidden" name="approval_id" id="approve_approval_id">
+          <input type="hidden" name="direct_hire_id" id="approve_direct_hire_id">
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Comments (Optional)</label>
+            <textarea style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;" id="approve_comments" name="comments" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer" style="padding: 15px; border-top: 1px solid #e9ecef; text-align: right;">
+          <button type="button" class="close-modal" data-modal-id="approveModal" style="padding: 6px 12px; margin-right: 5px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
+          <button type="submit" style="padding: 6px 12px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Approve</button>
+        </div>
+      </form>
     </div>
   </div>
 
   <!-- Deny Modal -->
-  <div class="modal fade" id="denyModal" tabindex="-1" aria-labelledby="denyModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="denyModalLabel">Deny Record</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form method="POST" action="">
-          <div class="modal-body">
-            <p>Are you sure you want to deny the record for <strong id="deny_name"></strong>?</p>
-            <input type="hidden" name="action" value="deny">
-            <input type="hidden" name="approval_id" id="deny_approval_id">
-            <input type="hidden" name="direct_hire_id" id="deny_direct_hire_id">
-            <div class="mb-3">
-              <label for="deny_comments" class="form-label">Reason for Denial (Required)</label>
-              <textarea class="form-control" id="deny_comments" name="comments" rows="3" required></textarea>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-danger">Deny</button>
-          </div>
-        </form>
+  <div id="denyModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+    <div class="modal-content" style="background-color: #fefefe; margin: 10% auto; padding: 0; border: 1px solid #888; width: 50%; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+      <div class="modal-header" style="padding: 15px; border-bottom: 1px solid #e9ecef; background-color: #f8f9fa;">
+        <h3 style="margin: 0; color: #333;"><i class="fa fa-times-circle" style="color: #dc3545;"></i> Deny Record</h3>
+        <span class="close-modal" data-modal-id="denyModal" style="color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
       </div>
+      <form method="POST" action="">
+        <div class="modal-body" style="padding: 15px;">
+          <p>Are you sure you want to deny the record for <strong id="deny_name"></strong>?</p>
+          <input type="hidden" name="action" value="deny">
+          <input type="hidden" name="approval_id" id="deny_approval_id">
+          <input type="hidden" name="direct_hire_id" id="deny_direct_hire_id">
+          <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Reason for Denial (Required)</label>
+            <textarea style="width: 100%; padding: 8px; border: 1px solid #ced4da; border-radius: 4px;" id="deny_comments" name="comments" rows="3" required></textarea>
+          </div>
+        </div>
+        <div class="modal-footer" style="padding: 15px; border-top: 1px solid #e9ecef; text-align: right;">
+          <button type="button" class="close-modal" data-modal-id="denyModal" style="padding: 6px 12px; margin-right: 5px; background-color: #6c757d; color: white; border: none; border-radius: 4px; cursor: pointer;">Cancel</button>
+          <button type="submit" style="padding: 6px 12px; background-color: #dc3545; color: white; border: none; border-radius: 4px; cursor: pointer;">Deny</button>
+        </div>
+      </form>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     // Handle approve modal
     document.querySelectorAll('.approve-record').forEach(button => {
@@ -380,6 +360,36 @@ function format_date($date_string) {
       const modal = event.target;
       setTimeout(() => { modal.focus(); }, 50);
     }, true);
+
+    function showApproveModal(approval_id, direct_hire_id, name) {
+      document.getElementById('approve_approval_id').value = approval_id;
+      document.getElementById('approve_direct_hire_id').value = direct_hire_id;
+      document.getElementById('approve_name').textContent = name;
+      var approveModal = document.getElementById('approveModal');
+      approveModal.style.display = 'block';
+    }
+
+    function showDenyModal(approval_id, direct_hire_id, name) {
+      document.getElementById('deny_approval_id').value = approval_id;
+      document.getElementById('deny_direct_hire_id').value = direct_hire_id;
+      document.getElementById('deny_name').textContent = name;
+      var denyModal = document.getElementById('denyModal');
+      denyModal.style.display = 'block';
+    }
+
+    document.querySelectorAll('.close-modal').forEach(button => {
+      button.addEventListener('click', function() {
+        var modalId = this.getAttribute('data-modal-id');
+        var modal = document.getElementById(modalId);
+        modal.style.display = 'none';
+      });
+    });
+
+    window.addEventListener('click', function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>

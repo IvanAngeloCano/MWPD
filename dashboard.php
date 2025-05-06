@@ -13,37 +13,89 @@ try {
     $direct_hire_total_stmt = $pdo->query("SELECT COUNT(*) FROM direct_hire");
     $direct_hire_total = $direct_hire_total_stmt->fetchColumn();
     
+    // Total Balik Manggagawa records count
+    $balik_manggagawa_total_stmt = $pdo->query("SELECT COUNT(*) FROM bm");
+    $balik_manggagawa_total = $balik_manggagawa_total_stmt->fetchColumn();
+    
+    // Total Gov-to-Gov records count
+    $gov_to_gov_total_stmt = $pdo->query("SELECT COUNT(*) FROM gov_to_gov");
+    $gov_to_gov_total = $gov_to_gov_total_stmt->fetchColumn();
+    
+    // Total Job Fairs records count
+    $job_fairs_total_stmt = $pdo->query("SELECT COUNT(*) FROM job_fairs");
+    $job_fairs_total = $job_fairs_total_stmt->fetchColumn();
+    
+    // Total Information Sheet records count
+    $info_sheet_total_stmt = $pdo->query("SELECT COUNT(*) FROM info_sheet");
+    $info_sheet_total = $info_sheet_total_stmt->fetchColumn();
+    
     // Direct Hire pending approvals count
     $direct_hire_pending_stmt = $pdo->query("SELECT COUNT(*) FROM direct_hire WHERE status = 'pending'");
     $direct_hire_pending = $direct_hire_pending_stmt->fetchColumn();
     
-    // Get recent pending approvals
+    // Balik Manggagawa pending approvals count
+    $bm_pending_stmt = $pdo->query("SELECT COUNT(*) FROM bm WHERE remarks = 'Pending'");
+    $bm_pending = $bm_pending_stmt->fetchColumn();
+    
+    // Total pending approvals count
+    $total_pending = $direct_hire_pending + $bm_pending;
+    
+    // Get recent pending approvals from all modules
     $pending_stmt = $pdo->query("
-        SELECT 'Direct Hire' as process_type, name, status, created_at 
+        (SELECT 'Direct Hire' as process_type, name as applicant_name, status, created_at 
         FROM direct_hire 
-        WHERE status = 'pending' 
+        WHERE status = 'pending')
+        UNION ALL
+        (SELECT 'Balik Manggagawa' as process_type, CONCAT(last_name, ', ', given_name) as applicant_name, remarks as status, NOW() as created_at 
+        FROM bm 
+        WHERE remarks = 'Pending')
         ORDER BY created_at DESC 
-        LIMIT 5
+        LIMIT 10
     ");
     $pending_approvals = $pending_stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Get recent activity logs (using the direct_hire for now)
+    // Get recent activity logs from all modules
     $activity_stmt = $pdo->query("
-        SELECT 
-            CASE 
+        (SELECT 
+            CONCAT('Direct Hire: ', CASE 
                 WHEN status = 'approved' THEN CONCAT(name, ' was approved')
                 WHEN status = 'denied' THEN CONCAT(name, ' was denied')
+                WHEN status = 'pending' THEN CONCAT(name, ' is pending approval')
                 ELSE CONCAT(name, ' was added to the system')
-            END as activity,
+            END) as activity,
             created_at,
-            updated_at
-        FROM direct_hire
-        ORDER BY 
-            CASE 
-                WHEN updated_at > created_at THEN updated_at
-                ELSE created_at
-            END DESC
-        LIMIT 5
+            updated_at,
+            CASE WHEN updated_at > created_at THEN updated_at ELSE created_at END as sort_date
+        FROM direct_hire)
+        UNION ALL
+        (SELECT 
+            CONCAT('Balik Manggagawa: ', CONCAT(last_name, ', ', given_name, ' ', 
+                CASE 
+                    WHEN remarks = 'Approved' THEN 'was approved'
+                    WHEN remarks = 'Declined' THEN 'was declined'
+                    WHEN remarks = 'Pending' THEN 'is pending approval'
+                    ELSE 'was added to the system'
+                END)) as activity,
+            NULL as created_at,
+            NULL as updated_at,
+            NOW() as sort_date
+        FROM bm)
+        UNION ALL
+        (SELECT 
+            CONCAT('Gov-to-Gov: ', CONCAT(last_name, ', ', first_name, ' was added to the system')) as activity,
+            NULL as created_at,
+            NULL as updated_at,
+            NOW() as sort_date
+        FROM gov_to_gov)
+        UNION ALL
+        (SELECT 
+            CONCAT('Job Fair: ', venue, ' (', date, ') - ', status) as activity,
+            NULL as created_at,
+            NULL as updated_at,
+            date as sort_date
+        FROM job_fairs)
+        ORDER BY sort_date DESC
+        LIMIT 10
     ");
     $activity_logs = $activity_stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -209,7 +261,7 @@ function time_elapsed_string($datetime, $full = false) {
               <!-- Card 2: Balik Manggagawa -->
               <div class="record-card">
                 <div class="card-text">
-                  <span class="record-count">0</span>
+                  <span class="record-count"><?= number_format($balik_manggagawa_total) ?></span>
                   <span class="record-label">Balik Manggagawa</span>
                 </div>
                 <div class="card-icon">
@@ -220,7 +272,7 @@ function time_elapsed_string($datetime, $full = false) {
               <!-- Card 3: Gov-to-Gov -->
               <div class="record-card">
                 <div class="card-text">
-                  <span class="record-count">0</span>
+                  <span class="record-count"><?= number_format($gov_to_gov_total) ?></span>
                   <span class="record-label">Gov-to-Gov</span>
                 </div>
                 <div class="card-icon">
@@ -231,7 +283,7 @@ function time_elapsed_string($datetime, $full = false) {
               <!-- Card 4: Job Fairs -->
               <div class="record-card">
                 <div class="card-text">
-                  <span class="record-count">0</span>
+                  <span class="record-count"><?= number_format($job_fairs_total) ?></span>
                   <span class="record-label">Job Fairs</span>
                 </div>
                 <div class="card-icon">
@@ -244,7 +296,7 @@ function time_elapsed_string($datetime, $full = false) {
 
           <!-- Box 2: Pending Approvals -->
           <div class="bento-box box-pending-approvals">
-            <h2>Pending Approvals <span class="count-badge"><?= $direct_hire_pending ?></span></h2>
+            <h2>Pending Approvals <span class="count-badge"><?= $total_pending ?></span></h2>
             <?php if (count($pending_approvals) > 0): ?>
             <table>
               <thead>
@@ -259,7 +311,7 @@ function time_elapsed_string($datetime, $full = false) {
                 <?php foreach ($pending_approvals as $approval): ?>
                 <tr>
                   <td><?= htmlspecialchars($approval['process_type']) ?></td>
-                  <td><?= htmlspecialchars($approval['name']) ?></td>
+                  <td><?= htmlspecialchars($approval['applicant_name']) ?></td>
                   <td><span class="status-badge pending"><?= ucfirst(htmlspecialchars($approval['status'])) ?></span></td>
                   <td title="<?= date('M j, Y g:i A', strtotime($approval['created_at'])) ?>"><?= time_elapsed_string($approval['created_at']) ?></td>
                 </tr>

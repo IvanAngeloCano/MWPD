@@ -1,10 +1,22 @@
 <?php
 include 'session.php';
 require_once 'connection.php';
+require_once 'blacklist_check.php';
 
 // Process form submission
 $success_message = '';
 $error_message = '';
+$blacklist_warning = '';
+
+// Check if we're looking up a person
+if (isset($_GET['name']) && !empty($_GET['name'])) {
+    $name = trim($_GET['name']);
+    $blacklist_record = checkBlacklist($pdo, $name);
+    if ($blacklist_record) {
+        // Person is blacklisted, show warning
+        $blacklist_warning = generateBlacklistWarning($blacklist_record);
+    }
+}
 
 // Create uploads directory if it doesn't exist
 $upload_dir = 'uploads/direct_hire/';
@@ -20,6 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($_POST[$field])) {
                 throw new Exception("$field is required");
             }
+        }
+        
+        // Check if the person is blacklisted
+        $name = trim($_POST['name']);
+        $blacklist_record = checkBlacklist($pdo, $name);
+        if ($blacklist_record) {
+            // Person is blacklisted, but still allow the form to be submitted with a warning
+            $blacklist_warning = generateBlacklistWarning($blacklist_record);
         }
         
         // Get form data
@@ -398,7 +418,14 @@ include '_head.php';
           <i class="fa fa-exclamation-circle"></i> <?= htmlspecialchars($error_message) ?>
         </div>
         <?php endif; ?>
-
+        
+        <?php
+        // Display blacklist warning if it exists
+        if (!empty($blacklist_warning)) {
+            echo $blacklist_warning;
+        }
+        ?>
+        
         <!-- Form Section -->
         <form class="record-form" method="POST" action="" enctype="multipart/form-data">
           <input type="hidden" name="type" value="<?= htmlspecialchars($record_type) ?>">

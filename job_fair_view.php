@@ -20,16 +20,33 @@ try {
         throw new Exception("Job fair not found");
     }
     
-    // Get employers participating in this job fair
-    $employers_stmt = $pdo->prepare("
-        SELECT e.*, jfe.status as participation_status
-        FROM employers e
-        JOIN job_fair_employers jfe ON e.id = jfe.employer_id
-        WHERE jfe.job_fair_id = ?
-        ORDER BY e.name ASC
-    ");
-    $employers_stmt->execute([$job_fair_id]);
-    $employers = $employers_stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Initialize employers array
+    $employers = [];
+    
+    // Check if employers table exists before attempting to query it
+    $check_table_exists = $pdo->query("SHOW TABLES LIKE 'employers'");
+    $employers_table_exists = $check_table_exists->rowCount() > 0;
+    $job_fair_employers_table_exists = $pdo->query("SHOW TABLES LIKE 'job_fair_employers'")->rowCount() > 0;
+    
+    if ($employers_table_exists && $job_fair_employers_table_exists) {
+        // Only attempt to query employers if the table exists
+        try {
+            // Get employers participating in this job fair
+            $employers_stmt = $pdo->prepare("
+                SELECT e.*, jfe.status as participation_status
+                FROM employers e
+                JOIN job_fair_employers jfe ON e.id = jfe.employer_id
+                WHERE jfe.job_fair_id = ?
+                ORDER BY e.name ASC
+            ");
+            $employers_stmt->execute([$job_fair_id]);
+            $employers = $employers_stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            // Silently handle any errors with the employers query
+            // We don't want it to prevent viewing the job fair
+            error_log("Error fetching employers: " . $e->getMessage());
+        }
+    }
     
 } catch (Exception $e) {
     header('Location: job_fairs.php?error=' . urlencode($e->getMessage()));
@@ -115,12 +132,18 @@ include '_head.php';
           <div class="details-section">
             <div class="section-header">
               <h2>Participating Employers</h2>
+              <?php if ($employers_table_exists && $job_fair_employers_table_exists): ?>
               <a href="job_fair_employer_add.php?job_fair_id=<?= $job_fair['id'] ?>" class="btn btn-sm btn-primary">
                 <i class="fa fa-plus"></i> Add Employer
               </a>
+              <?php endif; ?>
             </div>
             
-            <?php if (count($employers) > 0): ?>
+            <?php if (!$employers_table_exists || !$job_fair_employers_table_exists): ?>
+            <div class="no-data" style="padding: 20px; text-align: center; color: #666;">
+              <p><i class="fa fa-info-circle"></i> Employers feature is not available. The required database tables have not been set up.</p>
+            </div>
+            <?php elseif (count($employers) > 0): ?>
             <div class="employers-table-wrapper">
               <table class="employers-table">
                 <thead>

@@ -371,4 +371,52 @@ function notifyApprovalDecision($direct_hire_id, $approval_id, $submitted_by, $n
         return false;
     }
 }
+
+// Notify Regional Directors about new user account requests
+function notifyNewUserRequest($username, $full_name) {
+    global $pdo;
+    ensureNotificationsTableExists();
+    
+    try {
+        // Find all Regional Directors
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE role = 'Regional Director' OR role = 'regional director'");
+        $stmt->execute();
+        $directors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $message = "New user account request: {$full_name} ({$username}) awaiting approval";
+        $link = "account_approvals.php";
+        
+        // Add notification for each Regional Director
+        foreach ($directors as $director) {
+            addNotification($director['id'], $message, null, 'user_request', $link);
+        }
+        
+        return true;
+    } catch (PDOException $e) {
+        error_log("Error notifying about new user request: " . $e->getMessage());
+        return false;
+    }
+}
+
+// Notify user about account approval or rejection
+function notifyAccountDecision($user_id, $username, $full_name, $decision, $rejection_reason = null) {
+    global $pdo;
+    ensureNotificationsTableExists();
+    
+    try {
+        $message = $decision === 'approved' 
+            ? "User account for {$full_name} ({$username}) has been approved" 
+            : "User account for {$full_name} ({$username}) has been rejected" . ($rejection_reason ? ": {$rejection_reason}" : "");
+        
+        $link = "accounts.php";
+        
+        // Add notification for the submitter
+        addNotification($user_id, $message, null, 'user_account', $link);
+        
+        return true;
+    } catch (PDOException $e) {
+        error_log("Error notifying about account decision: " . $e->getMessage());
+        return false;
+    }
+}
 ?>

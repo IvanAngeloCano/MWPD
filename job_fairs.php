@@ -132,21 +132,23 @@ include '_head.php';
         </div>
 
         <!-- Controls Section -->
-        <div class="job-fair-controls">
-          <div class="search-filter">
+        <div class="process-page-top">
+          <div class="controls">
             <form action="" method="GET" class="search-form">
-              <input type="text" name="search" placeholder="Search job fairs..."
-                class="search-bar" value="<?= htmlspecialchars($search_query) ?>">
-              <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
+              <div class="search-form">
+                <input type="text" name="search" placeholder="Search job fairs..." 
+                  class="search-bar" value="<?= htmlspecialchars($search_query) ?>">
+                <button type="submit" class="btn search-btn"><i class="fa fa-search"></i></button>
+              </div>
             </form>
 
             <div class="filter-group">
-              <form action="" method="GET">
+              <form action="" method="GET" style="display: inline-flex; align-items: center;">
                 <?php if (!empty($search_query)): ?>
                   <input type="hidden" name="search" value="<?= htmlspecialchars($search_query) ?>">
                 <?php endif; ?>
 
-                <select name="status" onchange="this.form.submit()">
+                <select name="status" onchange="this.form.submit()" class="form-control" style="margin-right: 10px;">
                   <option value="">All Statuses</option>
                   <option value="planned" <?= $status_filter === 'planned' ? 'selected' : '' ?>>Planned</option>
                   <option value="confirmed" <?= $status_filter === 'confirmed' ? 'selected' : '' ?>>Confirmed</option>
@@ -154,18 +156,13 @@ include '_head.php';
                   <option value="cancelled" <?= $status_filter === 'cancelled' ? 'selected' : '' ?>>Cancelled</option>
                 </select>
               </form>
+              
+              <a href="job_fair_add.php" class="btn add-btn" style="background-color: #28a745; color: white; border: none; border-radius: 4px; font-family: 'Montserrat', sans-serif; font-weight: 500; height: 2rem; padding: 0.5rem 1rem;">
+                <i class="fa fa-plus"></i> Add New Job Fair
+              </a>
             </div>
           </div>
 
-          <div class="action-buttons">
-            <a href="job_fair_add.php" class="btn btn-primary">
-              <i class="fa fa-plus"></i> Add New Job Fair
-            </a>
-          </div>
-        </div>
-
-        <!-- Controls Section with Rows Per Page -->
-        <div class="job-fair-top">
           <div class="table-footer">
             <span class="results-count">
               Showing <?= min(($offset + 1), $total_records) ?>-<?= min(($offset + $rows_per_page), $total_records) ?> out of <?= $total_records ?> results
@@ -189,15 +186,15 @@ include '_head.php';
 
         <!-- Job Fairs Table -->
         <div class="direct-hire-table">
-          <table>
+          <table style="border: none; border-collapse: collapse;">
             <thead>
               <tr>
-                <th>No.</th>
-                <th>Date</th>
-                <th>Venue</th>
-                <th>Contact Information</th>
-                <th>Status</th>
-                <th>Action</th>
+                <th style="border: none;">No.</th>
+                <th style="border: none;">Date</th>
+                <th style="border: none;">Venue</th>
+                <th style="border: none;">Contact Information</th>
+                <th style="border: none;">Status</th>
+                <th style="border: none;">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -207,23 +204,23 @@ include '_head.php';
                 </tr>
               <?php else: ?>
                 <?php foreach ($job_fairs as $index => $fair): ?>
-                  <tr>
-                    <td><?= $offset + $index + 1 ?></td>
-                    <td><?= date('F d, Y', strtotime($fair['date'])) ?></td>
-                    <td><?= htmlspecialchars($fair['venue']) ?></td>
-                    <td>
+                  <tr style="border-bottom: 1px solid #f0f0f0;">
+                    <td style="border: none;"><?= $offset + $index + 1 ?></td>
+                    <td style="border: none;"><?= date('F d, Y', strtotime($fair['date'])) ?></td>
+                    <td style="border: none;"><?= htmlspecialchars($fair['venue']) ?></td>
+                    <td style="border: none;">
                       <?php if (!empty($fair['contact_info'])): ?>
                         <?= htmlspecialchars($fair['contact_info']) ?>
                       <?php else: ?>
                         <span class="text-muted">Not provided</span>
                       <?php endif; ?>
                     </td>
-                    <td>
+                    <td style="border: none;">
                       <span class="status <?= strtolower($fair['status']) ?>">
                         <?= ucfirst(htmlspecialchars($fair['status'])) ?>
                       </span>
                     </td>
-                    <td class="action-icons">
+                    <td class="action-icons" style="border: none;">
                       <a href="job_fair_view.php?id=<?= $fair['id'] ?>" title="View Job Fair">
                         <i class="fa fa-eye"></i>
                       </a>
@@ -329,6 +326,31 @@ include '_head.php';
 </div>
 
 <script>
+  // Add double-click functionality to table rows
+  document.addEventListener('DOMContentLoaded', function() {
+    const tableRows = document.querySelectorAll('.main-content table tbody tr');
+    
+    tableRows.forEach(row => {
+      row.style.cursor = 'pointer';
+      
+      row.addEventListener('dblclick', function(e) {
+        // Make sure we're not clicking on a button or link
+        if (e.target.tagName.toLowerCase() !== 'button' && 
+            e.target.tagName.toLowerCase() !== 'a' && 
+            e.target.tagName.toLowerCase() !== 'i' &&
+            !e.target.closest('button') && 
+            !e.target.closest('a')) {
+          
+          // Get the job fair ID from the row
+          const viewLink = this.querySelector('a[href*="job_fair_view.php"]');
+          if (viewLink) {
+            window.location.href = viewLink.getAttribute('href');
+          }
+        }
+      });
+    });
+  });
+
   function confirmDelete(id) {
     const modal = document.getElementById('deleteModal');
     const confirmBtn = document.getElementById('confirmDeleteBtn');
@@ -412,29 +434,76 @@ include '_head.php';
     margin: 0.25rem 0;
   }
 
-  .job-fair-controls {
+  .process-page-top {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .controls {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-  }
-
-  .search-filter {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+    margin-bottom: 15px;
   }
 
   .search-form {
     display: flex;
     align-items: center;
+    flex: 1;
+    max-width: 400px;
   }
 
   .search-bar {
-    min-width: 300px;
+    flex: 1;
     padding: 0.5rem;
     border: 1px solid #ced4da;
+    border-right: none;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    outline: none;
+    height: 38px;
+  }
+
+  .search-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 0 15px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-btn:hover {
+    background-color: #5a6268;
+  }
+
+  .add-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
     border-radius: 4px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .add-btn:hover {
+    background-color: #218838;
+    color: white;
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 
   .filter-group select {
@@ -486,12 +555,6 @@ include '_head.php';
   }
 
   /* Rows Per Page and Table Footer Styles */
-  .job-fair-top {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
   .table-footer {
     display: flex;
     justify-content: space-between;
@@ -508,11 +571,13 @@ include '_head.php';
   /* Direct Hire Table Styles */
   .direct-hire-table {
     overflow-x: auto;
+    border-collapse: collapse;
   }
 
   .direct-hire-table table {
     width: 100%;
     border-collapse: collapse;
+    border: none;
   }
 
   .direct-hire-table thead {
@@ -523,10 +588,11 @@ include '_head.php';
   .direct-hire-table th {
     padding: 0.75rem;
     text-align: left;
+    border: none;
   }
 
   .direct-hire-table tbody tr {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #f0f0f0;
   }
 
   tbody tr:nth-child(even) {
@@ -535,6 +601,7 @@ include '_head.php';
 
   .direct-hire-table td {
     padding: 0.75rem;
+    border: none;
   }
 
   .direct-hire-table .status {
@@ -571,25 +638,37 @@ include '_head.php';
     justify-content: center;
   }
 
-  .direct-hire-table .action-icons i {
-    cursor: pointer;
-  }
-
   .direct-hire-table .action-icons a {
-    color: inherit;
     text-decoration: none;
+    margin-right: 10px;
   }
 
+  .direct-hire-table .action-icons a i {
+    font-size: 16px;
+  }
+  
   .direct-hire-table .action-icons i.fa-eye {
-    color: #007bff;
+    color: #007bff; /* Blue color */
   }
-
+  
   .direct-hire-table .action-icons i.fa-edit {
-    color: #28a745;
+    color: #28a745; /* Green color */
   }
-
+  
   .direct-hire-table .action-icons i.fa-trash-alt {
-    color: #dc3545;
+    color: #dc3545; /* Red color */
+  }
+  
+  .direct-hire-table .action-icons i.fa-eye:hover {
+    color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .direct-hire-table .action-icons i.fa-edit:hover {
+    color: #218838; /* Darker green on hover */
+  }
+  
+  .direct-hire-table .action-icons i.fa-trash-alt:hover {
+    color: #bd2130; /* Darker red on hover */
   }
 
   .no-records {

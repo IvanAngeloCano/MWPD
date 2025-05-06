@@ -35,10 +35,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <span>Information sheet</span>
       </a>
       
+
+      
       <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'div head' || $_SESSION['role'] === 'Division Head')): ?>
-      <a href="accounts.php" class="nav-item <?= ($currentPage == 'accounts.php') ? 'active' : '' ?>">
-        <i class="fa fa-users-cog"></i>
-        <span>Accounts</span>
+      <a href="account_dashboard.php" class="nav-item <?= ($currentPage == 'account_dashboard.php') ? 'active' : '' ?>">
+        <i class="fa fa-user-shield"></i>
+        <span>Account Dashboard</span>
       </a>
       <?php endif; ?>
       
@@ -46,6 +48,10 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       <a href="approval_view_simple.php" class="nav-item <?= ($currentPage == 'approval_view_simple.php') ? 'active' : '' ?>">
         <i class="fa fa-check-circle"></i>
         <span>Approval</span>
+      </a>
+      <a href="account_dashboard.php" class="nav-item <?= ($currentPage == 'account_dashboard.php') ? 'active' : '' ?>">
+        <i class="fa fa-user-shield"></i>
+        <span>Account Dashboard</span>
       </a>
       <?php endif; ?>
     </nav>

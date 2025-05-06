@@ -20,4 +20,35 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/session_notifications.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  
+  <!-- Set variables for blacklist button -->
+  <?php if (isset($_SESSION['user_id']) && isset($_SESSION['role'])): ?>
+  <script>
+    // Set variables for the blacklist button
+    var userRole = '<?php echo $_SESSION['role']; ?>';
+    
+    // Check if blacklist table exists and get count of pending entries
+    <?php
+    $pendingCount = 0;
+    if (strtolower($_SESSION['role']) === 'regional director') {
+        try {
+            // First check if the blacklist table exists
+            $stmt = $pdo->query("SHOW TABLES LIKE 'blacklist'");
+            if ($stmt->rowCount() > 0) {
+                // Table exists, get pending count
+                $stmt = $pdo->query("SELECT COUNT(*) FROM blacklist WHERE status = 'pending'");
+                $pendingCount = $stmt->fetchColumn();
+            }
+        } catch (Exception $e) {
+            // Silently fail, don't show count
+            $pendingCount = 0;
+        }
+    }
+    ?>
+    var pendingBlacklistCount = <?php echo $pendingCount; ?>;
+  </script>
+  
+  <!-- Include floating blacklist button script -->
+  <script src="assets/js/floating-blacklist-button.js"></script>
+  <?php endif; ?>
 </head>

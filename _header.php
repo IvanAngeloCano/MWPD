@@ -382,12 +382,12 @@ if (isset($_SESSION['user_id'])) {
     function dismissNotification(id) {
       if (!id) return;
 
-      fetch('notification_actions.php', {
+      fetch('dismiss_notification.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: 'action=delete&id=' + id
+          body: 'notification_id=' + id
         })
         .then(response => response.json())
         .then(data => {

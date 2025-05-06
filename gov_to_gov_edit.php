@@ -84,7 +84,16 @@ include '_head.php';
             <label>Company Name/Year Started–Ended<input type="text" name="company_name_year_started_ended" value="<?= htmlspecialchars($record['company_name_year_started_ended']) ?>"></label>
             <label>With Other Experience<input type="text" name="with_job_experience_aside_from" value="<?= htmlspecialchars($record['with_job_experience_aside_from']) ?>"></label>
             <label>Name/Company/Year Started–Ended<input type="text" name="name_company_year_started_ended" value="<?= htmlspecialchars($record['name_company_year_started_ended']) ?>"></label>
-            <label>Remarks<input type="text" name="remarks" value="<?= htmlspecialchars($record['remarks']) ?>"></label>
+            <label>Remarks
+              <select name="remarks">
+                <option value="Pending" <?= $record['remarks'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
+                <option value="Good" <?= $record['remarks'] === 'Good' ? 'selected' : '' ?>>Good</option>
+                <option value="Endorsed" <?= $record['remarks'] === 'Endorsed' ? 'selected' : '' ?>>Endorsed</option>
+                <?php if ($record['remarks'] !== 'Pending' && $record['remarks'] !== 'Good' && $record['remarks'] !== 'Endorsed'): ?>
+                <option value="<?= htmlspecialchars($record['remarks']) ?>" selected><?= htmlspecialchars($record['remarks']) ?></option>
+                <?php endif; ?>
+              </select>
+            </label>
             <label>Date Received by Region<input type="date" name="date_received_by_region" value="<?= htmlspecialchars($record['date_received_by_region']) ?>"></label>
           </div>
           <div class="form-actions">

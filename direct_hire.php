@@ -598,9 +598,9 @@ include '_head.php';
                       <a href="direct_hire_edit.php?id=<?= $record['id'] ?>" title="Edit Record">
                         <i class="fa fa-edit"></i>
                       </a>
-                      <a href="javascript:void(0)" onclick="confirmDelete(<?= $record['id'] ?>)" title="Delete Record">
+                      <button class="delete-button" onclick="openDeleteModal(<?= $record['id'] ?>)" title="Delete Record">
                         <i class="fa fa-trash-alt"></i>
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 <?php endforeach; ?>
@@ -626,6 +626,155 @@ include '_head.php';
           });
         </script>
 
+        <!-- Delete Confirmation Modal -->
+        <div id="deleteModal" class="modal">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Confirm Delete</h3>
+              <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete this record? This action cannot be undone.</p>
+              <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn" onclick="confirmDelete()">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <style>
+          /* Delete Modal Styles */
+          #deleteModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+          }
+          
+          #deleteModal.show {
+            display: flex;
+          }
+          
+          #deleteModal .modal-content {
+            background-color: #fff;
+            border-radius: 5px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          }
+          
+          #deleteModal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #ffc107; /* Yellow color */
+            color: white;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+          }
+          
+          #deleteModal .modal-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+          }
+          
+          #deleteModal .modal-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+          }
+          
+          #deleteModal .modal-body {
+            padding: 20px;
+          }
+          
+          #deleteModal .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+          }
+          
+          #deleteModal .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+          }
+          
+          #deleteModal .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+          }
+          
+          #deleteModal .btn-danger {
+            background-color: #ffc107; /* Yellow color */
+            color: white;
+          }
+          
+          #deleteModal .btn-danger:hover {
+            background-color: #e0a800; /* Darker yellow on hover */
+          }
+          
+          #deleteModal .btn:hover {
+            opacity: 0.9;
+          }
+          
+          /* Delete button styles */
+          .delete-button {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            padding: 5px;
+            margin-left: 5px;
+            display: inline-block;
+            vertical-align: middle;
+          }
+          
+          .delete-button:hover {
+            color: #bd2130;
+          }
+        </style>
+
+        <script>
+          let deleteRecordId = null;
+          
+          function openDeleteModal(id) {
+            deleteRecordId = id;
+            document.getElementById('deleteModal').classList.add('show');
+          }
+          
+          function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.remove('show');
+          }
+          
+          function confirmDelete() {
+            window.location.href = "direct_hire_delete.php?id=" + deleteRecordId;
+          }
+          
+          // Close modal when clicking outside
+          window.onclick = function(event) {
+            const modal = document.getElementById('deleteModal');
+            if (event.target === modal) {
+              closeDeleteModal();
+            }
+            if (event.target == document.getElementById('popupMemoForm')) {
+              document.getElementById('popupMemoForm').style.display = "none";
+            }
+          };
+        </script>
 
         <!-- Bottom Section -->
         <div class="process-page-bot">
@@ -833,3 +982,5 @@ include '_head.php';
     });
   });
 </script>
+
+<?php include '_footer.php'; ?>

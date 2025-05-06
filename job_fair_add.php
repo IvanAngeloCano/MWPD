@@ -30,17 +30,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         // Insert into job_fairs table
-        $sql = "INSERT INTO job_fairs (date, venue, contact_numbers, invitation_contact_email, status, note) 
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO job_fairs (date, venue, contact_info, note, status) 
+                VALUES (?, ?, ?, ?, ?)";
         
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
             $date,
             $venue,
             $contact_numbers,
-            $invitation_contact_email,
-            $status,
-            $note
+            $note,
+            $status
         ]);
         
         $job_fair_id = $pdo->lastInsertId();
