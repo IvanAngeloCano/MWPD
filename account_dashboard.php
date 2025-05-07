@@ -618,12 +618,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                         <td style="padding: 12px 15px; vertical-align: middle;">
                           <div style="display: flex; gap: 8px; justify-content: center;">
                             <?php if (!$is_division_head): ?>
-                            <button onclick="showApproveModal(<?= $approval['id'] ?>, '<?= htmlspecialchars(addslashes($approval['username'])) ?>', '<?= htmlspecialchars(addslashes($approval['full_name'])) ?>')" style="display: inline-flex; align-items: center; gap: 5px; background-color: #28a745; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer;">
-                              <i class="fas fa-check"></i> Approve
-                            </button>
-                            <button onclick="showDenyModal(<?= $approval['id'] ?>, '<?= htmlspecialchars(addslashes($approval['username'])) ?>', '<?= htmlspecialchars(addslashes($approval['full_name'])) ?>')" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer;">
-                              <i class="fas fa-times"></i> Deny
-                            </button>
+                            <form method="POST" action="process_account_approval.php" style="display: inline;">
+                              <input type="hidden" name="approval_id" value="<?= $approval['id'] ?>">
+                              <input type="hidden" name="action" value="approve">
+                              <button type="submit" style="display: inline-flex; align-items: center; gap: 5px; background-color: #28a745; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer;">
+                                <i class="fas fa-check"></i> Approve
+                              </button>
+                            </form>
+                            <form method="POST" action="process_account_approval.php" style="display: inline;" onsubmit="return validateDenyForm(this);">
+                              <input type="hidden" name="approval_id" value="<?= $approval['id'] ?>">
+                              <input type="hidden" name="action" value="reject">
+                              <input type="hidden" name="rejection_reason" id="rejection_reason_<?= $approval['id'] ?>" value="">
+                              <button type="submit" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer;">
+                                <i class="fas fa-times"></i> Deny
+                              </button>
+                            </form>
                             <?php else: ?>
                             <span class="badge" style="background-color: #6c757d; color: white; padding: 6px 12px; border-radius: 4px;">Pending Approval</span>
                             <?php endif; ?>
@@ -653,7 +662,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
               <span class="close" data-modal-id="approveModal">&times;</span>
             </div>
             <div class="modal-body">
-              <form id="approveForm" action="process_account_approval.php" method="post" onsubmit="event.preventDefault(); submitApproval();">
+              <form id="approveForm" action="process_account_approval.php" method="post">
                 <input type="hidden" name="action" value="approve">
                 <input type="hidden" id="approve_approval_id" name="approval_id" value="">
                 <input type="hidden" name="no_redirect" value="1">
@@ -665,7 +674,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="close-modal btn btn-secondary" data-modal-id="approveModal">Cancel</button>
-                  <button type="submit" class="btn btn-success">Approve</button>
+                  <button type="submit" class="btn btn-success" onclick="submitApproval(); return false;">Approve</button>
                 </div>
               </form>
             </div>
@@ -681,7 +690,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             </div>
             <form id="denyForm" method="POST" action="process_account_approval.php">
               <input type="hidden" name="approval_id" id="deny_approval_id">
-              <input type="hidden" name="action" value="deny">
+              <input type="hidden" name="action" value="reject">
               
               <p style="margin-bottom: 20px;">Are you sure you want to deny the account for <span id="deny_user_name" style="font-weight: bold;"></span>?</p>
               
@@ -692,7 +701,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
               
               <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
                 <button type="button" class="close-modal" data-modal-id="denyModal" style="background-color: #6c757d; color: white; border: none; border-radius: 4px; padding: 10px 15px; cursor: pointer;">Cancel</button>
-                <button type="submit" style="background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 10px 15px; cursor: pointer;">
+                <button type="submit" style="background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 10px 15px; cursor: pointer;" onclick="submitDenial(); return false;">
                   <i class="fas fa-times"></i> Deny
                 </button>
               </div>
@@ -707,7 +716,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 <script>
   // Modal functions
-  <?php if (!$is_division_head): ?>
   function showApproveModal(approvalId, username, fullName) {
     document.getElementById('approve_approval_id').value = approvalId;
     document.getElementById('approve_user_name').textContent = fullName + ' (' + username + ')';
@@ -719,7 +727,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     document.getElementById('deny_user_name').textContent = fullName + ' (' + username + ')';
     document.getElementById('denyModal').style.display = 'block';
   }
-  <?php endif; ?>
+  
+  // Add double-click functionality to approval table rows
+  document.addEventListener('DOMContentLoaded', function() {
+    const approvalRows = document.querySelectorAll('.tab-content[class*="approvals"] tbody tr');
+    
+    approvalRows.forEach(function(row) {
+      row.style.cursor = 'pointer';
+      
+      row.addEventListener('dblclick', function(e) {
+        // Don't trigger if clicking on buttons or checkboxes
+        if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT' || 
+            e.target.tagName === 'I' || e.target.closest('button') || e.target.closest('input')) {
+          return;
+        }
+        
+        const approvalId = this.getAttribute('data-approval-id');
+        const username = this.getAttribute('data-username');
+        const fullName = this.getAttribute('data-fullname');
+        
+        if (approvalId && username && fullName) {
+          showApproveModal(approvalId, username, fullName);
+        }
+      });
+    });
+  });
   
   // Close modal when clicking on X or Cancel
   document.querySelectorAll('.close, .close-modal').forEach(function(element) {
@@ -925,7 +957,9 @@ function submitApproval() {
           document.getElementById('successModal').style.display = 'block';
           
           // Reload the page to refresh the data
-          //window.location.reload();
+          setTimeout(function() {
+            window.location.reload();
+          }, 1500);
         } else {
           // Show error message
           document.getElementById('errorMessage').textContent = response.message || 'An error occurred during account approval.';
@@ -960,4 +994,148 @@ function submitApproval() {
   // Send the form data
   xhr.send(formData);
 }
+
+// Simple direct function to handle denial form submission
+function submitDenial() {
+  // Get the form and button
+  const form = document.getElementById('denyForm');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  
+  // Show processing state
+  const originalText = submitBtn.innerHTML;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  submitBtn.disabled = true;
+  
+  // Create form data with required parameters
+  const formData = new FormData(form);
+  formData.append('no_redirect', '1');
+  
+  // Use vanilla AJAX for maximum compatibility
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', 'process_account_approval.php', true);
+  
+  xhr.onload = function() {
+    // Hide the modal regardless of success
+    document.getElementById('denyModal').style.display = 'none';
+    
+    if (xhr.status >= 200 && xhr.status < 300) {
+      try {
+        // Try to parse as JSON
+        const response = JSON.parse(xhr.responseText);
+        if (response && response.success) {
+          // Show success message using alert as fallback if modal elements don't exist
+          if (document.getElementById('successMessage')) {
+            document.getElementById('successMessage').textContent = response.message || 'Account denied successfully!';
+            document.getElementById('successModal').style.display = 'block';
+          } else {
+            alert(response.message || 'Account denied successfully!');
+          }
+          
+          // Reload the page to refresh the data
+          setTimeout(function() {
+            window.location.reload();
+          }, 1500);
+        } else {
+          // Show error message
+          if (document.getElementById('errorMessage')) {
+            document.getElementById('errorMessage').textContent = response.message || 'An error occurred during account denial.';
+            document.getElementById('errorModal').style.display = 'block';
+          } else {
+            alert(response.message || 'An error occurred during account denial.');
+          }
+        }
+      } catch (e) {
+        console.error('Error parsing JSON response:', e);
+        if (document.getElementById('errorMessage')) {
+          document.getElementById('errorMessage').textContent = 'An error occurred during account denial.';
+          document.getElementById('errorModal').style.display = 'block';
+        } else {
+          alert('An error occurred during account denial.');
+        }
+      }
+    } else {
+      // HTTP error
+      if (document.getElementById('errorMessage')) {
+        document.getElementById('errorMessage').textContent = 'HTTP error ' + xhr.status + ' occurred during account denial.';
+        document.getElementById('errorModal').style.display = 'block';
+      } else {
+        alert('HTTP error ' + xhr.status + ' occurred during account denial.');
+      }
+    }
+    
+    // Reset button
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  };
+  
+  xhr.onerror = function() {
+    console.error('Network error occurred');
+    // Show error message
+    if (document.getElementById('errorMessage')) {
+      document.getElementById('errorMessage').textContent = 'A network error occurred during account denial.';
+      document.getElementById('errorModal').style.display = 'block';
+    } else {
+      alert('A network error occurred during account denial.');
+    }
+    
+    // Reset button
+    submitBtn.innerHTML = originalText;
+    submitBtn.disabled = false;
+  };
+  // Send the form data
+  xhr.send(formData);
+}
 </script>
+
+<script>
+// Function to validate the deny form and get the rejection reason
+function validateDenyForm(form) {
+  // Get the approval ID from the form
+  const approvalIdInput = form.querySelector('input[name="approval_id"]');
+  const approvalId = approvalIdInput ? approvalIdInput.value : '';
+  
+  // Prompt for a rejection reason
+  const reason = prompt('Please enter a reason for denying this account request:');
+  
+  // If the user cancels the prompt or provides no reason, prevent form submission
+  if (reason === null || reason.trim() === '') {
+    alert('A reason is required to deny an account request.');
+    return false;
+  }
+  
+  // Set the reason in the hidden input field
+  const reasonInput = document.getElementById('rejection_reason_' + approvalId);
+  if (reasonInput) {
+    reasonInput.value = reason;
+  }
+  
+  // Allow the form to submit
+  return true;
+}
+</script>
+
+<!-- Success Modal -->
+<div id="successModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+  <div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; border-radius: 8px; width: 50%; max-width: 500px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <div class="modal-header" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="margin: 0; font-size: 20px; color: #333;">Success</h2>
+      <span class="close" data-modal-id="successModal" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p id="successMessage" style="margin-bottom: 20px;">Action completed successfully!</p>
+    </div>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div id="errorModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+  <div class="modal-content" style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; border-radius: 8px; width: 50%; max-width: 500px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <div class="modal-header" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center;">
+      <h2 style="margin: 0; font-size: 20px; color: #333;">Error</h2>
+      <span class="close" data-modal-id="errorModal" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+    </div>
+    <div class="modal-body">
+      <p id="errorMessage" style="margin-bottom: 20px; color: #dc3545;">An error occurred. Please try again.</p>
+    </div>
+  </div>
+</div>

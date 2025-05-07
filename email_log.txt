@@ -1,0 +1,16 @@
+[2025-05-07 07:36:23] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:24] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:27] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:27] TO: castanar656@gmail.com | SUBJECT: MWPD System - New Account Request | TYPE: new_account_request | STATUS: failed
+[2025-05-07 07:36:28] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:32] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:33] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:34] TO: castanar656@gmail.com | SUBJECT: MWPD System - New Account Request | TYPE: new_account_request | STATUS: failed
+[2025-05-07 07:37:25] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:30] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:31] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:32] TO: castanar656@gmail.com | SUBJECT: MWPD System - New Account Request | TYPE: new_account_request | STATUS: failed
+[2025-05-07 07:37:33] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:36] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:37] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:38] TO: castanar656@gmail.com | SUBJECT: MWPD System - New Account Request | TYPE: new_account_request | STATUS: failed

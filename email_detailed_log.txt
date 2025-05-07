@@ -1,0 +1,4 @@
+[2025-05-07 07:36:27] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request, Message: Failed to send email after 3 attempts
+[2025-05-07 07:36:34] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request, Message: Failed to send email after 3 attempts
+[2025-05-07 07:37:32] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request, Message: Failed to send email after 3 attempts
+[2025-05-07 07:37:38] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request, Message: Failed to send email after 3 attempts

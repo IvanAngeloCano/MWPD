@@ -78,9 +78,11 @@ if (isset($_SESSION['user_id'])) {
       <div class="user-profile">
         <div class="profile-icon">
           <?php if (isset($_SESSION['profile_picture']) && !empty($_SESSION['profile_picture'])): ?>
-            <img src="<?= htmlspecialchars($_SESSION['profile_picture']) ?>" alt="Profile picture" class="header-profile-picture">
+            <img src="<?= htmlspecialchars($_SESSION['profile_picture']) ?>" alt="Profile picture" class="header-profile-picture" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background-color: white;">
           <?php else: ?>
-            <i class="fa fa-user-circle"></i>
+            <div class="header-profile-picture" style="width: 40px; height: 40px; border-radius: 50%; background-color: #e0e0e0; display: flex; justify-content: center; align-items: center;">
+              <i class="fa fa-user" style="color: #9E9E9E; font-size: 20px;"></i>
+            </div>
           <?php endif; ?>
         </div>
         <div class="profile-info">
@@ -117,6 +119,16 @@ if (isset($_SESSION['user_id'])) {
 <?php displayAlerts(); ?>
 
 <style>
+  /* Profile picture styling */
+  .header-profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: white;
+    border: 2px solid #f8f9fa;
+  }
+
   .notif-icon {
     position: relative;
     font-size: 1.2rem;

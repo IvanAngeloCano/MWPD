@@ -94,28 +94,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             // Get the file and convert to base64
             $imageData = file_get_contents($_FILES['profile_picture']['tmp_name']);
             $imageType = $_FILES['profile_picture']['type'];
-            $base64Image = 'data:' . $imageType . ';base64,' . base64_encode($imageData);
-
-            // Log info
-            error_log("Image type: " . $imageType . ", Base64 length: " . strlen($base64Image));
-
-            // First, try a separate query to update just the profile picture
-            $updateStmt = $pdo->prepare("UPDATE users SET profile_picture = ? WHERE id = ?");
-            $updateResult = $updateStmt->execute([$base64Image, $userId]);
-
-            if ($updateResult && $updateStmt->rowCount() > 0) {
-                // Success!
-                $successMessage = "Profile picture updated successfully.";
-                error_log("Profile picture updated in database");
-                $uploadSuccess = true;
-
-                // Save to session
-                $_SESSION['profile_picture'] = $base64Image;
-            } else {
-                // Query executed but no rows affected
-                $errorMessage = "Failed to update profile picture. No records were updated.";
-                error_log("Profile picture update query didn't affect any rows");
+            
+            // Convert to base64 data URL
+            $base64 = 'data:' . $imageType . ';base64,' . base64_encode($imageData);
+            
+            // Update the user's profile picture in the database
+            $stmt = $pdo->prepare("UPDATE users SET profile_picture = ? WHERE id = ?");
+            $result = $stmt->execute([$base64, $userId]);
+            
+            // Also update the session immediately to ensure consistency
+            if ($result) {
+                $_SESSION['profile_picture'] = $base64;
             }
+
+            $successMessage = "Profile picture updated successfully.";
+            error_log("Profile picture updated in database");
+            $uploadSuccess = true;
         } catch (PDOException $e) {
             // Database error
             $errorMessage = "Database error: " . $e->getMessage();
@@ -144,84 +138,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-// Check for profile picture upload messages from session
-if (isset($_SESSION['success_message'])) {
-    $successMessage = $_SESSION['success_message'];
-    unset($_SESSION['success_message']);
-} elseif (isset($_SESSION['error_message'])) {
-    $errorMessage = $_SESSION['error_message'];
-    unset($_SESSION['error_message']);
-}
-
-// Process form submission for password change
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'change_password') {
-    $currentPassword = $_POST['current_password'] ?? '';
-    $newPassword = $_POST['new_password'] ?? '';
-    $confirmPassword = $_POST['confirm_password'] ?? '';
-
-    // Verify current password
-    if (empty($currentPassword)) {
-        $errorMessage = "Current password is required";
-    } elseif (empty($newPassword)) {
-        $errorMessage = "New password is required";
-    } elseif (strlen($newPassword) < 8) {
-        $errorMessage = "New password must be at least 8 characters long";
-    } elseif ($newPassword !== $confirmPassword) {
-        $errorMessage = "New password and confirm password do not match";
-    } else {
-        // Verify the current password matches the stored password
-        if (password_verify($currentPassword, $user['password'])) {
-            // Update password
-            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            $passwordStmt = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
-            $passwordStmt->execute([$hashedPassword, $userId]);
-
-            $successMessage = "Password has been updated successfully";
-        } else {
-            $errorMessage = "Current password is incorrect";
-        }
-    }
-}
-
-// Process form submission for name change
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'change_name') {
-    $fullName = $_POST['full_name'] ?? '';
-    $password = $_POST['verify_password'] ?? '';
-
-    if (empty($fullName)) {
-        $errorMessage = "Full name cannot be empty";
-    } elseif (empty($password)) {
-        $errorMessage = "Please enter your password to verify this change";
-    } else {
-        // Verify password
-        $stmt = $pdo->prepare("SELECT password FROM users WHERE id = ?");
-        $stmt->execute([$userId]);
-        $storedPassword = $stmt->fetchColumn();
-
-        $passwordCorrect = false;
-        if (strpos($storedPassword, '$2y$') === 0) {
-            // Bcrypt hashed password
-            $passwordCorrect = password_verify($password, $storedPassword);
-        } else {
-            // Plain text password (fallback)
-            $passwordCorrect = ($password === $storedPassword);
-        }
-
-        if ($passwordCorrect) {
-            // Update name
-            $stmt = $pdo->prepare("UPDATE users SET full_name = ? WHERE id = ?");
-            $stmt->execute([$fullName, $userId]);
-            $_SESSION['full_name'] = $fullName;
-            $successMessage = "Your name has been updated successfully";
-        } else {
-            $errorMessage = "Incorrect password";
-        }
-    }
-}
-
-// Update profile picture in session
+// Update profile picture in session (forcing refresh to ensure consistency)
 if (!empty($user['profile_picture'])) {
     $_SESSION['profile_picture'] = $user['profile_picture'];
+} else {
+    // Clear the session profile picture if none exists in database
+    $_SESSION['profile_picture'] = '';
 }
 
 $pageTitle = "Profile";
@@ -268,10 +190,10 @@ include '_head.php';
                             <div class="user-info-card">
                                 <div class="profile-picture-container">
                                     <?php if (!empty($user['profile_picture'])): ?>
-                                        <img src="<?= $user['profile_picture'] ?>" alt="Profile picture" class="profile-picture">
+                                        <img src="<?= $user['profile_picture'] ?>" alt="Profile picture" class="profile-picture" style="background-color: white; object-fit: cover;">
                                     <?php else: ?>
-                                        <div class="profile-picture-placeholder">
-                                            <i class="fas fa-user"></i>
+                                        <div class="profile-picture-placeholder" style="background-color: #e0e0e0; display: flex; justify-content: center; align-items: center;">
+                                            <i class="fas fa-user" style="color: #9E9E9E;"></i>
                                         </div>
                                     <?php endif; ?>
                                     <div class="change-picture-overlay">

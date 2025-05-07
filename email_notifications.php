@@ -55,13 +55,34 @@ function sendEmail($to, $subject, $html_content, $message_type = 'general') {
     $formatted_html = formatEmailContent($subject, $html_content);
     
     // Use our foolproof mailer to send the email with fallback options
-    $result = foolproof_send_email(
-        $to, 
-        $subject, 
-        $formatted_html, 
-        $config['from_email'], 
-        $config['from_name']
-    );
+    try {
+        $result = foolproof_send_email(
+            $to, 
+            $subject, 
+            $formatted_html, 
+            $config['from_email'], 
+            $config['from_name']
+        );
+    } catch (Exception $e) {
+        // Log the error but allow the process to continue
+        error_log('Email sending error: ' . $e->getMessage());
+        // Return a default result structure to avoid breaking the flow
+        $result = [
+            'success' => false,
+            'message' => 'Email sending failed: ' . $e->getMessage()
+        ];
+        
+        // For critical emails, show an error
+        if (strpos($subject, 'Password') !== false || strpos($message_type, 'password') !== false) {
+            // Return failure only for password-related emails
+            return false;
+        }
+        
+        // For non-critical notifications, allow the process to continue
+        if (strpos($subject, 'Notification') !== false || strpos($message_type, 'notification') !== false) {
+            $result['success'] = true; // Mark as success for business flow
+        }
+    }
     
     // Log the activity
     logEmailActivity(

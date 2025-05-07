@@ -124,9 +124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <main class="main-content">
         <div class="account-management-wrapper">
-          <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h1 style="margin: 0; font-size: 24px; color: #333;">Add New User</h1>
-            <a href="accounts.php" style="display: inline-flex; align-items: center; gap: 5px; background-color: #6c757d; color: white; border: none; border-radius: 4px; padding: 8px 12px; text-decoration: none; font-weight: 500;">
+          <div class="page-header" style="display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px;">
+            <a href="account_dashboard.php?tab=users" style="display: inline-flex; align-items: center; gap: 5px; background-color: #6c757d; color: white; border: none; border-radius: 4px; padding: 8px 12px; text-decoration: none; font-weight: 500;">
               <i class="fa fa-arrow-left"></i> Back to Users
             </a>
           </div>
