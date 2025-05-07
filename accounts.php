@@ -89,7 +89,7 @@ try {
                             <a href="reset_password.php?id=<?= $user['id'] ?>" title="Reset Password" style="display: inline-flex; align-items: center; color: #ffc107; text-decoration: none;">
                               <i class="fa fa-key" style="font-size: 16px;"></i>
                             </a>
-                            <a href="account_delete.php?id=<?= $user['id'] ?>" title="Delete User" style="display: inline-flex; align-items: center; color: #dc3545; text-decoration: none;">
+                            <a href="javascript:void(0)" onclick="showDeleteModal(<?= $user['id'] ?>, '<?= htmlspecialchars(addslashes($user['username'])) ?>')" title="Delete User" style="display: inline-flex; align-items: center; color: #dc3545; text-decoration: none;">
                               <i class="fa fa-trash" style="font-size: 16px;"></i>
                             </a>
                           </div>
@@ -110,8 +110,157 @@ try {
       </main>
     </div>
   </div>
+  
+  <!-- Delete User Confirmation Modal -->
+  <div id="deleteUserModal" class="modal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Deletion</h5>
+          <button type="button" class="close" onclick="closeDeleteModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-danger">
+            <p>Are you sure you want to delete user <strong id="deleteUsername"></strong>?</p>
+            <p class="mb-0">This action cannot be undone.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <form method="POST" action="process_user_deletion.php" id="deleteForm">
+            <input type="hidden" name="user_id" id="deleteUserId" value="">
+            <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">
+              <i class="fa fa-times"></i> Cancel
+            </button>
+            <button type="submit" class="btn btn-danger">
+              <i class="fa fa-trash"></i> Delete User
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <style>
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    
+    .modal-dialog {
+      position: relative;
+      width: auto;
+      margin: 1.75rem auto;
+      max-width: 500px;
+    }
+    
+    .modal-dialog-centered {
+      display: flex;
+      align-items: center;
+      min-height: calc(100% - 3.5rem);
+    }
+    
+    .modal-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 0.3rem;
+      box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.5);
+      outline: 0;
+    }
+    
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 1rem;
+      border-bottom: 1px solid #dee2e6;
+      border-top-left-radius: 0.3rem;
+      border-top-right-radius: 0.3rem;
+    }
+    
+    .modal-title {
+      margin-bottom: 0;
+      line-height: 1.5;
+      font-size: 1.25rem;
+    }
+    
+    button.close {
+      background-color: transparent;
+      border: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #000;
+      text-shadow: 0 1px 0 #fff;
+      opacity: 0.5;
+      padding: 0;
+      cursor: pointer;
+    }
+    
+    .modal-body {
+      position: relative;
+      flex: 1 1 auto;
+      padding: 1rem;
+    }
+    
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 1rem;
+      border-top: 1px solid #dee2e6;
+    }
+    
+    .modal-footer form {
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+    }
+    
+    .modal-footer .btn {
+      margin-left: 0.5rem;
+    }
+    
+    .btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      border-radius: 0.25rem;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    
+    .btn-secondary {
+      color: #fff;
+      background-color: #6c757d;
+      border-color: #6c757d;
+    }
+    
+    .btn-danger {
+      color: #fff;
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    
+    .mb-0 {
+      margin-bottom: 0;
+    }
+    
+    /* Table Row Styles */
     .edit-link, .delete-link {
       display: inline-flex;
       align-items: center;
@@ -138,6 +287,19 @@ try {
   </style>
 
   <script>
+    // Check if we need to show the delete modal (from redirects)
+    document.addEventListener('DOMContentLoaded', function() {
+      <?php if (isset($_GET['show_delete_modal']) && $_GET['show_delete_modal'] == 1 && isset($_SESSION['delete_user_id']) && isset($_SESSION['delete_username'])): ?>
+        // Show delete modal with data from session
+        showDeleteModal(<?= $_SESSION['delete_user_id'] ?>, '<?= htmlspecialchars(addslashes($_SESSION['delete_username'])) ?>');
+        <?php 
+          // Clear the session variables
+          unset($_SESSION['delete_user_id']);
+          unset($_SESSION['delete_username']);
+        ?>
+      <?php endif; ?>
+    });
+    
     // Add double-click functionality to table rows
     document.addEventListener('DOMContentLoaded', function() {
       const tableRows = document.querySelectorAll('.user-table tbody tr');
@@ -162,6 +324,29 @@ try {
         });
       });
     });
+    
+    // Delete modal functions
+    function showDeleteModal(userId, username) {
+      console.log('Opening delete modal for user:', username, 'with ID:', userId);
+      document.getElementById('deleteUserId').value = userId;
+      document.getElementById('deleteUsername').textContent = username;
+      document.getElementById('deleteUserModal').style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Disable scrolling
+    }
+    
+    function closeDeleteModal() {
+      console.log('Closing delete modal');
+      document.getElementById('deleteUserModal').style.display = 'none';
+      document.body.style.overflow = ''; // Re-enable scrolling
+    }
+    
+    // Close the modal if the user clicks outside of it
+    window.onclick = function(event) {
+      const modal = document.getElementById('deleteUserModal');
+      if (event.target === modal) {
+        closeDeleteModal();
+      }
+    };
   </script>
 </body>
 </html>

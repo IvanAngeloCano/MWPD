@@ -172,14 +172,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else if ($action === 'reject') {
             $rejection_reason = $_POST['rejection_reason'] ?? '';
             
-            // Update the approval status
-            $update_stmt = $pdo->prepare("UPDATE account_approvals SET status = 'rejected', approved_by = ?, approved_date = NOW(), rejection_reason = ? WHERE id = ?");
-            $update_stmt->execute([$_SESSION['user_id'], $rejection_reason, $approval_id]);
+            // First, check if rejection_reason column exists and add it if needed
+            try {
+                $column_check = $pdo->query("SHOW COLUMNS FROM account_approvals LIKE 'rejection_reason'");
+                $column_exists = $column_check->rowCount() > 0;
+                
+                if (!$column_exists) {
+                    // Add the column if it doesn't exist
+                    $pdo->exec("ALTER TABLE account_approvals ADD COLUMN rejection_reason TEXT NULL AFTER notes");
+                    error_log("Added missing rejection_reason column to account_approvals table");
+                }
+            } catch (PDOException $column_e) {
+                error_log("Error checking/adding rejection_reason column: " . $column_e->getMessage());
+            }
+            
+            // Update the approval status (using notes as fallback if rejection_reason column doesn't exist)
+            try {
+                $update_stmt = $pdo->prepare("UPDATE account_approvals SET status = 'rejected', approved_by = ?, approved_date = NOW(), rejection_reason = ? WHERE id = ?");
+                $update_stmt->execute([$_SESSION['user_id'], $rejection_reason, $approval_id]);
+            } catch (PDOException $update_e) {
+                // If update fails because column doesn't exist, try updating without the rejection_reason
+                if (strpos($update_e->getMessage(), "rejection_reason") !== false) {
+                    error_log("Falling back to notes field for rejection reason");
+                    $update_stmt = $pdo->prepare("UPDATE account_approvals SET status = 'rejected', approved_by = ?, approved_date = NOW(), notes = ? WHERE id = ?");
+                    $update_stmt->execute([$_SESSION['user_id'], $rejection_reason, $approval_id]);
+                } else {
+                    // If it's some other error, rethrow it
+                    throw $update_e;
+                }
+            }
             
             // Send email and notifications
             try {
-                // Notify the submitter via in-app notification
-                notifyAccountDecision($approval['submitted_by'], $approval['username'], 'rejected', $rejection_reason);
+                // Add extra error checking for the notification process
+                error_log("Starting notification process for denial, submitter ID: {$approval['submitted_by']}");
+                
+                // Safely notify the submitter via in-app notification
+                try {
+                    notifyAccountDecision($approval['submitted_by'], $approval['username'], 'rejected', $rejection_reason);
+                    error_log("In-app notification sent successfully");
+                } catch (Exception $notifyError) {
+                    error_log("Error in notifyAccountDecision: " . $notifyError->getMessage());
+                    // Continue processing, don't let notification failure stop the process
+                }
                 
                 // Send email notification to the rejected user
                 $user_email_sent = false;
@@ -255,10 +290,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($no_redirect) {
         // Return a JSON response for AJAX requests
         header('Content-Type: application/json');
-        echo json_encode([
+        // Log what we're sending back (for debugging)
+        error_log("Sending AJAX response: success=true, message=" . $response_message);
+        
+        // Make sure to properly handle any potential JSON encoding errors
+        $json_response = json_encode([
             'success' => true,
             'message' => $response_message
         ]);
+        
+        if ($json_response === false) {
+            // If JSON encoding failed, send a simpler response
+            error_log("JSON encoding error: " . json_last_error_msg());
+            echo json_encode([
+                'success' => true,
+                'message' => 'Action completed. ' . json_last_error_msg()
+            ]);
+        } else {
+            echo $json_response;
+        }
         exit();
     } else {
         // Normal redirect with message in session

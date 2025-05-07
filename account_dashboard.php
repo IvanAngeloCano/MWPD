@@ -618,21 +618,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                         <td style="padding: 12px 15px; vertical-align: middle;">
                           <div style="display: flex; gap: 8px; justify-content: center;">
                             <?php if (!$is_division_head): ?>
-                            <form method="POST" action="process_account_approval.php" style="display: inline;">
-                              <input type="hidden" name="approval_id" value="<?= $approval['id'] ?>">
-                              <input type="hidden" name="action" value="approve">
-                              <button type="submit" style="display: inline-flex; align-items: center; gap: 5px; background-color: #28a745; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer;">
-                                <i class="fas fa-check"></i> Approve
-                              </button>
-                            </form>
-                            <form method="POST" action="process_account_approval.php" style="display: inline;" onsubmit="return validateDenyForm(this);">
-                              <input type="hidden" name="approval_id" value="<?= $approval['id'] ?>">
-                              <input type="hidden" name="action" value="reject">
-                              <input type="hidden" name="rejection_reason" id="rejection_reason_<?= $approval['id'] ?>" value="">
-                              <button type="submit" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer;">
-                                <i class="fas fa-times"></i> Deny
-                              </button>
-                            </form>
+                            <button type="button" onclick="showApproveModal(<?= $approval['id'] ?>, '<?= htmlspecialchars(addslashes($approval['username'])) ?>', '<?= htmlspecialchars(addslashes($approval['full_name'])) ?>')" style="display: inline-flex; align-items: center; gap: 5px; background-color: #28a745; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer;">
+                              <i class="fas fa-check"></i> Approve
+                            </button>
+                            <button type="button" onclick="showDenyModal(<?= $approval['id'] ?>, '<?= htmlspecialchars(addslashes($approval['username'])) ?>', '<?= htmlspecialchars(addslashes($approval['full_name'])) ?>')" style="display: inline-flex; align-items: center; gap: 5px; background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 6px 12px; cursor: pointer;">
+                              <i class="fas fa-times"></i> Deny
+                            </button>
                             <?php else: ?>
                             <span class="badge" style="background-color: #6c757d; color: white; padding: 6px 12px; border-radius: 4px;">Pending Approval</span>
                             <?php endif; ?>
@@ -711,6 +702,201 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
       </main>
     </div>
   </div>
+  
+  <!-- Approve Account Modal -->
+  <div id="approveAccountModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; overflow: auto;">
+    <div class="modal-content" style="background-color: white; margin: 15% auto; padding: 20px; border-radius: 8px; width: 90%; max-width: 500px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative;">
+      <span class="close" onclick="closeModals()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; font-weight: bold; cursor: pointer;">&times;</span>
+      <h2 style="margin-top: 0; color: #333; font-size: 20px;">Approve Account</h2>
+      <p>Are you sure you want to approve the account for <strong id="approveUsername"></strong>?</p>
+      <p>Full name: <span id="approveFullname"></span></p>
+      <form method="POST" action="process_account_approval.php" style="margin-top: 20px;">
+        <input type="hidden" name="approval_id" id="approveId" value="">
+        <input type="hidden" name="action" value="approve">
+        <div style="text-align: right; margin-top: 20px;">
+          <button type="button" onclick="closeModals()" style="background-color: #6c757d; color: white; border: none; border-radius: 4px; padding: 8px 16px; margin-right: 10px; cursor: pointer;">Cancel</button>
+          <button type="submit" style="background-color: #28a745; color: white; border: none; border-radius: 4px; padding: 8px 16px; cursor: pointer;">Confirm Approval</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Deny Account Modal -->
+  <div id="denyAccountModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; overflow: auto;">
+    <div class="modal-content" style="background-color: white; margin: 15% auto; padding: 20px; border-radius: 8px; width: 90%; max-width: 500px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative;">
+      <span class="close" onclick="closeModals()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; font-weight: bold; cursor: pointer;">&times;</span>
+      <h2 style="margin-top: 0; color: #333; font-size: 20px;">Deny Account</h2>
+      <p>Are you sure you want to deny the account for <strong id="denyUsername"></strong>?</p>
+      <p>Full name: <span id="denyFullname"></span></p>
+      <form method="POST" action="process_account_approval.php" id="denyForm" onsubmit="return validateDenialForm(this);">
+        <input type="hidden" name="approval_id" id="denyId" value="">
+        <input type="hidden" name="action" value="reject">
+        <div class="form-group" style="margin-top: 15px;">
+          <label for="rejection_reason" style="display: block; margin-bottom: 5px; font-weight: 500;">Reason for Denial <span style="color: red;">*</span></label>
+          <textarea name="rejection_reason" id="rejection_reason" rows="4" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; resize: vertical;" placeholder="Please provide a reason for denying this account"></textarea>
+          <p id="reasonError" style="color: #dc3545; font-size: 14px; margin-top: 5px; display: none;">Please provide a reason for the denial</p>
+        </div>
+        <div style="text-align: right; margin-top: 20px;">
+          <button type="button" onclick="closeModals()" style="background-color: #6c757d; color: white; border: none; border-radius: 4px; padding: 8px 16px; margin-right: 10px; cursor: pointer;">Cancel</button>
+          <button type="submit" style="background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 8px 16px; cursor: pointer;">Confirm Denial</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function showApproveModal(id, username, fullname) {
+      document.getElementById('approveId').value = id;
+      document.getElementById('approveUsername').textContent = username;
+      document.getElementById('approveFullname').textContent = fullname;
+      document.getElementById('approveAccountModal').style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    function showDenyModal(id, username, fullname) {
+      // Log the values to ensure they're being passed correctly
+      console.log('Opening deny modal with ID:', id, 'Username:', username, 'Fullname:', fullname);
+      
+      // Make sure the ID is set properly
+      var denyIdField = document.getElementById('denyId');
+      denyIdField.value = id;
+      console.log('Set denyId value to:', denyIdField.value);
+      
+      // Update modal content
+      document.getElementById('denyUsername').textContent = username;
+      document.getElementById('denyFullname').textContent = fullname;
+      
+      // Reset previous form state
+      document.getElementById('reasonError').style.display = 'none';
+      document.getElementById('rejection_reason').value = '';
+      
+      // Show the modal
+      document.getElementById('denyAccountModal').style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    }
+
+    function closeModals() {
+      document.getElementById('approveAccountModal').style.display = 'none';
+      document.getElementById('denyAccountModal').style.display = 'none';
+      document.body.style.overflow = ''; // Re-enable scrolling
+    }
+
+    function validateDenialForm(form) {
+      console.log('Validating denial form');
+      var reason = document.getElementById('rejection_reason').value.trim();
+      if (reason === '') {
+        document.getElementById('reasonError').style.display = 'block';
+        return false;
+      }
+      console.log('Denial form validation passed, submitting form with ID:', document.getElementById('denyId').value);
+      return true;
+    }
+    
+    function submitDenyForm() {
+      var reason = document.getElementById('rejection_reason').value.trim();
+      if (reason === '') {
+        document.getElementById('reasonError').style.display = 'block';
+        return false;
+      }
+      
+      // Hide the error message if validation passes
+      document.getElementById('reasonError').style.display = 'none';
+      
+      // Get the approval ID
+      var approvalId = document.getElementById('denyId').value;
+      console.log('Denial for approval ID:', approvalId);
+      
+      // Create a form data object
+      var formData = new FormData();
+      formData.append('approval_id', approvalId);
+      formData.append('action', 'reject');
+      formData.append('rejection_reason', reason);
+      formData.append('no_redirect', '1'); // For AJAX handling
+      
+      // Disable the button and show loading state
+      var submitBtn = document.querySelector('#denyFormWrapper button[type="button"]:last-child');
+      var originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+      submitBtn.disabled = true;
+      
+      // For debugging, show what we're submitting
+      console.log('Submitting denial with reason:', reason);
+      
+      // Send the AJAX request
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'process_account_approval.php', true);
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          console.log('Server response:', xhr.responseText);
+          try {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+              // Show success message
+              console.log('Denial successful:', response.message);
+              document.getElementById('successMessage').textContent = response.message || 'Account denied successfully.';
+              document.getElementById('successModal').style.display = 'block';
+              
+              // Close the denial modal
+              closeModals();
+              
+              // Reload the page after a delay
+              setTimeout(function() {
+                window.location.reload();
+              }, 1500);
+            } else {
+              // Show error message
+              console.error('Denial failed:', response.message);
+              document.getElementById('errorMessage').textContent = response.message || 'An error occurred during account denial.';
+              document.getElementById('errorModal').style.display = 'block';
+            }
+          } catch (e) {
+            console.error('Error parsing JSON response:', e, 'Raw response:', xhr.responseText);
+            document.getElementById('errorMessage').textContent = 'Error parsing server response: ' + e.message;
+            document.getElementById('errorModal').style.display = 'block';
+          }
+        } else {
+          // HTTP error
+          console.error('HTTP error:', xhr.status, xhr.statusText);
+          document.getElementById('errorMessage').textContent = 'HTTP error ' + xhr.status + ' occurred during account denial.';
+          document.getElementById('errorModal').style.display = 'block';
+        }
+        
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      };
+      
+      xhr.onerror = function() {
+        console.error('Network error occurred');
+        document.getElementById('errorMessage').textContent = 'A network error occurred during account denial.';
+        document.getElementById('errorModal').style.display = 'block';
+        
+        // Reset button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      };
+      
+      // Send the request
+      xhr.send(formData);
+      console.log('Request sent to process_account_approval.php');
+    }
+    
+    // Override any existing prompt-based validation
+    var oldValidateDenyPrompt = window.validateDenyForm;
+    window.validateDenyForm = function(form) {
+      // Only use our modal validation, no browser prompts
+      return true;
+    };
+
+    // Close modal when clicking outside of it
+    window.onclick = function(event) {
+      var approveModal = document.getElementById('approveAccountModal');
+      var denyModal = document.getElementById('denyAccountModal');
+      if (event.target === approveModal || event.target === denyModal) {
+        closeModals();
+      }
+    };
+  </script>
 </body>
 </html>
 
@@ -1085,33 +1271,17 @@ function submitDenial() {
   // Send the form data
   xhr.send(formData);
 }
-</script>
 
-<script>
-// Function to validate the deny form and get the rejection reason
-function validateDenyForm(form) {
-  // Get the approval ID from the form
-  const approvalIdInput = form.querySelector('input[name="approval_id"]');
-  const approvalId = approvalIdInput ? approvalIdInput.value : '';
-  
-  // Prompt for a rejection reason
-  const reason = prompt('Please enter a reason for denying this account request:');
-  
-  // If the user cancels the prompt or provides no reason, prevent form submission
-  if (reason === null || reason.trim() === '') {
-    alert('A reason is required to deny an account request.');
-    return false;
-  }
-  
-  // Set the reason in the hidden input field
-  const reasonInput = document.getElementById('rejection_reason_' + approvalId);
-  if (reasonInput) {
-    reasonInput.value = reason;
-  }
-  
-  // Allow the form to submit
-  return true;
-}
+// Completely remove old validation system
+// Make sure our custom modals are the only ones that show up
+document.addEventListener('DOMContentLoaded', function() {
+  // This globally prevents any old validateDenyForm functions
+  window.validateDenyForm = function() {
+    // Always return true so the form doesn't submit
+    // Our modals will handle the actual submission
+    return true;
+  };
+});
 </script>
 
 <!-- Success Modal -->

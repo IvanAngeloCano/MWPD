@@ -10,14 +10,14 @@ if ($_SESSION['role'] !== 'div head' && $_SESSION['role'] !== 'Division Head') {
     exit();
 }
 
-// Check if user ID is provided
-if (!isset($_GET['id'])) {
+// Check if user ID is provided in POST
+if (!isset($_POST['user_id']) || empty($_POST['user_id'])) {
     $_SESSION['error_message'] = "No user specified for deletion.";
     header('Location: accounts.php');
     exit();
 }
 
-$user_id = $_GET['id'];
+$user_id = $_POST['user_id'];
 
 // Don't allow deletion of own account
 if ($user_id == $_SESSION['user_id']) {
@@ -26,7 +26,7 @@ if ($user_id == $_SESSION['user_id']) {
     exit();
 }
 
-// Get user data for confirmation
+// Check if user exists
 try {
     $stmt = $pdo->prepare("SELECT username FROM users WHERE id = ?");
     $stmt->execute([$user_id]);
@@ -38,20 +38,18 @@ try {
         exit();
     }
     
-    // Instead of showing the delete confirmation page,
-    // store the data in session and redirect to accounts page with a flag to show modal
-    $_SESSION['delete_user_id'] = $user_id;
-    $_SESSION['delete_username'] = $user['username'];
-    header('Location: accounts.php?show_delete_modal=1');
-    exit();
+    // Process the deletion
+    $delete_stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+    $delete_stmt->execute([$user_id]);
+    
+    // Set success message
+    $_SESSION['success_message'] = "User deleted successfully.";
     
 } catch (PDOException $e) {
-    $_SESSION['error_message'] = "Error fetching user data: " . $e->getMessage();
-    header('Location: accounts.php');
-    exit();
+    $_SESSION['error_message'] = "Database error: " . $e->getMessage();
 }
 
-// We've already redirected to the accounts page with modal,
-// so none of the following code should run
+// Redirect back to accounts page
+header('Location: accounts.php');
+exit();
 ?>
-
