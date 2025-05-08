@@ -35,7 +35,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <span>Information sheet</span>
       </a>
       
-
+      <!-- Account management section -->
+      <div class="nav-section-divider"></div>
       
       <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'div head' || $_SESSION['role'] === 'Division Head')): ?>
       <a href="account_dashboard.php" class="nav-item <?= ($currentPage == 'account_dashboard.php') ? 'active' : '' ?>">
@@ -53,6 +54,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <i class="fa fa-user-shield"></i>
         <span>Account Dashboard</span>
       </a>
+      <!-- Activity logs are integrated into dashboard -->
       <?php endif; ?>
     </nav>
   </div>

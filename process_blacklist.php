@@ -120,7 +120,7 @@ try {
                 $message = "Your request to blacklist {$record['full_name']} has been confirmed.";
                 $link = "blacklist.php?tab=blacklisted";
                 
-                addNotification($pdo, $record['submitted_by'], $title, $message, $link);
+                addNotification($record['submitted_by'], $title, $message, $link);
             }
             
             $_SESSION['success_message'] = "Person has been successfully blacklisted.";
@@ -195,7 +195,7 @@ try {
                 $message = "Your request to blacklist {$record['full_name']} has been rejected. Reason: $notes";
                 $link = "blacklist.php";
                 
-                addNotification($pdo, $record['submitted_by'], $title, $message, $link);
+                addNotification($record['submitted_by'], $title, $message, $link);
             }
             
             $_SESSION['success_message'] = "Blacklist request rejected and removed successfully.";

@@ -14,6 +14,7 @@ include '_head.php';
     $fileWithoutExtension = pathinfo($currentFile, PATHINFO_FILENAME);
     $pageTitle = ucwords(str_replace(['-', '_'], ' ', $fileWithoutExtension));
     include '_header.php';
+    include 'includes/notification_modal.php'; // Include the notification system
     ?>
 
     <main class="main-content">
@@ -220,8 +221,8 @@ include '_head.php';
           cursor: pointer;
         }
         
-        /* Generate Documents Modal */
-        #generateModal {
+        /* Modal styles for both Generate and Delete modals */
+        #generateModal, #deleteModal {
           display: none;
           position: fixed;
           top: 0;
@@ -234,8 +235,12 @@ include '_head.php';
           align-items: center;
         }
         /* When the modal is shown, add this class to display it */
-        #generateModal.show {
+        #generateModal.show, #deleteModal.show {
           display: flex;
+        }
+        /* Or with style.display = 'flex' */
+        #generateModal[style*="display: flex"], #deleteModal[style*="display: flex"] {
+          display: flex !important;
         }
         #generateModal .modal-content {
           position: relative;
@@ -899,19 +904,65 @@ include '_head.php';
   function GenerateWEC(bmid) {
     window.open(`generate_wec.php?bmid=${bmid}`, '_blank');
   }
-
+  
+  // Delete record functionality
+  let deleteRecordId = null;
+  
   function openDeleteModal(bmid) {
-    deleteBmid = bmid;
-    document.getElementById('deleteModal').classList.add('show');
+    deleteRecordId = bmid;
+    document.getElementById('deleteModal').style.display = 'flex';
   }
-
+  
   function closeDeleteModal() {
-    document.getElementById('deleteModal').classList.remove('show');
+    document.getElementById('deleteModal').style.display = 'none';
+    deleteRecordId = null;
+  }
+  
+  // Using the global notification system from notification_modal.php
+  
+  function confirmDelete() {
+    if (!deleteRecordId) return;
+    
+    // Send AJAX request to delete the record
+    fetch('delete_record.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: `table=BM&id=${deleteRecordId}&id_field=bmid`
+    })
+    .then(response => response.json())
+    .then(data => {
+      closeDeleteModal();
+      if (data.success) {
+        // Remove the row from the table
+        const rows = document.querySelectorAll('#data-table tbody tr');
+        for (let i = 0; i < rows.length; i++) {
+          const idCell = rows[i].cells[2]; // The ID is in the third column (index 2)
+          if (idCell && idCell.textContent == deleteRecordId) {
+            rows[i].remove();
+            break;
+          }
+        }
+        
+        // Show success notification modal using global helper
+        showSuccess('Record deleted successfully!');
+        
+        // Update pagination without refreshing the page
+        initPagination();
+      } else {
+        // Show error notification modal using global helper
+        showError('Error deleting record: ' + (data.message || 'Unknown error'));
+      }
+    })
+    .catch(error => {
+      closeDeleteModal();
+      console.error('Error:', error);
+      showError('An error occurred while trying to delete the record.');
+    });
   }
 
-  function confirmDelete() {
-    window.location.href = "delete.php?bmid=" + deleteBmid;
-  }
+  // Note: Delete functions are already defined above
 
   // Save original table when page loads
   var originalTableHTML = document.getElementById("data-table").innerHTML;
@@ -1022,34 +1073,35 @@ include '_head.php';
 <div id="generateModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
-      <span class="close" onclick="closeGenerateModal()">&times;</span>
       <h2>Generate Documents</h2>
+      <span class="close" onclick="closeGenerateModal()">&times;</span>
     </div>
     <div class="modal-body">
-      <p style="margin-top: 0; margin-bottom: 15px; font-size: 1.1rem; color: #495057; text-align: center;">Select a document to generate:</p>
       <div class="generate-options">
-        <button onclick="GenerateAC(currentBmid); closeGenerateModal();" class="generate-btn">
+        <div class="generate-btn" onclick="GenerateAC(currentBmid)">
           <i class="fa fa-file-alt"></i>
-          <span>Assessment Certificate</span>
-          <small>Official assessment of OFW qualifications</small>
-        </button>
-        <button onclick="GenerateNVC(currentBmid); closeGenerateModal();" class="generate-btn">
-          <i class="fa fa-file-pdf"></i>
-          <span>NVC Document</span>
-          <small>No Verification Certificate for employment</small>
-        </button>
-        <button onclick="GenerateCS(currentBmid); closeGenerateModal();" class="generate-btn">
-          <i class="fa fa-file-word"></i>
-          <span>Certification Sheet</span>
-          <small>Official certification of OFW status</small>
-        </button>
-        <button onclick="GenerateNCC(currentBmid); closeGenerateModal();" class="generate-btn">
-          <i class="fa fa-file-contract"></i>
-          <span>NCC Document</span>
-          <small>No Certification Certificate for processing</small>
-        </button>
-        <button onclick="GenerateSP(currentBmid); closeGenerateModal();" class="generate-btn">
-          <i class="fa fa-file-signature"></i>
+          <span>Agency Clearance</span>
+        </div>
+        <div class="generate-btn" onclick="GenerateNVC(currentBmid)">
+          <i class="fa fa-file-alt"></i>
+          <span>No Visa Clearance</span>
+        </div>
+        <div class="generate-btn" onclick="GenerateCS(currentBmid)">
+          <i class="fa fa-file-alt"></i>
+          <span>Clearance Stub</span>
+        </div>
+        <div class="generate-btn" onclick="GenerateNCC(currentBmid)">
+          <i class="fa fa-file-alt"></i>
+          <span>No Contract Clearance</span>
+        </div>
+        <div class="generate-btn" onclick="GenerateSP(currentBmid)">
+          <i class="fa fa-file-alt"></i>
+          <span>Standard Procedure</span>
+        </div>
+        <div class="generate-btn" onclick="GenerateWEC(currentBmid)">
+          <i class="fa fa-file-alt"></i>
+          <span>With E-Contract</span>
+        </div>
           <span>Seafarer Document</span>
           <small>Special documentation for seafarers</small>
         </button>
@@ -1079,3 +1131,5 @@ include '_head.php';
     </div>
   </div>
 </div>
+
+<!-- Using global notification system from notification_modal.php -->

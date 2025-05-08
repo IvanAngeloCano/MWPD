@@ -3,6 +3,9 @@ include 'session.php';
 require_once 'connection.php';
 $pageTitle = "Gov to Gov - MWPD Filing System";
 include '_head.php';
+?><!-- Gov to Gov extra head content -->
+<script src="includes/gov_to_gov_fixes.js" defer></script>
+<?php
 
 // --- SEARCH, FILTER, PAGINATION LOGIC (Direct Hire Style) ---
 $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
@@ -67,9 +70,14 @@ try {
   if ($active_tab === 'endorsed') {
     $filter_sql .= ' AND remarks = ?';
     $filter_params[] = 'Endorsed';
+  } else if ($active_tab === 'approved') {
+    $filter_sql .= ' AND remarks = ?';
+    $filter_params[] = 'Approved';
   } else {
-    $filter_sql .= ' AND (remarks != ? OR remarks IS NULL)';
+    // Regular tab - exclude endorsed and approved
+    $filter_sql .= ' AND (remarks NOT IN (?, ?) OR remarks IS NULL)';
     $filter_params[] = 'Endorsed';
+    $filter_params[] = 'Approved';
   }
   
   if (!empty($search_query)) {
@@ -106,6 +114,7 @@ try {
       $fileWithoutExtension = pathinfo($currentFile, PATHINFO_FILENAME);
       $pageTitle = ucwords(str_replace(['-', '_'], ' ', $fileWithoutExtension));
       include '_header.php';
+      include 'includes/notification_modal.php'; // Include the notification system
     ?>
 
     <main class="main-content">
@@ -221,10 +230,9 @@ try {
                   $filter_sql .= ' AND remarks = ?';
                   $filter_params[] = 'Approved';
                 } else { // regular tab
-                  $filter_sql .= ' AND (remarks IS NULL OR remarks = ? OR remarks NOT IN (?, ?))';
-                  $filter_params[] = '';
-                  $filter_params[] = 'Approved';
+                  $filter_sql .= ' AND (remarks NOT IN (?, ?) OR remarks IS NULL)';
                   $filter_params[] = 'Endorsed';
+                  $filter_params[] = 'Approved';
                 }
                 
                 if (!empty($search_query)) {
@@ -255,8 +263,28 @@ try {
                     echo "<td>" . htmlspecialchars($row['last_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['first_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['middle_name']) . "</td>";
-                    echo "<td>" . htmlspecialchars($row['passport_number']) . "</td>";
-                    echo "<td>" . htmlspecialchars(isset($row['remarks']) ? $row['remarks'] : 'N/A') . "</td>";
+                    
+                    // Debug and display passport number - handle both passport_number and passport_no
+                    $passport = '';
+                    if (isset($row['passport_number']) && !empty($row['passport_number'])) {
+                      $passport = $row['passport_number'];
+                    } elseif (isset($row['passport_no']) && !empty($row['passport_no'])) {
+                      $passport = $row['passport_no'];
+                    }
+                    echo "<td>" . htmlspecialchars($passport) . "</td>";
+                    
+                    // Debug and display remarks - handle both remarks and status fields
+                    // For the approved tab, always show "Approved" as the remarks
+                    if ($active_tab === 'approved') {
+                      $remarks = 'Approved';
+                    } else {
+                      $remarks = (isset($row['remarks']) && !empty($row['remarks'])) ? $row['remarks'] : 'N/A';
+                      // Fallback to status if remarks is empty
+                      if ($remarks === 'N/A' && isset($row['status']) && !empty($row['status'])) {
+                        $remarks = $row['status'];
+                      }
+                    }
+                    echo "<td style='color: #333; font-weight: normal;'>" . htmlspecialchars($remarks) . "</td>";
                     
                     // Show endorsement info in the endorsed tab
                     if ($active_tab === 'endorsed') {
@@ -409,6 +437,14 @@ try {
         <div class="form-group">
           <label>Selected Applicants:</label>
           <div id="selectedApplicants" class="selected-applicants"></div>
+        </div>
+        
+        <div class="form-group" style="margin-top: 15px;">
+          <label style="display: flex; align-items: center; cursor: pointer;">
+            <input type="checkbox" id="force_update" name="force_update" value="1" style="margin-right: 8px;">
+            <span>Update existing pending approvals</span>
+          </label>
+          <small style="color: #666; margin-top: 5px; display: block;">Check this option if you want to update records that already have pending approvals</small>
         </div>
         
         <div class="modal-footer">
@@ -1148,85 +1184,87 @@ function processAndGenerateMemo() {
   // Close the memo modal
   document.getElementById('memoModal').style.display = 'none';
   
-  // Create a loading indicator
-  const loadingIndicator = document.createElement('div');
-  loadingIndicator.className = 'loading-overlay';
-  loadingIndicator.innerHTML = `
-    <div class="loading-spinner"></div>
-    <div class="loading-text">Generating memo and updating records...</div>
-  `;
-  document.body.appendChild(loadingIndicator);
+  // Create a form to submit the data to generate_memo.php
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'generate_memo.php';
+  form.target = '_blank'; // Open in a new tab/window
   
-  // Create an AJAX request to process the memo generation
-  const memoXhr = new XMLHttpRequest();
-  memoXhr.open('POST', 'process_gov_to_gov_memo.php', true);
+  // Add employer name
+  const employerInput = document.createElement('input');
+  employerInput.type = 'hidden';
+  employerInput.name = 'employer';
+  employerInput.value = employerName;
+  form.appendChild(employerInput);
   
-  // Create form data for the request
-  const memoData = new FormData();
-  memoData.append('action', 'generate_memo');
-  memoData.append('memo_reference', memoReference);
-  memoData.append('employer', employerName);
+  // Add memo date (current date)
+  const memoDateInput = document.createElement('input');
+  memoDateInput.type = 'hidden';
+  memoDateInput.name = 'memo_date';
+  memoDateInput.value = new Date().toISOString().split('T')[0];
+  form.appendChild(memoDateInput);
+  
+  // Add source indicator
+  const sourceInput = document.createElement('input');
+  sourceInput.type = 'hidden';
+  sourceInput.name = 'source';
+  sourceInput.value = 'gov_to_gov';
+  form.appendChild(sourceInput);
+  
+  // Add memo reference as a custom field
+  const memoRefInput = document.createElement('input');
+  memoRefInput.type = 'hidden';
+  memoRefInput.name = 'memo_reference';
+  memoRefInput.value = memoReference;
+  form.appendChild(memoRefInput);
   
   // Add the selected IDs
   selectedIds.forEach(id => {
-    memoData.append('selected_ids[]', id);
+    const idInput = document.createElement('input');
+    idInput.type = 'hidden';
+    idInput.name = 'selected_ids[]';
+    idInput.value = id;
+    form.appendChild(idInput);
   });
   
-  // Handle the memo generation response
-  memoXhr.onload = function() {
-    // Remove loading indicator
-    document.body.removeChild(loadingIndicator);
-    
-    if (memoXhr.status === 200) {
-      try {
-        const response = JSON.parse(memoXhr.responseText);
-        
-        if (response.success) {
-          // Create a success notification
-          const successNotification = document.createElement('div');
-          successNotification.className = 'success-notification';
-          successNotification.innerHTML = `
-            <div class="success-content">
-              <div class="success-icon"><i class="fa fa-check-circle"></i></div>
-              <div class="success-message">
-                <h3>Memo Generated Successfully</h3>
-                <p class="note">${selectedIds.length} record(s) have been endorsed with Memo Ref: ${memoReference}</p>
-              </div>
-            </div>
-            <div class="success-actions">
-              <a href="${response.memo_url}" class="btn btn-primary" target="_blank">View Memo</a>
-              <button class="btn btn-secondary" onclick="window.location.reload()">Close</button>
-            </div>
-          `;
-          
-          document.body.appendChild(successNotification);
-          
-          // Auto-redirect after 5 seconds
-          setTimeout(function() {
-            window.location.href = 'gov_to_gov.php?tab=endorsed&success=' + encodeURIComponent('Memo generated successfully');
-          }, 5000);
-        } else {
-          alert('Error generating memo: ' + response.message);
-        }
-      } catch (e) {
-        console.error("Error parsing memo generation response:", e);
-        alert('Error processing memo generation response.');
-      }
+  // Add the form to the document body (required for submission)
+  document.body.appendChild(form);
+  
+  // Now also update the records to Endorsed status in the background
+  // Create a separate AJAX request to update the status
+  const statusXhr = new XMLHttpRequest();
+  statusXhr.open('POST', 'process_gov_to_gov_memo.php', true);
+  
+  // Create form data for status update
+  const statusData = new FormData();
+  statusData.append('action', 'update_status');
+  statusData.append('memo_reference', memoReference);
+  statusData.append('employer', employerName);
+  
+  // Add the selected IDs
+  selectedIds.forEach(id => {
+    statusData.append('selected_ids[]', id);
+  });
+  
+  // Handle the status update response
+  statusXhr.onload = function() {
+    if (statusXhr.status === 200) {
+      console.log('Records updated to Endorsed status successfully');
     } else {
-      console.error("Memo generation request failed:", memoXhr.status);
-      alert('Error generating memo. Please try again.');
+      console.error('Failed to update records to Endorsed status');
     }
   };
   
-  // Handle network errors
-  memoXhr.onerror = function(e) {
-    console.error("Network error during memo generation:", e);
-    document.body.removeChild(loadingIndicator);
-    alert('Network error occurred while generating memo.');
-  };
+  // Send the request to update statuses
+  statusXhr.send(statusData);
   
-  // Send the request
-  memoXhr.send(memoData);
+  // Submit the form to generate the memo
+  form.submit();
+  
+  // Remove the form from the document after submission
+  setTimeout(() => {
+    document.body.removeChild(form);
+  }, 500);
 }
 
 // Function to submit selected applicants for approval
@@ -1429,24 +1467,30 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
 // Double-click functionality for table rows
 document.addEventListener('DOMContentLoaded', function() {
-  const tableRows = document.querySelectorAll('#g2g-tbody tr');
-  tableRows.forEach(row => {
-    row.addEventListener('dblclick', function(e) {
-      // Don't trigger if clicking on checkbox or action buttons
-      if (e.target.closest('input[type="checkbox"]') || e.target.closest('.action-icons')) {
-        return;
-      }
-      
-      // Get the record ID from the row
-      const viewLink = row.querySelector('a[href*="gov_to_gov_view.php"]');
-      if (viewLink) {
-        window.location.href = viewLink.getAttribute('href');
-      }
-    });
+  // Use event delegation for better performance and to catch dynamically added rows
+  document.querySelector('#g2g-tbody').addEventListener('dblclick', function(e) {
+    // Get the closest tr parent - this is the clicked row
+    const row = e.target.closest('tr');
+    if (!row) return; // Not a table row
     
-    // Add cursor style to indicate clickable
-    row.style.cursor = 'pointer';
+    // Don't trigger if clicking on checkbox or action buttons
+    if (e.target.closest('input[type="checkbox"]') || e.target.closest('.action-icons')) {
+      return;
+    }
+    
+    // Get the record ID from the checkbox value or the first action link
+    const checkbox = row.querySelector('input[type="checkbox"]');
+    if (checkbox && checkbox.value) {
+      // Navigate to the view page with this ID
+      window.location.href = 'gov_to_gov_view.php?id=' + checkbox.value;
+    }
   });
+  
+  // Add cursor style to indicate rows are clickable
+  const style = document.createElement('style');
+  style.textContent = '#g2g-tbody tr { cursor: pointer; }';
+  document.head.appendChild(style);
+});
   
   // Select All functionality
   const selectAllLabel = document.getElementById('select-all-label');

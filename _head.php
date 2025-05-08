@@ -12,6 +12,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  <!-- Guided Tour CSS -->
+  <link rel="stylesheet" href="assets/css/guided-tour.css">
+  
+  <!-- Notification Fix CSS -->
+  <link rel="stylesheet" href="assets/css/notification-fix.css">
+  
+  <!-- Floating Menu Fix CSS -->
+  <link rel="stylesheet" href="assets/css/floating-menu-fix.css">
+  
+  <!-- Quick Access Menu Fix CSS -->
+  <link rel="stylesheet" href="assets/css/quick-access-fix.css">
+  
   <!-- FullCalendar CSS -->
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
 
@@ -48,7 +60,6 @@
     var pendingBlacklistCount = <?php echo $pendingCount; ?>;
   </script>
   
-  <!-- Include floating blacklist button script -->
-  <script src="assets/js/floating-blacklist-button.js"></script>
+  <!-- Blacklist button has been removed -->
   <?php endif; ?>
 </head>

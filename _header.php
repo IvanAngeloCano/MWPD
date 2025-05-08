@@ -33,7 +33,7 @@ if (isset($_SESSION['user_id'])) {
   <div class="header-right">
     <button class="quick-add">+ Quick Add</button>
 
-    <div class="notif-icon" id="notificationIcon">
+    <div class="notif-icon" id="notificationIcon" style="display: flex; margin: 0 15px; cursor: pointer; position: relative;">
       <i class="fa fa-bell"></i>
       <?php if ($unread_count > 0): ?>
         <span class="notif-dot" id="notificationDot"><?= $unread_count > 9 ? '9+' : $unread_count ?></span>
@@ -74,7 +74,7 @@ if (isset($_SESSION['user_id'])) {
       </div>
     </div>
 
-    <a href="profile.php" class="user-profile-link" style="text-decoration: none !important; border-bottom: none !important;">
+    <a href="profile.php" class="user-profile-link user-dropdown" style="text-decoration: none !important; border-bottom: none !important;">
       <div class="user-profile">
         <div class="profile-icon">
           <?php if (isset($_SESSION['profile_picture']) && !empty($_SESSION['profile_picture'])): ?>
@@ -310,14 +310,9 @@ if (isset($_SESSION['user_id'])) {
     notificationIcon.addEventListener('click', function(e) {
       e.stopPropagation();
       notificationDropdown.style.display = notificationDropdown.style.display === 'block' ? 'none' : 'block';
-
-      // Mark notifications as read when opened
-      if (notificationDropdown.style.display === 'block') {
-        const unreadItems = document.querySelectorAll('.notification-item.unread');
-        if (unreadItems.length > 0) {
-          markNotificationsAsRead(Array.from(unreadItems).map(item => item.dataset.id));
-        }
-      }
+      
+      // Don't automatically mark notifications as read when dropdown opens
+      // This follows the user's request to only mark as read when clicked
     });
 
     // Close dropdown when clicking outside
@@ -327,19 +322,39 @@ if (isset($_SESSION['user_id'])) {
       }
     });
 
-    // Mark all as read
-    markAllReadBtn.addEventListener('click', function() {
+    // Mark all as read - Fix to ensure it works properly
+    markAllReadBtn.addEventListener('click', function(e) {
+      e.stopPropagation(); // Prevent event bubbling
+      e.preventDefault();
+      
       const items = document.querySelectorAll('.notification-item');
       const ids = Array.from(items).map(item => item.dataset.id).filter(id => id);
+      
       if (ids.length > 0) {
-        markNotificationsAsRead(ids);
+        // Show loading indicator
+        markAllReadBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Processing...';
+        markAllReadBtn.disabled = true;
+        
+        // Call the endpoint
+        markNotificationsAsRead(ids, function() {
+          // Reset button after processing
+          markAllReadBtn.innerHTML = 'Mark all as read';
+          markAllReadBtn.disabled = false;
+        });
       }
     });
 
-    // Handle notification item clicks for navigation
+    // Handle notification item clicks for navigation AND mark as read when clicked
     document.addEventListener('click', function(e) {
       const notificationItem = e.target.closest('.notification-item');
       if (notificationItem && !e.target.classList.contains('notification-dismiss')) {
+        // Mark this specific notification as read when clicked
+        const notificationId = notificationItem.dataset.id;
+        if (notificationId && notificationItem.classList.contains('unread')) {
+          markNotificationsAsRead([notificationId]);
+        }
+        
+        // Navigate to the link if available
         const link = notificationItem.dataset.link;
         if (link) {
           window.location.href = link;
@@ -347,9 +362,11 @@ if (isset($_SESSION['user_id'])) {
       }
     });
 
-    // Dismiss notification
+    // Dismiss notification (fix the X button)
     document.addEventListener('click', function(e) {
       if (e.target.classList.contains('notification-dismiss')) {
+        e.stopPropagation(); // Prevent event bubbling
+        e.stopPropagation(); // Prevent triggering the notification item click
         const id = e.target.dataset.id;
         if (id) {
           dismissNotification(id);
@@ -357,9 +374,12 @@ if (isset($_SESSION['user_id'])) {
       }
     });
 
-    // Mark notifications as read via AJAX
-    function markNotificationsAsRead(ids) {
-      if (!ids || !ids.length) return;
+    // Mark notifications as read via AJAX - Improved with callback
+    function markNotificationsAsRead(ids, callback) {
+      if (!ids || !ids.length) {
+        if (callback) callback();
+        return;
+      }
 
       fetch('notification_actions.php', {
           method: 'POST',
@@ -371,9 +391,13 @@ if (isset($_SESSION['user_id'])) {
         .then(response => response.json())
         .then(data => {
           if (data.success) {
+            // Update UI for each notification
             ids.forEach(id => {
               const item = document.querySelector(`.notification-item[data-id="${id}"]`);
-              if (item) item.classList.remove('unread');
+              if (item) {
+                item.classList.remove('unread');
+                item.classList.add('read');
+              }
             });
 
             // Update the notification dot
@@ -385,36 +409,76 @@ if (isset($_SESSION['user_id'])) {
                 dot.textContent = data.unread_count > 9 ? '9+' : data.unread_count;
               }
             }
+            
+            // Log success
+            console.log('Successfully marked notifications as read:', ids);
+          } else {
+            console.error('Failed to mark notifications as read:', data.message || 'Unknown error');
           }
+          
+          // Execute callback if provided
+          if (callback) callback();
         })
-        .catch(error => console.error('Error marking notifications as read:', error));
+        .catch(error => {
+          console.error('Error marking notifications as read:', error);
+          if (callback) callback();
+        });
     }
 
-    // Dismiss notification via AJAX
+    // Dismiss notification via AJAX - FIXED VERSION
     function dismissNotification(id) {
-      if (!id) return;
+      if (!id) {
+        console.error('Attempted to dismiss notification without ID');
+        return;
+      }
+      console.log('Dismissing notification ID:', id);
 
-      fetch('dismiss_notification.php', {
+      // Show a small loading indicator on the notification
+      const item = document.querySelector(`.notification-item[data-id="${id}"]`);
+      if (item) {
+        const dismissBtn = item.querySelector('.notification-dismiss');
+        if (dismissBtn) dismissBtn.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+      }
+
+      // Use the emergency deletion endpoint instead
+      fetch('emergency_delete_notification.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: 'notification_id=' + id
         })
-        .then(response => response.json())
+        .then(response => {
+          console.log('Dismiss response status:', response.status);
+          return response.text();
+        })
+        .then(text => {
+          console.log('Raw response:', text);
+          try {
+            return JSON.parse(text);
+          } catch (e) {
+            console.error('Failed to parse JSON:', e, text);
+            throw new Error('Invalid JSON response');
+          }
+        })
         .then(data => {
-          if (data.success) {
-            const item = document.querySelector(`.notification-item[data-id="${id}"]`);
+          console.log('Dismissal result:', data);
+          if (data && data.success) {
             if (item) {
+              // Animate removal
               item.style.height = '0';
               item.style.padding = '0';
               item.style.overflow = 'hidden';
+              item.style.opacity = '0';
+              item.style.marginBottom = '0';
+              
               setTimeout(() => {
+                // Actually remove from DOM
                 item.remove();
 
                 // Check if no notifications left
                 const list = document.getElementById('notificationList');
-                if (list && list.children.length === 0) {
+                if (list && (!list.children.length || (list.children.length === 1 && list.children[0].classList.contains('no-notifications')))) {
                   list.innerHTML = '<div class="no-notifications">No notifications</div>';
                 }
 
@@ -429,10 +493,31 @@ if (isset($_SESSION['user_id'])) {
                 }
               }, 300);
             }
+          } else {
+            console.error('Failed to dismiss notification:', data?.message || 'Unknown error');
+            alert('Could not remove notification. Please try again.');
+            
+            // Reset the dismiss button
+            if (item) {
+              const dismissBtn = item.querySelector('.notification-dismiss');
+              if (dismissBtn) dismissBtn.innerHTML = '×';
+            }
           }
         })
-        .catch(error => console.error('Error dismissing notification:', error));
+        .catch(error => {
+          console.error('Error dismissing notification:', error);
+          alert('Error removing notification: ' + error.message);
+          
+          // Reset the dismiss button
+          if (item) {
+            const dismissBtn = item.querySelector('.notification-dismiss');
+            if (dismissBtn) dismissBtn.innerHTML = '×';
+          }
+        });
     }
   });
 </script>
+
+<!-- Notification override script - MUST be loaded last -->
+<script src="assets/js/notification_override.js"></script>
 

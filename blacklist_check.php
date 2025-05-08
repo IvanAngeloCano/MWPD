@@ -4,6 +4,23 @@
  */
 
 /**
+ * Get all column names for a table
+ * 
+ * @param PDO $pdo Database connection
+ * @param string $table Table name
+ * @return array Array of column names
+ */
+function getTableColumns($pdo, $table) {
+    try {
+        $stmt = $pdo->query("DESCRIBE `$table`");
+        return $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+    } catch (PDOException $e) {
+        error_log("Error getting table columns: " . $e->getMessage());
+        return [];
+    }
+}
+
+/**
  * Check if a person is blacklisted based on their name, passport, email, or phone
  * 
  * @param PDO $pdo Database connection
@@ -30,8 +47,19 @@ function checkBlacklist($pdo, $name, $passport = '', $email = '', $phone = '') {
         
         // Check name (case insensitive)
         if (!empty($name)) {
-            $conditions[] = "LOWER(full_name) = LOWER(?)"; 
-            $params[] = $name;
+            // Add debug logging
+            error_log("Checking blacklist for name: $name");
+            
+            // Use LIKE operator for more flexible matching
+            $conditions[] = "LOWER(full_name) LIKE LOWER(?)"; 
+            $params[] = "%$name%";
+            
+            // Also try matching against name field if it exists
+            // This will be part of the OR conditions
+            if (in_array('name', array_map('strtolower', getTableColumns($pdo, 'blacklist')))) {
+                $conditions[] = "LOWER(name) LIKE LOWER(?)"; 
+                $params[] = "%$name%";
+            }
         }
         
         // Check passport if provided

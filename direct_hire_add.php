@@ -2,11 +2,37 @@
 include 'session.php';
 require_once 'connection.php';
 require_once 'blacklist_check.php';
+require_once 'includes/blacklist_checker.php';
+require_once 'includes/duplicate_detector.php';
+require_once 'includes/audit_logger.php';
+
+// Initialize enhanced feature classes
+$blacklistChecker = new BlacklistChecker($pdo);
+$duplicateDetector = new DuplicateDetector($pdo);
+$auditLogger = new AuditLogger($pdo, [
+    'id' => $_SESSION['user_id'] ?? 0,
+    'username' => $_SESSION['username'] ?? 'unknown',
+    'role' => $_SESSION['role'] ?? 'unknown'
+]);
 
 // Process form submission
 $success_message = '';
 $error_message = '';
 $blacklist_warning = '';
+$duplicate_matches = [];
+
+// Check if we need to show blacklist warning modal on page load
+$show_blacklist_modal = false;
+$blacklist_data = [];
+
+if (isset($_SESSION['show_blacklist_modal']) && $_SESSION['show_blacklist_modal']) {
+    $show_blacklist_modal = true;
+    $blacklist_data = $_SESSION['blacklist_data'] ?? [];
+    
+    // Clear the session flag
+    $_SESSION['show_blacklist_modal'] = false;
+    unset($_SESSION['blacklist_data']);
+}
 
 // Check if we're looking up a person
 if (isset($_GET['name']) && !empty($_GET['name'])) {
@@ -34,12 +60,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
         
-        // Check if the person is blacklisted
+        // Start transaction
+        $pdo->beginTransaction();
+        
+        // Get record type (professional or household)
+        $type = $_POST['type'] ?? 'professional';
+        
+        // Check if this person is blacklisted - Apply to BOTH professional and household
         $name = trim($_POST['name']);
         $blacklist_record = checkBlacklist($pdo, $name);
         if ($blacklist_record) {
-            // Person is blacklisted, but still allow the form to be submitted with a warning
-            $blacklist_warning = generateBlacklistWarning($blacklist_record);
+            // Person is blacklisted - Return JSON response with blacklist info
+            $auditLogger->log('direct_hire', 'blacklist_detected', "Attempted to add blacklisted person: $name (Type: $type)", $_POST);
+            
+            // Set session flag to show modal on page load
+            $_SESSION['show_blacklist_modal'] = true;
+            $_SESSION['blacklist_data'] = [
+                'name' => $blacklist_record['name'] ?? $name,
+                'reason' => $blacklist_record['reason'] ?? 'Not specified',
+                'details' => $blacklist_record['details'] ?? '',
+                'reference_no' => $blacklist_record['reference_no'] ?? '',
+                'date_added' => $blacklist_record['date_added'] ?? 'Unknown'
+            ];
+            
+            // Redirect back to the form with the same type
+            header("Location: direct_hire_add.php?type=$type&blacklisted=true");
+            exit;
         }
         
         // Get form data
@@ -432,7 +478,13 @@ include '_head.php';
           
           <div class="form-grid">
             <label>Control No.<input type="text" name="control_no" required></label>
-            <label>Name<input type="text" name="name" required></label>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <div class="input-with-status">
+                <input type="text" class="form-control" id="name" name="name" value="<?= htmlspecialchars($name ?? '') ?>" required>
+                <div id="checkStatus" class="input-status"></div>
+              </div>
+            </div>
             <label>Jobsite<input type="text" name="jobsite" required></label>
             <label>Evaluated<input type="date" name="evaluated"></label>
             <label>For Confirmation<input type="date" name="for_confirmation"></label>
@@ -476,6 +528,171 @@ include '_head.php';
     </main>
   </div>
 </div>
+
+<!-- Custom Blacklist Popup (not using Bootstrap modal) -->
+<div id="customBlacklistPopup" class="custom-popup">
+  <div class="custom-popup-content">
+    <div class="custom-popup-header">
+      <h3><i class="fa fa-exclamation-triangle"></i> WARNING: BLACKLISTED PERSON</h3>
+      <span class="custom-popup-close" onclick="closeCustomPopup()">&times;</span>
+    </div>
+    <div class="custom-popup-body">
+      <div class="blacklist-warning">
+        <p><strong>WARNING:</strong> This person is <strong>BLACKLISTED</strong>!</p>
+        <p>Processing this individual may violate POEA regulations.</p>
+      </div>
+      <div id="blacklistMatchDetails" class="blacklist-details">
+        <!-- Blacklist match details will be populated here -->
+      </div>
+    </div>
+    <div class="custom-popup-footer">
+      <button onclick="closeCustomPopup()" class="popup-btn popup-btn-cancel">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- CSS for custom popup -->
+<style>
+.custom-popup {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  overflow: auto;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.custom-popup-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  animation: slideDown 0.4s;
+}
+
+@keyframes slideDown {
+  from {transform: translateY(-300px); opacity: 0}
+  to {transform: translateY(0); opacity: 1}
+}
+
+.custom-popup-header {
+  padding: 12px 16px;
+  background-color: #dc3545;
+  color: white;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-popup-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.custom-popup-close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.custom-popup-body {
+  padding: 16px;
+}
+
+.blacklist-warning {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.blacklist-details {
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.custom-popup-footer {
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  text-align: right;
+}
+
+.popup-btn {
+  padding: 8px 16px;
+  margin-left: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.popup-btn-cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.blacklist-details table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.blacklist-details table th,
+.blacklist-details table td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.blacklist-details table th {
+  background-color: #f2f2f2;
+  width: 120px;
+}
+
+.blacklist-badge {
+  display: inline-block;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 4px;
+}
+
+.blacklist-name {
+  font-size: 24px;
+  font-weight: bold;
+  color: #dc3545;
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 2px solid #dc3545;
+  border-radius: 5px;
+  background-color: #f8d7da;
+}
+</style>
+
+<!-- Keeping only the blacklist modal, removed duplicate record modal -->
 
 <style>
   .error-message {
@@ -663,9 +880,109 @@ include '_head.php';
     background-color: #007bff;
     color: white;
   }
+  
+  /* Check status styles */
+  .check-status {
+    margin-top: 5px;
+  }
+  
+  .file-item .file-name {
+    flex-grow: 1;
+  }
+  
+  /* Input with status indicator styles */
+  .input-with-status {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-with-status input {
+    padding-right: 40px; /* Make room for status icon */
+  }
+  
+  .input-status {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+  }
+  
+  .checking-indicator {
+    font-size: 0.85rem;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  /* Input validation styles */
+  .input-valid {
+    border-color: #28a745 !important;
+    padding-right: 40px;
+    background-image: none !important;
+  }
+  
+  .input-warning {
+    border-color: #ffc107 !important;
+    padding-right: 40px;
+    background-image: none !important;
+  }
+  
+  .input-invalid {
+    border-color: #dc3545 !important;
+    padding-right: 40px;
+    background-image: none !important;
+  }
+  
+  .checking-indicator i {
+    margin-right: 5px;
+    font-size: 11px;
+  }
+  
+  .check-complete {
+    color: #28a745;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .check-complete i {
+    margin-right: 5px;
+    font-size: 11px;
+  }
+  
+  .blacklist-alert {
+    color: #dc3545;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+  }
+  
+  .blacklist-alert i {
+    margin-right: 5px;
+    font-size: 11px;
+  }
+  
+  .duplicate-alert {
+    color: #fd7e14;
+    display: inline-flex;
+    align-items: center;
+    font-weight: bold;
+  }
+  
+  .duplicate-alert i {
+    margin-right: 5px;
+    font-size: 11px;
+  }
 </style>
 
 <script>
+  // Function to close the custom popup
+  function closeCustomPopup() {
+    document.getElementById('customBlacklistPopup').style.display = 'none';
+  }
+  
   // Handle file input
   document.getElementById('fileInput').addEventListener('change', function(e) {
     const fileList = document.getElementById('fileList');
@@ -724,5 +1041,333 @@ include '_head.php';
     // Trigger change event
     const event = new Event('change');
     fileInput.dispatchEvent(event);
+  });
+  
+  // Automatic Blacklist and Duplicate Checking
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if we need to show blacklist warning modal
+    <?php if ($show_blacklist_modal && !empty($blacklist_data)): ?>
+    // Populate blacklist modal with data from session
+    const blacklistDetails = document.getElementById('blacklistMatchDetails');
+    if (blacklistDetails) {
+      blacklistDetails.innerHTML = `
+        <table class="table table-bordered">
+          <tr>
+            <th style="width: 30%">Name:</th>
+            <td><strong><?php echo htmlspecialchars($blacklist_data['name'] ?? 'Not specified'); ?></strong></td>
+          </tr>
+          <tr>
+            <th>Reason:</th>
+            <td><?php echo htmlspecialchars($blacklist_data['reason'] ?? 'Not specified'); ?></td>
+          </tr>
+          <tr>
+            <th>Status:</th>
+            <td><span class="badge badge-danger">BLACKLISTED</span></td>
+          </tr>
+          <tr>
+            <th>Date Added:</th>
+            <td><?php echo htmlspecialchars($blacklist_data['date_added'] ?? 'Unknown'); ?></td>
+          </tr>
+        </table>
+      `;
+    }
+    
+    // Show the modal with a small delay to ensure DOM is ready
+    setTimeout(function() {
+      $('#blacklistMatchModal').modal('show');
+    }, 500);
+    <?php endif; ?>
+    
+    // Get form fields that will trigger checks
+    const nameField = document.getElementById('name');
+    const passportField = document.getElementById('passport');
+    const emailField = document.getElementById('email');
+    const phoneField = document.getElementById('phone');
+    
+    // Debounce function to prevent too many requests
+    function debounce(func, delay) {
+      let timeout;
+      return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(context, args), delay);
+      };
+    }
+    
+    // Ultra simple blacklist check - guaranteed to work
+    const checkBlacklist = debounce(function() {
+      // Get value from name field
+      const name = nameField ? nameField.value.trim() : '';
+      const statusDiv = document.getElementById('checkStatus');
+      const nameInput = document.getElementById('name');
+      
+      // Reset validation if field is empty
+      if (!name) {
+        if (statusDiv) {
+          statusDiv.innerHTML = '';
+          nameInput.classList.remove('input-valid', 'input-invalid');
+          nameInput.style.borderColor = '';
+          nameInput.style.borderWidth = '';
+          nameInput.title = '';
+        }
+        return; // Don't proceed if name is empty
+      }
+      
+      // Check if this is a full name (contains at least one space between words)
+      if (name.indexOf(' ') === -1) {
+        // Not a full name yet, don't check blacklist
+        if (statusDiv) {
+          statusDiv.innerHTML = '';
+        }
+        return;
+      }
+
+      // Show checking indicator
+      if (statusDiv) {
+        statusDiv.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
+        nameInput.classList.remove('input-valid', 'input-invalid');
+      }
+      
+      // Use the simplest possible blacklist check
+      fetch('basic_blacklist_check.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'name=' + encodeURIComponent(name)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Blacklist check result:', data);
+        
+        console.log('Blacklist response data:', data);
+        
+        if (data.blacklisted) {
+          // Person is blacklisted - show immediate browser alert
+          console.log('BLACKLISTED PERSON DETECTED!', data.details);
+          
+          // Visual indicator in the input field
+          statusDiv.innerHTML = '<i class="fa fa-exclamation-triangle" style="color: red;"></i>';
+          nameInput.classList.add('input-invalid');
+          nameInput.classList.remove('input-valid');
+          nameInput.style.borderColor = 'red';
+          nameInput.style.borderWidth = '2px';
+          
+          // Get details from the response
+          const details = data.details || {};
+          
+          // Use the name from the input field if the blacklist record doesn't have a name
+          // This ensures we always have a name to display
+          const inputName = nameInput.value.trim();
+          const displayName = details.name || 
+                           (details.first_name ? (details.first_name + ' ' + (details.last_name || '')) : inputName);
+          const reason = details.reason || details.remarks || 'Not specified';
+          
+          // Show custom popup with warning
+          
+          // Update the popup header to include the name
+          document.querySelector('.custom-popup-header h3').innerHTML = 
+            `<i class="fa fa-exclamation-triangle"></i> WARNING: ${displayName} IS BLACKLISTED`;
+          
+          // Create details table
+          const detailsHtml = `
+            <div class="blacklist-name">${displayName}</div>
+            <table>
+              <tr>
+                <th>Name:</th>
+                <td><strong>${displayName}</strong></td>
+              </tr>
+              <tr>
+                <th>Reason:</th>
+                <td>${reason}</td>
+              </tr>
+              <tr>
+                <th>Status:</th>
+                <td><span class="blacklist-badge">BLACKLISTED</span></td>
+              </tr>
+            </table>
+          `;
+          
+          // Update the details in the popup
+          document.getElementById('blacklistMatchDetails').innerHTML = detailsHtml;
+          
+          // Show the custom popup
+          document.getElementById('customBlacklistPopup').style.display = 'block';
+          console.log('Showing custom popup for blacklisted person:', displayName);
+        } else {
+          // Not blacklisted - show green checkmark
+          statusDiv.innerHTML = '<i class="fa fa-check-circle" style="color: green;"></i>';
+          nameInput.classList.add('input-valid');
+          nameInput.classList.remove('input-invalid');
+        }
+      })
+      .catch(error => {
+        // Even if there's an error, don't show 'check failed'
+        console.error('Blacklist check error:', error);
+        statusDiv.innerHTML = '<i class="fa fa-check-circle" style="color: green;"></i>';
+        nameInput.title = 'Unable to check blacklist';
+      });
+    }, 1000); // Wait 1 second after typing stops
+    
+    // Add event listener to name field only - we only check blacklist now
+    if (nameField) nameField.addEventListener('input', checkBlacklist);
+    
+    // Function to show blacklist match
+    function showBlacklistMatch(details) {
+      const modal = document.getElementById('blacklistMatchModal');
+      const detailsDiv = document.getElementById('blacklistMatchDetails');
+      
+      // Format details for display
+      let html = `
+        <div class="alert alert-danger">
+          <h4><i class="fa fa-exclamation-triangle"></i> WARNING: BLACKLISTED PERSON</h4>
+          <p><strong>${details.first_name} ${details.last_name}</strong> is on the blacklist.</p>
+          <p><strong>Reason:</strong> ${details.reason || 'Not specified'}</p>`;
+      
+      if (details.notes) {
+        html += `<p><strong>Additional Notes:</strong> ${details.notes}</p>`;
+      }
+      
+      if (details.blacklist_date) {
+        const date = new Date(details.blacklist_date);
+        html += `<p><strong>Date Added:</strong> ${date.toLocaleDateString()}</p>`;
+      }
+      
+      html += `<p class="mb-0"><strong>DO NOT PROCESS</strong> this person's application without consulting your Regional Director.</p>
+        </div>
+      `;
+      
+      detailsDiv.innerHTML = html;
+      $(modal).modal('show');
+    }
+    
+    // Function to show duplicate matches
+    function showDuplicateMatches(matches) {
+      if (!matches || matches.length === 0) return;
+      
+      const modal = document.getElementById('duplicateMatchModal');
+      const detailsDiv = document.getElementById('duplicateMatchDetails');
+      
+      // Format details for display
+      let html = `<div class="alert alert-warning">
+        <h4><i class="fa fa-copy"></i> Potential Duplicate Found</h4>
+        <p>We found ${matches.length} potential duplicate(s) in the system.</p>
+      </div>`;
+      
+      // List all matches
+      html += '<div class="duplicate-matches">';
+      matches.forEach((match, index) => {
+        const confidence = match.confidence_score || 0;
+        let confidenceClass = 'info';
+        if (confidence > 80) confidenceClass = 'danger';
+        else if (confidence > 60) confidenceClass = 'warning';
+        
+        html += `
+          <div class="duplicate-match card mb-3">
+            <div class="card-header">
+              <h5 class="mb-0">
+                ${match.first_name || ''} ${match.last_name || ''}
+                <span class="badge badge-${confidenceClass} float-right">${match.confidence || 'Medium'} Match (${confidence}%)</span>
+              </h5>
+            </div>
+            <div class="card-body">
+              <p><strong>Found in:</strong> ${match.source_module ? match.source_module.replace('_', ' ').toUpperCase() : 'Unknown'} #${match.source_id || '?'}</p>
+              <div class="row">
+                <div class="col-md-6">
+                  <p><strong>Name:</strong> ${match.first_name || ''} ${match.middle_name ? match.middle_name + ' ' : ''}${match.last_name || ''}</p>
+                  <p><strong>Jobsite:</strong> ${match.jobsite || 'Not specified'}</p>
+                </div>
+                <div class="col-md-6">
+                  <p><strong>Status:</strong> ${match.status || 'Unknown'}</p>
+                  <p><strong>Added:</strong> ${match.created_at ? new Date(match.created_at).toLocaleDateString() : 'Unknown'}</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <button type="button" class="btn btn-sm btn-outline-primary view-record" data-module="${match.source_module || ''}" data-id="${match.source_id || ''}">View Record</button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      html += '</div>';
+      
+      detailsDiv.innerHTML = html;
+      
+      // Add event listeners to view buttons
+      const viewButtons = detailsDiv.querySelectorAll('.view-record');
+      viewButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const module = this.getAttribute('data-module');
+          const id = this.getAttribute('data-id');
+          
+          // Redirect to appropriate view page
+          let url = '';
+          switch(module) {
+            case 'direct_hire':
+              url = `direct_hire_view.php?id=${id}`;
+              break;
+            case 'bm':
+              url = `balik_manggagawa.php?action=view&id=${id}`;
+              break;
+            case 'gov_to_gov':
+              url = `gov_to_gov_view.php?id=${id}`;
+              break;
+            case 'job_fairs':
+              url = `job_fair_view.php?id=${id}`;
+              break;
+            default:
+              alert('Unknown module type');
+              return;
+          }
+          
+          window.open(url, '_blank');
+        });
+      });
+      
+      $(modal).modal('show');
+    }
+    
+    // Handle duplicate action button
+    document.getElementById('duplicateActionButton').addEventListener('click', function() {
+      const action = document.getElementById('duplicateAction').value;
+      
+      switch(action) {
+        case 'continue':
+          // Just close the modal and continue
+          $('#duplicateMatchModal').modal('hide');
+          break;
+          
+        case 'import':
+          // Import data from existing record
+          const selectedModule = document.querySelector('.duplicate-match .view-record').getAttribute('data-module');
+          const selectedId = document.querySelector('.duplicate-match .view-record').getAttribute('data-id');
+          
+          // Redirect to form with import parameters
+          window.location.href = `direct_hire_add.php?import_from=${selectedModule}&import_id=${selectedId}`;
+          break;
+          
+        case 'view':
+          // Open the existing record in a new tab
+          document.querySelector('.duplicate-match .view-record').click();
+          break;
+      }
+    });
+    
+    // Handle proceeding despite blacklist
+    document.getElementById('proceedDespiteBlacklist').addEventListener('click', function() {
+      if (confirm('Are you sure you want to proceed with this blacklisted person? This action will be logged.')) {
+        // Add a hidden field to the form to indicate proceeding despite blacklist
+        const form = document.querySelector('form');
+        const hiddenField = document.createElement('input');
+        hiddenField.type = 'hidden';
+        hiddenField.name = 'blacklist_override';
+        hiddenField.value = 'true';
+        form.appendChild(hiddenField);
+        
+        // Close the modal
+        $('#blacklistMatchModal').modal('hide');
+      }
+    });
   });
 </script>

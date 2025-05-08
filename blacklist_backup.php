@@ -451,7 +451,7 @@ function getStatusBadgeColor($status) {
         <?php if (in_array(strtolower($user_role), ['staff', 'division head'])): ?>
         <!-- Floating Action Button for non-regional director users -->
         <a href="#" class="floating-btn" id="addBlacklistBtn">
-          <i class="fas fa-user-slash"></i>
+          <i class="fas fa-bars"></i>
         </a>
         <?php endif; ?>
       </main>

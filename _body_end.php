@@ -1,8 +1,5 @@
 <?php
-// Include the floating blacklist button if user is logged in
-if (isset($_SESSION['user_id'])) {
-    include 'blacklist_button.php';
-}
+// Blacklist button has been removed and replaced with the floating action menu in dashboard.php
 ?>
 
 <script>

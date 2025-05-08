@@ -52,6 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_
             ");
             $update_stmt->execute([$user_id, $approval_id]);
             
+            // Debug info for troubleshooting
+            error_log("Approving record ID: $approval_id by user ID: $user_id");
+            
             // Get the g2g_id and other details
             $get_details = $pdo->prepare("
                 SELECT g2g_id, employer, memo_reference 
@@ -62,16 +65,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_
             $details = $get_details->fetch(PDO::FETCH_ASSOC);
             
             if ($details) {
-                // Update the gov_to_gov record to mark as endorsed
+                // 1. FIRST UPDATE ATTEMPT: Try to update the gov_to_gov record with all fields
                 $endorse_stmt = $pdo->prepare("
                     UPDATE gov_to_gov 
-                    SET remarks = 'Endorsed',
+                    SET remarks = 'Approved',
                         endorsement_date = NOW(),
                         employer = ?,
                         memo_reference = ?
                     WHERE g2g = ?
                 ");
-                $endorse_stmt->execute([$details['employer'], $details['memo_reference'], $details['g2g_id']]);
+                $result = $endorse_stmt->execute([$details['employer'], $details['memo_reference'], $details['g2g_id']]);
+                
+                // 2. SECOND UPDATE ATTEMPT: Try a simpler update if the first one didn't affect any rows
+                if (!$result || $endorse_stmt->rowCount() === 0) {
+                    $simple_update = $pdo->prepare("UPDATE gov_to_gov SET remarks = 'Approved' WHERE g2g = ?");
+                    $result2 = $simple_update->execute([$details['g2g_id']]);
+                    error_log("First update failed, second attempt result: " . ($result2 ? "Success" : "Failed"));
+                }
+                
+                // 3. THIRD UPDATE ATTEMPT: Force a direct update using raw SQL
+                $g2g_id = $details['g2g_id'];
+                $raw_sql = "UPDATE gov_to_gov SET remarks = 'Approved' WHERE g2g = $g2g_id";
+                $pdo->exec($raw_sql);
+                
+                // 4. VERIFY: Check if the update was successful
+                $check_stmt = $pdo->prepare("SELECT remarks FROM gov_to_gov WHERE g2g = ?");
+                $check_stmt->execute([$details['g2g_id']]);
+                $current_remarks = $check_stmt->fetchColumn();
+                error_log("After all update attempts, remarks = $current_remarks for g2g_id: {$details['g2g_id']}");
                 
                 // Send notification to the submitter
                 if ($submitter_id > 0) {
@@ -97,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_
             }
             
             $pdo->commit();
-            $_SESSION['success_message'] = "Record approved successfully and marked as endorsed.";
+            $_SESSION['success_message'] = "Record approved successfully and marked as 'Approved' in the Gov-to-Gov table.";
             
         } elseif ($action === 'reject') {
             // Update the approval record
@@ -111,6 +132,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_
                 WHERE approval_id = ?
             ");
             $update_stmt->execute([$user_id, $remarks, $approval_id]);
+            
+            // Get the g2g_id from the pending approval
+            $get_g2g_id = $pdo->prepare("SELECT g2g_id FROM pending_g2g_approvals WHERE approval_id = ?");
+            $get_g2g_id->execute([$approval_id]);
+            $g2g_id = $get_g2g_id->fetchColumn();
+            
+            if ($g2g_id) {
+                // Update the gov_to_gov record to mark as rejected
+                $reject_stmt = $pdo->prepare("
+                    UPDATE gov_to_gov 
+                    SET remarks = 'Rejected'
+                    WHERE g2g = ?
+                ");
+                $reject_stmt->execute([$g2g_id]);
+            }
             
             // Send notification to the submitter
             if ($submitter_id > 0) {
