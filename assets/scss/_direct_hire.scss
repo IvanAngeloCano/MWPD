@@ -3,7 +3,17 @@
   flex-direction: column;
   gap: 1rem;
 
+<<<<<<< HEAD
   .direct-hire-top {
+=======
+  input {
+    border-radius: 6px;
+    border: 1px solid $neutral-dark;
+    width: 3rem;
+  }
+
+  .process-page-top {
+>>>>>>> e676bef (Initial commit on updated_BM)
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -12,14 +22,33 @@
       display: flex;
       gap: 0.5rem;
 
+<<<<<<< HEAD
       .tab {
         padding: 0.5rem 1rem;
+=======
+
+      .tab {
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+>>>>>>> e676bef (Initial commit on updated_BM)
         border: none;
         background-color: #eee;
         cursor: pointer;
         border-radius: 6px;
         font-size: 1rem;
+<<<<<<< HEAD
 
+=======
+        text-decoration: none;
+        height: 2rem;
+
+        &:hover {
+          transition: 200ms ease;
+          background-color: $neutral-dark;
+          color: white;
+        }
+>>>>>>> e676bef (Initial commit on updated_BM)
 
         &.active {
           background-color: $brand-primary;
@@ -36,13 +65,30 @@
       font-size: 1rem;
 
 
+<<<<<<< HEAD
+=======
+      input {
+        height: 2rem;
+      }
+
+      .search-form {
+        display: flex;
+        flex: 1;
+        gap: 0.5rem;
+        height: 1rem;
+      }
+
+>>>>>>> e676bef (Initial commit on updated_BM)
       .search-bar {
         flex: 1;
         padding: 0.5rem;
         border: 1px solid #ccc;
         border-radius: 6px;
         font-size: 1rem;
+<<<<<<< HEAD
 
+=======
+>>>>>>> e676bef (Initial commit on updated_BM)
       }
 
       .btn {
@@ -56,7 +102,14 @@
         color: #fff;
         cursor: pointer;
         font-size: 1rem;
+<<<<<<< HEAD
 
+=======
+        text-decoration: none;
+        height: 2rem;
+        margin: 0;
+        
+>>>>>>> e676bef (Initial commit on updated_BM)
 
         i {
           font-size: 1rem;
@@ -67,11 +120,54 @@
         }
 
         &.filter-btn {
+<<<<<<< HEAD
           background-color: #007bff;
+=======
+          background-color: $brand-primary;
+
+          &.active {
+            background-color: $neutral-dark;
+            transition: 200ms ease;
+          }
+        } 
+
+        &.search-btn {
+          margin-left: 5px;
+        }
+
+        &.go-btn {
+          height: 1.5rem;
+          background-color: #444;
+          color: #fff;
+          border: none;
+          padding: 0.3rem 0.6rem;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        &.btn-danger {
+          background-color: $primary-red;
+          color: white;
+          border: none;
+          padding: 8px 16px;
+          border-radius: 4px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #c82333;
+          }
+        }
+
+        &.btn-cancel {
+          background-color: #f8f9fa;
+          border: 1px solid #ddd;
+          color: #333;
+>>>>>>> e676bef (Initial commit on updated_BM)
         }
       }
     }
 
+<<<<<<< HEAD
     .table-footer {
       display: flex;
       justify-content: space-between;
@@ -82,6 +178,31 @@
         width: 60px;
         padding: 0.2rem;
         margin-left: 0.3rem;
+=======
+
+    .search-form {
+      display: flex;
+      align-items: center;
+    }
+
+    .process-page-top-additionals {
+      display: flex;
+      justify-content: space-between;
+      font-size: $font-small;
+      color: $neutral-dark;
+
+      .rows-input {
+        width: 3rem;
+        padding: 0.2rem;
+        margin-left: 0.3rem;
+        height: 1.4rem;
+      }
+
+      #resetRowsBtn {
+        cursor: pointer;
+        font-size: .875rem;
+        background-color: $brand-primary;
+>>>>>>> e676bef (Initial commit on updated_BM)
       }
     }
   }
@@ -101,13 +222,26 @@
         }
       }
 
+<<<<<<< HEAD
       tbody tr {
         border-bottom: 1px solid #ddd;
+=======
+
+
+      tbody tr {
+        border-bottom: 1px solid #ddd;
+        &:hover {
+          background-color: $neutral-light;
+        }
+
+
+>>>>>>> e676bef (Initial commit on updated_BM)
 
         td {
           padding: 0.75rem;
         }
 
+<<<<<<< HEAD
         .status {
           padding: 0.3rem 0.6rem;
           border-radius: 12px;
@@ -129,20 +263,60 @@
             color: #721c24;
           }
         }
+=======
+
+>>>>>>> e676bef (Initial commit on updated_BM)
 
         .action-icons {
           display: flex;
           gap: 0.5rem;
+<<<<<<< HEAD
+=======
+          justify-content: center;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
           i {
             cursor: pointer;
           }
+<<<<<<< HEAD
         }
       }
     }
   }
 
   .direct-hire-bottom {
+=======
+
+          a {
+            color: inherit;
+            text-decoration: none;
+          }
+
+          i.fa-eye {
+            color: #007bff;
+          }
+
+          i.fa-edit {
+            color: #28a745;
+          }
+
+          i.fa-trash-alt {
+            color: #dc3545;
+          }
+        }
+      }
+
+      .no-records {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+      }
+    }
+  }
+
+  .process-page-bot {
+    font-family: $font-family;
+>>>>>>> e676bef (Initial commit on updated_BM)
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -153,6 +327,16 @@
       gap: 0.4rem;
 
       button {
+<<<<<<< HEAD
+=======
+        height: 2rem;
+        font-family: $font-family !important;
+
+      }
+
+      button,
+      a {
+>>>>>>> e676bef (Initial commit on updated_BM)
         padding: 0.4rem 0.8rem;
         border: 1px solid transparent;
         background-color: transparent;
@@ -162,6 +346,10 @@
         align-items: center;
         gap: 0.3rem;
         font-size: 0.9rem;
+<<<<<<< HEAD
+=======
+        text-decoration: none;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
         i {
           font-size: 0.85rem;
@@ -186,6 +374,10 @@
         background-color: #fff;
         cursor: pointer;
         border-radius: 6px;
+<<<<<<< HEAD
+=======
+        text-decoration: none;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
         &.active {
           background-color: $brand-primary;
@@ -200,6 +392,7 @@
       align-items: center;
       gap: 0.3rem;
 
+<<<<<<< HEAD
       input {
         width: 50px;
         height: 1.5rem;
@@ -216,6 +409,90 @@
         cursor: pointer;
       }
     }
+=======
+      label {
+        font-size: $font-small;
+        color: $neutral-dark;
+        margin-right: 3px;
+      }
+
+      input {
+        width: 3rem;
+        height: 1.4rem;
+        padding: 0.2rem;
+      }
+    }
+
+    .go-btn {
+      border: 1px solid transparent;
+      background-color: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      align-items: center;
+      font-size: 0.875rem;
+      text-decoration: none;
+
+      background-color: $brand-primary !important;
+      color: #fff;
+      border: none;
+      padding: 3px 10px;
+    }
+  }
+
+  // Modal styles for delete confirmation
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+
+    .modal-content {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+
+      h3 {
+        margin: 0;
+        font-size: 18px;
+      }
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
+>>>>>>> e676bef (Initial commit on updated_BM)
   }
 }
 
@@ -224,6 +501,24 @@
 
 
 
+<<<<<<< HEAD
+=======
+//Filter Bar
+.input-filter {
+  width: 10rem !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> e676bef (Initial commit on updated_BM)
 
 
 
@@ -250,6 +545,10 @@
     font-size: 1rem;
   }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e676bef (Initial commit on updated_BM)
   .tab {
     padding: 0.5rem 1rem;
     border: none;
@@ -257,6 +556,14 @@
     cursor: pointer;
     border-radius: 6px;
     font-size: 1rem;
+<<<<<<< HEAD
+=======
+    text-decoration: none;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    margin: 0;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
     &.active {
       background-color: $brand-primary;
@@ -372,18 +679,31 @@
 
     a {
       font-size: 1rem;
+<<<<<<< HEAD
 
+=======
+      text-decoration: none;
+>>>>>>> e676bef (Initial commit on updated_BM)
     }
 
     .btn {
       display: flex;
       align-items: center;
       gap: 0.5rem;
+<<<<<<< HEAD
       padding: 0.5rem 1rem;
+=======
+      padding: .75rem;
+>>>>>>> e676bef (Initial commit on updated_BM)
       border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
       font-size: 1rem;
+<<<<<<< HEAD
+=======
+      text-decoration: none;
+      height: 2rem;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
 
       &.btn-primary {
@@ -409,6 +729,15 @@
         color: black;
         border: 1px solid $neutral-dark;
       }
+<<<<<<< HEAD
+=======
+
+      &.btn-success {
+        background-color: #28a745;
+        border: 1px solid #28a745;
+        color: white;
+      }
+>>>>>>> e676bef (Initial commit on updated_BM)
     }
   }
 }

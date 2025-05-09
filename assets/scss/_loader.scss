@@ -1,11 +1,19 @@
 // Loader styles for MWPD Filing System
 // Used in loader.php
 
+<<<<<<< HEAD
 body.loader-page, 
 html.loader-page {
   height: 100%;
   margin: 0;
   background: #f9f9f9;
+=======
+body.loader-page,
+html.loader-page {
+  height: 100%;
+  margin: 0;
+  background: white;
+>>>>>>> e676bef (Initial commit on updated_BM)
   display: flex;
   align-items: center;
   justify-content: center;
@@ -13,11 +21,19 @@ html.loader-page {
 
 .loader-overlay {
   position: fixed;
+<<<<<<< HEAD
   top: 0; 
   left: 0; 
   right: 0; 
   bottom: 0;
   background: rgba($brand-primary, 0.07); // MWPD blue, light overlay
+=======
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white;
+>>>>>>> e676bef (Initial commit on updated_BM)
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -26,6 +42,7 @@ html.loader-page {
 }
 
 .loader {
+<<<<<<< HEAD
   border: 8px solid #e3e8f0;
   border-top: 8px solid $brand-primary; // MWPD blue
   border-radius: 50%;
@@ -43,6 +60,51 @@ html.loader-page {
 .loader-logo {
   width: 70px;
   margin-bottom: 16px;
+=======
+  position: relative;
+  border: 8px solid $neutral-light;
+  border-top: 8px solid $brand-primary;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 1s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.loader-inner {
+  position: absolute;
+  animation: spin2 1s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin2 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.loader-logo {
+  width: 100px;
+>>>>>>> e676bef (Initial commit on updated_BM)
 }
 
 .loader-text {
@@ -51,4 +113,8 @@ html.loader-page {
   font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 2px;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> e676bef (Initial commit on updated_BM)

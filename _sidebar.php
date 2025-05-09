@@ -1,11 +1,19 @@
 <?php
+<<<<<<< HEAD
   $currentPage = basename($_SERVER['PHP_SELF']);
+=======
+$currentPage = basename($_SERVER['PHP_SELF']);
+>>>>>>> e676bef (Initial commit on updated_BM)
 ?>
 
 <aside class="sidebar">
   <div class="sidebar-top">
     <div class="logo">
+<<<<<<< HEAD
       <img src="assets\images\DMW Logo.png" alt="DMW Logo"/>
+=======
+      <img src="assets\images\DMW Logo.png" alt="DMW Logo" />
+>>>>>>> e676bef (Initial commit on updated_BM)
       <span>MWPD<br><strong>Filing System</strong></span>
     </div>
 
@@ -14,7 +22,11 @@
         <i class="fa fa-th-large"></i>
         <span>Dashboard</span>
       </a>
+<<<<<<< HEAD
       <a href="direct_hire.php" class="nav-item <?= ($currentPage == 'direct_hire.php' || $currentPage == 'direct_hire_add.php') ? 'active' : '' ?>">
+=======
+      <a href="direct_hire.php" class="nav-item <?= ($currentPage == 'direct_hire.php') ? 'active' : '' ?>">
+>>>>>>> e676bef (Initial commit on updated_BM)
         <i class="fa fa-briefcase"></i>
         <span>Direct Hire</span>
       </a>
@@ -34,6 +46,23 @@
         <i class="fa fa-info-circle"></i>
         <span>Information sheet</span>
       </a>
+<<<<<<< HEAD
+=======
+      
+      <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'div head' || $_SESSION['role'] === 'Division Head')): ?>
+      <a href="accounts.php" class="nav-item <?= ($currentPage == 'accounts.php') ? 'active' : '' ?>">
+        <i class="fa fa-users-cog"></i>
+        <span>Accounts</span>
+      </a>
+      <?php endif; ?>
+      
+      <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'regional director' || $_SESSION['role'] === 'Regional Director')): ?>
+      <a href="approval_view_simple.php" class="nav-item <?= ($currentPage == 'approval_view_simple.php') ? 'active' : '' ?>">
+        <i class="fa fa-check-circle"></i>
+        <span>Approval</span>
+      </a>
+      <?php endif; ?>
+>>>>>>> e676bef (Initial commit on updated_BM)
     </nav>
   </div>
 
@@ -43,4 +72,8 @@
       <span>Logout</span>
     </a>
   </div>
+<<<<<<< HEAD
 </aside>
+=======
+</aside>
+>>>>>>> e676bef (Initial commit on updated_BM)

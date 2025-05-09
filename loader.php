@@ -10,23 +10,56 @@ unset($_SESSION['show_loader']);
 ?>
 <!DOCTYPE html>
 <html lang="en" class="loader-page">
+<<<<<<< HEAD
+=======
+
+>>>>>>> e676bef (Initial commit on updated_BM)
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading...</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="loader-page">
     <div class="loader-overlay">
         <img src="assets/images/DMW Logo.png" alt="MWPD Logo" class="loader-logo">
         <div class="loader"></div>
+=======
+    <link rel="icon" href="assets\images\DMW Logo.png" type="image/x-icon">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body class="loader-page">
+    <div class="loader-overlay">
+        <div class="loader">
+            <div class="loader-inner">
+                <img src="assets/images/DMW Logo.png" alt="MWPD Logo" class="loader-logo">
+            </div>
+        </div>
+
+>>>>>>> e676bef (Initial commit on updated_BM)
         <div class="loader-text">Welcome to MWPD Filing System</div>
     </div>
     <script>
         setTimeout(function() {
+<<<<<<< HEAD
             window.location.href = 'dashboard.php';
         }, 1500); // 1.5 seconds
     </script>
 </body>
 </html>
+=======
+            <?php if (isset($_GET['redirect']) && !empty($_GET['redirect'])): ?>
+            window.location.href = '<?php echo htmlspecialchars($_GET['redirect']); ?>';
+            <?php else: ?>
+            window.location.href = 'dashboard.php';
+            <?php endif; ?>
+        }, 1500); // 1.5 seconds
+    </script>
+</body>
+
+</html>
+>>>>>>> e676bef (Initial commit on updated_BM)

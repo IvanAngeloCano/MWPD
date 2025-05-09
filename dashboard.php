@@ -1,7 +1,147 @@
 <?php
 include 'session.php';
+<<<<<<< HEAD
 $pageTitle = "Dashboard - MWPD Filing System";
 include '_head.php';
+=======
+require_once 'connection.php';
+$pageTitle = "Dashboard - MWPD Filing System";
+include '_head.php';
+
+// Get user role from session
+$userRole = $_SESSION['role'] ?? 'staff';
+
+// Get statistics from the database
+try {
+    // Total Direct Hire records count
+    $direct_hire_total_stmt = $pdo->query("SELECT COUNT(*) FROM direct_hire");
+    $direct_hire_total = $direct_hire_total_stmt->fetchColumn();
+    
+    // Direct Hire pending approvals count
+    $direct_hire_pending_stmt = $pdo->query("SELECT COUNT(*) FROM direct_hire WHERE status = 'pending'");
+    $direct_hire_pending = $direct_hire_pending_stmt->fetchColumn();
+    
+    // Get recent pending approvals
+    $pending_stmt = $pdo->query("
+        SELECT 'Direct Hire' as process_type, name, status, created_at 
+        FROM direct_hire 
+        WHERE status = 'pending' 
+        ORDER BY created_at DESC 
+        LIMIT 5
+    ");
+    $pending_approvals = $pending_stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Get recent activity logs (using the direct_hire for now)
+    $activity_stmt = $pdo->query("
+        SELECT 
+            CASE 
+                WHEN status = 'approved' THEN CONCAT(name, ' was approved')
+                WHEN status = 'denied' THEN CONCAT(name, ' was denied')
+                ELSE CONCAT(name, ' was added to the system')
+            END as activity,
+            created_at,
+            updated_at
+        FROM direct_hire
+        ORDER BY 
+            CASE 
+                WHEN updated_at > created_at THEN updated_at
+                ELSE created_at
+            END DESC
+        LIMIT 5
+    ");
+    $activity_logs = $activity_stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Get job fair events for calendar
+    $current_month = date('m');
+    $current_year = date('Y');
+    
+    // Get all job fairs for calendar highlighting
+    $job_fairs_stmt = $pdo->query("
+        SELECT id, date, venue, contact_info, status 
+        FROM job_fairs 
+        WHERE status != 'cancelled'
+        ORDER BY date ASC
+    ");
+    $job_fairs = $job_fairs_stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Get job fairs for current month to display in "This Month" section
+    $this_month_fairs_stmt = $pdo->query("
+        SELECT id, date, venue, contact_info, status 
+        FROM job_fairs 
+        WHERE MONTH(date) = $current_month 
+        AND YEAR(date) = $current_year
+        AND status != 'cancelled'
+        ORDER BY date ASC
+    ");
+    $this_month_fairs = $this_month_fairs_stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+} catch (PDOException $e) {
+    // Set defaults in case of database error
+    $direct_hire_total = 0;
+    $direct_hire_pending = 0;
+    $pending_approvals = [];
+    $activity_logs = [];
+    $job_fairs = [];
+    $this_month_fairs = [];
+}
+
+// Format time differences for display
+function time_elapsed_string($datetime, $full = false) {
+    // Set timezone to match your server
+    date_default_timezone_set('Asia/Manila'); // Adjust to your timezone
+    
+    // Get current time
+    $now = new DateTime();
+    
+    // Convert the datetime string to a DateTime object with proper timezone
+    $ago = new DateTime($datetime);
+    
+    // Get the difference
+    $diff = $now->diff($ago);
+    
+    // Calculate seconds difference for "just now" detection
+    $seconds_diff = $now->getTimestamp() - $ago->getTimestamp();
+    
+    // If less than 60 seconds, show "just now"
+    if ($seconds_diff < 60) {
+        return "just now";
+    }
+    
+    // If less than 60 minutes, show in minutes
+    if ($diff->h == 0 && $diff->d == 0 && $diff->m == 0) {
+        return $diff->i . ' minute' . ($diff->i > 1 ? 's' : '') . ' ago';
+    }
+    
+    // If less than 24 hours, show in hours and minutes
+    if ($diff->d == 0 && $diff->m == 0) {
+        if ($diff->i > 0) {
+            return $diff->h . ' hour' . ($diff->h > 1 ? 's' : '') . ' ' . 
+                   $diff->i . ' minute' . ($diff->i > 1 ? 's' : '') . ' ago';
+        } else {
+            return $diff->h . ' hour' . ($diff->h > 1 ? 's' : '') . ' ago';
+        }
+    }
+    
+    // If less than 7 days, show in days
+    if ($diff->d < 7 && $diff->m == 0) {
+        return $diff->d . ' day' . ($diff->d > 1 ? 's' : '') . ' ago';
+    }
+    
+    // If less than 30 days, show in weeks
+    if ($diff->d < 30 && $diff->m == 0) {
+        $weeks = floor($diff->d / 7);
+        return $weeks . ' week' . ($weeks > 1 ? 's' : '') . ' ago';
+    }
+    
+    // If less than 365 days, show in months
+    if ($diff->y == 0) {
+        return $diff->m . ' month' . ($diff->m > 1 ? 's' : '') . ' ago';
+    }
+    
+    // Otherwise, show in years
+    return $diff->y . ' year' . ($diff->y > 1 ? 's' : '') . ' ago';
+}
+>>>>>>> e676bef (Initial commit on updated_BM)
 ?>
 
 <body>
@@ -24,16 +164,57 @@ include '_head.php';
       ?>
 
       <main class="main-content">
+<<<<<<< HEAD
         <main class="dashboard-grid">
           <!-- Box 1: Total Records -->
+=======
+        <?php if (!empty($_SESSION['error_message'])): ?>
+          <div class="alert alert-danger">
+            <?= htmlspecialchars($_SESSION['error_message']) ?>
+          </div>
+          <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
+
+        <?php if ($userRole === 'regional director'): ?>
+          <!-- Regional Director Dashboard -->
+          <div class="alert alert-info">
+            <i class="fa fa-info-circle"></i> Welcome, Regional Director. You can review and approve pending records in the <a href="approvals.php">Approvals</a> page.
+          </div>
+          <div class="dashboard-redirect-btn">
+            <a href="approvals.php" class="btn btn-primary btn-lg">
+              <i class="fa fa-check-circle"></i> Go to Approvals Page
+            </a>
+          </div>
+        <?php elseif ($userRole === 'div head'): ?>
+          <!-- Division Head Dashboard -->
+          <div class="alert alert-info">
+            <i class="fa fa-info-circle"></i> Welcome, Division Head. You can manage user accounts in the <a href="accounts.php">Accounts</a> page.
+          </div>
+          <div class="dashboard-redirect-btn">
+            <a href="accounts.php" class="btn btn-primary btn-lg">
+              <i class="fa fa-users-cog"></i> Go to Account Management
+            </a>
+          </div>
+        <?php endif; ?>
+        
+        <main class="dashboard-grid">
+          <!-- Box 1: Total Records -->
+
+          <!-- Add As of this month kineme eme -->
+>>>>>>> e676bef (Initial commit on updated_BM)
           <div class="bento-box box-total-records">
             <h2>Total Records</h2>
             <div class="record-cards">
               <!-- Card 1: Direct Hire -->
               <div class="record-card">
+<<<<<<< HEAD
 
                 <div class="card-text">
                   <span class="record-count">120</span>
+=======
+                <div class="card-text">
+                  <span class="record-count"><?= number_format($direct_hire_total) ?></span>
+>>>>>>> e676bef (Initial commit on updated_BM)
                   <span class="record-label">Direct Hire</span>
                 </div>
                 <div class="card-icon">
@@ -44,7 +225,11 @@ include '_head.php';
               <!-- Card 2: Balik Manggagawa -->
               <div class="record-card">
                 <div class="card-text">
+<<<<<<< HEAD
                   <span class="record-count">85</span>
+=======
+                  <span class="record-count">0</span>
+>>>>>>> e676bef (Initial commit on updated_BM)
                   <span class="record-label">Balik Manggagawa</span>
                 </div>
                 <div class="card-icon">
@@ -55,7 +240,11 @@ include '_head.php';
               <!-- Card 3: Gov-to-Gov -->
               <div class="record-card">
                 <div class="card-text">
+<<<<<<< HEAD
                   <span class="record-count">45</span>
+=======
+                  <span class="record-count">0</span>
+>>>>>>> e676bef (Initial commit on updated_BM)
                   <span class="record-label">Gov-to-Gov</span>
                 </div>
                 <div class="card-icon">
@@ -66,7 +255,11 @@ include '_head.php';
               <!-- Card 4: Job Fairs -->
               <div class="record-card">
                 <div class="card-text">
+<<<<<<< HEAD
                   <span class="record-count">32</span>
+=======
+                  <span class="record-count">0</span>
+>>>>>>> e676bef (Initial commit on updated_BM)
                   <span class="record-label">Job Fairs</span>
                 </div>
                 <div class="card-icon">
@@ -79,7 +272,12 @@ include '_head.php';
 
           <!-- Box 2: Pending Approvals -->
           <div class="bento-box box-pending-approvals">
+<<<<<<< HEAD
             <h2>Pending Approvals</h2>
+=======
+            <h2>Pending Approvals <span class="count-badge"><?= $direct_hire_pending ?></span></h2>
+            <?php if (count($pending_approvals) > 0): ?>
+>>>>>>> e676bef (Initial commit on updated_BM)
             <table>
               <thead>
                 <tr>
@@ -89,6 +287,7 @@ include '_head.php';
                   <th>Time</th>
                 </tr>
               </thead>
+<<<<<<< HEAD
 
               <!-- Limit to only 3 rows of data -->
               <tbody>
@@ -115,6 +314,30 @@ include '_head.php';
           </div>
 
 
+=======
+              <tbody>
+                <?php foreach ($pending_approvals as $approval): ?>
+                <tr>
+                  <td><?= htmlspecialchars($approval['process_type']) ?></td>
+                  <td><?= htmlspecialchars($approval['name']) ?></td>
+                  <td><span class="status-badge pending"><?= ucfirst(htmlspecialchars($approval['status'])) ?></span></td>
+                  <td title="<?= date('M j, Y g:i A', strtotime($approval['created_at'])) ?>"><?= time_elapsed_string($approval['created_at']) ?></td>
+                </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+            <?php else: ?>
+            <div class="no-records">
+                <i class="fa fa-check-circle"></i>
+                <p>No pending approvals at this time</p>
+            </div>
+            <?php endif; ?>
+            <div class="view-all">
+              <!-- <p class="records-info">Showing <?= min(count($pending_approvals), 5) ?> of <?= $direct_hire_pending ?> pending records</p> -->
+            </div>
+          </div>
+
+>>>>>>> e676bef (Initial commit on updated_BM)
           <!-- Box 3: Calendar -->
           <div class="bento-box box-calendar">
             <div class="calendar-header">
@@ -138,6 +361,7 @@ include '_head.php';
             </div>
           </div>
 
+<<<<<<< HEAD
 
           <!-- Box 4: TBD Content -->
           <div class="bento-box box-tbd">
@@ -153,6 +377,70 @@ include '_head.php';
               <li>April 18 – Maria Santos submitted a form</li>
               <li>April 17 – Clearance approved for Juan Dela Cruz</li>
             </ul>
+=======
+          <!-- Box 4: This Month List -->
+          <div class="bento-box box-activity-log">
+            <h2>This Month's Job Fairs</h2>
+            <?php if (count($this_month_fairs) > 0): ?>
+            <ul class="activity-list">
+              <?php foreach ($this_month_fairs as $fair): ?>
+              <li>
+                <div class="activity-time"><?= date('M j', strtotime($fair['date'])) ?></div>
+                <div class="activity-info">
+                  <div class="activity-text"><?= htmlspecialchars($fair['venue']) ?></div>
+                  <div class="activity-meta"><?= htmlspecialchars($fair['contact_info']) ?></div>
+                  <div class="activity-status">
+                    <span class="status-badge <?= strtolower($fair['status']) ?>">
+                      <?= ucfirst(htmlspecialchars($fair['status'])) ?>
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <?php endforeach; ?>
+            </ul>
+            <div class="view-all">
+              <!-- <a href="job_fairs.php" class="btn-link">View all job fairs <i class="fa fa-arrow-right"></i></a> -->
+            </div>
+            <?php else: ?>
+            <div class="no-records">
+              <i class="fa fa-calendar"></i>
+              <p>No job fairs scheduled this month</p>
+            </div>
+            <?php endif; ?>
+          </div>
+          
+          <!-- Box 5: EMe (Bottom) -->
+          <div class="bento-box box-statistics">
+            <h2>Recent System Activity</h2>
+            <?php if (count($activity_logs) > 0): ?>
+            <ul class="activity-list">
+              <?php foreach ($activity_logs as $log): 
+                  $time = !empty($log['updated_at']) && $log['updated_at'] > $log['created_at'] 
+                          ? $log['updated_at'] 
+                          : $log['created_at'];
+                  
+                  // Format exact time for tooltip  
+                  $exact_time = date('M j, Y g:i A', strtotime($time));
+              ?>
+              <li>
+                <div class="activity-time"><?= date('M j', strtotime($time)) ?></div>
+                <div class="activity-info">
+                  <div class="activity-text"><?= htmlspecialchars($log['activity']) ?></div>
+                  <div class="activity-meta" title="<?= $exact_time ?>"><?= time_elapsed_string($time) ?></div>
+                </div>
+              </li>
+              <?php endforeach; ?>
+            </ul>
+            <div class="view-all">
+              <!-- <p class="records-info">Showing <?= count($activity_logs) ?> most recent activities</p> -->
+            </div>
+            <?php else: ?>
+            <div class="no-records">
+                <i class="fa fa-history"></i>
+                <p>No recent activity</p>
+            </div>
+            <?php endif; ?>
+>>>>>>> e676bef (Initial commit on updated_BM)
           </div>
         </main>
 
@@ -170,6 +458,20 @@ include '_head.php';
   const nextBtn = document.getElementById('nextMonth');
 
   let currentDate = new Date();
+<<<<<<< HEAD
+=======
+  
+  // Job fair dates from PHP
+  const jobFairDates = [
+    <?php foreach ($job_fairs as $fair): ?>
+      {
+        date: "<?= $fair['date'] ?>",
+        venue: "<?= addslashes($fair['venue']) ?>",
+        status: "<?= $fair['status'] ?>"
+      },
+    <?php endforeach; ?>
+  ];
+>>>>>>> e676bef (Initial commit on updated_BM)
 
   function renderCalendar(date) {
     const year = date.getFullYear();
@@ -190,8 +492,29 @@ include '_head.php';
     }
 
     for (let day = 1; day <= daysInMonth; day++) {
+<<<<<<< HEAD
       const isEvent = [5, 12].includes(day); // Sample event days
       calendarGrid.innerHTML += `<div class="day ${isEvent ? 'event' : ''}">${day}</div>`;
+=======
+      // Check if this day has any job fairs
+      const currentDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+      const hasEvent = jobFairDates.some(event => {
+        const eventDate = event.date.split(' ')[0]; // Get just the date part
+        return eventDate === currentDateStr;
+      });
+      
+      const events = jobFairDates.filter(event => {
+        const eventDate = event.date.split(' ')[0]; // Get just the date part
+        return eventDate === currentDateStr;
+      });
+      
+      let tooltip = '';
+      if (events.length > 0) {
+        tooltip = events.map(e => e.venue).join('\n');
+      }
+      
+      calendarGrid.innerHTML += `<div class="day ${hasEvent ? 'event' : ''}" ${tooltip ? `title="${tooltip}"` : ''}>${day}</div>`;
+>>>>>>> e676bef (Initial commit on updated_BM)
     }
   }
 
@@ -206,4 +529,13 @@ include '_head.php';
   };
 
   renderCalendar(currentDate);
+<<<<<<< HEAD
 </script>
+=======
+</script>
+
+<!-- Styles moved to _dashboard.scss -->
+
+</body>
+</html>
+>>>>>>> e676bef (Initial commit on updated_BM)

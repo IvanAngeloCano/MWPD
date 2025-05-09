@@ -54,6 +54,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // If full_name is null or empty, use the actual value from database
                     $_SESSION['full_name'] = !empty($user['full_name']) ? $user['full_name'] : $username;
                     $_SESSION['role'] = !empty($user['role']) ? $user['role'] : 'User';
+<<<<<<< HEAD
+=======
+                    
+                    // Check if user has consented to privacy policy
+                    $stmt = $pdo->prepare('SELECT privacy_consent, first_login FROM users WHERE id = ?');
+                    $stmt->execute([$user['id']]);
+                    $privacy_data = $stmt->fetch();
+                    
+                    $_SESSION['privacy_consent'] = $privacy_data['privacy_consent'] ?? 0;
+                    $_SESSION['first_login'] = $privacy_data['first_login'] ?? 1;
+                    
+                    // If first login or no privacy consent, redirect to privacy consent page
+                    if ($_SESSION['first_login'] == 1 || $_SESSION['privacy_consent'] == 0) {
+                        $_SESSION['show_loader'] = true;
+                        header('Location: loader.php?redirect=privacy_consent.php');
+                        exit();
+                    }
+                    
+                    // Otherwise proceed to dashboard
+>>>>>>> e676bef (Initial commit on updated_BM)
                     $_SESSION['show_loader'] = true;
                     header('Location: loader.php');
                     exit();

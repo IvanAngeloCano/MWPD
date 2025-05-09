@@ -4,7 +4,11 @@
 
 @import 'sidebar', 'header', 'loader';
 
+<<<<<<< HEAD
 @import 'dashboard', 'direct_hire';
+=======
+@import 'login', 'dashboard', 'direct_hire', 'gov_to_gov', 'profile', 'accounts', 'approvals', 'record_view', 'privacy';
+>>>>>>> e676bef (Initial commit on updated_BM)
 
 * {
   margin: 0;
@@ -12,17 +16,33 @@
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+<<<<<<< HEAD
   text-decoration: none;
 }
 
+=======
+}
+
+a:visited{
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+>>>>>>> e676bef (Initial commit on updated_BM)
 
 body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+<<<<<<< HEAD
   margin: 0;
   padding: 0;
   background-color: #f9f9f9;
   box-sizing: border-box;
+=======
+  background-color: #f9f9f9;
+>>>>>>> e676bef (Initial commit on updated_BM)
   color: black;
 }
 
@@ -30,7 +50,11 @@ body {
 .layout-wrapper {
   display: flex;
   height: 100vh; // full viewport height
+<<<<<<< HEAD
   width: 100vw; // full viewport width
+=======
+  width: 100vw;  // full viewport width
+>>>>>>> e676bef (Initial commit on updated_BM)
 
   //sidebar styles are within its own module
 
@@ -50,6 +74,7 @@ body {
   }
 }
 
+<<<<<<< HEAD
 
 
 
@@ -189,11 +214,39 @@ body {
     p {
       margin: 8px 0;
     }
+=======
+.status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: inline-block;
+
+  &.approved {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  &.pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  &.denied {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  &.declined {
+    background-color: #f8d7da;
+    color: #721c24;
+>>>>>>> e676bef (Initial commit on updated_BM)
   }
 }
 
 
 
+<<<<<<< HEAD
 .input-group {
   display: flex;
   align-items: center;
@@ -256,3 +309,26 @@ body {
   z-index: 1000;
   /* Ensures the element is on top of other content */
 }
+=======
+
+
+// .dashboard-header {
+//   height: 60px;
+//   background-color: #fff;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 0 1.5rem;
+//   border-bottom: 1px solid #ddd;
+//   flex-shrink: 0;
+// }
+
+
+// .main-content {
+//   flex-grow: 1;
+//   padding: 1.5rem;
+//   overflow-y: auto;
+//   background-color: #f9f9f9;
+// }
+
+>>>>>>> e676bef (Initial commit on updated_BM)

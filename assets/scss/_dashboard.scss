@@ -3,9 +3,23 @@
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(7, 1fr);
   gap: 1rem;
+<<<<<<< HEAD
   height: 100%;
 }
 
+=======
+  min-height: 600px;
+  height: 100%;
+
+  h2 {
+    font-weight: 600 !important;
+  }
+}
+
+
+
+
+>>>>>>> e676bef (Initial commit on updated_BM)
 .bento-box {
   background-color: $neutral-light;
   border-radius: .5rem;
@@ -28,10 +42,16 @@
   overflow: auto;
   display: flex;
   justify-content: start;
+<<<<<<< HEAD
   background-color: white;
 
   h2 {
     margin-bottom: .2rem;
+=======
+
+  h2 {
+    margin-bottom: .5rem;
+>>>>>>> e676bef (Initial commit on updated_BM)
   }
 
   table {
@@ -45,12 +65,21 @@
       font-size: 0.875rem;
     }
 
+<<<<<<< HEAD
     thead {
       background-color: $neutral-light;
 
       th {
         font-weight: 700;
       }
+=======
+    th {
+      font-weight: bold;
+    }
+
+    thead {
+      background-color: white;
+>>>>>>> e676bef (Initial commit on updated_BM)
     }
   }
 }
@@ -79,11 +108,18 @@
   }
 }
 
+<<<<<<< HEAD
 
 
 .box-calendar {
   grid-column: 3;
   grid-row: 1 / span 5;
+=======
+.box-calendar {
+  grid-column: 3;
+  grid-row: 1 / span 4;
+  gap: 0;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
   .calendar-placeholder {
     background-color: #f0f0f0;
@@ -91,7 +127,11 @@
     border-radius: 0.5rem;
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     justify-content: center;
+=======
+    justify-content: start;
+>>>>>>> e676bef (Initial commit on updated_BM)
     color: #aaa;
   }
 }
@@ -103,7 +143,11 @@
 
 .box-activity-log {
   grid-column: 3;
+<<<<<<< HEAD
   grid-row: 6 / span 2;
+=======
+  grid-row: 5 / span 3;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
   ul {
     list-style: none;
@@ -114,6 +158,110 @@
       margin-bottom: 0.5rem;
     }
   }
+<<<<<<< HEAD
+=======
+  
+  // This Month's Job Fairs styling
+  .activity-status {
+    margin-top: 5px;
+  }
+  
+  .status-badge {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    display: inline-block;
+    
+    &.planned {
+      background-color: #cff4fc;
+      color: #055160;
+    }
+    
+    &.confirmed {
+      background-color: #d1e7dd;
+      color: #0f5132;
+    }
+    
+    &.completed {
+      background-color: #e2e3e5;
+      color: #41464b;
+    }
+  }
+}
+
+.box-statistics {
+  grid-column: 1 / span 2;
+  grid-row: 6 / span 2;
+  
+  .statistics-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .stat-metrics {
+    .metric-items {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+    
+    .metric-item {
+      padding: 15px;
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      
+      .metric-label {
+        font-size: 12px;
+        color: #858796;
+        margin-bottom: 5px;
+      }
+      
+      .metric-value {
+        font-size: 24px;
+        font-weight: 700;
+        color: $neutral-dark;
+      }
+      
+      .metric-trend {
+        font-size: 12px;
+        font-weight: 600;
+        margin-top: 5px;
+        
+        &.positive {
+          color: #1cc88a;
+        }
+        
+        &.negative {
+          color: #e74a3b;
+        }
+        
+        &.neutral {
+          color: #858796;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .stat-metrics .metric-items {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .stat-metrics .metric-items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .stat-metrics .metric-items {
+      grid-template-columns: 1fr;
+    }
+  }
+>>>>>>> e676bef (Initial commit on updated_BM)
 }
 
 .box-total-records {
@@ -122,7 +270,10 @@
   background-color: $brand-primary;
 
   h2 {
+<<<<<<< HEAD
     margin-bottom: .2rem;
+=======
+>>>>>>> e676bef (Initial commit on updated_BM)
     color: white;
   }
 
@@ -159,7 +310,11 @@
       }
 
       .record-label {
+<<<<<<< HEAD
         font-size: 0.875rem;
+=======
+        font-size: $font-small;
+>>>>>>> e676bef (Initial commit on updated_BM)
         color: $neutral-dark;
       }
     }
@@ -167,16 +322,28 @@
     .card-icon {
       font-size: 1.75rem;
       color: $neutral-dark;
+<<<<<<< HEAD
+=======
+      background-color: transparent;
+>>>>>>> e676bef (Initial commit on updated_BM)
     }
   }
 }
 
+<<<<<<< HEAD
 
 .box-calendar {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
   justify-content: start;
+=======
+.box-calendar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
   .calendar-header {
     display: flex;
@@ -197,6 +364,7 @@
   }
 
   .calendar-weekdays {
+<<<<<<< HEAD
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
@@ -216,6 +384,21 @@
     gap: 0.5rem;
     text-align: center;
 
+=======
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 600;
+  font-size: $font-small;
+  color: $neutral-dark;
+}
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 0.25rem;
+    margin-top: 0.5rem;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
     .day {
       aspect-ratio: 1 / 1;
@@ -226,10 +409,18 @@
       border-radius: 0.5rem;
       background-color: #f5f5f5;
       position: relative;
+<<<<<<< HEAD
     }
 
     .event {
       background-color: #2b7de9;
+=======
+      cursor: default;
+    }
+
+    .event {
+      background-color: #007bff;
+>>>>>>> e676bef (Initial commit on updated_BM)
       color: white;
       border-radius: 50%;
       font-weight: bold;
@@ -239,7 +430,229 @@
       display: flex;
       justify-content: center;
       align-items: center;
+<<<<<<< HEAD
     }
   }
 
 }
+=======
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        background-color: darken(#007bff, 10%);
+      }
+    }
+  }
+}
+
+// Styles from dashboard.css
+.records-info {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.record-summary {
+  margin-top: 15px;
+  text-align: center;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  border-left: 3px solid #2196F3;
+}
+
+// Styles from dashboard.php
+.record-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.record-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    background-color: #f5f5f5;
+  }
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.record-count {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+}
+
+.record-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.card-icon {
+  font-size: 24px;
+  color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+  height: 45px;
+  width: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.count-badge {
+  background-color: #007bff;
+  color: white;
+  border-radius: 50px;
+  padding: 2px 8px;
+  font-size: 12px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+.no-records {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+
+  i {
+    font-size: 24px;
+    color: #aaa;
+    margin-bottom: 10px;
+  }
+}
+
+.view-all {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.btn-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.action-card {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+  text-decoration: none;
+  gap: 10px;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    background-color: #f5f5f5;
+  }
+}
+
+.action-icon {
+  font-size: 24px;
+  color: #007bff;
+  margin-bottom: 5px;
+}
+
+.action-text {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+
+.activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0 0;
+  overflow: auto;
+
+  li {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+}
+
+.activity-time {
+  color:$brand-primary;
+  font-weight: 500;
+  margin-right: 15px;
+  min-width: 50px;
+}
+
+.activity-info {
+  flex: 1;
+}
+
+.activity-text {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 2px;
+}
+
+.activity-meta {
+  font-size: 12px;
+  color: #888;
+}
+
+.activity-meta, 
+.box-pending-approvals td:last-child {
+  position: relative;
+  cursor: help;
+
+  
+
+  &[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    left: 0;
+    top: 100%;
+    z-index: 100;
+    background-color: #333;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+}
+
+@media (max-width: 768px) {
+  .record-cards, 
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+}
+>>>>>>> e676bef (Initial commit on updated_BM)

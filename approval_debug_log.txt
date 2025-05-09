@@ -1,0 +1,610 @@
+2025-04-26 09:16:44: Process approval script started
+2025-04-26 09:16:44: Form data: action=approve, record_id=1, approval_id=1
+2025-04-26 09:16:44: Transaction started
+2025-04-26 09:16:44: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":"pending","created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 14:45:58","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 09:16:44: Updated direct_hire record status to approved
+2025-04-26 09:16:44: Updated approval record (ID: 1) status to approved
+2025-04-26 09:16:44: Generating approved clearance document with e-signature
+2025-04-26 09:17:31: Process approval script started
+2025-04-26 09:17:31: Invalid request method
+2025-04-26 09:17:39: Process approval script started
+2025-04-26 09:17:39: Form data: action=approve, record_id=1, approval_id=1
+2025-04-26 09:17:39: Transaction started
+2025-04-26 09:17:39: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":"pending","created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 14:45:58","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 09:17:39: Updated direct_hire record status to approved
+2025-04-26 09:17:39: Updated approval record (ID: 1) status to approved
+2025-04-26 09:17:39: Generating approved clearance document with e-signature
+2025-04-26 09:17:48: Process approval script started
+2025-04-26 09:17:48: Form data: action=approve, record_id=1, approval_id=1
+2025-04-26 09:17:48: Transaction started
+2025-04-26 09:17:48: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":"pending","created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 14:45:58","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 09:17:48: Updated direct_hire record status to approved
+2025-04-26 09:17:48: Updated approval record (ID: 1) status to approved
+2025-04-26 09:17:48: Generating approved clearance document with e-signature
+2025-04-26 09:18:15: Process approval script started
+2025-04-26 09:18:15: Form data: action=approve, record_id=1, approval_id=1
+2025-04-26 09:18:15: Transaction started
+2025-04-26 09:18:15: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":"pending","created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 14:45:58","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 09:18:15: Updated direct_hire record status to approved
+2025-04-26 09:18:15: Updated approval record (ID: 1) status to approved
+2025-04-26 09:18:15: Generating approved clearance document with e-signature
+2025-04-26 09:18:15: Added signature image
+2025-04-26 09:18:15: Document saved to: temp/Approved_Clearance_DH-001_20250426_091815.docx
+2025-04-26 09:18:39: PDF conversion successful
+2025-04-26 09:18:39: Document reference saved to database
+2025-04-26 09:18:39: Transaction committed successfully
+2025-04-26 14:30:06: Process approval script started
+2025-04-26 14:30:06: Form data: action=approve, record_id=1, approval_id=5
+2025-04-26 14:30:06: Transaction started
+2025-04-26 14:30:06: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":"pending","created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 20:20:50","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 14:30:06: Updated direct_hire record status to approved
+2025-04-26 14:30:06: Updated approval record (ID: 5) status to approved
+2025-04-26 14:30:06: Generating approved clearance document with e-signature
+2025-04-26 14:30:06: Added signature image
+2025-04-26 14:30:06: Document saved to: temp/Approved_Clearance_DH-001_20250426_143006.docx
+2025-04-26 14:30:10: PDF conversion successful
+2025-04-26 14:30:10: Document reference saved to database
+2025-04-26 14:30:10: Transaction committed successfully
+2025-04-26 16:01:18: Process approval script started
+2025-04-26 16:01:18: Form data: action=approve, record_id=1, approval_id=15
+2025-04-26 16:01:18: Transaction started
+2025-04-26 16:01:18: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":"pending","created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 22:01:05","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-26 16:01:18: Approval record found, submitted by user ID: 1
+2025-04-26 16:01:18: Updated direct_hire record status to approved
+2025-04-26 16:01:18: Updated approval record (ID: 15) status to approved
+2025-04-26 16:01:18: Generating approved clearance document with e-signature
+2025-04-26 16:01:18: Added signature image
+2025-04-26 16:01:18: Document saved to: temp/Approved_Clearance_DH-001_20250426_160118.docx
+2025-04-26 16:01:25: PDF conversion successful
+2025-04-26 16:01:25: Document reference saved to database
+2025-04-26 16:01:25: Transaction committed successfully
+2025-04-26 16:01:25: Notification sent to user 1 about Justine approval status: approved - Result: Failed
+2025-04-26 16:01:26: Process approval script started
+2025-04-26 16:01:26: Form data: action=approve, record_id=1, approval_id=15
+2025-04-26 16:01:26: Transaction started
+2025-04-26 16:01:26: Record found: {"id":1,"control_no":"DH-001","name":"Justine","jobsite":"Allianz","evaluated":"2025-08-09","for_confirmation":"2025-04-04","emailed_to_dhad":"2025-09-09","received_from_dhad":"2025-09-09","evaluator":"Ivan Cano","note":"","type":"professional","status":"approved","created_at":"2025-04-26 14:45:51","updated_at":"2025-04-26 22:01:18","submitted_by":null,"approved_by":1,"approved_at":"2025-04-26 22:01:18"}
+2025-04-26 16:01:26: Approval record found, submitted by user ID: 1
+2025-04-26 16:01:26: Updated direct_hire record status to approved
+2025-04-26 16:01:26: Updated approval record (ID: 15) status to approved
+2025-04-26 16:01:26: Generating approved clearance document with e-signature
+2025-04-26 16:01:26: Added signature image
+2025-04-26 16:01:26: Document saved to: temp/Approved_Clearance_DH-001_20250426_160126.docx
+2025-04-26 16:01:32: PDF conversion successful
+2025-04-26 16:01:32: Document reference saved to database
+2025-04-26 16:01:32: Transaction committed successfully
+2025-04-26 16:01:32: Notification sent to user 1 about Justine approval status: approved - Result: Failed
+2025-04-28 09:14:21: Process approval script started
+2025-04-28 09:14:21: Form data: action=deny, record_id=2, approval_id=44
+2025-04-28 09:14:21: Transaction started
+2025-04-28 09:14:21: Record found: {"id":2,"control_no":"DH-0040","name":"tester justintelol","jobsite":"Allienz","evaluated":"2024-04-22","for_confirmation":"2025-02-23","emailed_to_dhad":"2025-02-23","received_from_dhad":"2025-02-20","evaluator":"justine ","note":"","type":"household","status":"pending","created_at":"2025-04-26 15:20:54","updated_at":"2025-04-28 15:13:24","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-28 09:14:21: Approval record found, submitted by user ID: 3
+2025-04-28 09:14:21: Updated direct_hire record status to denied
+2025-04-28 09:14:21: Updated approval record (ID: 44) status to denied
+2025-04-28 09:14:21: Transaction committed successfully
+2025-04-28 09:14:21: Notification sent to user 3 about tester justintelol approval status: denied - Result: Failed
+2025-04-29 05:31:33: Process approval script started
+2025-04-29 05:31:33: Form data: action=approve, record_id=11, approval_id=50
+2025-04-29 05:31:33: Transaction started
+2025-04-29 05:31:33: Record found: {"id":11,"control_no":"DH-0090645","name":"JustinesTESTER","jobsite":"JULI","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-04-28 16:12:42","updated_at":"2025-04-29 11:31:24","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:31:33: Approval record found, submitted by user ID: 1
+2025-04-29 05:31:33: Updated direct_hire record status to approved with formatted note
+2025-04-29 05:31:33: Updated approval record (ID: 50) status to approved
+2025-04-29 05:31:33: Generating approved clearance document with e-signature
+2025-04-29 05:31:33: Added signature image
+2025-04-29 05:31:33: Document saved to: temp/Approved_Clearance_DH-0090645_20250429_053133.docx
+2025-04-29 05:31:38: PDF conversion successful
+2025-04-29 05:31:38: Document reference saved to database
+2025-04-29 05:31:38: Transaction committed successfully
+2025-04-29 05:31:38: Notification sent to user 1 about JustinesTESTER approval status: approved - Result: Failed
+2025-04-29 05:35:32: Process approval script started
+2025-04-29 05:35:32: Form data: action=deny, record_id=10, approval_id=51
+2025-04-29 05:35:32: Transaction started
+2025-04-29 05:35:32: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-04-28 16:12:20","updated_at":"2025-04-29 11:35:25","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:35:32: Approval record found, submitted by user ID: 1
+2025-04-29 05:35:32: Updated direct_hire record status to denied with formatted note
+2025-04-29 05:35:32: Updated approval record (ID: 51) status to denied
+2025-04-29 05:35:32: Transaction committed successfully
+2025-04-29 05:35:32: Notification sent to user 1 about KALIX approval status: denied - Result: Failed
+2025-04-29 05:53:31: Process approval script started
+2025-04-29 05:53:31: Form data: action=approve, record_id=8, approval_id=53
+2025-04-29 05:53:31: Transaction started
+2025-04-29 05:53:31: Record found: {"id":8,"control_no":"DH-004088","name":"JADEERD","jobsite":"GFSGF","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-04-28 16:11:18","updated_at":"2025-04-29 11:53:21","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:53:31: Approval record found, submitted by user ID: 1
+2025-04-29 05:53:31: Updated direct_hire record status to approved with formatted note
+2025-04-29 05:53:31: Updated approval record (ID: 53) status to approved
+2025-04-29 05:53:31: Notification sent to user ID: 1
+2025-04-29 05:53:31: Generating approved clearance document with e-signature
+2025-04-29 05:53:31: Added signature image
+2025-04-29 05:53:31: Document saved to: temp/Approved_Clearance_DH-004088_20250429_055331.docx
+2025-04-29 05:53:35: PDF conversion successful
+2025-04-29 05:53:35: Document reference saved to database
+2025-04-29 05:53:35: Transaction committed successfully
+2025-04-29 05:53:35: Notification sent to user 1 about JADEERD approval status: approved - Result: Failed
+2025-04-29 05:54:26: Process approval script started
+2025-04-29 05:54:26: Form data: action=deny, record_id=9, approval_id=52
+2025-04-29 05:54:26: Transaction started
+2025-04-29 05:54:26: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-04-28 16:11:42","updated_at":"2025-04-29 11:53:17","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:54:26: Approval record found, submitted by user ID: 1
+2025-04-29 05:54:26: Updated direct_hire record status to denied with formatted note
+2025-04-29 05:54:26: Updated approval record (ID: 52) status to denied
+2025-04-29 05:54:26: Notification sent to user ID: 1
+2025-04-29 05:54:26: Transaction committed successfully
+2025-04-29 05:54:26: Notification sent to user 1 about JOLY approval status: denied - Result: Failed
+2025-04-29 05:56:45: Process approval script started
+2025-04-29 05:56:45: Form data: action=approve, record_id=7, approval_id=54
+2025-04-29 05:56:45: Transaction started
+2025-04-29 05:56:45: Record found: {"id":7,"control_no":"DH-0099","name":"dsadsal","jobsite":"gjhfjgdgghshgs","evaluated":"2025-04-10","for_confirmation":"2025-04-10","emailed_to_dhad":"2025-04-20","received_from_dhad":"2025-04-08","evaluator":"ghdytd","note":"","type":"professional","status":"pending","created_at":"2025-04-28 16:10:09","updated_at":"2025-04-29 11:56:40","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:56:45: Approval record found, submitted by user ID: 1
+2025-04-29 05:56:45: Updated direct_hire record status to approved with formatted note
+2025-04-29 05:56:45: Updated approval record (ID: 54) status to approved
+2025-04-29 05:56:45: Notification sent to user ID: 1
+2025-04-29 05:56:45: Generating approved clearance document with e-signature
+2025-04-29 05:56:45: Added signature image
+2025-04-29 05:56:45: Document saved to: temp/Approved_Clearance_DH-0099_20250429_055645.docx
+2025-04-29 05:56:48: PDF conversion successful
+2025-04-29 05:56:48: Document reference saved to database
+2025-04-29 05:56:48: Transaction committed successfully
+2025-04-29 05:56:48: Notification sent to user 1 about dsadsal approval status: approved - Result: Failed
+2025-04-29 05:58:16: Process approval script started
+2025-04-29 05:58:16: Form data: action=approve, record_id=6, approval_id=55
+2025-04-29 05:58:16: Transaction started
+2025-04-29 05:58:16: Record found: {"id":6,"control_no":"DH-00401","name":"jamiwjap","jobsite":"joblist","evaluated":"2025-04-09","for_confirmation":"2025-04-14","emailed_to_dhad":"2025-04-17","received_from_dhad":"2025-04-18","evaluator":"Ivan Cano","note":"","type":"professional","status":"pending","created_at":"2025-04-28 16:09:33","updated_at":"2025-04-29 11:58:11","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:58:16: Approval record found, submitted by user ID: 1
+2025-04-29 05:58:16: Updated direct_hire record status to approved with formatted note
+2025-04-29 05:58:16: Updated approval record (ID: 55) status to approved
+2025-04-29 05:58:16: Notification sent to user ID: 1
+2025-04-29 05:58:16: Generating approved clearance document with e-signature
+2025-04-29 05:58:16: Added signature image
+2025-04-29 05:58:16: Document saved to: temp/Approved_Clearance_DH-00401_20250429_055816.docx
+2025-04-29 05:58:20: PDF conversion successful
+2025-04-29 05:58:20: Document reference saved to database
+2025-04-29 05:58:20: Transaction committed successfully
+2025-04-29 05:58:20: Notification sent to user 1 about jamiwjap approval status: approved - Result: Failed
+2025-04-29 05:59:42: Process approval script started
+2025-04-29 05:59:42: Form data: action=approve, record_id=7, approval_id=61
+2025-04-29 05:59:42: Transaction started
+2025-04-29 05:59:42: Record found: {"id":7,"control_no":"DH-0099","name":"dsadsal","jobsite":"gjhfjgdgghshgs","evaluated":"2025-04-10","for_confirmation":"2025-04-10","emailed_to_dhad":"2025-04-20","received_from_dhad":"2025-04-08","evaluator":"ghdytd","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":"pending","created_at":"2025-04-28 16:10:09","updated_at":"2025-04-29 11:59:34","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 05:59:42: Approval record found, submitted by user ID: 1
+2025-04-29 05:59:42: Updated direct_hire record status to approved with formatted note
+2025-04-29 05:59:42: Updated approval record (ID: 61) status to approved
+2025-04-29 05:59:42: Notification sent to user ID: 1
+2025-04-29 05:59:42: Generating approved clearance document with e-signature
+2025-04-29 05:59:43: Added signature image
+2025-04-29 05:59:43: Document saved to: temp/Approved_Clearance_DH-0099_20250429_055942.docx
+2025-04-29 05:59:49: PDF conversion successful
+2025-04-29 05:59:49: Document reference saved to database
+2025-04-29 05:59:49: Transaction committed successfully
+2025-04-29 05:59:49: Notification sent to user 1 about dsadsal approval status: approved - Result: Failed
+2025-04-29 06:09:38: Process approval script started
+2025-04-29 06:09:38: Form data: action=approve, record_id=8, approval_id=60
+2025-04-29 06:09:38: Transaction started
+2025-04-29 06:09:38: Record found: {"id":8,"control_no":"DH-004088","name":"JADEERD","jobsite":"GFSGF","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":"pending","created_at":"2025-04-28 16:11:18","updated_at":"2025-04-29 11:59:24","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 06:09:38: Approval record found, submitted by user ID: 1
+2025-04-29 06:09:38: Updated direct_hire record status to approved with formatted note
+2025-04-29 06:09:38: Updated approval record (ID: 60) status to approved
+2025-04-29 06:09:38: Session notification sent to user ID: 1
+2025-04-29 06:09:38: Generating approved clearance document with e-signature
+2025-04-29 06:09:38: Added signature image
+2025-04-29 06:09:38: Document saved to: temp/Approved_Clearance_DH-004088_20250429_060938.docx
+2025-04-29 06:09:42: PDF conversion successful
+2025-04-29 06:09:42: Document reference saved to database
+2025-04-29 06:09:42: Transaction committed successfully
+2025-04-29 06:09:55: Process approval script started
+2025-04-29 06:09:55: Invalid request method
+2025-04-29 06:10:07: Process approval script started
+2025-04-29 06:10:07: Form data: action=deny, record_id=9, approval_id=59
+2025-04-29 06:10:07: Transaction started
+2025-04-29 06:10:07: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsdas","type":"professional","status":"pending","created_at":"2025-04-28 16:11:42","updated_at":"2025-04-29 11:59:13","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 11:54:26"}
+2025-04-29 06:10:07: Approval record found, submitted by user ID: 1
+2025-04-29 06:10:07: Updated direct_hire record status to denied with formatted note
+2025-04-29 06:10:07: Updated approval record (ID: 59) status to denied
+2025-04-29 06:10:07: Session notification sent to user ID: 1
+2025-04-29 06:10:07: Transaction committed successfully
+2025-04-29 06:10:13: Process approval script started
+2025-04-29 06:10:13: Form data: action=deny, record_id=9, approval_id=59
+2025-04-29 06:10:13: Transaction started
+2025-04-29 06:10:13: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsdas\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa","type":"professional","status":"denied","created_at":"2025-04-28 16:11:42","updated_at":"2025-04-29 12:10:07","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 12:10:07"}
+2025-04-29 06:10:13: Approval record found, submitted by user ID: 1
+2025-04-29 06:10:13: Updated direct_hire record status to denied with formatted note
+2025-04-29 06:10:13: Updated approval record (ID: 59) status to denied
+2025-04-29 06:10:13: Session notification sent to user ID: 1
+2025-04-29 06:10:13: Transaction committed successfully
+2025-04-29 06:10:22: Process approval script started
+2025-04-29 06:10:22: Form data: action=deny, record_id=9, approval_id=59
+2025-04-29 06:10:22: Transaction started
+2025-04-29 06:10:22: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsdas\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa","type":"professional","status":"denied","created_at":"2025-04-28 16:11:42","updated_at":"2025-04-29 12:10:13","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 12:10:13"}
+2025-04-29 06:10:22: Approval record found, submitted by user ID: 1
+2025-04-29 06:10:22: Updated direct_hire record status to denied with formatted note
+2025-04-29 06:10:22: Updated approval record (ID: 59) status to denied
+2025-04-29 06:10:22: Session notification sent to user ID: 1
+2025-04-29 06:10:22: Transaction committed successfully
+2025-04-29 06:10:34: Process approval script started
+2025-04-29 06:10:34: Form data: action=deny, record_id=9, approval_id=59
+2025-04-29 06:10:34: Transaction started
+2025-04-29 06:10:34: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsdas\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa","type":"professional","status":"denied","created_at":"2025-04-28 16:11:42","updated_at":"2025-04-29 12:10:22","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 12:10:22"}
+2025-04-29 06:10:34: Approval record found, submitted by user ID: 1
+2025-04-29 06:10:34: Updated direct_hire record status to denied with formatted note
+2025-04-29 06:10:34: Updated approval record (ID: 59) status to denied
+2025-04-29 06:10:34: Session notification sent to user ID: 1
+2025-04-29 06:10:34: Transaction committed successfully
+2025-04-29 06:11:38: Process approval script started
+2025-04-29 06:11:38: Form data: action=approve, record_id=10, approval_id=58
+2025-04-29 06:11:38: Transaction started
+2025-04-29 06:11:38: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ncdcsa","type":"professional","status":"pending","created_at":"2025-04-28 16:12:20","updated_at":"2025-04-29 11:59:09","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 11:35:32"}
+2025-04-29 06:11:38: Approval record found, submitted by user ID: 1
+2025-04-29 06:11:38: Updated direct_hire record status to approved with formatted note
+2025-04-29 06:11:38: Updated approval record (ID: 58) status to approved
+2025-04-29 06:11:38: Session notification sent to user ID: 1
+2025-04-29 06:11:38: Generating approved clearance document with e-signature
+2025-04-29 06:11:38: Added signature image
+2025-04-29 06:11:38: Document saved to: temp/Approved_Clearance_DH-001965_20250429_061138.docx
+2025-04-29 06:11:42: PDF conversion successful
+2025-04-29 06:11:42: Document reference saved to database
+2025-04-29 06:11:42: Transaction committed successfully
+2025-04-29 06:12:14: Process approval script started
+2025-04-29 06:12:14: Form data: action=deny, record_id=12, approval_id=56
+2025-04-29 06:12:14: Transaction started
+2025-04-29 06:12:14: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 11:58:49","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 06:12:14: Approval record found, submitted by user ID: 1
+2025-04-29 06:12:14: Updated direct_hire record status to denied with formatted note
+2025-04-29 06:12:14: Updated approval record (ID: 56) status to denied
+2025-04-29 06:12:14: Session notification sent to user ID: 1
+2025-04-29 06:12:14: Transaction committed successfully
+2025-04-29 06:21:53: Process approval script started
+2025-04-29 06:21:53: Form data: action=approve, record_id=11, approval_id=57
+2025-04-29 06:21:53: Transaction started
+2025-04-29 06:21:53: Record found: {"id":11,"control_no":"DH-0090645","name":"JustinesTESTER","jobsite":"JULI","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\njustine","type":"professional","status":"pending","created_at":"2025-04-28 16:12:42","updated_at":"2025-04-29 11:59:03","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 06:21:53: Approval record found, submitted by user ID: 1
+2025-04-29 06:21:53: Updated direct_hire record status to approved with formatted note
+2025-04-29 06:21:53: Updated approval record (ID: 57) status to approved
+2025-04-29 06:21:53: Session notification sent to user ID: 1
+2025-04-29 06:21:53: Generating approved clearance document with e-signature
+2025-04-29 06:21:53: Added signature image
+2025-04-29 06:21:53: Document saved to: temp/Approved_Clearance_DH-0090645_20250429_062153.docx
+2025-04-29 06:21:56: PDF conversion successful
+2025-04-29 06:21:56: Document reference saved to database
+2025-04-29 06:21:56: Transaction committed successfully
+2025-04-29 06:47:38: Process approval script started
+2025-04-29 06:47:38: Form data: action=approve, record_id=10, approval_id=64
+2025-04-29 06:47:38: Transaction started
+2025-04-29 06:47:38: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ncdcsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":"pending","created_at":"2025-04-28 16:12:20","updated_at":"2025-04-29 12:25:53","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 06:47:38: Approval record found, submitted by user ID: 1
+2025-04-29 06:47:38: Updated direct_hire record status to approved with formatted note
+2025-04-29 06:47:38: Updated approval record (ID: 64) status to approved
+2025-04-29 06:47:38: Session notification sent to user ID: 1
+2025-04-29 06:47:38: Generating approved clearance document with e-signature
+2025-04-29 06:47:38: Added signature image
+2025-04-29 06:47:38: Document saved to: temp/Approved_Clearance_DH-001965_20250429_064738.docx
+2025-04-29 06:47:43: PDF conversion successful
+2025-04-29 06:47:43: Document reference saved to database
+2025-04-29 06:47:43: Transaction committed successfully
+2025-04-29 08:08:44: Process approval script started
+2025-04-29 08:08:44: Form data: action=approve, record_id=12, approval_id=63
+2025-04-29 08:08:44: Transaction started
+2025-04-29 08:08:44: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsad","type":"professional","status":"pending","created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 12:24:14","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 12:12:14"}
+2025-04-29 08:08:44: Approval record found, submitted by user ID: 1
+2025-04-29 08:08:44: Updated direct_hire record status to approved with formatted note
+2025-04-29 08:08:44: Updated approval record (ID: 63) status to approved
+2025-04-29 08:08:44: Session notification sent to user ID: 1
+2025-04-29 08:08:44: Generating approved clearance document with e-signature
+2025-04-29 08:08:44: Added signature image
+2025-04-29 08:08:44: Document saved to: temp/Approved_Clearance_DH-00109_20250429_080844.docx
+2025-04-29 08:08:53: PDF conversion successful
+2025-04-29 08:08:53: Document reference saved to database
+2025-04-29 08:08:53: Transaction committed successfully
+2025-04-29 11:07:35: Process approval script started
+2025-04-29 11:07:35: Form data: action=approve, record_id=12, approval_id=65
+2025-04-29 11:07:35: Transaction started
+2025-04-29 11:07:35: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsad\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":"pending","created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 17:06:53","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 11:07:35: Approval record found, submitted by user ID: 1
+2025-04-29 11:07:35: Updated direct_hire record status to approved with formatted note
+2025-04-29 11:07:35: Updated approval record (ID: 65) status to approved
+2025-04-29 11:07:35: Session notification sent to user ID: 1
+2025-04-29 11:07:35: Generating approved clearance document with e-signature
+2025-04-29 11:07:35: Added signature image
+2025-04-29 11:07:35: Document saved to: temp/Approved_Clearance_DH-00109_20250429_110735.docx
+2025-04-29 11:07:39: PDF conversion successful
+2025-04-29 11:07:39: Document reference saved to database
+2025-04-29 11:07:39: Transaction committed successfully
+2025-04-29 11:07:46: Process approval script started
+2025-04-29 11:07:46: Form data: action=approve, record_id=11, approval_id=62
+2025-04-29 11:07:46: Transaction started
+2025-04-29 11:07:46: Record found: {"id":11,"control_no":"DH-0090645","name":"JustinesTESTER","jobsite":"JULI","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\njustine\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":"pending","created_at":"2025-04-28 16:12:42","updated_at":"2025-04-29 12:22:34","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 11:07:46: Approval record found, submitted by user ID: 1
+2025-04-29 11:07:46: Updated direct_hire record status to approved with formatted note
+2025-04-29 11:07:46: Updated approval record (ID: 62) status to approved
+2025-04-29 11:07:46: Session notification sent to user ID: 1
+2025-04-29 11:07:46: Generating approved clearance document with e-signature
+2025-04-29 11:07:46: Added signature image
+2025-04-29 11:07:46: Document saved to: temp/Approved_Clearance_DH-0090645_20250429_110746.docx
+2025-04-29 11:07:49: PDF conversion successful
+2025-04-29 11:07:49: Document reference saved to database
+2025-04-29 11:07:49: Transaction committed successfully
+2025-04-29 11:24:25: Process approval script started
+2025-04-29 11:24:25: Form data: action=approve, record_id=9, approval_id=66
+2025-04-29 11:24:25: Transaction started
+2025-04-29 11:24:25: Record found: {"id":9,"control_no":"DH-001090","name":"JOLY","jobsite":"PORK","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsdas\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa\n\n[DENIAL NOTE - April 29, 2025 by Regional Director]\ndsadsa","type":"professional","status":"pending","created_at":"2025-04-28 16:11:42","updated_at":"2025-04-29 17:23:58","submitted_by":null,"approved_by":1,"approved_at":"2025-04-29 12:10:34"}
+2025-04-29 11:24:25: Approval record found, submitted by user ID: 2
+2025-04-29 11:24:25: Updated direct_hire record status to approved with formatted note
+2025-04-29 11:24:25: Updated approval record (ID: 66) status to approved
+2025-04-29 11:24:25: Session notification sent to user ID: 2
+2025-04-29 11:24:25: Generating approved clearance document with e-signature
+2025-04-29 11:24:25: Added signature image
+2025-04-29 11:24:25: Document saved to: temp/Approved_Clearance_DH-001090_20250429_112425.docx
+2025-04-29 11:24:29: PDF conversion successful
+2025-04-29 11:24:29: Document reference saved to database
+2025-04-29 11:24:29: Transaction committed successfully
+2025-04-29 11:57:27: Process approval script started
+2025-04-29 11:57:27: Form data: action=approve, record_id=6, approval_id=67
+2025-04-29 11:57:27: Transaction started
+2025-04-29 11:57:27: Record found: {"id":6,"control_no":"DH-00401","name":"jamiwjap","jobsite":"joblist","evaluated":"2025-04-09","for_confirmation":"2025-04-14","emailed_to_dhad":"2025-04-17","received_from_dhad":"2025-04-18","evaluator":"Ivan Cano","note":"[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":"pending","created_at":"2025-04-28 16:09:33","updated_at":"2025-04-29 17:25:42","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 11:57:27: Approval record found, submitted by user ID: 1
+2025-04-29 11:57:27: Updated direct_hire record status to approved with formatted note
+2025-04-29 11:57:27: Updated approval record (ID: 67) status to approved
+2025-04-29 11:57:27: Session notification sent to user ID: 1
+2025-04-29 11:57:27: Generating approved clearance document with e-signature
+2025-04-29 11:57:27: Added signature image
+2025-04-29 11:57:27: Document saved to: temp/Approved_Clearance_DH-00401_20250429_115727.docx
+2025-04-29 11:57:31: PDF conversion successful
+2025-04-29 11:57:31: Document reference saved to database
+2025-04-29 11:57:31: Transaction committed successfully
+2025-04-29 12:04:49: Process approval script started
+2025-04-29 12:04:49: Form data: action=approve, record_id=10, approval_id=68
+2025-04-29 12:04:49: Transaction started
+2025-04-29 12:04:49: Record found: {"id":10,"control_no":"DH-001965","name":"KALIX","jobsite":"KOLIV","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ncdcsa\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":"pending","created_at":"2025-04-28 16:12:20","updated_at":"2025-04-29 18:04:03","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 12:04:49: Approval record found, submitted by user ID: 1
+2025-04-29 12:04:49: Updated direct_hire record status to approved with formatted note
+2025-04-29 12:04:49: Updated approval record (ID: 68) status to approved
+2025-04-29 12:04:49: Session notification sent to user ID: 1
+2025-04-29 12:04:49: Generating approved clearance document with e-signature
+2025-04-29 12:04:49: Added signature image
+2025-04-29 12:04:49: Document saved to: temp/Approved_Clearance_DH-001965_20250429_120449.docx
+2025-04-29 12:04:52: PDF conversion successful
+2025-04-29 12:04:52: Document reference saved to database
+2025-04-29 12:04:52: Transaction committed successfully
+2025-04-29 12:11:44: Process approval script started
+2025-04-29 12:11:44: Form data: action=approve, record_id=12, approval_id=69
+2025-04-29 12:11:44: Transaction started
+2025-04-29 12:11:44: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsad\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":"pending","created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 18:08:15","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 12:11:44: Approval record found, submitted by user ID: 2
+2025-04-29 12:11:44: Updated direct_hire record status to approved with formatted note
+2025-04-29 12:11:44: Updated approval record (ID: 69) status to approved
+2025-04-29 12:11:44: Session notification sent to user ID: 2
+2025-04-29 12:11:44: Generating approved clearance document with e-signature
+2025-04-29 12:11:45: Added signature image
+2025-04-29 12:11:45: Document saved to: temp/Approved_Clearance_DH-00109_20250429_121144.docx
+2025-04-29 12:11:49: PDF conversion successful
+2025-04-29 12:11:49: Document reference saved to database
+2025-04-29 12:11:49: Transaction committed successfully
+2025-04-29 12:49:29: Process approval script started
+2025-04-29 12:49:29: Form data: action=approve, record_id=12, approval_id=70
+2025-04-29 12:49:29: Transaction started
+2025-04-29 12:49:29: Record found: {"id":12,"control_no":"DH-00109","name":"JG","jobsite":"GC","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"[DENIAL NOTE - April 29, 2025 by Regional Director]\r\ndsad\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.\r\n\r\n[APPROVAL NOTE - April 29, 2025 by Regional Director]\r\nRecord approved without additional comments.","type":"professional","status":"pending","created_at":"2025-04-28 16:13:03","updated_at":"2025-04-29 18:38:12","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-04-29 12:49:29: Approval record found, submitted by user ID: 1
+2025-04-29 12:49:29: Updated direct_hire record status to approved with formatted note
+2025-04-29 12:49:29: Updated approval record (ID: 70) status to approved
+2025-04-29 12:49:29: Session notification sent to user ID: 1
+2025-04-29 12:49:29: Generating approved clearance document with e-signature
+2025-04-29 12:49:29: Added signature image
+2025-04-29 12:49:29: Document saved to: temp/Approved_Clearance_DH-00109_20250429_124929.docx
+2025-04-29 12:49:32: PDF conversion successful
+2025-04-29 12:49:32: Document reference saved to database
+2025-04-29 12:49:32: Transaction committed successfully
+2025-04-29 12:53:18: Process approval script started
+2025-04-29 12:53:18: Form data: action=approve, record_id=12, approval_id=71
+2025-04-29 12:53:18: Transaction started
+2025-04-29 12:53:18: Status determined: approved
+2025-04-29 12:53:18: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.clearance_approvals' doesn't exist
+2025-04-29 12:55:12: Process approval script started
+2025-04-29 12:55:12: Form data: action=approve, record_id=12, approval_id=71
+2025-04-29 12:55:12: Transaction started
+2025-04-29 12:55:12: Status determined: approved
+2025-04-29 12:55:12: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.clearance_approvals' doesn't exist
+2025-04-29 16:04:41: Process approval script started
+2025-04-29 16:04:41: Form data: action=approve, record_id=12, approval_id=71
+2025-04-29 16:04:41: Transaction started
+2025-04-29 16:04:41: Status determined: approved
+2025-04-29 16:04:41: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.clearance_approvals' doesn't exist
+2025-04-29 16:07:47: Process approval script started
+2025-04-29 16:07:47: Form data: action=approve, record_id=12, approval_id=71
+2025-04-29 16:07:47: Transaction started
+2025-04-29 16:07:47: Status determined: approved
+2025-04-29 16:07:47: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.clearance_approvals' doesn't exist
+2025-04-29 16:09:50: Process approval script started
+2025-04-29 16:09:50: Form data: action=approve, record_id=12, approval_id=71
+2025-04-29 16:09:50: Transaction started
+2025-04-29 16:09:50: Status determined: approved
+2025-04-29 16:09:50: Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'approved_at' in 'field list'
+2025-04-29 16:10:44: Process approval script started
+2025-04-29 16:10:44: Form data: action=approve, record_id=12, approval_id=71
+2025-04-29 16:10:44: Transaction started
+2025-04-29 16:10:44: Status determined: approved
+2025-04-29 16:10:44: Approval record updated
+2025-04-29 16:10:44: Direct hire record updated
+2025-04-29 16:10:44: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:10:44: Transaction committed successfully
+2025-04-29 16:10:54: Process approval script started
+2025-04-29 16:10:54: Form data: action=approve, record_id=12, approval_id=71
+2025-04-29 16:10:54: Transaction started
+2025-04-29 16:10:54: Status determined: approved
+2025-04-29 16:10:54: Approval record updated
+2025-04-29 16:10:54: Direct hire record updated
+2025-04-29 16:10:54: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:10:54: Transaction committed successfully
+2025-04-29 16:11:11: Process approval script started
+2025-04-29 16:11:11: Form data: action=deny, record_id=12, approval_id=71
+2025-04-29 16:11:11: Transaction started
+2025-04-29 16:11:11: Status determined: denied
+2025-04-29 16:11:11: Approval record updated
+2025-04-29 16:11:11: Direct hire record updated
+2025-04-29 16:11:11: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:11:11: Transaction committed successfully
+2025-04-29 16:36:54: Process approval script started
+2025-04-29 16:36:54: Form data: action=approve, record_id=12, approval_id=71
+2025-04-29 16:36:54: Transaction started
+2025-04-29 16:36:54: Status determined: approved
+2025-04-29 16:36:54: Approval record updated
+2025-04-29 16:36:54: Direct hire record updated
+2025-04-29 16:36:54: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:36:54: Transaction committed successfully
+2025-04-29 16:37:58: Process approval script started
+2025-04-29 16:37:58: Form data: action=approve, record_id=11, approval_id=72
+2025-04-29 16:37:58: Transaction started
+2025-04-29 16:37:58: Status determined: approved
+2025-04-29 16:37:58: Approval record updated
+2025-04-29 16:37:58: Direct hire record updated
+2025-04-29 16:37:58: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:37:58: Transaction committed successfully
+2025-04-29 16:39:42: Process approval script started
+2025-04-29 16:39:42: Form data: action=approve, record_id=11, approval_id=72
+2025-04-29 16:39:42: Transaction started
+2025-04-29 16:39:42: Status determined: approved
+2025-04-29 16:39:42: Approval record updated
+2025-04-29 16:39:42: Direct hire record updated
+2025-04-29 16:39:42: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:39:42: Transaction committed successfully
+2025-04-29 16:39:45: Process approval script started
+2025-04-29 16:39:45: Form data: action=approve, record_id=11, approval_id=72
+2025-04-29 16:39:45: Transaction started
+2025-04-29 16:39:45: Status determined: approved
+2025-04-29 16:39:45: Approval record updated
+2025-04-29 16:39:45: Direct hire record updated
+2025-04-29 16:39:45: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:39:45: Transaction committed successfully
+2025-04-29 16:42:56: Process approval script started
+2025-04-29 16:42:56: Form data: action=approve, record_id=11, approval_id=72
+2025-04-29 16:42:56: Transaction started
+2025-04-29 16:42:56: Status determined: approved
+2025-04-29 16:42:56: Approval record updated
+2025-04-29 16:42:56: Direct hire record updated
+2025-04-29 16:42:56: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:42:56: Transaction committed successfully
+2025-04-29 16:43:04: Process approval script started
+2025-04-29 16:43:04: Form data: action=approve, record_id=12, approval_id=71
+2025-04-29 16:43:04: Transaction started
+2025-04-29 16:43:04: Status determined: approved
+2025-04-29 16:43:04: Approval record updated
+2025-04-29 16:43:04: Direct hire record updated
+2025-04-29 16:43:04: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:43:04: Transaction committed successfully
+2025-04-29 16:46:24: Process approval script started
+2025-04-29 16:46:24: Form data: action=approve, record_id=12, approval_id=71
+2025-04-29 16:46:24: Transaction started
+2025-04-29 16:46:24: Status determined: approved
+2025-04-29 16:46:24: Approval record updated
+2025-04-29 16:46:24: Direct hire record updated
+2025-04-29 16:46:24: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:46:24: Transaction committed successfully
+2025-04-29 16:46:37: Process approval script started
+2025-04-29 16:46:37: Form data: action=approve, record_id=11, approval_id=72
+2025-04-29 16:46:37: Transaction started
+2025-04-29 16:46:37: Status determined: approved
+2025-04-29 16:46:37: Approval record updated
+2025-04-29 16:46:37: Direct hire record updated
+2025-04-29 16:46:37: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:46:37: Transaction committed successfully
+2025-04-29 16:50:56: Process approval script started
+2025-04-29 16:50:56: Form data: action=deny, record_id=11, approval_id=72
+2025-04-29 16:50:56: Transaction started
+2025-04-29 16:50:56: Status determined: denied
+2025-04-29 16:50:56: Approval record updated
+2025-04-29 16:50:56: Direct hire record updated
+2025-04-29 16:50:56: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:50:56: Transaction committed successfully
+2025-04-29 16:58:33: Process approval script started
+2025-04-29 16:58:33: Form data: action=approve, record_id=11, approval_id=72
+2025-04-29 16:58:33: Transaction started
+2025-04-29 16:58:33: Status determined: approved
+2025-04-29 16:58:33: Approval record updated
+2025-04-29 16:58:33: Direct hire record updated
+2025-04-29 16:58:33: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 16:58:33: Transaction committed successfully
+2025-04-29 17:01:14: Process approval script started
+2025-04-29 17:01:14: Form data: action=deny, record_id=10, approval_id=73
+2025-04-29 17:01:14: Transaction started
+2025-04-29 17:01:14: Status determined: denied
+2025-04-29 17:01:14: Approval record updated
+2025-04-29 17:01:14: Direct hire record updated
+2025-04-29 17:01:14: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 17:01:14: Transaction committed successfully
+2025-04-29 17:02:28: Process approval script started
+2025-04-29 17:02:28: Form data: action=deny, record_id=10, approval_id=73
+2025-04-29 17:02:28: Transaction started
+2025-04-29 17:02:28: Status determined: denied
+2025-04-29 17:02:28: Approval record updated
+2025-04-29 17:02:28: Direct hire record updated
+2025-04-29 17:02:28: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 17:02:28: Transaction committed successfully
+2025-04-29 17:02:44: Process approval script started
+2025-04-29 17:02:44: Form data: action=deny, record_id=10, approval_id=73
+2025-04-29 17:02:44: Transaction started
+2025-04-29 17:02:44: Status determined: denied
+2025-04-29 17:02:44: Approval record updated
+2025-04-29 17:02:44: Direct hire record updated
+2025-04-29 17:02:44: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-29 17:02:44: Transaction committed successfully
+2025-04-30 05:26:54: Process approval script started
+2025-04-30 05:26:54: Form data: action=approve, record_id=10, approval_id=73
+2025-04-30 05:26:54: Transaction started
+2025-04-30 05:26:54: Status determined: approved
+2025-04-30 05:26:54: Approval record updated
+2025-04-30 05:26:54: Direct hire record updated
+2025-04-30 05:26:54: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-30 05:26:54: Transaction committed successfully
+2025-04-30 05:29:42: Process approval script started
+2025-04-30 05:29:42: Form data: action=approve, record_id=10, approval_id=73
+2025-04-30 05:29:42: Transaction started
+2025-04-30 05:29:42: Status determined: approved
+2025-04-30 05:29:42: Approval record updated
+2025-04-30 05:29:42: Direct hire record updated
+2025-04-30 05:29:42: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-30 05:29:42: Transaction committed successfully
+2025-04-30 05:30:50: Process approval script started
+2025-04-30 05:30:50: Form data: action=approve, record_id=10, approval_id=73
+2025-04-30 05:30:50: Transaction started
+2025-04-30 05:30:50: Status determined: approved
+2025-04-30 05:30:50: Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'approved_at' in 'field list'
+2025-04-30 05:31:29: Process approval script started
+2025-04-30 05:31:29: Form data: action=approve, record_id=9, approval_id=74
+2025-04-30 05:31:29: Transaction started
+2025-04-30 05:31:29: Status determined: approved
+2025-04-30 05:31:29: Using table: direct_hire_clearance_approvals
+2025-04-30 05:31:29: Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'approved_at' in 'field list'
+2025-04-30 05:31:54: Process approval script started
+2025-04-30 05:31:54: Form data: action=approve, record_id=9, approval_id=74
+2025-04-30 05:31:54: Transaction started
+2025-04-30 05:31:54: Status determined: approved
+2025-04-30 05:31:54: Using table: direct_hire_clearance_approvals
+2025-04-30 05:31:54: Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'approved_at' in 'field list'
+2025-04-30 05:32:07: Process approval script started
+2025-04-30 05:32:07: Form data: action=approve, record_id=9, approval_id=74
+2025-04-30 05:32:07: Transaction started
+2025-04-30 05:32:07: Status determined: approved
+2025-04-30 05:32:07: Using table: direct_hire_clearance_approvals
+2025-04-30 05:32:07: Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'approved_at' in 'field list'
+2025-04-30 05:32:50: Process approval script started
+2025-04-30 05:32:50: Form data: action=approve, record_id=9, approval_id=74
+2025-04-30 05:32:50: Transaction started
+2025-04-30 05:32:50: Status determined: approved
+2025-04-30 05:32:50: Approval record updated
+2025-04-30 05:32:50: Direct hire record updated
+2025-04-30 05:32:51: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-04-30 05:32:51: Transaction committed successfully
+2025-04-30 05:34:15: Process approval script started
+2025-04-30 05:34:15: Form data: action=approve, record_id=9, approval_id=74
+2025-04-30 05:34:15: Transaction started
+2025-04-30 05:34:15: Status determined: approved
+2025-04-30 05:34:15: Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'approved_at' in 'field list'
+2025-04-30 05:34:49: Process approval script started
+2025-04-30 05:34:49: Form data: action=approve, record_id=5, approval_id=75
+2025-04-30 05:34:49: Transaction started
+2025-04-30 05:34:49: Status determined: approved
+2025-04-30 05:34:49: Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'approved_at' in 'field list'
+2025-05-01 05:53:34: Process approval script started
+2025-05-01 05:53:34: Form data: action=approve, record_id=9, approval_id=78
+2025-05-01 05:53:34: Transaction started
+2025-05-01 05:53:34: Status determined: approved
+2025-05-01 05:53:34: Approval record updated
+2025-05-01 05:53:34: Direct hire record updated
+2025-05-01 05:53:34: Error finding submitter: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'dh.created_by' in 'on clause'
+2025-05-01 05:53:34: Transaction committed successfully

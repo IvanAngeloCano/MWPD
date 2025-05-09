@@ -2,9 +2,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+<<<<<<< HEAD
   padding: .5rem 1.5rem;
   background-color: $neutral-white;
   border-bottom: 2px solid $neutral-light;
+=======
+  padding: .5rem 1rem;
+  background-color: $neutral-white;
+  border-bottom: 2px solid $neutral-light;
+  height: 60px;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
   .header-left h1 {
     font-size: 1.5rem;
@@ -14,13 +21,21 @@
   .header-right {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
     gap: 1.5rem;
+=======
+    gap: 0.5rem;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
     .quick-add {
       padding: 0.4rem 0.8rem;
       border: 1px solid #2563eb;
       color: #2563eb;
       background: transparent;
+<<<<<<< HEAD
+=======
+      font-size: 1rem;
+>>>>>>> e676bef (Initial commit on updated_BM)
       border-radius: 4px;
       font-weight: 600;
       cursor: pointer;
@@ -38,6 +53,10 @@
     .notif-icon {
       position: relative;
       font-size: 1.2rem;
+<<<<<<< HEAD
+=======
+      margin: .5rem;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
       .notif-dot {
         position: absolute;
@@ -54,9 +73,21 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+<<<<<<< HEAD
 
       .profile-icon {
         font-size: 1.4rem;
+=======
+      padding: 0px .5rem;
+      border-radius: 6px;
+
+      &:hover {
+        background-color: $neutral-light;
+      }
+
+      .profile-icon {
+        font-size: 1rem;
+>>>>>>> e676bef (Initial commit on updated_BM)
         color: #555;
       }
 
@@ -67,6 +98,10 @@
 
         span:first-child {
           font-weight: 600;
+<<<<<<< HEAD
+=======
+          font-size: 1rem;
+>>>>>>> e676bef (Initial commit on updated_BM)
         }
 
         span:last-child {
@@ -128,6 +163,10 @@
         justify-content: center;
         color: $neutral-dark;
         transition: 0.2s;
+<<<<<<< HEAD
+=======
+        height: 100px;
+>>>>>>> e676bef (Initial commit on updated_BM)
 
         i {
           font-size: 24px;
@@ -148,6 +187,35 @@
       padding: 0.5rem 1rem;
       border-radius: 6px;
       cursor: pointer;
+<<<<<<< HEAD
     }
   }
 }
+=======
+      font-size: 1rem;
+    }
+  }
+}
+
+.header-profile-picture {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 2px solid $brand-primary;
+}
+
+.fullscreen-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: 10px;
+  color: #333;
+}
+
+.fullscreen-toggle:hover {
+  color: $brand-primary;
+}
+>>>>>>> e676bef (Initial commit on updated_BM)
