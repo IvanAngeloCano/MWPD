@@ -1,0 +1,9 @@
+/* Minimal z-index fix without changing design or position */
+.floating-action-menu {
+  z-index: 9999 !important;
+}
+
+/* Make sure tooltips are always on top */
+.mwpd-tooltip {
+  z-index: 10000 !important;
+}

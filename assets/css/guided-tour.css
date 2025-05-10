@@ -1,0 +1,264 @@
+/**
+ * MWPD Guided Tour Styles
+ */
+
+/* Tour Overlay */
+.mwpd-overlay {
+  transition: opacity 0.3s ease;
+}
+
+/* Tour Tooltip */
+.mwpd-tooltip {
+  font-family: inherit;
+  color: #333;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.3s ease;
+  width: 300px;
+  z-index: 9999 !important;
+  position: absolute !important;
+}
+
+.mwpd-tooltip h5 {
+  color: #007bff;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.mwpd-tooltip p {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+}
+
+/* Progress Dots */
+.progress-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0;
+}
+
+/* Tour Buttons */
+.tour-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+/* Highlight Effect */
+.mwpd-highlight {
+  animation: pulse 1.5s infinite;
+  background: none !important;
+  border: 1px solid #0d6efd !important;
+  outline: 1px solid #0d6efd !important;
+  box-shadow: 0 0 0 8px rgba(13, 110, 253, 0.7), 0 0 0 9999px rgba(0, 0, 0, 0.7) !important;
+  z-index: 9995 !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  color: inherit !important;
+  background-color: transparent !important;
+  /* Force all children to be visible */
+  * {
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: inherit !important;
+    background-color: inherit !important;
+  }
+}
+
+/* Special case for the floating menu */
+.mwpd-highlight .main-button {
+  background-color: #246EE9 !important;
+}
+
+/* Dimmed elements from previous steps */
+.mwpd-dimmed {
+  opacity: 0.4 !important;
+  transition: opacity 0.5s ease;
+  z-index: 9990 !important;
+}
+
+/* Prevent the floating menu from moving during tour */
+body[data-tour-active="true"] .floating-action-menu {
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+  position: fixed !important;
+  bottom: 30px !important;
+  right: 30px !important;
+  top: auto !important;
+  left: auto !important;
+}
+
+/* Special tooltip positioning for floating menu */
+.mwpd-tooltip {
+  position: fixed !important;
+  z-index: 10000 !important;
+}
+
+/* Adjust position of the floating menu tooltip to prevent overlap */
+.mwpd-tooltip[data-position="left"][data-for=".floating-action-menu"],
+.mwpd-tooltip[data-for=".floating-action-menu"] {
+  margin-right: 250px !important; /* Move it extremely far left */
+  right: 300px !important;
+  left: auto !important;
+  top: auto !important;
+  bottom: 30px !important;
+  z-index: 10001 !important;
+}
+
+/* Special highlight style for floating menu */
+.tour-highlight {
+  box-shadow: 0 0 0 1px #0d6efd !important;
+  border: 1px solid #0d6efd !important;
+  z-index: 9995 !important;
+}
+
+/* Tooltip Arrow */
+.tooltip-arrow {
+  position: absolute;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.3));
+  z-index: 9996;
+  width: 0 !important;
+  height: 0 !important;
+  pointer-events: none;
+  animation: bounce 1s ease infinite;
+}
+
+/* Process Flow Visualization */
+.process-flow {
+  position: relative;
+  padding: 0 0 20px 0;
+}
+
+.process-step {
+  display: flex;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.process-step:not(:last-child):after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 30px;
+  height: calc(100% - 15px);
+  width: 2px;
+  background-color: #e9ecef;
+}
+
+.process-step-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #28a745;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-right: 15px;
+  z-index: 1;
+}
+
+.process-step-content {
+  flex: 1;
+}
+
+.process-step-content h6 {
+  margin: 0 0 5px 0;
+  font-weight: 600;
+}
+
+.process-step-content p {
+  margin: 0;
+  color: #6c757d;
+  font-size: 13px;
+}
+
+/* Animation Effects */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.9), 0 0 0 9999px rgba(0, 0, 0, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(13, 110, 253, 0.6), 0 0 0 9999px rgba(0, 0, 0, 0.4); }
+  100% { box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.9), 0 0 0 9999px rgba(0, 0, 0, 0.4); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Flash effect for highlighted elements */
+.tour-highlight-flash {
+  animation: flash 1s ease;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0.7; }
+  50% { opacity: 0.3; }
+}
+
+/* Live Demo Container */
+.live-demo-container {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.demo-iframe {
+  width: 100%;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+}
+
+.overlay-controls {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  z-index: 1;
+}
+
+/* Annotation Points */
+.annotation {
+  position: absolute;
+  z-index: 2;
+}
+
+.annotation-dot {
+  width: 12px;
+  height: 12px;
+  background-color: #28a745;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(40, 167, 69, 0.3);
+  cursor: pointer;
+  animation: pulse 2s infinite;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .mwpd-tooltip {
+    max-width: 90%;
+    width: auto;
+  }
+  
+  .process-step {
+    flex-direction: column;
+  }
+  
+  .process-step-circle {
+    margin-bottom: 10px;
+  }
+  
+  .process-step:not(:last-child):after {
+    left: 15px;
+    top: 40px;
+  }
+}

@@ -1,0 +1,32 @@
+[2025-05-07 07:36:23] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:24] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:27] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:27] TO: castanar656@gmail.com | SUBJECT: MWPD System - New Account Request | TYPE: new_account_request | STATUS: failed
+[2025-05-07 07:36:28] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:32] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:33] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:36:34] TO: castanar656@gmail.com | SUBJECT: MWPD System - New Account Request | TYPE: new_account_request | STATUS: failed
+[2025-05-07 07:37:25] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:30] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:31] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:32] TO: castanar656@gmail.com | SUBJECT: MWPD System - New Account Request | TYPE: new_account_request | STATUS: failed
+[2025-05-07 07:37:33] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:36] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:37] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request
+[2025-05-07 07:37:38] TO: castanar656@gmail.com | SUBJECT: MWPD System - New Account Request | TYPE: new_account_request | STATUS: failed
+[2025-05-07 08:02:15] FAILED - To: mariaaronpandong1@gmail.com, Subject: MWPD Filing System - Your Account Has Been Approved
+[2025-05-07 08:02:17] FAILED - To: mariaaronpandong1@gmail.com, Subject: MWPD Filing System - Your Account Has Been Approved
+[2025-05-07 08:02:19] FAILED - To: mariaaronpandong1@gmail.com, Subject: MWPD Filing System - Your Account Has Been Approved
+[2025-05-07 08:02:19] TO: mariaaronpandong1@gmail.com | SUBJECT: MWPD Filing System - Your Account Has Been Approved | TYPE: general | STATUS: failed
+[2025-05-07 08:05:36] FAILED - To: jamessimson656@gmail.com, Subject: MWPD Filing System - Your Account Has Been Approved
+[2025-05-07 08:05:39] FAILED - To: jamessimson656@gmail.com, Subject: MWPD Filing System - Your Account Has Been Approved
+[2025-05-07 08:05:50] FAILED - To: jamessimson656@gmail.com, Subject: MWPD Filing System - Your Account Has Been Approved
+[2025-05-07 08:05:50] TO: jamessimson656@gmail.com | SUBJECT: MWPD Filing System - Your Account Has Been Approved | TYPE: general | STATUS: failed
+[2025-05-07 08:47:24] FAILED - To: jamessimson656@gmail.com, Subject: MWPD Filing System - Account Request Status
+[2025-05-07 08:47:25] FAILED - To: jamessimson656@gmail.com, Subject: MWPD Filing System - Account Request Status
+[2025-05-07 08:47:27] FAILED - To: jamessimson656@gmail.com, Subject: MWPD Filing System - Account Request Status
+[2025-05-07 08:47:27] TO: jamessimson656@gmail.com | SUBJECT: MWPD Filing System - Account Request Status | TYPE: general | STATUS: failed
+[2025-05-07 08:48:01] FAILED - To: jinhogang656@gmail.com, Subject: MWPD Filing System - Account Request Status
+[2025-05-07 08:48:02] FAILED - To: jinhogang656@gmail.com, Subject: MWPD Filing System - Account Request Status
+[2025-05-07 08:48:04] FAILED - To: jinhogang656@gmail.com, Subject: MWPD Filing System - Account Request Status
+[2025-05-07 08:48:04] TO: jinhogang656@gmail.com | SUBJECT: MWPD Filing System - Account Request Status | TYPE: general | STATUS: failed

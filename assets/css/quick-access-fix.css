@@ -1,0 +1,14 @@
+/**
+ * Minimal Quick Access Menu Fix for Guided Tour
+ * Only set z-index without changing the design or position
+ */
+
+/* Just increase z-index without modifying original design or position */
+.floating-action-menu {
+  z-index: 9999 !important;
+}
+
+/* Ensure tooltips appear above other elements */
+.mwpd-tooltip {
+  z-index: 10000 !important;
+}

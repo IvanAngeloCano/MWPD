@@ -1,0 +1,8 @@
+[2025-05-07 07:36:27] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request, Message: Failed to send email after 3 attempts
+[2025-05-07 07:36:34] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request, Message: Failed to send email after 3 attempts
+[2025-05-07 07:37:32] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request, Message: Failed to send email after 3 attempts
+[2025-05-07 07:37:38] FAILED - To: castanar656@gmail.com, Subject: MWPD System - New Account Request, Message: Failed to send email after 3 attempts
+[2025-05-07 08:02:19] FAILED - To: mariaaronpandong1@gmail.com, Subject: MWPD Filing System - Your Account Has Been Approved, Message: Failed to send email after 3 attempts
+[2025-05-07 08:05:50] FAILED - To: jamessimson656@gmail.com, Subject: MWPD Filing System - Your Account Has Been Approved, Message: Failed to send email after 3 attempts
+[2025-05-07 08:47:27] FAILED - To: jamessimson656@gmail.com, Subject: MWPD Filing System - Account Request Status, Message: Failed to send email after 3 attempts
+[2025-05-07 08:48:04] FAILED - To: jinhogang656@gmail.com, Subject: MWPD Filing System - Account Request Status, Message: Failed to send email after 3 attempts

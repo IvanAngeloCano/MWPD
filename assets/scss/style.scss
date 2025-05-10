@@ -1,0 +1,146 @@
+@import 'variables', 'typography', 'mixins';
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import 'sidebar', 'header', 'loader';
+
+@import 'login', 'dashboard', 'direct_hire', 'gov_to_gov', 'info_sheet', 'profile', 'accounts', 'approvals', 'record_view', 'privacy';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+a:visited {
+  color: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  background-color: #f9f9f9;
+  color: black;
+}
+
+//Omnipresent Layout
+.layout-wrapper {
+  display: flex;
+  height: 100vh; // full viewport height
+  width: 100vw; // full viewport width
+
+  //sidebar styles are within its own module
+
+  .content-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .main-content {
+    flex: 1;
+    overflow-y: auto; // if content is long
+    background-color: $neutral-white;
+    padding: 1rem;
+  }
+}
+
+.status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: inline-block;
+
+  &.approved {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  &.pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  &.denied {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  &.declined {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+
+
+  .tab {
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: #eee;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 1rem;
+    text-decoration: none;
+    height: 2rem;
+
+    &:hover {
+      transition: 200ms ease;
+      background-color: $neutral-dark;
+      color: white;
+    }
+
+    &.active {
+      background-color: $brand-primary;
+      color: white;
+    }
+  }
+}
+
+.btn {
+
+
+  &.btn-primary {
+    background-color: $brand-primary;
+    color: white;
+    border: none;
+  }
+
+  &.btn-outline-primary {
+    background-color: white;
+    color: $brand-primary;
+    border: 2px solid $brand-primary;
+  }
+
+  &.btn-reset {
+    background-color: white;
+    color: $brand-primary;
+    border: 1px dashed $brand-primary;
+  }
+
+  &.btn-cancel {
+    background-color: white;
+    color: black;
+    border: 1px solid $neutral-dark;
+  }
+
+  &.btn-success {
+    background-color: #28a745;
+    border: 1px solid #28a745;
+    color: white;
+  }
+}
