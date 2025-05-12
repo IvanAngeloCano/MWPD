@@ -432,11 +432,7 @@ function time_elapsed_string($datetime, $full = false) {
               <i class="fa fa-magic"></i>
             </div>
           </li>
-          <li class="menu-option" data-toggle="tooltip" title="Blacklist Management">
-            <a href="blacklist.php" class="option-button" id="blacklistLogsButton">
-              <i class="fa fa-ban"></i>
-            </a>
-          </li>
+          <!-- Blacklist management removed as requested -->
           <li class="menu-option" data-toggle="tooltip" title="Generate Reports">
             <div class="option-button" id="reportGenButton">
               <i class="fa fa-file-export"></i>
@@ -1483,66 +1479,126 @@ function time_elapsed_string($datetime, $full = false) {
   });
   </script>
 
-  <!-- Guided Tour JavaScript -->
-  <script src="assets/js/guided-tour.js"></script>
+  <!-- Direct intro.js implementation -->
   <script>
-    // Initialize dashboard tour
-    let dashboardTour;
-    
+    // Directly add intro.js implementation
     document.addEventListener('DOMContentLoaded', function() {
-      // Initialize the tour
-      dashboardTour = mwpdTours.initTour('dashboard');
+      // Initialize intro.js
+      const intro = introJs();
       
-      // Add wizard guide button functionality
+      // Define steps directly here
+      // Define custom positions to keep tooltips away from content
+      const positionPendingApprovals = function(tooltip, item) {
+        const rect = item.getBoundingClientRect();
+        tooltip.style.top = rect.top + window.scrollY - 15 + 'px';
+        tooltip.style.left = rect.right + window.scrollX + 20 + 'px';
+        return tooltip;
+      };
+      
+      intro.setOptions({
+        steps: [
+          {
+            intro: '<h4>Welcome to MWPD Filing System</h4><p>This interactive guide will walk you through the main features of the Migrant Workers Protection Division Filing System. We will highlight key components you need to work efficiently in the system.</p>'
+          },
+          {
+            element: document.querySelector('.sidebar'),
+            intro: '<h4>Navigation Menu</h4><p>Access all system modules through this sidebar menu. Click on any item to navigate to that section.</p>',
+            position: 'right'
+          },
+          {
+            element: document.querySelector('.quick-add'),
+            intro: '<h4>Quick Add</h4><p>Quickly add new records without navigating to specific modules.</p>',
+            position: 'bottom'
+          },
+          {
+            element: document.querySelector('#notificationIcon'),
+            intro: '<h4>Notifications Center</h4><p>View all system notifications here. The badge shows how many unread notifications you have.</p>',
+            position: 'bottom'
+          },
+          {
+            element: document.querySelector('.user-profile'),
+            intro: '<h4>User Profile</h4><p>Access your profile settings, change password, or log out from the system.</p>',
+            position: 'bottom'
+          },
+          {
+            element: document.querySelector('.box-total-records'),
+            intro: '<h4>Total Records</h4><p>View all your system records at a glance. This section shows counts for Direct Hire, Balik Manggagawa, Gov-to-Gov, and Job Fairs records with their status indicators.</p>',
+            position: 'bottom'
+          },
+          {
+            element: document.querySelector('#pendingApprovalsBox'),
+            intro: '<h4>Pending Approvals</h4><p>Monitor applications awaiting approval from Regional Directors.</p>',
+            position: 'right',
+            tooltipClass: 'pending-approvals-tooltip'
+          },
+          {
+            element: document.querySelector('#calendarBox'),
+            intro: '<h4>Calendar View</h4><p>View scheduled job fairs and important events for the month.</p>',
+            position: 'left'
+          },
+          {
+            element: document.querySelector('.recent-activity'),
+            intro: '<h4>Recent System Activity</h4><p>Track the latest activities and updates in the system.</p>',
+            position: 'top'
+          },
+          {
+            element: document.querySelector('.job-fairs-this-month'),
+            intro: '<h4>This Month\'s Job Fairs</h4><p>Quick overview of all job fairs scheduled for the current month.</p>',
+            position: 'top'
+          },
+          {
+            element: document.querySelector('.floating-action-menu'),
+            intro: '<h4>Quick Access Menu</h4><p>Use this floating menu for quick access to common actions like this interactive guide, blacklist checking, and generating reports.</p>',
+            position: 'right',
+            tooltipClass: 'quick-access-tooltip'
+          }
+        ],
+        showBullets: true,
+        showProgress: true,
+        exitOnOverlayClick: false,
+        tooltipClass: 'intro-tooltip',
+        showStepNumbers: false,
+        skipLabel: 'Skip Tour',
+        showBullets: true,
+        showProgress: true,
+        hidePrev: false,
+        hideNext: false,
+        hideSkip: false,
+        showButtons: true,
+        disableInteraction: false,
+        doneLabel: 'Done',
+        nextLabel: 'Next →',
+        prevLabel: '← Back'
+      });
+      
+      // Make intro globally available
+      window.dashboardTour = intro;
+      
+      // Add event listener to wizard guide button
       const wizardGuideButton = document.getElementById('wizardGuideButton');
       if (wizardGuideButton) {
         // Remove existing event listeners
         const newWizardButton = wizardGuideButton.cloneNode(true);
         wizardGuideButton.parentNode.replaceChild(newWizardButton, wizardGuideButton);
         
-        // Add new event listener for guided tour
+        // Add click event
         newWizardButton.addEventListener('click', function(e) {
           e.preventDefault();
-          dashboardTour.start();
+          // Start the tour
+          window.dashboardTour.start();
         });
       }
       
-      // Add event listeners for module-specific tours
-      document.querySelectorAll('a[data-module]').forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const moduleType = this.getAttribute('data-module');
-          const stepNumber = parseInt(this.getAttribute('data-step') || '1');
-          
-          // Jump to specific step in the tour
-          if (dashboardTour && stepNumber) {
-            dashboardTour.goToStep(stepNumber - 1);
-          }
-        });
-      });
-      
-      // Add listeners for Skip Tour and Finish buttons
-      document.querySelector('.skip-tour-btn, #skipTourButton, .skip-tour, button:contains("Skip Tour")').addEventListener('click', function() {
-        localStorage.setItem('mwpdTourCompleted', 'true');
-        localStorage.setItem('mwpdTourShown', 'true');
-        window.location.reload();
-      });
-      
-      document.querySelector('.finish-tour-btn, #finishTourButton, .finish-tour, button:contains("Finish")').addEventListener('click', function() {
-        localStorage.setItem('mwpdTourCompleted', 'true');
-        localStorage.setItem('mwpdTourShown', 'true');
-        window.location.reload();
-      });
-      
-      // Auto-start tour for first-time visitors (using localStorage)
+      // Auto-start tour for first-time visitors
       if (!localStorage.getItem('mwpdTourShown')) {
-        // Show tour after a slight delay to ensure page is fully loaded
         setTimeout(() => {
-          dashboardTour.start();
+          window.dashboardTour.start();
           localStorage.setItem('mwpdTourShown', 'true');
         }, 1000);
       }
     });
   </script>
+
+
 </body>
 </html>

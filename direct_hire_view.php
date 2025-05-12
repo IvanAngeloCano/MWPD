@@ -93,7 +93,7 @@ include '_head.php';
             <a href="javascript:void(0)" onclick="confirmDelete(<?= $record['id'] ?>)" class="btn btn-danger">
               <i class="fa fa-trash"></i> Delete
             </a>
-            <button type="button" class="btn btn-success" id="generateClearanceBtn" onclick="window.open('generate_clearance.php?id=<?= $record['id'] ?>', '_blank')">
+            <button type="button" class="btn btn-success" id="generateClearanceBtn" onclick="window.open('fix_clearance.php?id=<?= $record['id'] ?>', '_blank')">
               <i class="fa fa-file-pdf"></i> Generate Clearance
             </button>
             <a href="direct_hire.php?tab=<?= urlencode($record['type']) ?>" class="btn btn-secondary">
@@ -240,20 +240,42 @@ include '_head.php';
             <div class="documents-container">
               <?php foreach ($documents as $doc): ?>
               <div class="document-item">
+                <?php if (strpos($doc['file_type'], 'image/') === 0): ?>
+                <!-- Show thumbnail for images -->
+                <div class="document-thumbnail">
+                  <img src="view_image.php?id=<?= $doc['id'] ?>" alt="<?= htmlspecialchars($doc['original_filename']) ?>" class="thumbnail-image">
+                </div>
+                <?php else: ?>
+                <!-- Show icon for non-image files -->
                 <div class="document-icon">
                   <i class="fa <?= getFileIcon($doc['file_type']) ?>"></i>
                 </div>
+                <?php endif; ?>
                 <div class="document-details">
                   <div class="document-name"><?= htmlspecialchars($doc['original_filename']) ?></div>
                   <div class="document-meta">
                     <span><?= date('F j, Y', strtotime($doc['uploaded_at'] ?? $doc['created_at'])) ?></span>
                     <span><?= formatFileSize($doc['file_size']) ?></span>
+                    <?php if (strpos($doc['file_type'], 'image/') === 0): ?>
+                    <span><strong>Image</strong></span>
+                    <?php endif; ?>
                   </div>
                 </div>
                 <div class="document-actions">
+                  <?php if (strpos($doc['file_type'], 'image/') === 0): ?>
+                  <!-- Image viewer for images -->
+                  <a href="#" class="btn btn-sm btn-info" onclick="openImageViewer(<?= $doc['id'] ?>); return false;">
+                    <i class="fa fa-search"></i> View Image
+                  </a>
+                  <a href="view_image.php?id=<?= $doc['id'] ?>" class="btn btn-sm btn-primary" target="_blank">
+                    <i class="fa fa-download"></i> Full Size
+                  </a>
+                  <?php else: ?>
+                  <!-- Document viewer for non-images -->
                   <a href="view_document.php?id=<?= $doc['id'] ?>" class="btn btn-sm btn-primary" target="_blank">
                     <i class="fa fa-eye"></i> View
                   </a>
+                  <?php endif; ?>
                   <a href="remove_document.php?id=<?= $doc['id'] ?>&direct_hire_id=<?= $record_id ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to remove this document?')">
                     <i class="fa fa-trash"></i> Remove
                   </a>
@@ -341,7 +363,129 @@ include '_head.php';
       closeDeleteModal();
     }
   };
+  
+  // Image viewer functionality
+  function openImageViewer(imageId) {
+    const modal = document.getElementById('imageViewerModal');
+    const modalImg = document.getElementById('fullSizeImage');
+    const captionText = document.getElementById('imageCaption');
+    
+    // Set the image source to our image handler
+    modalImg.src = 'view_image.php?id=' + imageId;
+    
+    // Find the image name from the document list
+    const documentItems = document.querySelectorAll('.document-item');
+    let imageName = 'Image Preview';
+    
+    documentItems.forEach(item => {
+      // Check if this is the right document
+      const viewBtn = item.querySelector('a[onclick*="openImageViewer(' + imageId + ')"]');
+      if (viewBtn) {
+        const nameElement = item.querySelector('.document-name');
+        if (nameElement) {
+          imageName = nameElement.textContent;
+        }
+      }
+    });
+    
+    captionText.textContent = imageName;
+    modal.style.display = 'block';
+  }
+  
+  function closeImageViewer() {
+    const modal = document.getElementById('imageViewerModal');
+    modal.style.display = 'none';
+  }
 </script>
+
+<!-- Image Viewer Modal -->
+<div id="imageViewerModal" class="modal image-viewer-modal">
+  <span class="modal-close" onclick="closeImageViewer()">&times;</span>
+  <div class="modal-content image-viewer-content">
+    <img id="fullSizeImage" src="" alt="Full size image">
+    <div id="imageCaption"></div>
+  </div>
+</div>
+
+<style>
+  /* Image Viewer Modal Styles */
+  .image-viewer-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  
+  .image-viewer-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 1200px;
+    background: transparent;
+    box-shadow: none;
+    position: relative;
+  }
+  
+  .image-viewer-content img {
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+  }
+  
+  #imageCaption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: white;
+    padding: 10px 0;
+    height: 150px;
+    font-size: 18px;
+  }
+  
+  .image-viewer-modal .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    z-index: 2100;
+  }
+  
+  .image-viewer-modal .modal-close:hover,
+  .image-viewer-modal .modal-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Document thumbnail styles */
+  .document-thumbnail {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+  }
+  
+  .thumbnail-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
 
 <style>
   .record-view-wrapper {

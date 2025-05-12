@@ -3,6 +3,16 @@ include 'session.php';
 include 'connection.php';
 $pageTitle = "Information Sheet Dashboard";
 
+// Check for Excel generation success message
+$excel_generated = isset($_GET['excel_generated']) && $_GET['excel_generated'] == 1;
+$excel_filename = $_SESSION['excel_filename'] ?? '';
+$excel_path = $_SESSION['excel_path'] ?? '';
+
+// Clear the session variables after reading them
+if (isset($_SESSION['excel_success'])) {
+    unset($_SESSION['excel_success']);
+}
+
 // Add Chart.js library in the head section
 $additionalHeadContent = '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
 $additionalHeadContent = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">';
@@ -106,50 +116,145 @@ include '_head.php'; // Ensure this includes Chart.js CDN
 // Add custom styles for the dashboard
 ?>
 <style>
-  /* Import Google Fonts for better typography */
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-  
-  /* Dashboard Container */
-  .dashboard-container {
-    padding: 25px;
-    font-family: 'Poppins', sans-serif;
-    animation: fadeIn 0.8s ease-in-out;
+  /* Dashboard styling */
+  .info-sheet-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
   }
   
-  /* Stats Row */
-  .stats-row {
+  /* Section Header */
+  .section-header {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+    margin-bottom: 1.5rem;
+  }
+  
+  .section-header h1 {
+    margin: 0 0 0.5rem 0;
+    color: #343a40;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  
+  .section-header p {
+    margin: 0 0 1rem 0;
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+  
+  /* Controls section */
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  /* Stats section */
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (max-width: 1199px) {
+    .stats-section {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .stats-section {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 1199px) {
+    .stat-card {
+      flex: 0 0 calc(50% - 0.5rem);
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .stat-card {
+      flex: 0 0 100%;
+    }
+  }
+  
+  /* Charts section */
+  .charts-section {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    margin-bottom: 35px;
+    gap: 1.5rem;
+  }
+  
+  /* Chart section */
+  .charts-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Card styling - consistent with system */
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    padding: 1rem 1.25rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .card-title {
+    margin: 0;
+    font-size: 1rem;
+    color: #343a40;
+    font-weight: 500;
+  }
+  
+  .card-subtitle {
+    margin-top: 0.25rem;
+    color: #6c757d;
+    font-size: 0.875rem;
+  }
+  
+  .card-body {
+    padding: 1.25rem;
   }
   
   /* Stat Cards */
   .stat-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    padding: 22px;
-    flex: 1;
-    min-width: 200px;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    padding: 1rem;
     display: flex;
     align-items: center;
-    position: relative;
-    overflow: hidden;
-    animation: slideInUp 0.5s ease-out forwards;
-    animation-delay: calc(var(--animation-order, 0) * 0.1s);
-    opacity: 0;
+    gap: 1rem;
+    border-left: 4px solid #007bff;
   }
   
-  .stat-card:nth-child(1) { --animation-order: 1; }
-  .stat-card:nth-child(2) { --animation-order: 2; }
-  .stat-card:nth-child(3) { --animation-order: 3; }
-  .stat-card:nth-child(4) { --animation-order: 4; }
+  .stat-card:nth-child(1) { border-left-color: #007bff; }
+  .stat-card:nth-child(2) { border-left-color: #28a745; }
+  .stat-card:nth-child(3) { border-left-color: #17a2b8; }
+  .stat-card:nth-child(4) { border-left-color: #ffc107; }
   
   .stat-card:hover {
-    transform: translateY(-7px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
   
   .stat-card::after {
@@ -161,69 +266,39 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     height: 100%;
     background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 70%);
     transform: translateX(-100%);
-    transition: all 0.6s ease;
-  }
-  
-  .stat-card:hover::after {
-    transform: translateX(100%);
   }
   
   /* Stat Icons */
   .stat-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 18px;
-    font-size: 24px;
-    color: white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    flex-shrink: 0;
   }
   
-  /* Ensure perfect circle */
-  .stat-icon::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.2);
-    box-sizing: border-box;
-  }
-  
-  .stat-card:hover .stat-icon {
-    transform: rotate(10deg) scale(1.1);
-  }
+  .bg-primary { background-color: #007bff; }
+  .bg-success { background-color: #28a745; }
+  .bg-info { background-color: #17a2b8; }
+  .bg-warning { background-color: #ffc107; }
   
   /* Stat Info */
   .stat-info h3 {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin: 0 0 8px 0;
+    font-size: 0.875rem;
+    margin: 0 0 0.25rem 0;
     color: #6c757d;
-    font-weight: 600;
   }
   
   .stat-info .value {
-    font-size: 30px;
+    font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
-    color: #333;
-    transition: all 0.3s ease;
+    color: #343a40;
   }
   
-  .stat-card:hover .stat-info .value {
-    color: #4e73df;
-    transform: scale(1.05);
-  }
   .chart-container {
     background: white;
     border-radius: 10px;
@@ -236,7 +311,6 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     flex-wrap: wrap;
     gap: 25px;
     margin-bottom: 35px;
-    animation: fadeIn 0.8s ease-in-out;
   }
   
   .chart-card {
@@ -247,52 +321,15 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.07);
     padding: 25px;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
     height: auto;
     overflow: hidden;
-    animation: slideInUp 0.6s ease-out forwards;
-    animation-delay: calc(var(--animation-order, 0) * 0.15s);
-    opacity: 0;
   }
-  
-  .chart-row:nth-child(1) .chart-card:nth-child(1) { --animation-order: 5; }
-  .chart-row:nth-child(1) .chart-card:nth-child(2) { --animation-order: 6; }
-  .chart-row:nth-child(2) .chart-card:nth-child(1) { --animation-order: 7; }
-  .chart-row:nth-child(3) .chart-card:nth-child(1) { --animation-order: 8; }
-  .chart-row:nth-child(3) .chart-card:nth-child(2) { --animation-order: 9; }
   
   .chart-card canvas {
     max-height: 400px; /* Limit the height of the charts */
     width: 100% !important;
     height: auto !important;
-    transition: all 0.5s ease;
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  .chart-card:hover {
-    transform: translateY(-7px) scale(1.01);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-  }
-  
-  .chart-card:hover canvas {
-    transform: scale(1.02);
-  }
-  
-  .chart-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, #4e73df, #36b9cc, #1cc88a);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  
-  .chart-card:hover::before {
-    opacity: 1;
   }
   
   /* Chart Headers */
@@ -303,7 +340,6 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     margin-bottom: 20px;
     position: relative;
   }
-  
   /* Chart Icons */
   .chart-icon {
     width: 40px;
@@ -316,9 +352,7 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     font-size: 18px;
     color: white;
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    background-color: #007bff;
   }
   
   .chart-icon::before {
@@ -338,57 +372,14 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     font-weight: 600;
     margin: 0;
     color: #333;
-    transition: all 0.3s ease;
-  }
-  
-  .chart-card:hover .chart-title {
-    color: #4e73df;
-    transform: translateX(5px);
   }
   
   .chart-subtitle {
     font-size: 13px;
     color: #6c757d;
     margin: 5px 0 0 0;
-    transition: all 0.3s ease;
   }
   
-  .chart-card:hover .chart-subtitle {
-    color: #4e73df;
-  }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slideInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  canvas {
-    width: 100% !important;
-    height: auto !important;
-  }
-  .bg-primary-gradient {
-    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%);
-  }
-  .bg-success-gradient {
-    background: linear-gradient(135deg, #1cc88a 0%, #13855c 100%);
-  }
-  .bg-info-gradient {
-    background: linear-gradient(135deg, #36b9cc 0%, #258391 100%);
-  }
-  .bg-warning-gradient {
-    background: linear-gradient(135deg, #f6c23e 0%, #dda20a 100%);
-  }
   /* Dashboard Header */
   .dashboard-header {
     display: flex;
@@ -398,7 +389,6 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     padding-bottom: 20px;
     border-bottom: 1px solid rgba(0,0,0,0.05);
     position: relative;
-    animation: slideInDown 0.6s ease-out forwards;
   }
   
   .dashboard-actions {
@@ -433,18 +423,12 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     width: 0;
     height: 2px;
     background-color: #4e73df;
-    transition: width 0.4s ease;
-  }
-  
-  .dashboard-title:hover::before {
-    width: 100%;
   }
   
   /* Dashboard Actions */
   .dashboard-actions {
     display: flex;
     gap: 12px;
-    animation: fadeIn 0.8s ease-in-out;
   }
   
   .btn-dashboard {
@@ -465,11 +449,6 @@ include '_head.php'; // Ensure this includes Chart.js CDN
   
   .btn-dashboard i {
     font-size: 15px;
-    transition: transform 0.3s ease;
-  }
-  
-  .btn-dashboard:hover i {
-    transform: translateX(3px);
   }
   
   .btn-dashboard::after {
@@ -485,10 +464,6 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     transform: scale(1, 1) translate(-50%, -50%);
     transform-origin: 50% 50%;
     z-index: -1;
-  }
-  
-  .btn-dashboard:hover::after {
-    animation: ripple 1s ease-out;
   }
   
   .btn-primary-soft {
@@ -511,10 +486,9 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     box-shadow: 0 4px 10px rgba(78, 115, 223, 0.3);
   }
   
+  /* Simplified button hover state */
   .btn-primary:hover {
-    background: linear-gradient(135deg, #3a5fc8 0%, #1a3a9c 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(78, 115, 223, 0.4);
+    background-color: #0069d9;
   }
   
   .btn-success-soft {
@@ -529,44 +503,6 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(28, 200, 138, 0.3);
   }
-  
-  @keyframes ripple {
-    0% {
-      transform: scale(0, 0);
-      opacity: 1;
-    }
-    20% {
-      transform: scale(25, 25);
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: scale(40, 40);
-    }
-  }
-  
-  @keyframes slideInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Button click animation */
-  .btn-clicked {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
-  
-  /* Button click animation */
-  .btn-clicked {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
 </style>
 
 <?php include '_head.php'; ?>
@@ -574,7 +510,7 @@ include '_head.php'; // Ensure this includes Chart.js CDN
 <div class="layout-wrapper">
   <?php include '_sidebar.php'; ?>
 
-<div class="content-wrapper">
+  <div class="content-wrapper">
     <?php
     $currentFile = basename($_SERVER['PHP_SELF']);
     $fileWithoutExtension = pathinfo($currentFile, PATHINFO_FILENAME);
@@ -583,24 +519,38 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     ?>
 
     <main class="main-content">
-      <div class="dashboard-container">
-        <!-- Dashboard Header -->
-        <div class="dashboard-header">
-          <h1 class="dashboard-title">Information Sheet Dashboard</h1>
-          <div class="dashboard-actions">
-            <a href="insert_info_sheet.php" class="btn-dashboard btn-primary" id="addNewBtn">
-              <i class="fas fa-plus-circle"></i> Add New Record
-            </a>
-            <button class="btn-dashboard btn-primary" data-bs-toggle="modal" data-bs-target="#generateModal">
-              <i class="fas fa-plus-circle"></i> Generate Summary
-            </button>
+      <div class="info-sheet-wrapper">
+        <!-- Hidden input to trigger modal when Excel is generated -->
+        <?php if ($excel_generated): ?>
+        <input type="hidden" id="excel_generated" value="1">
+        <input type="hidden" id="excel_filename" value="<?= htmlspecialchars($excel_filename) ?>">
+        <input type="hidden" id="excel_path" value="<?= htmlspecialchars($excel_path) ?>">
+        <?php endif; ?>
+        
+        <!-- Section Header -->
+        <div class="section-header">
+          <h1>Information Sheet Dashboard</h1>
+          <p>View and analyze information sheet data with visual reports</p>
+          
+          <div class="controls">
+            <div>
+              <!-- Could add filters here if needed -->
+            </div>
+            <div class="actions">
+              <a href="insert_info_sheet.php" class="btn btn-primary">
+                <i class="fas fa-plus-circle"></i> Add New Record
+              </a>
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#generateModal">
+                <i class="fas fa-file-excel"></i> Generate Excel Report
+              </button>
+            </div>
           </div>
         </div>
         
-        <!-- Stats Cards -->
-        <div class="stats-row">
+        <!-- Stats Section -->
+        <div class="stats-section">
           <div class="stat-card">
-            <div class="stat-icon bg-primary-gradient">
+            <div class="stat-icon bg-primary">
               <i class="fas fa-file-alt"></i>
             </div>
             <div class="stat-info">
@@ -610,7 +560,7 @@ include '_head.php'; // Ensure this includes Chart.js CDN
           </div>
           
           <div class="stat-card">
-            <div class="stat-icon bg-success-gradient">
+            <div class="stat-icon bg-success">
               <i class="fas fa-print"></i>
             </div>
             <div class="stat-info">
@@ -620,7 +570,7 @@ include '_head.php'; // Ensure this includes Chart.js CDN
           </div>
           
           <div class="stat-card">
-            <div class="stat-icon bg-info-gradient">
+            <div class="stat-icon bg-info">
               <i class="fas fa-users"></i>
             </div>
             <div class="stat-info">
@@ -650,7 +600,7 @@ include '_head.php'; // Ensure this includes Chart.js CDN
           </div>
           
           <div class="stat-card">
-            <div class="stat-icon bg-warning-gradient">
+            <div class="stat-icon bg-warning">
               <i class="fas fa-clock"></i>
             </div>
             <div class="stat-info">
@@ -668,99 +618,94 @@ include '_head.php'; // Ensure this includes Chart.js CDN
           </div>
         </div>
         
-        <!-- Charts Row 1 -->
-        <div class="chart-row">
-          <div class="chart-card">
-            <div class="chart-header">
-              <div class="d-flex align-items-center">
-                <div class="chart-icon bg-primary-gradient">
-                  <i class="fas fa-venus-mars"></i>
-                </div>
-                <div>
-                  <h2 class="chart-title">Gender Distribution</h2>
-                  <p class="chart-subtitle">Breakdown of records by gender</p>
-                </div>
+        <!-- Charts Section -->
+        <div class="charts-section">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Gender Distribution</h2>
+                <p class="card-subtitle">Breakdown of records by gender</p>
+              </div>
+              <div class="stat-icon bg-primary">
+                <i class="fas fa-venus-mars"></i>
               </div>
             </div>
-            <canvas id="genderChart" height="250"></canvas>
+            <div class="card-body">
+              <canvas id="genderChart" height="250"></canvas>
+            </div>
           </div>
           
-          <div class="chart-card">
-            <div class="chart-header">
-              <div class="d-flex align-items-center">
-                <div class="chart-icon bg-warning-gradient">
-                  <i class="fas fa-clock"></i>
-                </div>
-                <div>
-                  <h2 class="chart-title">Processing Time Comparison</h2>
-                  <p class="chart-subtitle">Lowest vs Highest PCT</p>
-                </div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Processing Time</h2>
+                <p class="card-subtitle">Lowest vs Highest PCT</p>
+              </div>
+              <div class="stat-icon bg-warning">
+                <i class="fas fa-clock"></i>
               </div>
             </div>
-            <canvas id="pctChart" height="250"></canvas>
+            <div class="card-body">
+              <canvas id="pctChart" height="250"></canvas>
+            </div>
           </div>
-        </div>
         
-        <!-- Charts Row 2 -->
-        <div class="chart-row">
-          <div class="chart-card">
-            <div class="chart-header">
-              <div class="d-flex align-items-center">
-                <div class="chart-icon" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
-                  <i class="fas fa-tasks"></i>
-                </div>
-                <div>
-                  <h2 class="chart-title">Purpose Analysis</h2>
-                  <p class="chart-subtitle">Distribution by purpose category</p>
-                </div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Purpose Analysis</h2>
+                <p class="card-subtitle">Distribution by purpose</p>
+              </div>
+              <div class="stat-icon bg-primary">
+                <i class="fas fa-tasks"></i>
               </div>
             </div>
-            <canvas id="purposeChart" height="300"></canvas>
+            <div class="card-body">
+              <canvas id="purposeChart" height="250"></canvas>
+            </div>
           </div>
-        </div>
         
-        <!-- Charts Row 3 -->
-        <div class="chart-row">
-          <div class="chart-card">
-            <div class="chart-header">
-              <div class="d-flex align-items-center">
-                <div class="chart-icon" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);">
-                  <i class="fas fa-users-cog"></i>
-                </div>
-                <div>
-                  <h2 class="chart-title">Worker Categories</h2>
-                  <p class="chart-subtitle">Breakdown by worker type</p>
-                </div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Worker Categories</h2>
+                <p class="card-subtitle">Breakdown by type</p>
+              </div>
+              <div class="stat-icon bg-success">
+                <i class="fas fa-users-cog"></i>
               </div>
             </div>
-            <canvas id="workCategoryChart" height="250"></canvas>
+            <div class="card-body">
+              <canvas id="workCategoryChart" height="250"></canvas>
+            </div>
           </div>
           
-          <div class="chart-card">
-            <div class="chart-header">
-              <div class="d-flex align-items-center">
-                <div class="chart-icon" style="background: linear-gradient(135deg, #36b9cc 0%, #258391 100%);">
-                  <i class="fas fa-file-alt"></i>
-                </div>
-                <div>
-                  <h2 class="chart-title">Requested Records</h2>
-                  <p class="chart-subtitle">Types of records requested</p>
-                </div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h2 class="card-title">Requested Records</h2>
+                <p class="card-subtitle">Types of requests</p>
+              </div>
+              <div class="stat-icon bg-info">
+                <i class="fas fa-file-alt"></i>
               </div>
             </div>
-            <canvas id="requestChart" height="250"></canvas>
+            <div class="card-body">
+              <canvas id="requestChart" height="250"></canvas>
+            </div>
           </div>
         </div>
         <!-- Modal -->
 <div class="modal fade" id="generateModal" tabindex="-1" aria-labelledby="generateModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <form id="generateForm" method="GET" action="generate_spreadsheet.php" class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="generateModalLabel">Select Month and Year</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="generateModalLabel">Generate Excel Report</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body">
+        <p class="mb-3">Please select the month and year for your report:</p>
         <div class="mb-3">
           <label for="month" class="form-label">Month</label>
           <select class="form-select" name="month" id="month" required>
@@ -776,14 +721,223 @@ include '_head.php'; // Ensure this includes Chart.js CDN
       </div>
 
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">Generate</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Generate Report</button>
       </div>
     </form>
   </div>
 </div>
 
+<!-- Excel Generation Success Modal -->
+<div class="modal fade" id="excelSuccessModal" tabindex="-1" aria-labelledby="excelSuccessModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="excelSuccessModalLabel">Success</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Information sheet Excel file has been generated successfully.</p>
+        <p class="small text-muted" id="excelPathText"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a id="downloadExcelBtn" href="#" class="btn btn-primary">Download File</a>
+      </div>
+    </div>
+  </div>
+</div>
+
       </div>
     </main>
+  </div>
+</div>
+
+<!-- Tour Guide Modal -->
+<div class="modal fade" id="tourGuideModal" tabindex="-1" role="dialog" aria-labelledby="tourGuideModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="tourGuideModalLabel">Information Sheet Guide</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Tour Navigation -->
+        <div class="tour-navigation mb-4">
+          <div class="progress">
+            <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+          <ul class="nav nav-pills nav-justified tour-nav mt-2">
+            <li class="nav-item">
+              <a class="nav-link active" data-step="1">Sidebar Navigation</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-step="2">Dashboard Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-step="3">Statistics Cards</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-step="4">Charts & Reports</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-step="5">Excel Generation</a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Tour Content -->
+        <div class="tour-content">
+          <!-- Step 1: Sidebar Navigation (visible by default) -->
+          <div class="tour-step" data-step="1">
+            <div class="text-center mb-4">
+              <h3>Sidebar Navigation</h3>
+              <p class="lead">The sidebar provides quick access to all system modules.</p>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5>Main Navigation Menu</h5>
+                    <p>The sidebar contains these important sections:</p>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item d-flex align-items-center">
+                        <span class="badge bg-primary me-2">1</span> Dashboard - Overview of the entire system
+                      </li>
+                      <li class="list-group-item d-flex align-items-center">
+                        <span class="badge bg-primary me-2">2</span> Direct Hire - Manage direct hire applications
+                      </li>
+                      <li class="list-group-item d-flex align-items-center">
+                        <span class="badge bg-primary me-2">3</span> Gov-to-Gov - Government deployment program management
+                      </li>
+                      <li class="list-group-item d-flex align-items-center">
+                        <span class="badge bg-primary me-2">4</span> Balik Manggagawa - Process returning worker documentation
+                      </li>
+                      <li class="list-group-item d-flex align-items-center">
+                        <span class="badge bg-primary me-2">5</span> Information Sheet - Current module you're viewing now
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Step 2: Dashboard Overview -->
+          <div class="tour-step" data-step="2" style="display: none;">
+            <div class="text-center mb-4">
+              <h3>Welcome to Information Sheet Dashboard</h3>
+              <p class="lead">This dashboard helps you analyze and export information sheet data.</p>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5>Dashboard Features</h5>
+                    <p>The information sheet dashboard provides visual reports and statistics about all records in the system.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <h5>Key Functions</h5>
+                    <p>Easily add new records, generate reports, and analyze data with visual charts.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Step 2: Statistics Cards (initially hidden) -->
+          <div class="tour-step" data-step="2" style="display: none;">
+            <div class="text-center mb-4">
+              <h3>Statistics Cards</h3>
+              <p class="lead">Quick overview of key metrics from the information sheets.</p>
+            </div>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Statistics Overview</h5>
+                <p>The top section displays important statistics:</p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Total number of information sheet records</li>
+                  <li class="list-group-item">Number of records that have been printed</li>
+                  <li class="list-group-item">Gender distribution of applicants</li>
+                  <li class="list-group-item">Processing time statistics</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Step 3: Charts & Reports (initially hidden) -->
+          <div class="tour-step" data-step="3" style="display: none;">
+            <div class="text-center mb-4">
+              <h3>Charts & Reports</h3>
+              <p class="lead">Visual analysis of information sheet data.</p>
+            </div>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Available Charts</h5>
+                <p>The dashboard includes several interactive charts:</p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Gender distribution pie chart</li>
+                  <li class="list-group-item">Processing time comparison</li>
+                  <li class="list-group-item">Purpose analysis bar chart</li>
+                  <li class="list-group-item">Worker categories breakdown</li>
+                  <li class="list-group-item">Requested records analysis</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Step 4: Charts & Reports (initially hidden) -->
+          <div class="tour-step" data-step="4" style="display: none;">
+            <div class="text-center mb-4">
+              <h3>Charts & Reports</h3>
+              <p class="lead">Visual analysis of information sheet data.</p>
+            </div>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Available Charts</h5>
+                <p>The dashboard includes several interactive charts:</p>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Gender distribution pie chart</li>
+                  <li class="list-group-item">Processing time comparison</li>
+                  <li class="list-group-item">Purpose analysis bar chart</li>
+                  <li class="list-group-item">Worker categories breakdown</li>
+                  <li class="list-group-item">Requested records analysis</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Step 5: Excel Generation (initially hidden) -->
+          <div class="tour-step" data-step="5" style="display: none;">
+            <div class="text-center mb-4">
+              <h3>Excel Report Generation</h3>
+              <p class="lead">Create and download Excel reports from information sheet data.</p>
+            </div>
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">How to Generate Reports</h5>
+                <ol class="list-group list-group-flush">
+                  <li class="list-group-item">Click the "Generate Excel Report" button</li>
+                  <li class="list-group-item">Select the month and year for your report</li>
+                  <li class="list-group-item">Click "Generate Report" to create the Excel file</li>
+                  <li class="list-group-item">Download the file when prompted</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Tour Footer -->
+        <div class="tour-footer d-flex justify-content-between mt-4">
+          <button type="button" class="btn btn-secondary" id="tourPrevBtn" disabled>Previous</button>
+          <button type="button" class="btn btn-primary" id="tourNextBtn">Next</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -865,14 +1019,6 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     animation: {
       duration: 1200,
       easing: 'easeOutCirc',
-      delay: function(context) {
-        // First dataset is delayed a bit
-        let delay = 0;
-        if (context.type === 'data') {
-          delay = context.dataIndex * 100 + context.datasetIndex * 100;
-        }
-        return delay;
-      }
     },
     layout: {
       padding: {
@@ -1156,5 +1302,97 @@ include '_head.php'; // Ensure this includes Chart.js CDN
     setTimeout(() => {
       this.classList.remove('btn-clicked');
     }, 300);
+  });
+  
+  // Tour Guide functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    // Show tour guide button
+    const tourBtn = document.createElement('button');
+    tourBtn.className = 'btn btn-info position-fixed';
+    tourBtn.style.bottom = '20px';
+    tourBtn.style.right = '20px';
+    tourBtn.innerHTML = 'Start Tour';
+    tourBtn.addEventListener('click', function() {
+      const tourModal = new bootstrap.Modal(document.getElementById('tourGuideModal'));
+      tourModal.show();
+    });
+    document.body.appendChild(tourBtn);
+    
+    // Tour guide variables
+    let currentTourStep = 1;
+    const totalTourSteps = 5;
+    
+    // Update tour guide UI
+    function updateTourUI() {
+      // Update progress bar
+      const progressPercent = ((currentTourStep - 1) / (totalTourSteps - 1)) * 100;
+      document.querySelector('.progress-bar').style.width = `${progressPercent}%`;
+      document.querySelector('.progress-bar').setAttribute('aria-valuenow', progressPercent);
+      
+      // Update navigation pills
+      document.querySelectorAll('.tour-nav .nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (parseInt(link.getAttribute('data-step')) === currentTourStep) {
+          link.classList.add('active');
+        }
+      });
+      
+      // Show current step, hide others
+      document.querySelectorAll('.tour-step').forEach(step => {
+        step.style.display = 'none';
+        if (parseInt(step.getAttribute('data-step')) === currentTourStep) {
+          step.style.display = 'block';
+        }
+      });
+      
+      // Update button states
+      const prevBtn = document.getElementById('tourPrevBtn');
+      const nextBtn = document.getElementById('tourNextBtn');
+      prevBtn.disabled = currentTourStep === 1;
+      
+      if (currentTourStep === totalTourSteps) {
+        nextBtn.textContent = 'Finish';
+      } else {
+        nextBtn.textContent = 'Next';
+      }
+    }
+    
+    // Initialize tour navigation
+    const nextBtn = document.getElementById('tourNextBtn');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function() {
+        if (currentTourStep < totalTourSteps) {
+          currentTourStep++;
+          updateTourUI();
+        } else {
+          // Close the modal on finish
+          const tourModal = bootstrap.Modal.getInstance(document.getElementById('tourGuideModal'));
+          tourModal.hide();
+          currentTourStep = 1;
+          updateTourUI();
+        }
+      });
+    }
+    
+    const prevBtn = document.getElementById('tourPrevBtn');
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function() {
+        if (currentTourStep > 1) {
+          currentTourStep--;
+          updateTourUI();
+        }
+      });
+    }
+    
+    // Make nav pills clickable
+    document.querySelectorAll('.tour-nav .nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        currentTourStep = parseInt(this.getAttribute('data-step'));
+        updateTourUI();
+      });
+    });
+    
+    // Initialize tour UI
+    updateTourUI();
   });
 </script>

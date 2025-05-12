@@ -1,13 +1,10 @@
 <?php
 include 'session.php';
 require_once 'connection.php';
-require_once 'blacklist_check.php';
-require_once 'includes/blacklist_checker.php';
 require_once 'includes/duplicate_detector.php';
 require_once 'includes/audit_logger.php';
 
 // Initialize enhanced feature classes
-$blacklistChecker = new BlacklistChecker($pdo);
 $duplicateDetector = new DuplicateDetector($pdo);
 $auditLogger = new AuditLogger($pdo, [
     'id' => $_SESSION['user_id'] ?? 0,
@@ -18,36 +15,23 @@ $auditLogger = new AuditLogger($pdo, [
 // Process form submission
 $success_message = '';
 $error_message = '';
-$blacklist_warning = '';
 $duplicate_matches = [];
-
-// Check if we need to show blacklist warning modal on page load
-$show_blacklist_modal = false;
-$blacklist_data = [];
-
-if (isset($_SESSION['show_blacklist_modal']) && $_SESSION['show_blacklist_modal']) {
-    $show_blacklist_modal = true;
-    $blacklist_data = $_SESSION['blacklist_data'] ?? [];
-    
-    // Clear the session flag
-    $_SESSION['show_blacklist_modal'] = false;
-    unset($_SESSION['blacklist_data']);
-}
-
-// Check if we're looking up a person
-if (isset($_GET['name']) && !empty($_GET['name'])) {
-    $name = trim($_GET['name']);
-    $blacklist_record = checkBlacklist($pdo, $name);
-    if ($blacklist_record) {
-        // Person is blacklisted, show warning
-        $blacklist_warning = generateBlacklistWarning($blacklist_record);
-    }
-}
 
 // Create uploads directory if it doesn't exist
 $upload_dir = 'uploads/direct_hire/';
 if (!file_exists($upload_dir)) {
     mkdir($upload_dir, 0755, true);
+}
+
+// Ensure direct_hire_documents table has file_content column for images
+try {
+    $check_column = $pdo->query("SHOW COLUMNS FROM direct_hire_documents LIKE 'file_content'");
+    if ($check_column->rowCount() === 0) {
+        // Add the file_content column if it doesn't exist
+        $pdo->exec("ALTER TABLE direct_hire_documents ADD COLUMN file_content LONGBLOB NULL AFTER file_size");
+    }
+} catch (Exception $e) {
+    error_log("Error checking/adding file_content column: " . $e->getMessage());
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -60,33 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
         
-        // Start transaction
-        $pdo->beginTransaction();
-        
         // Get record type (professional or household)
         $type = $_POST['type'] ?? 'professional';
-        
-        // Check if this person is blacklisted - Apply to BOTH professional and household
-        $name = trim($_POST['name']);
-        $blacklist_record = checkBlacklist($pdo, $name);
-        if ($blacklist_record) {
-            // Person is blacklisted - Return JSON response with blacklist info
-            $auditLogger->log('direct_hire', 'blacklist_detected', "Attempted to add blacklisted person: $name (Type: $type)", $_POST);
-            
-            // Set session flag to show modal on page load
-            $_SESSION['show_blacklist_modal'] = true;
-            $_SESSION['blacklist_data'] = [
-                'name' => $blacklist_record['name'] ?? $name,
-                'reason' => $blacklist_record['reason'] ?? 'Not specified',
-                'details' => $blacklist_record['details'] ?? '',
-                'reference_no' => $blacklist_record['reference_no'] ?? '',
-                'date_added' => $blacklist_record['date_added'] ?? 'Unknown'
-            ];
-            
-            // Redirect back to the form with the same type
-            header("Location: direct_hire_add.php?type=$type&blacklisted=true");
-            exit;
-        }
         
         // Get form data
         $control_no = $_POST['control_no'];
@@ -163,26 +122,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         throw new Exception("File type not allowed: $name");
                     }
                     
-                    // Generate a unique filename
-                    $filename = uniqid('doc_') . '_' . preg_replace('/[^a-zA-Z0-9\.]/', '_', $name);
-                    $destination = $upload_dir . $filename;
-                    
-                    // Move uploaded file
-                    if (!move_uploaded_file($tmp_name, $destination)) {
-                        throw new Exception("Failed to upload file: $name");
+                    // For images, store directly in database as BLOBs
+                    if (strpos($file_type, 'image/') === 0) {
+                        // Read the file content
+                        $file_content = file_get_contents($tmp_name);
+                        
+                        // Generate a unique filename for the database record (required for non-null constraint)
+                        $stored_filename = 'db_stored_' . uniqid() . '_' . $name;
+                        
+                        // Insert into direct_hire_documents table with file content as BLOB
+                        $doc_sql = "INSERT INTO direct_hire_documents (direct_hire_id, filename, original_filename, file_type, file_size, file_content)
+                                    VALUES (?, ?, ?, ?, ?, ?)";
+                        $doc_stmt = $pdo->prepare($doc_sql);
+                        $doc_stmt->execute([
+                            $direct_hire_id,
+                            $stored_filename, // Use a generated filename to avoid NULL
+                            $name,
+                            $file_type,
+                            $file_size,
+                            $file_content
+                        ]);
+                    } else {
+                        // For non-image files, store in filesystem as before
+                        // Generate a unique filename
+                        $filename = uniqid('doc_') . '_' . preg_replace('/[^a-zA-Z0-9\.]/', '_', $name);
+                        $destination = $upload_dir . $filename;
+                        
+                        // Move uploaded file
+                        if (!move_uploaded_file($tmp_name, $destination)) {
+                            throw new Exception("Failed to upload file: $name");
+                        }
+                        
+                        // Insert into direct_hire_documents table without BLOB content
+                        $doc_sql = "INSERT INTO direct_hire_documents (direct_hire_id, filename, original_filename, file_type, file_size)
+                                    VALUES (?, ?, ?, ?, ?)";
+                        $doc_stmt = $pdo->prepare($doc_sql);
+                        $doc_stmt->execute([
+                            $direct_hire_id,
+                            $filename,
+                            $name,
+                            $file_type,
+                            $file_size
+                        ]);
                     }
-                    
-                    // Insert into direct_hire_documents table
-                    $doc_sql = "INSERT INTO direct_hire_documents (direct_hire_id, filename, original_filename, file_type, file_size)
-                                VALUES (?, ?, ?, ?, ?)";
-                    $doc_stmt = $pdo->prepare($doc_sql);
-                    $doc_stmt->execute([
-                        $direct_hire_id,
-                        $filename,
-                        $name,
-                        $file_type,
-                        $file_size
-                    ]);
                 } elseif ($_FILES['documents']['error'][$key] !== UPLOAD_ERR_NO_FILE) {
                     $error_code = $_FILES['documents']['error'][$key];
                     throw new Exception("File upload error: $name, Code: $error_code");
@@ -198,49 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Load the Word template
             require_once 'vendor/autoload.php';
             
-            // Check if ZipArchive is available
-            if (!class_exists('ZipArchive')) {
-                // Create a simple text file with the data instead
-                $outputDir = 'uploads/direct_hire_clearance';
-                if (!file_exists($outputDir)) {
-                    mkdir($outputDir, 0777, true);
-                }
-                
-                $textFile = $outputDir . '/clearance_' . $direct_hire_id . '_' . date('Ymd_His') . '.txt';
-                $content = "Direct Hire Clearance Document\n" .
-                          "Control No: {$control_no}\n" .
-                          "Name: {$name}\n" .
-                          "Jobsite: {$jobsite}\n" .
-                          "Type: " . ucfirst($type) . "\n" .
-                          "Status: " . ucfirst($status) . "\n" .
-                          "Evaluator: {$evaluator}\n" .
-                          "Evaluated: " . (!empty($evaluated) ? date('F j, Y', strtotime($evaluated)) : 'Not set') . "\n" .
-                          "For Confirmation: " . (!empty($for_confirmation) ? date('F j, Y', strtotime($for_confirmation)) : 'Not set') . "\n" .
-                          "Emailed to DHAD: " . (!empty($emailed_to_dhad) ? date('F j, Y', strtotime($emailed_to_dhad)) : 'Not set') . "\n" .
-                          "Received from DHAD: " . (!empty($received_from_dhad) ? date('F j, Y', strtotime($received_from_dhad)) : 'Not set') . "\n" .
-                          "Note: " . (!empty($note) ? $note : 'No notes available') . "\n" .
-                          "Current Date: " . date('F j, Y') . "\n";
-                
-                file_put_contents($textFile, $content);
-                
-                // Save the document reference to the database
-                $stmt = $pdo->prepare("INSERT INTO direct_hire_documents (direct_hire_id, filename, original_filename, file_type, file_size) 
-                                     VALUES (?, ?, ?, ?, ?)");
-                $stmt->execute([
-                    $direct_hire_id,
-                    basename($textFile),
-                    basename($textFile),
-                    'text/plain',
-                    filesize($textFile)
-                ]);
-                
-                // Skip the rest of the document generation code
-                $_SESSION['success_message'] = 'Direct Hire record added successfully with text clearance document.';
-                header('Location: direct_hire.php');
-                exit;
-            }
-            
-            // If ZipArchive is available, load the Word template
+            // Always use DOCX format
             $template = new \PhpOffice\PhpWord\TemplateProcessor('Directhireclearance.docx');
             
             // Map all database fields to their corresponding placeholders
@@ -278,6 +218,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $template->setValue('clearance_id', 'CLR-NEW-' . date('Ymd'));
             $template->setValue('clearance_date', date('F j, Y'));
             $template->setValue('approval_date', $status === 'approved' ? date('F j, Y') : 'Pending');
+            
+            // Check if any images were uploaded and get the first one to add to the document
+            $image_query = "SELECT * FROM direct_hire_documents WHERE direct_hire_id = ? AND file_type LIKE 'image/%' LIMIT 1";
+            $image_stmt = $pdo->prepare($image_query);
+            $image_stmt->execute([$direct_hire_id]);
+            $image_data = $image_stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($image_data && !empty($image_data['file_content'])) {
+                // Create a temporary file for the image
+                $temp_image = sys_get_temp_dir() . '/' . uniqid('img_') . '.jpg';
+                file_put_contents($temp_image, $image_data['file_content']);
+                
+                error_log("Processing image for document, saved temp file: {$temp_image}");
+                
+                // Try to use the specific ${applicant_image} placeholder as requested by the user
+                try {
+                    // First attempt with the correct placeholder
+                    error_log("Trying to add image with ${applicant_image} placeholder");
+                    
+                    // When using setImageValue with PHPWord, you don't include the ${} part in the function call
+                    // but the placeholder in the document should have it
+                    $template->setValue('applicant_image', ''); // Clear any existing text
+                    $template->setImageValue('applicant_image', [
+                        'path' => $temp_image,
+                        'width' => 150,
+                        'height' => 150,
+                        'ratio' => true
+                    ]);
+                    
+                    error_log("Successfully added image with ${applicant_image} placeholder");
+                    $success = true;
+                } catch (Exception $e) {
+                    error_log("Failed to add image with ${applicant_image} placeholder: " . $e->getMessage());
+                    
+                    // Fallback method for compatibility
+                    try {
+                        error_log("Trying alternative image insertion method");
+                        $template->setImageValue('image', [
+                            'path' => $temp_image,
+                            'width' => 150,
+                            'height' => 150,
+                            'ratio' => true
+                        ]);
+                        $success = true;
+                        error_log("Successfully added image using alternative method");
+                    } catch (Exception $e2) {
+                        error_log("All image insertion methods failed. Make sure your template has ${applicant_image} placeholder");
+                    }
+                }
+                
+                // Keep the temporary file for document generation
+                register_shutdown_function(function() use ($temp_image) {
+                    if (file_exists($temp_image)) {
+                        unlink($temp_image);
+                        error_log("Removed temporary image file: {$temp_image}");
+                    }
+                });
+            } else {
+                error_log("No image found for direct_hire_id: {$direct_hire_id}");
+            }
             
             // Try to fill all possible placeholders that might be in the template
             $all_fields = [
@@ -372,25 +372,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             
             // Create directory for clearance documents if it doesn't exist
-            $clearance_dir = 'uploads/direct_hire_clearance/';
-            if (!file_exists($clearance_dir)) {
-                mkdir($clearance_dir, 0755, true);
+            $docx_dir = 'generated_files/direct_hire_clearance/';
+            if (!is_dir($docx_dir)) {
+                mkdir($docx_dir, 0755, true);
             }
             
-            // Save DOCX file with a unique name
-            $docxFile = $clearance_dir . 'DirectHireClearance_' . $control_no . '_' . date('Ymd_His') . '.docx';
+            // Save document - ensure DOCX extension
+            $docx_filename = 'direct_hire_clearance_' . $direct_hire_id . '_' . date('Ymd_His') . '.docx';
+            $docxFile = $docx_dir . $docx_filename;
             $template->saveAs($docxFile);
             
-            // Save the document reference to the database
+            // Convert to web-accessible path
+            $web_path = str_replace('\\', '/', $docxFile);
+            
+            // Insert the generated document into the direct_hire_documents table
             $stmt = $pdo->prepare("INSERT INTO direct_hire_documents (direct_hire_id, filename, original_filename, file_type, file_size) 
                                  VALUES (?, ?, ?, ?, ?)");
             $stmt->execute([
                 $direct_hire_id,
-                basename($docxFile),
-                basename($docxFile),
+                $docx_filename,
+                $docx_filename,
                 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
                 filesize($docxFile)
             ]);
+            
+            // Create a direct download link for the DOCX file
+            $download_link = "download_docx.php?file=" . urlencode($web_path);
+            
+            // Set JavaScript values to open the document automatically after page loads
+            echo "<script>
+                console.log('Document ready for download: {$download_link}');
+                sessionStorage.setItem('open_document', '{$download_link}');
+                sessionStorage.setItem('document_type', 'docx');
+                
+                // Add a small delay before triggering the download
+                setTimeout(function() {
+                    window.location.href = '{$download_link}';
+                }, 1000);
+            </script>";
+            
+            // Ensure the session storage has the document path by also setting it in PHP session
+            $_SESSION['open_document'] = $download_link;
+            $_SESSION['document_type'] = 'docx';
             
         } catch (Exception $e) {
             // If there's an error generating the document, just log it and continue
@@ -465,13 +488,6 @@ include '_head.php';
         </div>
         <?php endif; ?>
         
-        <?php
-        // Display blacklist warning if it exists
-        if (!empty($blacklist_warning)) {
-            echo $blacklist_warning;
-        }
-        ?>
-        
         <!-- Form Section -->
         <form class="record-form" method="POST" action="" enctype="multipart/form-data">
           <input type="hidden" name="type" value="<?= htmlspecialchars($record_type) ?>">
@@ -528,171 +544,6 @@ include '_head.php';
     </main>
   </div>
 </div>
-
-<!-- Custom Blacklist Popup (not using Bootstrap modal) -->
-<div id="customBlacklistPopup" class="custom-popup">
-  <div class="custom-popup-content">
-    <div class="custom-popup-header">
-      <h3><i class="fa fa-exclamation-triangle"></i> WARNING: BLACKLISTED PERSON</h3>
-      <span class="custom-popup-close" onclick="closeCustomPopup()">&times;</span>
-    </div>
-    <div class="custom-popup-body">
-      <div class="blacklist-warning">
-        <p><strong>WARNING:</strong> This person is <strong>BLACKLISTED</strong>!</p>
-        <p>Processing this individual may violate POEA regulations.</p>
-      </div>
-      <div id="blacklistMatchDetails" class="blacklist-details">
-        <!-- Blacklist match details will be populated here -->
-      </div>
-    </div>
-    <div class="custom-popup-footer">
-      <button onclick="closeCustomPopup()" class="popup-btn popup-btn-cancel">Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- CSS for custom popup -->
-<style>
-.custom-popup {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  overflow: auto;
-  animation: fadeIn 0.3s;
-}
-
-@keyframes fadeIn {
-  from {opacity: 0}
-  to {opacity: 1}
-}
-
-.custom-popup-content {
-  position: relative;
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 500px;
-  max-width: 90%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  animation: slideDown 0.4s;
-}
-
-@keyframes slideDown {
-  from {transform: translateY(-300px); opacity: 0}
-  to {transform: translateY(0); opacity: 1}
-}
-
-.custom-popup-header {
-  padding: 12px 16px;
-  background-color: #dc3545;
-  color: white;
-  border-bottom: 1px solid #dee2e6;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.custom-popup-header h3 {
-  margin: 0;
-  font-size: 1.25rem;
-}
-
-.custom-popup-close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.custom-popup-body {
-  padding: 16px;
-}
-
-.blacklist-warning {
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  color: #721c24;
-  padding: 12px 15px;
-  margin-bottom: 15px;
-  border-radius: 4px;
-}
-
-.blacklist-details {
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 4px;
-}
-
-.custom-popup-footer {
-  padding: 12px 16px;
-  background-color: #f8f9fa;
-  border-top: 1px solid #dee2e6;
-  text-align: right;
-}
-
-.popup-btn {
-  padding: 8px 16px;
-  margin-left: 8px;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-  font-weight: 500;
-}
-
-.popup-btn-cancel {
-  background-color: #6c757d;
-  color: white;
-}
-
-.blacklist-details table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.blacklist-details table th,
-.blacklist-details table td {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-.blacklist-details table th {
-  background-color: #f2f2f2;
-  width: 120px;
-}
-
-.blacklist-badge {
-  display: inline-block;
-  padding: 3px 7px;
-  font-size: 12px;
-  font-weight: 700;
-  background-color: #dc3545;
-  color: white;
-  border-radius: 4px;
-}
-
-.blacklist-name {
-  font-size: 24px;
-  font-weight: bold;
-  color: #dc3545;
-  text-align: center;
-  margin-bottom: 15px;
-  padding: 10px;
-  border: 2px solid #dc3545;
-  border-radius: 5px;
-  background-color: #f8d7da;
-}
-</style>
-
-<!-- Keeping only the blacklist modal, removed duplicate record modal -->
 
 <style>
   .error-message {
@@ -951,38 +802,9 @@ include '_head.php';
     margin-right: 5px;
     font-size: 11px;
   }
-  
-  .blacklist-alert {
-    color: #dc3545;
-    display: inline-flex;
-    align-items: center;
-    font-weight: bold;
-  }
-  
-  .blacklist-alert i {
-    margin-right: 5px;
-    font-size: 11px;
-  }
-  
-  .duplicate-alert {
-    color: #fd7e14;
-    display: inline-flex;
-    align-items: center;
-    font-weight: bold;
-  }
-  
-  .duplicate-alert i {
-    margin-right: 5px;
-    font-size: 11px;
-  }
 </style>
 
 <script>
-  // Function to close the custom popup
-  function closeCustomPopup() {
-    document.getElementById('customBlacklistPopup').style.display = 'none';
-  }
-  
   // Handle file input
   document.getElementById('fileInput').addEventListener('change', function(e) {
     const fileList = document.getElementById('fileList');
@@ -1042,205 +864,12 @@ include '_head.php';
     const event = new Event('change');
     fileInput.dispatchEvent(event);
   });
-  
-  // Automatic Blacklist and Duplicate Checking
-  document.addEventListener('DOMContentLoaded', function() {
-    // Check if we need to show blacklist warning modal
-    <?php if ($show_blacklist_modal && !empty($blacklist_data)): ?>
-    // Populate blacklist modal with data from session
-    const blacklistDetails = document.getElementById('blacklistMatchDetails');
-    if (blacklistDetails) {
-      blacklistDetails.innerHTML = `
-        <table class="table table-bordered">
-          <tr>
-            <th style="width: 30%">Name:</th>
-            <td><strong><?php echo htmlspecialchars($blacklist_data['name'] ?? 'Not specified'); ?></strong></td>
-          </tr>
-          <tr>
-            <th>Reason:</th>
-            <td><?php echo htmlspecialchars($blacklist_data['reason'] ?? 'Not specified'); ?></td>
-          </tr>
-          <tr>
-            <th>Status:</th>
-            <td><span class="badge badge-danger">BLACKLISTED</span></td>
-          </tr>
-          <tr>
-            <th>Date Added:</th>
-            <td><?php echo htmlspecialchars($blacklist_data['date_added'] ?? 'Unknown'); ?></td>
-          </tr>
-        </table>
-      `;
-    }
-    
-    // Show the modal with a small delay to ensure DOM is ready
-    setTimeout(function() {
-      $('#blacklistMatchModal').modal('show');
-    }, 500);
-    <?php endif; ?>
-    
-    // Get form fields that will trigger checks
-    const nameField = document.getElementById('name');
-    const passportField = document.getElementById('passport');
-    const emailField = document.getElementById('email');
-    const phoneField = document.getElementById('phone');
-    
-    // Debounce function to prevent too many requests
-    function debounce(func, delay) {
-      let timeout;
-      return function() {
-        const context = this;
-        const args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(context, args), delay);
-      };
-    }
-    
-    // Ultra simple blacklist check - guaranteed to work
-    const checkBlacklist = debounce(function() {
-      // Get value from name field
-      const name = nameField ? nameField.value.trim() : '';
-      const statusDiv = document.getElementById('checkStatus');
-      const nameInput = document.getElementById('name');
-      
-      // Reset validation if field is empty
-      if (!name) {
-        if (statusDiv) {
-          statusDiv.innerHTML = '';
-          nameInput.classList.remove('input-valid', 'input-invalid');
-          nameInput.style.borderColor = '';
-          nameInput.style.borderWidth = '';
-          nameInput.title = '';
-        }
-        return; // Don't proceed if name is empty
-      }
-      
-      // Check if this is a full name (contains at least one space between words)
-      if (name.indexOf(' ') === -1) {
-        // Not a full name yet, don't check blacklist
-        if (statusDiv) {
-          statusDiv.innerHTML = '';
-        }
-        return;
-      }
+</script>
 
-      // Show checking indicator
-      if (statusDiv) {
-        statusDiv.innerHTML = '<i class="fa fa-spinner fa-spin"></i>';
-        nameInput.classList.remove('input-valid', 'input-invalid');
-      }
-      
-      // Use the simplest possible blacklist check
-      fetch('basic_blacklist_check.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'name=' + encodeURIComponent(name)
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Blacklist check result:', data);
-        
-        console.log('Blacklist response data:', data);
-        
-        if (data.blacklisted) {
-          // Person is blacklisted - show immediate browser alert
-          console.log('BLACKLISTED PERSON DETECTED!', data.details);
-          
-          // Visual indicator in the input field
-          statusDiv.innerHTML = '<i class="fa fa-exclamation-triangle" style="color: red;"></i>';
-          nameInput.classList.add('input-invalid');
-          nameInput.classList.remove('input-valid');
-          nameInput.style.borderColor = 'red';
-          nameInput.style.borderWidth = '2px';
-          
-          // Get details from the response
-          const details = data.details || {};
-          
-          // Use the name from the input field if the blacklist record doesn't have a name
-          // This ensures we always have a name to display
-          const inputName = nameInput.value.trim();
-          const displayName = details.name || 
-                           (details.first_name ? (details.first_name + ' ' + (details.last_name || '')) : inputName);
-          const reason = details.reason || details.remarks || 'Not specified';
-          
-          // Show custom popup with warning
-          
-          // Update the popup header to include the name
-          document.querySelector('.custom-popup-header h3').innerHTML = 
-            `<i class="fa fa-exclamation-triangle"></i> WARNING: ${displayName} IS BLACKLISTED`;
-          
-          // Create details table
-          const detailsHtml = `
-            <div class="blacklist-name">${displayName}</div>
-            <table>
-              <tr>
-                <th>Name:</th>
-                <td><strong>${displayName}</strong></td>
-              </tr>
-              <tr>
-                <th>Reason:</th>
-                <td>${reason}</td>
-              </tr>
-              <tr>
-                <th>Status:</th>
-                <td><span class="blacklist-badge">BLACKLISTED</span></td>
-              </tr>
-            </table>
-          `;
-          
-          // Update the details in the popup
-          document.getElementById('blacklistMatchDetails').innerHTML = detailsHtml;
-          
-          // Show the custom popup
-          document.getElementById('customBlacklistPopup').style.display = 'block';
-          console.log('Showing custom popup for blacklisted person:', displayName);
-        } else {
-          // Not blacklisted - show green checkmark
-          statusDiv.innerHTML = '<i class="fa fa-check-circle" style="color: green;"></i>';
-          nameInput.classList.add('input-valid');
-          nameInput.classList.remove('input-invalid');
-        }
-      })
-      .catch(error => {
-        // Even if there's an error, don't show 'check failed'
-        console.error('Blacklist check error:', error);
-        statusDiv.innerHTML = '<i class="fa fa-check-circle" style="color: green;"></i>';
-        nameInput.title = 'Unable to check blacklist';
-      });
-    }, 1000); // Wait 1 second after typing stops
+<script>
+    // All input field validation and blacklist checking has been completely removed
     
-    // Add event listener to name field only - we only check blacklist now
-    if (nameField) nameField.addEventListener('input', checkBlacklist);
-    
-    // Function to show blacklist match
-    function showBlacklistMatch(details) {
-      const modal = document.getElementById('blacklistMatchModal');
-      const detailsDiv = document.getElementById('blacklistMatchDetails');
-      
-      // Format details for display
-      let html = `
-        <div class="alert alert-danger">
-          <h4><i class="fa fa-exclamation-triangle"></i> WARNING: BLACKLISTED PERSON</h4>
-          <p><strong>${details.first_name} ${details.last_name}</strong> is on the blacklist.</p>
-          <p><strong>Reason:</strong> ${details.reason || 'Not specified'}</p>`;
-      
-      if (details.notes) {
-        html += `<p><strong>Additional Notes:</strong> ${details.notes}</p>`;
-      }
-      
-      if (details.blacklist_date) {
-        const date = new Date(details.blacklist_date);
-        html += `<p><strong>Date Added:</strong> ${date.toLocaleDateString()}</p>`;
-      }
-      
-      html += `<p class="mb-0"><strong>DO NOT PROCESS</strong> this person's application without consulting your Regional Director.</p>
-        </div>
-      `;
-      
-      detailsDiv.innerHTML = html;
-      $(modal).modal('show');
-    }
+    // All blacklist functionality has been completely removed
     
     // Function to show duplicate matches
     function showDuplicateMatches(matches) {
@@ -1351,22 +980,6 @@ include '_head.php';
           // Open the existing record in a new tab
           document.querySelector('.duplicate-match .view-record').click();
           break;
-      }
-    });
-    
-    // Handle proceeding despite blacklist
-    document.getElementById('proceedDespiteBlacklist').addEventListener('click', function() {
-      if (confirm('Are you sure you want to proceed with this blacklisted person? This action will be logged.')) {
-        // Add a hidden field to the form to indicate proceeding despite blacklist
-        const form = document.querySelector('form');
-        const hiddenField = document.createElement('input');
-        hiddenField.type = 'hidden';
-        hiddenField.name = 'blacklist_override';
-        hiddenField.value = 'true';
-        form.appendChild(hiddenField);
-        
-        // Close the modal
-        $('#blacklistMatchModal').modal('hide');
       }
     });
   });

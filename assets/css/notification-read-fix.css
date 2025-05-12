@@ -1,0 +1,67 @@
+/* Notification read/unread styles */
+.notification-dropdown {
+  z-index: 9999 !important;
+}
+
+.notification-list {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+/* Make unread notifications clearly distinguishable */
+.notification-item.unread {
+  background-color: #eef7ff !important;
+  border-left: 3px solid #246EE9 !important;
+  font-weight: 500 !important;
+}
+
+/* Style for read notifications */
+.notification-item.read {
+  background-color: #fff !important;
+  border-left: 3px solid transparent !important;
+  opacity: 0.8 !important;
+  font-weight: normal !important;
+}
+
+/* Ensure proper spacing */
+.notification-item {
+  padding: 12px 15px !important;
+  border-bottom: 1px solid #eee !important;
+  position: relative !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.notification-item:hover {
+  background-color: #f9f9f9 !important;
+}
+
+/* Force the read status to apply */
+.notification-item.read .notification-content p {
+  font-weight: normal !important;
+  color: #555 !important;
+}
+
+.notification-item.unread .notification-content p {
+  font-weight: 500 !important;
+  color: #333 !important;
+}
+
+/* Fix dismiss button to prevent overlap */
+.notification-dismiss {
+  position: absolute !important;
+  right: 8px !important;
+  top: 8px !important;
+  background: none !important;
+  border: none !important;
+  color: #999 !important;
+  cursor: pointer !important;
+  font-size: 16px !important;
+  padding: 3px 6px !important;
+  border-radius: 3px !important;
+}
+
+.notification-dismiss:hover {
+  background-color: #f0f0f0 !important;
+  color: #555 !important;
+}

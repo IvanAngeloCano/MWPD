@@ -153,5 +153,17 @@ $fullPath = $savePath . "/" . $filename;
 $writer = new Xlsx($spreadsheet);
 $writer->save($fullPath);
 
-echo "✅ Excel report created at: $fullPath";
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Add success message to session
+$_SESSION['excel_success'] = true;
+$_SESSION['excel_filename'] = $filename;
+$_SESSION['excel_path'] = $fullPath;
+
+// Redirect back to information_sheet.php
+header('Location: information_sheet.php?excel_generated=1');
+exit;
 ?>

@@ -77,7 +77,24 @@ if (isset($_SESSION['user_id'])) {
     <a href="profile.php" class="user-profile-link user-dropdown" style="text-decoration: none !important; border-bottom: none !important;">
       <div class="user-profile">
         <div class="profile-icon">
-          <?php if (isset($_SESSION['profile_picture']) && !empty($_SESSION['profile_picture'])): ?>
+          <?php 
+          // Force profile picture reload from database
+          if (isset($_SESSION['user_id'])) {
+            try {
+              require_once 'connection.php';
+              $stmt = $pdo->prepare("SELECT profile_picture FROM users WHERE id = ? LIMIT 1");
+              $stmt->execute([$_SESSION['user_id']]);
+              $user = $stmt->fetch(PDO::FETCH_ASSOC);
+              
+              if ($user && !empty($user['profile_picture'])) {
+                $_SESSION['profile_picture'] = $user['profile_picture'];
+              }
+            } catch (Exception $e) {
+              // Silently fail, use whatever is in session
+            }
+          }
+          
+          if (isset($_SESSION['profile_picture']) && !empty($_SESSION['profile_picture'])): ?>
             <img src="<?= htmlspecialchars($_SESSION['profile_picture']) ?>" alt="Profile picture" class="header-profile-picture" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background-color: white;">
           <?php else: ?>
             <div class="header-profile-picture" style="width: 40px; height: 40px; border-radius: 50%; background-color: #e0e0e0; display: flex; justify-content: center; align-items: center;">

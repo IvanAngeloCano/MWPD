@@ -1,6 +1,7 @@
 /**
  * MWPD Guided Tour
  * A step-by-step interactive guide to help users navigate the MWPD system
+ * Designed to resemble intro.js look and functionality
  */
 class GuidedTour {
     constructor(options = {}) {
@@ -49,6 +50,8 @@ class GuidedTour {
     }
     
     createOverlay() {
+        // For non-modal experience, we create an overlay only for click detection
+        // but it's fully transparent and doesn't block the UI
         const overlay = document.createElement('div');
         overlay.className = this.overlayClass;
         overlay.style.position = 'fixed';
@@ -56,33 +59,80 @@ class GuidedTour {
         overlay.style.left = 0;
         overlay.style.width = '100%';
         overlay.style.height = '100%';
-        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.6)';
+        overlay.style.backgroundColor = 'transparent';
         overlay.style.zIndex = 9990;
         overlay.style.display = 'none';
+        overlay.style.pointerEvents = 'none'; // Let clicks pass through
         
         document.body.appendChild(overlay);
         this.overlay = overlay;
     }
     
     createTooltip() {
+        // First add intro.js CSS styles to document if not already added
+        if (!document.getElementById('mwpd-introjs-styles')) {
+            const styleEl = document.createElement('style');
+            styleEl.id = 'mwpd-introjs-styles';
+            styleEl.textContent = `
+                .introjs-button {
+                    padding: 7px 14px;
+                    border-radius: 3px;
+                    border: 1px solid #bbb;
+                    background-color: #f5f5f5;
+                    color: #333;
+                    font-size: 14px;
+                    font-weight: 500;
+                    text-decoration: none;
+                    text-shadow: none;
+                    margin-right: 5px;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                }
+                .introjs-prevbutton {
+                    border-color: #ccc;
+                    background-color: #f8f8f8;
+                }
+                .introjs-nextbutton, .introjs-donebutton {
+                    border-color: #1a73e8;
+                    background-color: #1a73e8;
+                    color: white;
+                }
+                .introjs-skipbutton {
+                    color: #999;
+                    border: none;
+                    background: transparent;
+                }
+                .introjs-button:hover {
+                    opacity: 0.9;
+                }
+            `;
+            document.head.appendChild(styleEl);
+        }
+        
         const tooltip = document.createElement('div');
         tooltip.className = this.tooltipClass;
         tooltip.style.position = 'absolute';
         tooltip.style.zIndex = 9999;
         tooltip.style.backgroundColor = '#fff';
-        tooltip.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
-        tooltip.style.borderRadius = '5px';
-        tooltip.style.padding = '15px';
+        tooltip.style.boxShadow = '0 1px 10px rgba(0, 0, 0, 0.4)';
+        tooltip.style.borderRadius = '3px';
+        tooltip.style.padding = '15px 20px';
         tooltip.style.maxWidth = '350px';
         tooltip.style.display = 'none';
+        tooltip.style.transition = 'all 0.3s ease';
+        tooltip.style.color = '#2d3b45';
+        tooltip.style.border = '1px solid #eee';
+        
+        // Content container
+        const contentContainer = document.createElement('div');
+        contentContainer.className = 'tour-content';
+        contentContainer.style.marginBottom = '15px';
+        tooltip.appendChild(contentContainer);
         
         // Progress indicator
         const progressContainer = document.createElement('div');
         progressContainer.className = 'progress-container';
-        progressContainer.style.display = 'flex';
-        progressContainer.style.justifyContent = 'center';
         progressContainer.style.margin = '10px 0';
-        
         tooltip.appendChild(progressContainer);
         
         // Navigation buttons
@@ -96,12 +146,14 @@ class GuidedTour {
         this.prevButton = document.createElement('button');
         this.prevButton.textContent = 'Previous';
         this.prevButton.className = 'btn btn-sm btn-outline-secondary';
+        this.prevButton.style.marginRight = '5px';
         this.prevButton.addEventListener('click', this.prev);
         
         // Next button
         this.nextButton = document.createElement('button');
         this.nextButton.textContent = 'Next';
         this.nextButton.className = 'btn btn-sm btn-primary';
+        this.nextButton.style.minWidth = '80px';
         this.nextButton.addEventListener('click', this.next);
         
         // Skip button
@@ -110,9 +162,14 @@ class GuidedTour {
         this.skipButton.className = 'btn btn-sm btn-link';
         this.skipButton.addEventListener('click', this.end);
         
+        // Button container for navigation
+        const navButtonsContainer = document.createElement('div');
+        navButtonsContainer.style.display = 'flex';
+        
         buttonsContainer.appendChild(this.skipButton);
-        buttonsContainer.appendChild(this.prevButton);
-        buttonsContainer.appendChild(this.nextButton);
+        navButtonsContainer.appendChild(this.prevButton);
+        navButtonsContainer.appendChild(this.nextButton);
+        buttonsContainer.appendChild(navButtonsContainer);
         
         tooltip.appendChild(buttonsContainer);
         
@@ -124,25 +181,35 @@ class GuidedTour {
         const progressContainer = this.tooltipElement.querySelector('.progress-container');
         progressContainer.innerHTML = '';
         
+        // Simple progress bullets (intro.js style)
+        const bulletsContainer = document.createElement('div');
+        bulletsContainer.style.display = 'flex';
+        bulletsContainer.style.justifyContent = 'center';
+        bulletsContainer.style.marginTop = '15px';
+        
         for (let i = 0; i < this.steps.length; i++) {
-            const dot = document.createElement('div');
-            dot.style.width = '8px';
-            dot.style.height = '8px';
-            dot.style.borderRadius = '50%';
-            dot.style.margin = '0 3px';
+            const bullet = document.createElement('div');
+            bullet.style.width = '8px';
+            bullet.style.height = '8px';
+            bullet.style.borderRadius = '50%';
+            bullet.style.margin = '0 3px';
+            bullet.style.transition = 'all 0.2s ease';
             
             if (i === this.currentStep) {
-                dot.style.backgroundColor = '#28a745';
-                dot.style.width = '10px';
-                dot.style.height = '10px';
+                bullet.style.backgroundColor = '#1a73e8';
+                bullet.style.width = '10px';
+                bullet.style.height = '10px';
+                bullet.style.transform = 'scale(1.2)';
             } else if (i < this.currentStep) {
-                dot.style.backgroundColor = '#6c757d';
+                bullet.style.backgroundColor = '#8bb4f7';
             } else {
-                dot.style.backgroundColor = '#dee2e6';
+                bullet.style.backgroundColor = '#ddd';
             }
             
-            progressContainer.appendChild(dot);
+            bulletsContainer.appendChild(bullet);
         }
+        
+        progressContainer.appendChild(bulletsContainer);
     }
     
     positionTooltip() {
@@ -153,6 +220,33 @@ class GuidedTour {
         if (!targetElement) {
             console.warn(`Element not found: ${elementSelector}`);
             return;
+        }
+        
+        // Handle special welcome step positioning
+        if (step.isWelcomeStep) {
+            // Position the tooltip at the top center of the page (intro.js style)
+            this.tooltipElement.style.width = '450px'; // Wider tooltip for welcome message
+            this.tooltipElement.style.top = '100px';
+            this.tooltipElement.style.left = '50%';
+            this.tooltipElement.style.transform = 'translateX(-50%)';
+            this.tooltipElement.style.boxShadow = '0 3px 15px rgba(0, 0, 0, 0.3)';
+            this.tooltipElement.style.borderRadius = '5px';
+            this.tooltipElement.style.padding = '20px';
+            this.tooltipElement.style.textAlign = 'center';
+            this.tooltipElement.style.maxWidth = '550px';
+            
+            // Clear any previous highlights
+            this.removeHighlight();
+            
+            return;
+        } else {
+            // Reset tooltip styles to default for non-welcome steps
+            this.tooltipElement.style.width = '350px';
+            this.tooltipElement.style.transform = '';
+            this.tooltipElement.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+            this.tooltipElement.style.borderRadius = '5px';
+            this.tooltipElement.style.padding = '15px';
+            this.tooltipElement.style.textAlign = '';
         }
         
         // Highlight the element with stronger visual cue
@@ -194,6 +288,10 @@ class GuidedTour {
             case 'right':
                 top = elementRect.top + (elementRect.height / 2) - (tooltipRect.height / 2);
                 left = elementRect.right + 10;
+                break;
+            case 'center':
+                top = window.innerHeight / 2 - tooltipRect.height / 2;
+                left = window.innerWidth / 2 - tooltipRect.width / 2;
                 break;
         }
         
@@ -291,8 +389,11 @@ class GuidedTour {
         // Store current highlighted element
         this.highlightedElement = element;
         
-        // Dim previous elements
-        this.dimPreviousElements();
+        // Skip highlighting for welcome step
+        const step = this.steps[this.currentStep];
+        if (step.isWelcomeStep) {
+            return;
+        }
         
         // Special handling for floating-action-menu
         const isFloatingMenu = element.classList.contains('floating-action-menu');
@@ -309,18 +410,21 @@ class GuidedTour {
             return; // Exit early, don't create the highlight div
         }
         
-        // For all other elements, proceed with normal highlighting
+        // For all other elements, proceed with normal highlighting (intro.js style)
+        // but without dimming the background
         const rect = element.getBoundingClientRect();
         const highlight = document.createElement('div');
         highlight.className = this.highlightClass;
         highlight.style.position = 'fixed';
-        highlight.style.top = (rect.top - 4) + 'px';
-        highlight.style.left = (rect.left - 4) + 'px';
-        highlight.style.width = (rect.width + 8) + 'px';
-        highlight.style.height = (rect.height + 8) + 'px';
+        highlight.style.top = (rect.top - 5) + 'px';
+        highlight.style.left = (rect.left - 5) + 'px';
+        highlight.style.width = (rect.width + 10) + 'px';
+        highlight.style.height = (rect.height + 10) + 'px';
         highlight.style.zIndex = 9991;
         highlight.style.pointerEvents = 'none';
         highlight.style.borderRadius = '4px';
+        highlight.style.boxShadow = '0 0 0 3px rgba(26, 115, 232, 0.5)';
+        highlight.style.transition = 'all 0.3s ease-out';
         
         // Special handling for quick access menu
         if (element.classList.contains('main-button') || element.closest('.floating-action-menu')) {
@@ -378,53 +482,102 @@ class GuidedTour {
         }
     }
     
-    renderStep() {
+    showCurrentStep() {
         const step = this.steps[this.currentStep];
-        if (!step) return;
         
-        // Update content
-        const contentContainer = this.tooltipElement.querySelector('.tour-content') || document.createElement('div');
-        if (!this.tooltipElement.contains(contentContainer)) {
-            contentContainer.className = 'tour-content';
-            this.tooltipElement.insertBefore(contentContainer, this.tooltipElement.querySelector('.progress-container'));
+        if (!step) {
+            console.error('No step found at index', this.currentStep);
+            return;
         }
         
-        let content = '';
-        if (step.title) {
-            content += `<h5 style="margin-top: 0;">${step.title}</h5>`;
-        }
-        content += `<p style="margin-bottom: 0;">${step.content}</p>`;
+        // Get the content container
+        const contentContainer = this.tooltipElement.querySelector('.tour-content');
+        contentContainer.innerHTML = '';
         
-        // Add navigation instructions for first step
+        // Create header with step count (intro.js style)
+        const header = document.createElement('div');
+        header.style.borderBottom = '1px solid #eee';
+        header.style.paddingBottom = '10px';
+        header.style.marginBottom = '10px';
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.style.alignItems = 'center';
+        contentContainer.appendChild(header);
+        
+        // Step count badge (intro.js style)
+        if (!step.isWelcomeStep) {
+            const stepCount = document.createElement('span');
+            stepCount.textContent = `${this.currentStep + 1}/${this.steps.length}`;
+            stepCount.style.backgroundColor = '#1a73e8';
+            stepCount.style.color = 'white';
+            stepCount.style.padding = '1px 6px';
+            stepCount.style.fontSize = '12px';
+            stepCount.style.borderRadius = '10px';
+            header.appendChild(stepCount);
+        }
+        
+        // Create title
+        const title = document.createElement('h5');
+        if (step.isWelcomeStep) {
+            // Add icon for welcome step
+            const icon = document.createElement('div');
+            icon.innerHTML = '<i class="fa fa-magic" style="font-size: 40px; color: #1a73e8; margin-bottom: 15px;"></i>';
+            contentContainer.appendChild(icon);
+            
+            title.style.fontSize = '22px';
+            title.style.marginBottom = '15px';
+            title.style.width = '100%';
+            title.style.textAlign = 'center';
+            header.style.justifyContent = 'center';
+        }
+        
+        title.textContent = step.title;
+        title.style.marginTop = '0';
+        title.style.color = '#222';
+        title.style.fontWeight = '500';
+        header.appendChild(title);
+        
+        // Create content
+        const content = document.createElement('p');
+        content.textContent = step.content;
+        content.style.marginBottom = '10px';
+        content.style.color = '#495057';
+        content.style.lineHeight = '1.5';
+        contentContainer.appendChild(content);
+        
+        // Change button text based on step (intro.js style)
         if (this.currentStep === 0) {
-            content += `
-                <div class="nav-instructions">
-                    <p class="text-muted mt-2" style="font-size: 12px; border-top: 1px solid #eee; padding-top: 10px; margin-top: 10px;">
-                        <i class="fa fa-info-circle"></i> <strong>Navigation Tips:</strong><br>
-                        • Click <strong>Next</strong> or press <strong>→</strong> key to continue<br>
-                        • Click <strong>Previous</strong> or press <strong>←</strong> key to go back<br>
-                        • Press <strong>ESC</strong> to exit the tour at any time
-                    </p>
-                </div>
-            `;
+            this.prevButton.style.display = 'none';
+        } else {
+            this.prevButton.style.display = 'inline-block';
         }
-        
-        contentContainer.innerHTML = content;
-        
-        // Update buttons
-        this.prevButton.disabled = this.currentStep === 0;
         
         if (this.currentStep === this.steps.length - 1) {
-            this.nextButton.textContent = 'Finish';
+            this.nextButton.textContent = 'Done ✓';
+            this.nextButton.className = 'introjs-button introjs-donebutton';
+            this.nextButton.style.backgroundColor = '#1a73e8';
+            this.nextButton.style.color = 'white';
         } else {
-            this.nextButton.textContent = 'Next';
+            this.nextButton.textContent = 'Next →';
+            this.nextButton.className = 'introjs-button introjs-nextbutton';
+            this.nextButton.style.backgroundColor = '#1a73e8';
+            this.nextButton.style.color = 'white';
         }
         
-        // Update progress
-        this.updateProgress();
+        this.prevButton.textContent = '← Back';
+        this.prevButton.className = 'introjs-button introjs-prevbutton';
+        this.skipButton.textContent = 'Skip';
+        this.skipButton.className = 'introjs-button introjs-skipbutton';
         
-        // Position tooltip
+        // Update the tooltip positioning
         this.positionTooltip();
+        
+        // Update progress indicator
+        this.updateProgress();
+    }
+    
+    renderStep() {
+        this.showCurrentStep();
     }
     
     goToStep(index) {
@@ -447,6 +600,15 @@ class GuidedTour {
         this.currentStep = 0;
         this.overlay.style.display = 'block';
         this.tooltipElement.style.display = 'block';
+        
+        // Add a subtle entrance animation
+        this.tooltipElement.style.opacity = '0';
+        this.tooltipElement.style.transform = 'translateY(-20px)';
+        
+        setTimeout(() => {
+            this.tooltipElement.style.opacity = '1';
+            this.tooltipElement.style.transform = 'translateY(0)';
+        }, 50);
         
         this.renderStep();
         
@@ -507,10 +669,11 @@ class GuidedTour {
 // MWPD Dashboard Tour Steps
 const dashboardTourSteps = [
     {
-        element: '.navbar-brand',
-        title: 'Welcome to MWPD',
-        content: 'This is the Migrant Workers Protection Division Filing System. Let\'s take a quick tour!',
-        position: 'bottom'
+        element: 'body',
+        title: 'Welcome to MWPD Filing System',
+        content: 'This interactive guide will walk you through the main features of the Migrant Workers Protection Division Filing System. We will highlight key components you will need to work efficiently in the system. Press "Next →" to begin!',
+        position: 'center',
+        isWelcomeStep: true
     },
     {
         element: '.sidebar',
@@ -695,36 +858,74 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Export the tour instances
-const mwpdTours = {
-    dashboard: dashboardTourSteps,
-    directHire: directHireTourSteps,
-    govToGov: govToGovTourSteps,
-    balikManggagawa: balikManggagawaTourSteps,
+// Initialize appropriate tour based on current page
+function initTour(tourName) {
+    const tourCompleted = localStorage.getItem('mwpdTourCompleted') === 'true';
+    const tourShown = localStorage.getItem('mwpdTourShown') === 'true';
     
-    // Initialize appropriate tour based on current page
-    initTour: function(tourName) {
-        let steps = [];
-        
-        switch(tourName) {
-            case 'dashboard':
-                steps = this.dashboard;
-                break;
-            case 'directHire':
-                steps = this.directHire;
-                break;
-            case 'govToGov':
-                steps = this.govToGov;
-                break;
-            case 'balikManggagawa':
-                steps = this.balikManggagawa;
-                break;
-            default:
-                steps = this.dashboard;
-        }
-        
-        return new GuidedTour({
-            steps: steps
-        });
+    // Check if we should start the tour automatically
+    if (tourCompleted || tourShown) {
+        console.log('Tour already completed or shown.');
+        return;
     }
+    
+    localStorage.setItem('mwpdTourShown', 'true');
+    
+    let tourSteps = [];
+    
+    switch (tourName) {
+        case 'dashboard':
+            tourSteps = dashboardTourSteps;
+            break;
+        case 'directHire':
+            tourSteps = directHireTourSteps;
+            break;
+        case 'govToGov':
+            tourSteps = govToGovTourSteps;
+            break;
+        case 'balikManggagawa':
+            tourSteps = balikManggagawaTourSteps;
+            break;
+        default:
+            return;
+    }
+    
+    // Create and start the tour
+    const tour = new GuidedTour({ 
+        steps: tourSteps,
+        onComplete: () => {
+            localStorage.setItem('mwpdTourCompleted', 'true');
+            
+            // Show completion message
+            const completionMessage = document.createElement('div');
+            completionMessage.style.position = 'fixed';
+            completionMessage.style.top = '20px';
+            completionMessage.style.left = '50%';
+            completionMessage.style.transform = 'translateX(-50%)';
+            completionMessage.style.backgroundColor = '#28a745';
+            completionMessage.style.color = 'white';
+            completionMessage.style.padding = '10px 20px';
+            completionMessage.style.borderRadius = '4px';
+            completionMessage.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            completionMessage.style.zIndex = '9999';
+            completionMessage.style.textAlign = 'center';
+            completionMessage.innerHTML = '<i class="fa fa-check-circle"></i> Tour completed! You can restart it anytime from the help menu.';
+            
+            document.body.appendChild(completionMessage);
+            
+            setTimeout(() => {
+                completionMessage.style.opacity = '0';
+                completionMessage.style.transition = 'opacity 0.5s ease';
+                
+                setTimeout(() => {
+                    document.body.removeChild(completionMessage);
+                }, 500);
+            }, 3000);
+        }
+    });
+    
+    // Start with a little delay
+    setTimeout(() => {
+        tour.start();
+    }, 1000);
 };

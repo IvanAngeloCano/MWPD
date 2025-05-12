@@ -1,58 +1,16 @@
 <?php
 include 'session.php';
 require_once 'connection.php';
-require_once 'includes/blacklist_checker.php';
-require_once 'blacklist_check.php'; // Added this line to include the checkBlacklist function
 
 // Initialize variables
 $error_message = '';
 $success_message = '';
-$show_blacklist_modal = false;
-$blacklist_data = [];
-$override_blacklist_check = isset($_POST['override_blacklist_check']) && $_POST['override_blacklist_check'] === 'true';
-
-// Check if we need to show blacklist warning modal on page load
-if (isset($_SESSION['show_blacklist_modal']) && $_SESSION['show_blacklist_modal']) {
-    $show_blacklist_modal = true;
-    $blacklist_data = $_SESSION['blacklist_data'] ?? [];
-    
-    // Clear the session flag
-    $_SESSION['show_blacklist_modal'] = false;
-    unset($_SESSION['blacklist_data']);
-}
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Get name for blacklist check
+        // Get name
         $name = $_POST['name'] ?? '';
-        
-        // Only do server-side blacklist check if not overridden by real-time check
-        if (!$override_blacklist_check) {
-            // Check for blacklist match
-            $blacklist_record = checkBlacklist($pdo, $name);
-            if ($blacklist_record) {
-                // Log that blacklist was found during server check
-                error_log("Blacklist found during server check for: $name");
-                
-                // Person is blacklisted - set up modal display
-                $_SESSION['show_blacklist_modal'] = true;
-                $_SESSION['blacklist_data'] = [
-                    'name' => $blacklist_record['name'] ?? $name,
-                    'reason' => $blacklist_record['reason'] ?? 'Not specified',
-                    'details' => $blacklist_record['details'] ?? '',
-                    'reference_no' => $blacklist_record['reference_no'] ?? '',
-                    'date_added' => $blacklist_record['date_added'] ?? 'Unknown'
-                ];
-                
-                // Redirect back to the form to show the modal
-                header("Location: gov_to_gov_add.php?blacklisted=true");
-                exit;
-            }
-        } else {
-            // Log that blacklist check was overridden
-            error_log("Blacklist check was overridden by client-side check for: $name");
-        }
         
         // Validate required fields
         $required_fields = ['control_no', 'name', 'destination'];
@@ -418,10 +376,7 @@ include '_head.php';
         <?php endif; ?>
         
         <?php
-        // Display blacklist warning if it exists
-        if (!empty($blacklist_warning)) {
-            echo $blacklist_warning;
-        }
+        <!-- Blacklist warning removed as requested -->
         ?>
         
         <!-- Form Section -->
@@ -490,231 +445,24 @@ include '_head.php';
   </div>
 </div>
 
-<!-- Custom Blacklist Popup (not using Bootstrap modal) -->
-<div id="customBlacklistPopup" class="custom-popup">
-  <div class="custom-popup-content">
-    <div class="custom-popup-header">
-      <h3><i class="fa fa-exclamation-triangle"></i> WARNING: BLACKLISTED PERSON</h3>
-      <span class="custom-popup-close" onclick="closeCustomPopup()">&times;</span>
-    </div>
-    <div class="custom-popup-body">
-      <div class="blacklist-warning">
-        <p><strong>WARNING:</strong> This person is <strong>BLACKLISTED</strong>!</p>
-        <p>Processing this individual may violate POEA regulations.</p>
-      </div>
-      <div id="blacklistMatchDetails" class="blacklist-details">
-        <!-- Blacklist match details will be populated here -->
-      </div>
-    </div>
-    <div class="custom-popup-footer">
-      <button onclick="closeCustomPopup()" class="popup-btn popup-btn-cancel">Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- CSS for custom popup -->
-<style>
-.custom-popup {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
-}
-
-.custom-popup-content {
-  position: relative;
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 0;
-  border: 1px solid #888;
-  width: 500px;
-  max-width: 90%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-  animation: slideDown 0.4s;
-}
-
-@keyframes slideDown {
-  from {transform: translateY(-300px); opacity: 0}
-  to {transform: translateY(0); opacity: 1}
-}
-
-.custom-popup-header {
-  padding: 12px 16px;
-  background-color: #dc3545;
-  color: white;
-  border-bottom: 1px solid #dee2e6;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.custom-popup-header h3 {
-  margin: 0;
-  font-size: 1.25rem;
-}
-
-.custom-popup-close {
-  color: white;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.custom-popup-body {
-  padding: 20px;
-}
-
-.blacklist-warning {
-  padding: 10px;
-  margin-bottom: 15px;
-  border-left: 5px solid #721c24;
-  background-color: #f8f9fa;
-}
-
-.blacklist-details {
-  background-color: #fff;
-  padding: 15px;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-}
-
-.blacklist-match-item {
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-}
-
-.blacklist-match-item:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-}
-
-.custom-popup-footer {
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-top: 1px solid #dee2e6;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  text-align: right;
-}
-
-.popup-btn {
-  padding: 8px 16px;
-  font-size: 14px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.popup-btn-cancel {
-  background-color: #6c757d;
-  color: white;
-  border: none;
-}
-</style>
-
 <script>
-  // Function to close the custom popup
-  function closeCustomPopup() {
-    document.getElementById('customBlacklistPopup').style.display = 'none';
-  }
-  
-  // Set up real-time blacklist checking
   document.addEventListener('DOMContentLoaded', function() {
-    const nameField = document.querySelector('input[name="name"]');
-    const form = document.querySelector('form.record-form');
-    const overrideField = document.createElement('input');
+    const nameInput = document.getElementById('name');
+    const submitButton = document.getElementById('submitButton');
     
-    // Create hidden field for blacklist check override
-    overrideField.type = 'hidden';
-    overrideField.name = 'override_blacklist_check';
-    overrideField.value = 'false';
-    form.appendChild(overrideField);
-    
-    // Add status indicator next to name field
-    if (nameField) {
-      const wrapper = nameField.parentNode;
-      const statusDiv = document.createElement('div');
-      statusDiv.id = 'checkStatus';
-      statusDiv.classList.add('input-status');
-      wrapper.classList.add('input-with-status');
-      wrapper.appendChild(statusDiv);
-      
-      // Function to delay execution (debounce)
-      function debounce(func, wait) {
-        let timeout;
-        return function() {
-          const context = this;
-          const args = arguments;
-          clearTimeout(timeout);
-          timeout = setTimeout(() => func.apply(context, args), wait);
-        };
+    if (nameInput && submitButton) {
+      // Disable submit button initially if name is empty
+      if (nameInput.value.trim() === '') {
+        submitButton.disabled = true;
       }
       
-      // Function to check blacklist
-      const checkBlacklist = debounce(function() {
-        const name = nameField.value.trim();
-        
-        // Don't check if name is too short
-        if (name.length < 5) {
-          statusDiv.innerHTML = '';
-          overrideField.value = 'false';
-          return;
-        }
-        
-        // Show loading indicator using Font Awesome
-        statusDiv.innerHTML = '<i class="fa fa-spinner fa-spin" style="color: #007bff;" title="Checking..."></i>';
-        
-        // Make AJAX call to check blacklist
-        fetch('basic_blacklist_check.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: 'name=' + encodeURIComponent(name)
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Blacklist check response:', data);
-          if (data.blacklisted) {
-            // Found in blacklist - show warning
-            statusDiv.innerHTML = '<i class="fa fa-exclamation-triangle" style="color: #dc3545;" title="Blacklisted"></i>';
-            overrideField.value = 'false'; // Don't override server-side check
-          } else {
-            // Not found in blacklist - show green checkmark
-            statusDiv.innerHTML = '<i class="fa fa-check-circle" style="color: #28a745;" title="Not blacklisted"></i>';
-            overrideField.value = 'true'; // Override server-side check
-          }
-        })
-        .catch(error => {
-          console.error('Error checking blacklist:', error);
-          statusDiv.innerHTML = '';
-          overrideField.value = 'false';
-        });
-      }, 500);
-      
-      // Attach event listeners for real-time blacklist checking
-      // Check on blur (when field loses focus)
-      nameField.addEventListener('blur', checkBlacklist);
-      
-      // Check after typing stops (with delay)
-      nameField.addEventListener('input', function() {
-        // Clear status when typing begins
-        statusDiv.innerHTML = '';
-        overrideField.value = 'false';
-        
-        // Call the debounced function - will execute after typing stops
-        checkBlacklist();
+      // Add event listener for input changes
+      nameInput.addEventListener('input', function() {
+        const name = this.value.trim();
+        submitButton.disabled = (name === '');
       });
     }
   });
-
-  document.addEventListener('DOMContentLoaded', function() {
     // Check if we need to show blacklist warning modal
     <?php if ($show_blacklist_modal && !empty($blacklist_data)): ?>
     // Populate blacklist modal with data from session

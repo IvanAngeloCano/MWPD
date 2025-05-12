@@ -264,14 +264,28 @@ try {
                     echo "<td>" . htmlspecialchars($row['first_name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['middle_name']) . "</td>";
                     
-                    // Debug and display passport number - handle both passport_number and passport_no
+                    // Enhanced passport number display with fallback checking
                     $passport = '';
                     if (isset($row['passport_number']) && !empty($row['passport_number'])) {
                       $passport = $row['passport_number'];
                     } elseif (isset($row['passport_no']) && !empty($row['passport_no'])) {
                       $passport = $row['passport_no'];
+                    } elseif (isset($row['passport']) && !empty($row['passport'])) {
+                      $passport = $row['passport'];
                     }
-                    echo "<td>" . htmlspecialchars($passport) . "</td>";
+                    
+                    // Force passport display from ID if available
+                    if (empty($passport) && $active_tab === 'approved') {
+                      // Try to fetch passport from database
+                      $passport_stmt = $pdo->prepare("SELECT passport_number FROM gov_to_gov WHERE g2g = ?");
+                      $passport_stmt->execute([$row['g2g']]);
+                      $passport_result = $passport_stmt->fetch(PDO::FETCH_ASSOC);
+                      if ($passport_result && !empty($passport_result['passport_number'])) {
+                        $passport = $passport_result['passport_number'];
+                      }
+                    }
+                    
+                    echo "<td data-record-id='".htmlspecialchars($row['g2g'])."'>" . htmlspecialchars($passport) . "</td>";
                     
                     // Debug and display remarks - handle both remarks and status fields
                     // For the approved tab, always show "Approved" as the remarks

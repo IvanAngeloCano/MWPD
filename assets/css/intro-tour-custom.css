@@ -1,0 +1,349 @@
+/**
+ * MWPD Custom Styling for Intro.js
+ * Clean, consistent design with standard sizes
+ */
+
+/* Smaller, more compact tooltip with arrow */
+.introjs-tooltip {
+  font-family: 'Inter', sans-serif;
+  border-radius: 6px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  width: 320px !important;
+  max-width: 320px !important;
+  min-width: 320px !important;
+  border: 1px solid #e6e6e6 !important;
+  background: #ffffff !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+/* Large, clear arrows pointing to highlighted elements */
+.introjs-arrow {
+  display: block !important;
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-style: solid !important;
+  background: none !important;
+}
+
+/* Arrow positions with increased size */
+.introjs-arrow.top {
+  top: -15px !important;
+  left: 50% !important;
+  margin-left: -15px !important;
+  border-width: 0 15px 15px 15px !important;
+  border-color: transparent transparent #ffffff transparent !important;
+  filter: drop-shadow(0px -1px 1px rgba(0,0,0,0.1)) !important;
+}
+
+.introjs-arrow.top:after {
+  content: '' !important;
+  position: absolute !important;
+  top: 2px !important;
+  left: -13px !important;
+  border-width: 0 13px 13px 13px !important;
+  border-style: solid !important;
+  border-color: transparent transparent #ffffff transparent !important;
+}
+
+.introjs-arrow.bottom {
+  bottom: -15px !important;
+  left: 50% !important;
+  margin-left: -15px !important;
+  border-width: 15px 15px 0 15px !important;
+  border-color: #ffffff transparent transparent transparent !important;
+  filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.1)) !important;
+}
+
+.introjs-arrow.right {
+  right: -15px !important;
+  top: 50% !important;
+  margin-top: -15px !important;
+  border-width: 15px 0 15px 15px !important;
+  border-color: transparent transparent transparent #ffffff !important;
+  filter: drop-shadow(1px 0px 1px rgba(0,0,0,0.1)) !important;
+}
+
+.introjs-arrow.left {
+  left: -15px !important;
+  top: 50% !important;
+  margin-top: -15px !important;
+  border-width: 15px 15px 15px 0 !important;
+  border-color: transparent #ffffff transparent transparent !important;
+  filter: drop-shadow(-1px 0px 1px rgba(0,0,0,0.1)) !important;
+}
+
+.introjs-tooltiptext {
+  padding: 15px !important;
+}
+
+/* Completely remove the X button and tooltip header */
+.introjs-tooltipbuttons .introjs-skipbutton,
+.introjs-tooltip .introjs-skipbutton,
+.introjs-tooltip-header .introjs-skipbutton,
+.introjs-skipbutton {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  z-index: -9999 !important;
+}
+
+/* Remove tooltip header completely */
+.introjs-tooltip-header,
+.introjs-tooltip > .introjs-tooltip-header {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Smaller, more compact headings and content */
+.introjs-tooltip h4 {
+  color: #246EE9;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0;
+  position: static;
+}
+
+.introjs-tooltip p {
+  color: #444;
+  line-height: 1.4;
+  font-size: 13px;
+  margin: 0;
+  font-weight: normal;
+}
+
+/* Smaller, more compact button design */
+.introjs-button {
+  text-shadow: none !important;
+  background-image: none !important;
+  background-color: #f5f5f5 !important;
+  border-radius: 4px !important;
+  font-family: 'Inter', sans-serif !important;
+  border: 1px solid #e0e0e0 !important;
+  color: #444 !important;
+  transition: all 0.2s ease !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
+  padding: 6px 12px !important;
+  margin: 0 3px !important;
+  box-shadow: none !important;
+}
+
+.introjs-button:hover {
+  background-color: #eaeaea !important;
+}
+
+.introjs-prevbutton {
+  border-color: #e0e0e0 !important;
+}
+
+.introjs-nextbutton, 
+.introjs-donebutton {
+  background-color: #246EE9 !important;
+  color: white !important;
+  border-color: #246EE9 !important;
+}
+
+.introjs-nextbutton:hover, 
+.introjs-donebutton:hover {
+  background-color: #1d5fcc !important;
+  border-color: #1d5fcc !important;
+}
+
+/* Compact buttons container */
+.introjs-tooltipbuttons {
+  border-top: 1px solid #eee !important;
+  background: #ffffff !important;
+  margin: 0 !important;
+  padding: 10px 15px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+/* Compact progress dots */
+.introjs-bullets {
+  margin: 10px 0 !important;
+}
+
+.introjs-bullets ul {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.introjs-bullets ul li a {
+  background-color: #d8d8d8;
+  width: 6px !important;
+  height: 6px !important;
+  box-shadow: none !important;
+  margin: 0 3px !important;
+  border: none !important;
+}
+
+.introjs-bullets ul li a.active {
+  background-color: #246EE9;
+}
+
+/* Compact progress bar */
+.introjs-progress {
+  background-color: #e8e8e8;
+  height: 3px !important;
+  margin: 10px 0 0 0 !important;
+  border-radius: 0 !important;
+}
+
+.introjs-progressbar {
+  background-color: #246EE9;
+  height: 3px !important;
+  border-radius: 0 !important;
+}
+
+/* Compact welcome step */
+.introjs-tooltip[data-step="0"] {
+  width: 320px !important;
+  max-width: 320px !important;
+  min-width: 320px !important;
+}
+
+.introjs-tooltip[data-step="0"] h4 {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #246EE9;
+}
+
+.introjs-tooltip[data-step="0"] p {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #444;
+}
+
+/* Fix z-index issues */
+.introjs-overlay {
+  opacity: 0.5 !important;
+}
+
+/* Modal specific styling */
+#introjs-tooltip {
+  width: 380px !important;
+  max-width: 380px !important;
+}
+
+/* Custom positioning for Pending Approvals tooltip */
+.pending-approvals-tooltip {
+  top: 240px !important;
+  right: 10px !important;
+  left: auto !important;
+  position: fixed !important;
+  width: 280px !important;
+  max-width: 280px !important;
+  min-width: 280px !important;
+}
+
+/* Position the arrow for this tooltip */
+.pending-approvals-tooltip .introjs-arrow.right {
+  right: -15px !important;
+}
+
+/* Make sure the tooltip shows all content */
+.pending-approvals-tooltip .introjs-tooltiptext {
+  max-height: none !important;
+  overflow: visible !important;
+  padding: 12px !important;
+}
+
+/* Custom positioning for Quick Access Menu tooltip */
+.quick-access-tooltip {
+  bottom: 40px !important;
+  right: 60px !important;
+  left: auto !important;
+  position: fixed !important;
+  width: 280px !important;
+  max-width: 280px !important;
+  min-width: 280px !important;
+}
+
+/* Position the arrow for Quick Access tooltip */
+.quick-access-tooltip .introjs-arrow.right {
+  right: -15px !important;
+}
+
+/* Make sure the quick access tooltip shows all content */
+.quick-access-tooltip .introjs-tooltiptext {
+  max-height: none !important;
+  overflow: visible !important;
+  padding: 12px !important;
+}
+
+/* Bigger arrows for better visibility */
+.introjs-arrow {
+  border-width: 12px !important;
+}
+
+/* Fix positioning of specific tooltips */
+#introjs-tooltip {
+  width: 280px !important;
+  max-width: 280px !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Clean highlight effects */
+.introjs-helperLayer {
+  background-color: transparent !important;
+  border: 2px solid #246EE9 !important;
+  box-shadow: 0 0 0 4px rgba(36, 110, 233, 0.2), 0 0 0 9999px rgba(0, 0, 0, 0.5) !important;
+  border-radius: 4px !important;
+}
+
+/* Ensure correct highlight appearance */
+.introjs-fixParent {
+  opacity: 1 !important;
+  z-index: auto !important;
+}
+
+.introjs-showElement {
+  border: 2px solid #246EE9 !important;
+  box-shadow: 0 0 0 4px rgba(36, 110, 233, 0.2) !important;
+  z-index: 9999 !important;
+}
+
+/* Fix z-index issues with floating actions menu */
+.introjs-fixParent {
+  z-index: 9999 !important;
+}
+
+.introjs-tooltip {
+  z-index: 10000 !important;
+}
+
+/* Animation for tooltips */
+@keyframes introjs-fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.introjs-tooltip {
+  animation: introjs-fadeIn 0.3s ease;
+}
+
+/* Special styling for the notification icon */
+div[data-step-number="4"] .introjs-helperLayer {
+  background: transparent !important;
+}
+
+/* Make tooltips more visible on small screens */
+@media (max-width: 768px) {
+  .introjs-tooltip {
+    min-width: 250px;
+    max-width: 300px;
+  }
+}

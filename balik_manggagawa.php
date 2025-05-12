@@ -567,7 +567,30 @@ include '_head.php';
         <tbody>
           <?php
           try {
-            $stmt = $pdo->query("SELECT bmid, last_name, given_name, middle_name, sex, address, destination, remarks FROM BM ORDER BY bmid");
+            // Check if search parameter exists
+            $search = isset($_GET['search']) ? $_GET['search'] : '';
+            
+            if (!empty($search)) {
+              // Search query with filter
+              $search_term = "%$search%";
+              $query = "SELECT bmid, last_name, given_name, middle_name, sex, address, destination, remarks 
+                      FROM BM 
+                      WHERE 
+                        bmid LIKE ? OR 
+                        last_name LIKE ? OR 
+                        given_name LIKE ? OR 
+                        middle_name LIKE ? OR 
+                        address LIKE ? OR 
+                        destination LIKE ? OR 
+                        remarks LIKE ? 
+                      ORDER BY bmid";
+              $stmt = $pdo->prepare($query);
+              $stmt->execute([$search_term, $search_term, $search_term, $search_term, $search_term, $search_term, $search_term]);
+            } else {
+              // Default query without search filter
+              $stmt = $pdo->query("SELECT bmid, last_name, given_name, middle_name, sex, address, destination, remarks FROM BM ORDER BY bmid");
+            }
+            
             if ($stmt->rowCount() > 0) {
               while ($row = $stmt->fetch()) {
                 echo "<tr>";

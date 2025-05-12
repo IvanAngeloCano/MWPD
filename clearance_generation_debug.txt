@@ -1,0 +1,640 @@
+2025-05-12 14:12:50: Clearance generation script started
+2025-05-12 14:12:50: Direct hire ID: 17
+2025-05-12 14:12:50: Record found: {"id":17,"control_no":"DH-2025-003","name":"Angela Reyes","jobsite":"Singapore","evaluated":"2025-02-01","for_confirmation":"2025-02-03","emailed_to_dhad":"2025-02-04","received_from_dhad":"2025-02-07","evaluator":"Engr. Santos","note":"All documents complete","type":"professional","status":"approved","created_at":"2025-05-02 12:14:22","updated_at":"2025-05-12 19:53:47","submitted_by":null,"approved_by":1,"approved_at":"2025-05-12 19:53:47"}
+2025-05-12 14:12:50: Record approval status: Approved
+2025-05-12 14:12:50: Using template file: Directhireclearance.docx
+2025-05-12 14:12:50: Status is approved - adding signature image
+2025-05-12 14:12:50: Added signature image using signature1_image placeholder
+2025-05-12 14:12:50: Document saved to: temp/Clearance_DH-2025-003_20250512_141250.docx
+2025-05-12 14:12:56: PDF conversion successful
+2025-05-12 14:12:56: Document served without storing in database as requested
+2025-05-12 14:12:56: Cleaned up temporary DOCX file: temp/Clearance_DH-2025-003_20250512_141250.docx
+2025-05-12 15:00:57: Clearance generation script started
+2025-05-12 15:00:57: Direct hire ID: 17
+2025-05-12 15:00:57: Record found: {"id":17,"control_no":"DH-2025-003","name":"Angela Reyes","jobsite":"Singapore","evaluated":"2025-02-01","for_confirmation":"2025-02-03","emailed_to_dhad":"2025-02-04","received_from_dhad":"2025-02-07","evaluator":"Engr. Santos","note":"All documents complete","type":"professional","status":"approved","created_at":"2025-05-02 12:14:22","updated_at":"2025-05-12 19:53:47","submitted_by":null,"approved_by":1,"approved_at":"2025-05-12 19:53:47"}
+2025-05-12 15:00:57: Record approval status: Approved
+2025-05-12 15:00:57: Using template file: Directhireclearance.docx
+2025-05-12 15:00:57: Status is approved - adding signature image
+2025-05-12 15:00:57: Added signature image using signature1_image placeholder
+2025-05-12 15:00:57: Document saved to: temp/Clearance_DH-2025-003_20250512_150057.docx
+2025-05-12 15:01:02: PDF conversion successful
+2025-05-12 15:01:02: Document served without storing in database as requested
+2025-05-12 15:01:02: Cleaned up temporary DOCX file: temp/Clearance_DH-2025-003_20250512_150057.docx
+2025-05-12 15:08:34: Clearance generation script started
+2025-05-12 15:08:34: Direct hire ID: 17
+2025-05-12 15:08:34: Record found: {"id":17,"control_no":"DH-2025-003","name":"Angela Reyes","jobsite":"Singapore","evaluated":"2025-02-01","for_confirmation":"2025-02-03","emailed_to_dhad":"2025-02-04","received_from_dhad":"2025-02-07","evaluator":"Engr. Santos","note":"All documents complete","type":"professional","status":"approved","created_at":"2025-05-02 12:14:22","updated_at":"2025-05-12 19:53:47","submitted_by":null,"approved_by":1,"approved_at":"2025-05-12 19:53:47"}
+2025-05-12 15:08:34: Record approval status: Approved
+2025-05-12 15:08:34: Using template file: Directhireclearance.docx
+2025-05-12 15:08:34: Status is approved - adding signature image
+2025-05-12 15:08:34: Added signature image using signature1_image placeholder
+2025-05-12 15:08:34: Document saved to: temp/Clearance_DH-2025-003_20250512_150834.docx
+2025-05-12 15:08:38: PDF conversion successful
+2025-05-12 15:08:38: Document served without storing in database as requested
+2025-05-12 15:08:38: Cleaned up temporary DOCX file: temp/Clearance_DH-2025-003_20250512_150834.docx
+2025-05-12 15:18:35: Clearance generation script started
+2025-05-12 15:18:35: Direct hire ID: 17
+2025-05-12 15:18:35: Record found: {"id":17,"control_no":"DH-2025-003","name":"Angela Reyes","jobsite":"Singapore","evaluated":"2025-02-01","for_confirmation":"2025-02-03","emailed_to_dhad":"2025-02-04","received_from_dhad":"2025-02-07","evaluator":"Engr. Santos","note":"All documents complete","type":"professional","status":"approved","created_at":"2025-05-02 12:14:22","updated_at":"2025-05-12 19:53:47","submitted_by":null,"approved_by":1,"approved_at":"2025-05-12 19:53:47"}
+2025-05-12 15:18:35: Record approval status: Approved
+2025-05-12 15:18:35: Using template file: Directhireclearance.docx
+2025-05-12 15:18:35: Status is approved - adding signature image
+2025-05-12 15:18:35: Added signature image using signature1_image placeholder
+2025-05-12 15:18:35: Document saved to: temp/Clearance_DH-2025-003_20250512_151835.docx
+2025-05-12 15:18:39: PDF conversion successful
+2025-05-12 15:18:39: Document served without storing in database as requested
+2025-05-12 15:18:39: Cleaned up temporary DOCX file: temp/Clearance_DH-2025-003_20250512_151835.docx
+2025-05-12 15:18:55: Clearance generation script started
+2025-05-12 15:18:55: Direct hire ID: 33
+2025-05-12 15:18:55: Record found: {"id":33,"control_no":"xzxXXXX","name":"X","jobsite":"X","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 20:56:39","updated_at":"2025-05-12 20:56:39","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 15:18:55: Record approval status: Not approved
+2025-05-12 15:18:55: Using template file: Directhireclearance.docx
+2025-05-12 15:18:55: Status is not approved - no signature
+2025-05-12 15:18:55: Document saved to: temp/Clearance_xzxXXXX_20250512_151855.docx
+2025-05-12 15:18:59: PDF conversion successful
+2025-05-12 15:18:59: Document served without storing in database as requested
+2025-05-12 15:18:59: Cleaned up temporary DOCX file: temp/Clearance_xzxXXXX_20250512_151855.docx
+2025-05-12 15:19:01: Clearance generation script started
+2025-05-12 15:19:01: Direct hire ID: 33
+2025-05-12 15:19:01: Record found: {"id":33,"control_no":"xzxXXXX","name":"X","jobsite":"X","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 20:56:39","updated_at":"2025-05-12 20:56:39","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 15:19:01: Record approval status: Not approved
+2025-05-12 15:19:01: Using template file: Directhireclearance.docx
+2025-05-12 15:19:01: Status is not approved - no signature
+2025-05-12 15:19:01: Document saved to: temp/Clearance_xzxXXXX_20250512_151901.docx
+2025-05-12 15:19:07: PDF conversion successful
+2025-05-12 15:19:07: Document served without storing in database as requested
+2025-05-12 15:19:07: Cleaned up temporary DOCX file: temp/Clearance_xzxXXXX_20250512_151901.docx
+2025-05-12 15:19:11: Clearance generation script started
+2025-05-12 15:19:11: Direct hire ID: 33
+2025-05-12 15:19:11: Record found: {"id":33,"control_no":"xzxXXXX","name":"X","jobsite":"X","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 20:56:39","updated_at":"2025-05-12 20:56:39","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 15:19:11: Record approval status: Not approved
+2025-05-12 15:19:11: Using template file: Directhireclearance.docx
+2025-05-12 15:19:11: Status is not approved - no signature
+2025-05-12 15:19:11: Document saved to: temp/Clearance_xzxXXXX_20250512_151911.docx
+2025-05-12 15:19:18: PDF conversion successful
+2025-05-12 15:19:18: Document served without storing in database as requested
+2025-05-12 15:19:18: Cleaned up temporary DOCX file: temp/Clearance_xzxXXXX_20250512_151911.docx
+2025-05-12 15:19:21: Clearance generation script started
+2025-05-12 15:19:21: Direct hire ID: 33
+2025-05-12 15:19:21: Record found: {"id":33,"control_no":"xzxXXXX","name":"X","jobsite":"X","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 20:56:39","updated_at":"2025-05-12 21:19:18","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 15:19:21: Record approval status: Not approved
+2025-05-12 15:19:21: Using template file: Directhireclearance.docx
+2025-05-12 15:19:21: Status is not approved - no signature
+2025-05-12 15:19:21: Document saved to: temp/Clearance_xzxXXXX_20250512_151921.docx
+2025-05-12 15:19:26: PDF conversion successful
+2025-05-12 15:19:26: Document served without storing in database as requested
+2025-05-12 15:19:26: Cleaned up temporary DOCX file: temp/Clearance_xzxXXXX_20250512_151921.docx
+2025-05-12 15:22:39: Clearance generation script started
+2025-05-12 15:22:39: Direct hire ID: 17
+2025-05-12 15:22:39: Record found: {"id":17,"control_no":"DH-2025-003","name":"Angela Reyes","jobsite":"Singapore","evaluated":"2025-02-01","for_confirmation":"2025-02-03","emailed_to_dhad":"2025-02-04","received_from_dhad":"2025-02-07","evaluator":"Engr. Santos","note":"All documents complete","type":"professional","status":"approved","created_at":"2025-05-02 12:14:22","updated_at":"2025-05-12 19:53:47","submitted_by":null,"approved_by":1,"approved_at":"2025-05-12 19:53:47"}
+2025-05-12 15:22:39: Record approval status: Approved
+2025-05-12 15:22:39: Using template file: Directhireclearance.docx
+2025-05-12 15:22:39: Status is approved - adding signature image
+2025-05-12 15:22:39: Added signature image using signature1_image placeholder
+2025-05-12 15:22:39: Document saved to: temp/Clearance_DH-2025-003_20250512_152239.docx
+2025-05-12 15:22:39: Serving DOCX file directly without PDF conversion
+2025-05-12 15:22:39: Redirecting to download handler: download_docx.php?file=temp%2FClearance_DH-2025-003_20250512_152239.docx
+2025-05-12 15:36:07: Clearance generation script started
+2025-05-12 15:36:07: Direct hire ID: 37
+2025-05-12 15:36:07: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 15:36:07: Record approval status: Not approved
+2025-05-12 15:36:07: Using template file: Directhireclearance.docx
+2025-05-12 15:36:07: Status is not approved - no signature
+2025-05-12 15:36:07: Document saved to: temp/Clearance_dsdddds_20250512_153607.docx
+2025-05-12 15:36:07: Serving DOCX file directly without PDF conversion
+2025-05-12 15:36:07: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6821f947e982b.jpg
+2025-05-12 15:37:56: Clearance generation script started
+2025-05-12 15:37:56: Direct hire ID: 37
+2025-05-12 15:37:56: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 15:37:56: Record approval status: Not approved
+2025-05-12 15:37:56: Using template file: Directhireclearance.docx
+2025-05-12 15:37:56: Status is not approved - no signature
+2025-05-12 15:37:56: Document saved to: temp/Clearance_dsdddds_20250512_153756.docx
+2025-05-12 15:37:56: Serving DOCX file directly without PDF conversion
+2025-05-12 15:37:56: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6821f9b4d25bc.jpg
+2025-05-12 15:38:17: Clearance generation script started
+2025-05-12 15:38:17: Direct hire ID: 37
+2025-05-12 15:38:17: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 15:38:17: Record approval status: Not approved
+2025-05-12 15:38:17: Using template file: Directhireclearance.docx
+2025-05-12 15:38:17: Status is not approved - no signature
+2025-05-12 15:38:17: Document saved to: temp/Clearance_dsdddds_20250512_153817.docx
+2025-05-12 15:38:17: Serving DOCX file directly without PDF conversion
+2025-05-12 15:38:17: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6821f9c9873d9.jpg
+2025-05-12 15:50:34: Clearance generation script started
+2025-05-12 15:50:34: Direct hire ID: 37
+2025-05-12 15:50:34: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 15:50:34: Record approval status: Not approved
+2025-05-12 15:50:34: Using template file: Directhireclearance.docx
+2025-05-12 15:50:34: Status is not approved - no signature
+2025-05-12 15:50:34: Document saved to: temp/Clearance_dsdddds_20250512_155034.docx
+2025-05-12 15:50:34: Serving DOCX file directly without PDF conversion
+2025-05-12 15:50:34: Bypassing image insertion to ensure document generation works
+2025-05-12 15:50:34: Generated HTML with auto-open script for document
+2025-05-12 15:59:59: Clearance generation script started
+2025-05-12 15:59:59: Direct hire ID: 37
+2025-05-12 15:59:59: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 15:59:59: Record approval status: Not approved
+2025-05-12 15:59:59: Using template file: Directhireclearance.docx
+2025-05-12 15:59:59: Status is not approved - no signature
+2025-05-12 15:59:59: Document saved to: temp/Clearance_dsdddds_20250512_155959.docx
+2025-05-12 15:59:59: Serving DOCX file directly without PDF conversion
+2025-05-12 15:59:59: Bypassing image insertion to ensure document generation works
+2025-05-12 15:59:59: Generated HTML with auto-open script for document
+2025-05-12 16:06:16: Clearance generation script started
+2025-05-12 16:06:16: Direct hire ID: 37
+2025-05-12 16:06:16: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:06:16: Record approval status: Not approved
+2025-05-12 16:06:16: Using template file: Directhireclearance.docx
+2025-05-12 16:06:17: Status is not approved - no signature
+2025-05-12 16:06:17: Document saved to: temp/Clearance_dsdddds_20250512_160617.docx
+2025-05-12 16:06:17: Serving DOCX file directly without PDF conversion
+2025-05-12 16:06:17: Bypassing image insertion to ensure document generation works
+2025-05-12 16:06:17: Generated HTML with auto-open script for document
+2025-05-12 16:11:09: Clearance generation script started
+2025-05-12 16:11:09: Direct hire ID: 37
+2025-05-12 16:11:09: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:11:09: Record approval status: Not approved
+2025-05-12 16:11:09: Using template file: Directhireclearance.docx
+2025-05-12 16:11:09: Status is not approved - no signature
+2025-05-12 16:11:09: Document saved to: temp/Clearance_dsdddds_20250512_161109.docx
+2025-05-12 16:11:09: Serving DOCX file directly without PDF conversion
+2025-05-12 16:11:09: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6822017dd1825.jpg
+2025-05-12 16:12:01: Clearance generation script started
+2025-05-12 16:12:01: Direct hire ID: 37
+2025-05-12 16:12:01: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:12:01: Record approval status: Not approved
+2025-05-12 16:12:01: Using template file: Directhireclearance.docx
+2025-05-12 16:12:01: Status is not approved - no signature
+2025-05-12 16:12:01: Document saved to: temp/Clearance_dsdddds_20250512_161201.docx
+2025-05-12 16:12:01: Serving DOCX file directly without PDF conversion
+2025-05-12 16:12:01: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_682201b1b86ab.jpg
+2025-05-12 16:12:27: Clearance generation script started
+2025-05-12 16:12:27: Direct hire ID: 37
+2025-05-12 16:12:27: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:12:27: Record approval status: Not approved
+2025-05-12 16:12:27: Using template file: Directhireclearance.docx
+2025-05-12 16:12:27: Status is not approved - no signature
+2025-05-12 16:12:27: Document saved to: temp/Clearance_dsdddds_20250512_161227.docx
+2025-05-12 16:12:27: Serving DOCX file directly without PDF conversion
+2025-05-12 16:12:27: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_682201cb67e37.jpg
+2025-05-12 16:13:46: Clearance generation script started
+2025-05-12 16:13:46: Direct hire ID: 37
+2025-05-12 16:13:46: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:13:47: Record approval status: Not approved
+2025-05-12 16:13:47: Using template file: Directhireclearance.docx
+2025-05-12 16:13:47: Status is not approved - no signature
+2025-05-12 16:13:47: Document saved to: temp/Clearance_dsdddds_20250512_161347.docx
+2025-05-12 16:13:47: Serving DOCX file directly without PDF conversion
+2025-05-12 16:13:47: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6822021b15976.jpg
+2025-05-12 16:14:24: Clearance generation script started
+2025-05-12 16:14:24: Direct hire ID: 37
+2025-05-12 16:14:24: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:14:24: Record approval status: Not approved
+2025-05-12 16:14:24: Using template file: Directhireclearance.docx
+2025-05-12 16:14:24: Status is not approved - no signature
+2025-05-12 16:14:24: Document saved to: temp/Clearance_dsdddds_20250512_161424.docx
+2025-05-12 16:14:24: Serving DOCX file directly without PDF conversion
+2025-05-12 16:14:24: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6822024058a6c.jpg
+2025-05-12 16:14:24: Clearance generation script started
+2025-05-12 16:14:24: Direct hire ID: 37
+2025-05-12 16:14:24: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:14:24: Record approval status: Not approved
+2025-05-12 16:14:24: Using template file: Directhireclearance.docx
+2025-05-12 16:14:24: Status is not approved - no signature
+2025-05-12 16:14:24: Document saved to: temp/Clearance_dsdddds_20250512_161424.docx
+2025-05-12 16:14:24: Serving DOCX file directly without PDF conversion
+2025-05-12 16:14:25: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6822024101ad9.jpg
+2025-05-12 16:14:25: Clearance generation script started
+2025-05-12 16:14:25: Direct hire ID: 37
+2025-05-12 16:14:25: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:14:25: Record approval status: Not approved
+2025-05-12 16:14:25: Using template file: Directhireclearance.docx
+2025-05-12 16:14:25: Status is not approved - no signature
+2025-05-12 16:14:25: Document saved to: temp/Clearance_dsdddds_20250512_161425.docx
+2025-05-12 16:14:25: Serving DOCX file directly without PDF conversion
+2025-05-12 16:14:25: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6822024135309.jpg
+2025-05-12 16:14:25: Clearance generation script started
+2025-05-12 16:14:25: Direct hire ID: 37
+2025-05-12 16:14:25: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:14:25: Record approval status: Not approved
+2025-05-12 16:14:25: Using template file: Directhireclearance.docx
+2025-05-12 16:14:25: Status is not approved - no signature
+2025-05-12 16:14:25: Document saved to: temp/Clearance_dsdddds_20250512_161425.docx
+2025-05-12 16:14:25: Serving DOCX file directly without PDF conversion
+2025-05-12 16:14:25: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_68220241509c6.jpg
+2025-05-12 16:14:25: Clearance generation script started
+2025-05-12 16:14:25: Direct hire ID: 37
+2025-05-12 16:14:25: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:14:25: Record approval status: Not approved
+2025-05-12 16:14:25: Using template file: Directhireclearance.docx
+2025-05-12 16:14:25: Status is not approved - no signature
+2025-05-12 16:14:25: Document saved to: temp/Clearance_dsdddds_20250512_161425.docx
+2025-05-12 16:14:25: Serving DOCX file directly without PDF conversion
+2025-05-12 16:14:25: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_68220241ce7a5.jpg
+2025-05-12 16:15:04: Clearance generation script started
+2025-05-12 16:15:04: Direct hire ID: 37
+2025-05-12 16:15:04: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:15:04: Record approval status: Not approved
+2025-05-12 16:15:04: Using template file: Directhireclearance.docx
+2025-05-12 16:15:04: Status is not approved - no signature
+2025-05-12 16:15:05: Document saved to: temp/Clearance_dsdddds_20250512_161504.docx
+2025-05-12 16:15:05: Serving DOCX file directly without PDF conversion
+2025-05-12 16:15:05: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_682202690ba0a.jpg
+2025-05-12 16:15:26: Clearance generation script started
+2025-05-12 16:15:26: Direct hire ID: 37
+2025-05-12 16:15:26: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:15:26: Record approval status: Not approved
+2025-05-12 16:15:26: Using template file: Directhireclearance.docx
+2025-05-12 16:15:26: Status is not approved - no signature
+2025-05-12 16:15:26: Document saved to: temp/Clearance_dsdddds_20250512_161526.docx
+2025-05-12 16:15:26: Serving DOCX file directly without PDF conversion
+2025-05-12 16:15:26: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6822027e8c085.jpg
+2025-05-12 16:15:30: Clearance generation script started
+2025-05-12 16:15:30: Direct hire ID: 37
+2025-05-12 16:15:30: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:15:30: Record approval status: Not approved
+2025-05-12 16:15:30: Using template file: Directhireclearance.docx
+2025-05-12 16:15:30: Status is not approved - no signature
+2025-05-12 16:15:30: Document saved to: temp/Clearance_dsdddds_20250512_161530.docx
+2025-05-12 16:15:30: Serving DOCX file directly without PDF conversion
+2025-05-12 16:15:30: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6822028297cdb.jpg
+2025-05-12 16:17:10: Clearance generation script started
+2025-05-12 16:17:10: Direct hire ID: 37
+2025-05-12 16:17:10: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:17:10: Record approval status: Not approved
+2025-05-12 16:17:10: Using template file: Directhireclearance.docx
+2025-05-12 16:17:10: Status is not approved - no signature
+2025-05-12 16:17:10: Document saved to: temp/Clearance_dsdddds_20250512_161710.docx
+2025-05-12 16:17:10: Serving DOCX file directly without PDF conversion
+2025-05-12 16:17:10: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_682202e62f1db.jpg
+2025-05-12 16:17:16: Clearance generation script started
+2025-05-12 16:17:16: Direct hire ID: 37
+2025-05-12 16:17:16: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:17:16: Record approval status: Not approved
+2025-05-12 16:17:16: Using template file: Directhireclearance.docx
+2025-05-12 16:17:16: Status is not approved - no signature
+2025-05-12 16:17:16: Document saved to: temp/Clearance_dsdddds_20250512_161716.docx
+2025-05-12 16:17:16: Serving DOCX file directly without PDF conversion
+2025-05-12 16:17:16: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_682202ec52f61.jpg
+2025-05-12 16:17:20: Clearance generation script started
+2025-05-12 16:17:20: Direct hire ID: 37
+2025-05-12 16:17:20: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:17:20: Record approval status: Not approved
+2025-05-12 16:17:20: Using template file: Directhireclearance.docx
+2025-05-12 16:17:20: Status is not approved - no signature
+2025-05-12 16:17:20: Document saved to: temp/Clearance_dsdddds_20250512_161720.docx
+2025-05-12 16:17:20: Serving DOCX file directly without PDF conversion
+2025-05-12 16:17:20: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_682202f01ccf8.jpg
+2025-05-12 16:17:34: Basic clearance generation script started
+2025-05-12 16:17:34: Direct hire ID: 0
+2025-05-12 16:17:34: Record not found
+2025-05-12 16:18:19: Basic clearance generation script started
+2025-05-12 16:18:19: Direct hire ID: 37
+2025-05-12 16:18:19: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:18:19: Record approval status: Not approved
+2025-05-12 16:18:20: Added applicant photo to document
+2025-05-12 16:18:20: Document saved to: temp/Clearance_dsdddds_20250512_161820.docx
+2025-05-12 16:19:17: Clearance generation script started
+2025-05-12 16:19:17: Direct hire ID: 37
+2025-05-12 16:19:17: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:19:17: Record approval status: Not approved
+2025-05-12 16:19:17: Using template file: Directhireclearance.docx
+2025-05-12 16:19:17: Status is not approved - no signature
+2025-05-12 16:19:17: Document saved to: temp/Clearance_dsdddds_20250512_161917.docx
+2025-05-12 16:19:17: Serving DOCX file directly without PDF conversion
+2025-05-12 16:19:17: Processing image for document, saved temp file: C:\WINDOWS\TEMP/img_6822036533729.jpg
+2025-05-12 16:22:02: New clearance generation script started
+2025-05-12 16:22:02: Direct hire ID: 0
+2025-05-12 16:22:02: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:09: New clearance generation script started
+2025-05-12 16:22:09: Direct hire ID: 37
+2025-05-12 16:22:09: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:12: New clearance generation script started
+2025-05-12 16:22:12: Direct hire ID: 37
+2025-05-12 16:22:12: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:12: New clearance generation script started
+2025-05-12 16:22:12: Direct hire ID: 37
+2025-05-12 16:22:12: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:12: New clearance generation script started
+2025-05-12 16:22:12: Direct hire ID: 37
+2025-05-12 16:22:12: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:12: New clearance generation script started
+2025-05-12 16:22:12: Direct hire ID: 37
+2025-05-12 16:22:12: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:12: New clearance generation script started
+2025-05-12 16:22:12: Direct hire ID: 37
+2025-05-12 16:22:12: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:13: New clearance generation script started
+2025-05-12 16:22:13: Direct hire ID: 37
+2025-05-12 16:22:13: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:13: New clearance generation script started
+2025-05-12 16:22:13: Direct hire ID: 37
+2025-05-12 16:22:13: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:13: New clearance generation script started
+2025-05-12 16:22:13: Direct hire ID: 37
+2025-05-12 16:22:13: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:13: New clearance generation script started
+2025-05-12 16:22:13: Direct hire ID: 37
+2025-05-12 16:22:13: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:13: New clearance generation script started
+2025-05-12 16:22:13: Direct hire ID: 37
+2025-05-12 16:22:13: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:13: New clearance generation script started
+2025-05-12 16:22:13: Direct hire ID: 37
+2025-05-12 16:22:13: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:13: New clearance generation script started
+2025-05-12 16:22:13: Direct hire ID: 37
+2025-05-12 16:22:13: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:14: New clearance generation script started
+2025-05-12 16:22:14: Direct hire ID: 37
+2025-05-12 16:22:14: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:14: New clearance generation script started
+2025-05-12 16:22:14: Direct hire ID: 37
+2025-05-12 16:22:14: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:14: New clearance generation script started
+2025-05-12 16:22:14: Direct hire ID: 37
+2025-05-12 16:22:14: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:14: New clearance generation script started
+2025-05-12 16:22:14: Direct hire ID: 37
+2025-05-12 16:22:14: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:14: New clearance generation script started
+2025-05-12 16:22:14: Direct hire ID: 37
+2025-05-12 16:22:14: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:14: New clearance generation script started
+2025-05-12 16:22:14: Direct hire ID: 37
+2025-05-12 16:22:14: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:14: New clearance generation script started
+2025-05-12 16:22:14: Direct hire ID: 37
+2025-05-12 16:22:14: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:15: New clearance generation script started
+2025-05-12 16:22:15: Direct hire ID: 37
+2025-05-12 16:22:15: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:15: New clearance generation script started
+2025-05-12 16:22:15: Direct hire ID: 37
+2025-05-12 16:22:15: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:15: New clearance generation script started
+2025-05-12 16:22:15: Direct hire ID: 37
+2025-05-12 16:22:15: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:15: New clearance generation script started
+2025-05-12 16:22:15: Direct hire ID: 37
+2025-05-12 16:22:15: Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'mwpd.direct' doesn't exist
+2025-05-12 16:22:37: New clearance generation script started
+2025-05-12 16:22:37: Direct hire ID: 37
+2025-05-12 16:22:37: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:22:37: Record approval status: Not approved
+2025-05-12 16:22:37: Added applicant photo to document
+2025-05-12 16:22:37: Document saved to: temp/Clearance_dsdddds_20250512_162237.docx
+2025-05-12 16:24:00: Clearance generation script started
+2025-05-12 16:24:00: Direct hire ID: 37
+2025-05-12 16:24:00: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:24:00: Record approval status: Not approved
+2025-05-12 16:24:00: Added applicant photo to document
+2025-05-12 16:24:00: Document saved to: temp/Clearance_dsdddds_20250512_162400.docx
+2025-05-12 16:25:39: Clearance generation script started
+2025-05-12 16:25:39: Direct hire ID: 37
+2025-05-12 16:25:39: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:25:39: Record approval status: Not approved
+2025-05-12 16:25:39: Added applicant photo to document
+2025-05-12 16:25:39: Document saved to: temp/Clearance_dsdddds_20250512_162539.docx
+2025-05-12 16:32:16: Template-based clearance generation script started
+2025-05-12 16:32:16: Direct hire ID: 0
+2025-05-12 16:32:16: Record not found
+2025-05-12 16:32:22: Template-based clearance generation script started
+2025-05-12 16:32:22: Direct hire ID: 37
+2025-05-12 16:32:22: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:32:22: Record approval status: Not approved
+2025-05-12 16:32:22: Using template file: Directhireclearance.docx
+2025-05-12 16:32:22: Status is not approved - no signature
+2025-05-12 16:32:22: Document saved to: temp/Clearance_dsdddds_20250512_163222.docx
+2025-05-12 16:32:22: Serving DOCX file directly without PDF conversion
+2025-05-12 16:32:22: Processing applicant image
+2025-05-12 16:32:22: Saved image to temporary file: C:\WINDOWS\TEMP/img_68220676d46eb.jpg
+2025-05-12 16:32:22: Successfully added image to placeholder: image
+2025-05-12 16:32:22: Saved document with applicant image using template approach
+2025-05-12 16:33:43: Template-based clearance generation script started
+2025-05-12 16:33:43: Direct hire ID: 37
+2025-05-12 16:33:44: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:33:44: Record approval status: Not approved
+2025-05-12 16:33:44: Using template file: Directhireclearance.docx
+2025-05-12 16:33:44: Status is not approved - no signature
+2025-05-12 16:33:44: Document saved to: temp/Clearance_dsdddds_20250512_163344.docx
+2025-05-12 16:33:44: Serving DOCX file directly without PDF conversion
+2025-05-12 16:33:44: Processing applicant image
+2025-05-12 16:33:44: Saved image to temporary file: C:\WINDOWS\TEMP/img_682206c882ed7.jpg
+2025-05-12 16:33:44: Successfully added image to placeholder: image
+2025-05-12 16:33:45: Saved document with applicant image using template approach
+2025-05-12 16:33:58: Template-based clearance generation script started
+2025-05-12 16:33:58: Direct hire ID: 37
+2025-05-12 16:33:58: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:33:58: Record approval status: Not approved
+2025-05-12 16:33:58: Using template file: Directhireclearance.docx
+2025-05-12 16:33:58: Status is not approved - no signature
+2025-05-12 16:33:58: Document saved to: temp/Clearance_dsdddds_20250512_163358.docx
+2025-05-12 16:33:58: Serving DOCX file directly without PDF conversion
+2025-05-12 16:33:58: Processing applicant image
+2025-05-12 16:33:58: Saved image to temporary file: C:\WINDOWS\TEMP/img_682206d697221.jpg
+2025-05-12 16:33:58: Successfully added image to placeholder: image
+2025-05-12 16:33:58: Saved document with applicant image using template approach
+2025-05-12 16:33:58: Template-based clearance generation script started
+2025-05-12 16:33:58: Direct hire ID: 37
+2025-05-12 16:33:58: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":null,"created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 21:34:41","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:33:58: Record approval status: Not approved
+2025-05-12 16:33:58: Using template file: Directhireclearance.docx
+2025-05-12 16:33:58: Status is not approved - no signature
+2025-05-12 16:33:58: Document saved to: temp/Clearance_dsdddds_20250512_163358.docx
+2025-05-12 16:33:58: Serving DOCX file directly without PDF conversion
+2025-05-12 16:33:58: Processing applicant image
+2025-05-12 16:33:58: Saved image to temporary file: C:\WINDOWS\TEMP/img_682206d6ecd7e.jpg
+2025-05-12 16:33:59: Successfully added image to placeholder: image
+2025-05-12 16:33:59: Saved document with applicant image using template approach
+2025-05-12 16:34:40: Clearance generation script started
+2025-05-12 16:34:40: Direct hire ID: 37
+2025-05-12 16:34:40: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:34:40: Record approval status: Not approved
+2025-05-12 16:34:40: Added applicant photo to document
+2025-05-12 16:34:40: Document saved to: temp/Clearance_dsdddds_20250512_163440.docx
+2025-05-12 16:37:26: Direct clearance generation started (no template/ZipArchive)
+2025-05-12 16:37:26: Direct hire ID: 37
+2025-05-12 16:37:26: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:37:26: Record approval status: Not approved
+2025-05-12 16:37:27: Saved image to temporary file: C:\WINDOWS\TEMP/img_682207a7036d5.jpg
+2025-05-12 16:37:27: Added applicant photo
+2025-05-12 16:37:27: Document saved to: temp/Clearance_dsdddds_20250512_163727.docx
+2025-05-12 16:40:37: Fix clearance generation started
+2025-05-12 16:40:37: Direct hire ID: 37
+2025-05-12 16:40:37: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:40:37: Record approval status: Not approved
+2025-05-12 16:40:37: Template copied to: temp/Clearance_dsdddds_20250512_164037.docx
+2025-05-12 16:40:37: Status is not approved - no signature
+2025-05-12 16:40:37: Document saved to: temp/Clearance_dsdddds_20250512_164037.docx
+2025-05-12 16:40:37: Processing applicant image
+2025-05-12 16:40:37: Saved image to temporary file: C:\WINDOWS\TEMP/img_68220865e6666.jpg
+2025-05-12 16:40:37: Successfully added image to placeholder: image
+2025-05-12 16:40:38: Saved document with applicant image
+2025-05-12 16:45:05: Fix clearance generation started
+2025-05-12 16:45:05: Direct hire ID: 37
+2025-05-12 16:45:05: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:45:05: Record approval status: Not approved
+2025-05-12 16:45:05: Template copied to: temp/Clearance_dsdddds_20250512_164505.docx
+2025-05-12 16:45:05: Status is not approved - no signature
+2025-05-12 16:45:06: Document saved to: temp/Clearance_dsdddds_20250512_164505.docx
+2025-05-12 16:45:06: Processing applicant image - using advanced placeholder detection method
+2025-05-12 16:45:06: Saved image to temporary file: C:\WINDOWS\TEMP/img_682209720949a.jpg
+2025-05-12 16:45:06: Using direct ZipArchive approach for image insertion
+2025-05-12 16:45:06: Extracted document to find image placeholders
+2025-05-12 16:45:06: Copied image to media directory: C:\WINDOWS\TEMP/docx_extract_6822097209c6f/word/media/applicant_photo_20250512164506.jpg
+2025-05-12 16:45:07: Created new document with applicant image
+2025-05-12 16:45:07: Temporary extract directory should be cleaned up
+2025-05-12 16:48:12: Fix clearance generation started
+2025-05-12 16:48:12: Direct hire ID: 37
+2025-05-12 16:48:12: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:48:12: Record approval status: Not approved
+2025-05-12 16:48:12: Template copied to: temp/Clearance_dsdddds_20250512_164812.docx
+2025-05-12 16:48:12: Status is not approved - no signature
+2025-05-12 16:48:13: Document saved to: temp/Clearance_dsdddds_20250512_164812.docx
+2025-05-12 16:48:13: Processing applicant image - using advanced placeholder detection method
+2025-05-12 16:48:13: Saved image to temporary file: C:\WINDOWS\TEMP/img_68220a2d929f5.jpg
+2025-05-12 16:48:13: Using direct ZipArchive approach for image insertion
+2025-05-12 16:48:13: Extracted document to find image placeholders
+2025-05-12 16:48:13: Copied image to media directory: C:\WINDOWS\TEMP/docx_extract_68220a2d92fd2/word/media/applicant_photo_20250512164813.jpg
+2025-05-12 16:48:14: Created new document with applicant image
+2025-05-12 16:48:14: Temporary extract directory should be cleaned up
+2025-05-12 16:49:42: Fix clearance generation started
+2025-05-12 16:49:42: Direct hire ID: 37
+2025-05-12 16:49:42: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:49:42: Record approval status: Not approved
+2025-05-12 16:49:42: Template copied to: temp/Clearance_dsdddds_20250512_164942.docx
+2025-05-12 16:49:42: Status is not approved - no signature
+2025-05-12 16:49:42: Document saved to: temp/Clearance_dsdddds_20250512_164942.docx
+2025-05-12 16:49:42: Processing applicant image - using advanced placeholder detection method
+2025-05-12 16:49:42: Saved image to temporary file: C:\WINDOWS\TEMP/img_68220a86bba6e.jpg
+2025-05-12 16:49:42: Using direct ZipArchive approach for image insertion
+2025-05-12 16:49:42: Extracted document to find image placeholders
+2025-05-12 16:49:42: Copied image to media directory: C:\WINDOWS\TEMP/docx_extract_68220a86bd93c/word/media/applicant_photo_20250512164942.jpg
+2025-05-12 16:49:43: Created new document with applicant image
+2025-05-12 16:49:43: Temporary extract directory should be cleaned up
+2025-05-12 16:49:49: Fix clearance generation started
+2025-05-12 16:49:49: Direct hire ID: 37
+2025-05-12 16:49:49: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:49:49: Record approval status: Not approved
+2025-05-12 16:49:49: Template copied to: temp/Clearance_dsdddds_20250512_164949.docx
+2025-05-12 16:49:49: Status is not approved - no signature
+2025-05-12 16:49:49: Document saved to: temp/Clearance_dsdddds_20250512_164949.docx
+2025-05-12 16:49:49: Processing applicant image - using advanced placeholder detection method
+2025-05-12 16:49:49: Saved image to temporary file: C:\WINDOWS\TEMP/img_68220a8dabd0b.jpg
+2025-05-12 16:49:49: Using direct ZipArchive approach for image insertion
+2025-05-12 16:49:49: Extracted document to find image placeholders
+2025-05-12 16:49:49: Copied image to media directory: C:\WINDOWS\TEMP/docx_extract_68220a8dac38a/word/media/applicant_photo_20250512164949.jpg
+2025-05-12 16:49:49: Created new document with applicant image
+2025-05-12 16:49:49: Temporary extract directory should be cleaned up
+2025-05-12 16:53:17: Fix clearance generation started
+2025-05-12 16:53:17: Direct hire ID: 37
+2025-05-12 16:53:17: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:53:17: Record approval status: Not approved
+2025-05-12 16:53:17: Template copied to: temp/Clearance_dsdddds_20250512_165317.docx
+2025-05-12 16:53:17: Status is not approved - no signature
+2025-05-12 16:53:17: Document saved to: temp/Clearance_dsdddds_20250512_165317.docx
+2025-05-12 16:53:17: Processing applicant image - using advanced placeholder detection method
+2025-05-12 16:53:17: Attempting to retrieve image for direct_hire_id: 37
+2025-05-12 16:53:17: Image found in database - ID: 59, Type: image/png
+2025-05-12 16:53:17: Image content exists and is not empty - size: 61397 bytes
+2025-05-12 16:53:17: Saved image to temporary file: C:\WINDOWS\TEMP/img_68220b5da748b.jpg
+2025-05-12 16:53:17: Using direct ZipArchive approach for image insertion
+2025-05-12 16:53:17: Extracted document to find image placeholders
+2025-05-12 16:53:17: Copied image to media directory: C:\WINDOWS\TEMP/docx_extract_68220b5da7b3d/word/media/applicant_photo_20250512165317.jpg
+2025-05-12 16:53:17: Created new document with applicant image
+2025-05-12 16:53:17: Temporary extract directory should be cleaned up
+2025-05-12 16:57:17: Fix clearance generation started
+2025-05-12 16:57:17: Direct hire ID: 37
+2025-05-12 16:57:17: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 16:57:17: Record approval status: Not approved
+2025-05-12 16:57:17: Template copied to: temp/Clearance_dsdddds_20250512_165717.docx
+2025-05-12 16:57:17: Status is not approved - no signature
+2025-05-12 16:57:17: Document saved to: temp/Clearance_dsdddds_20250512_165717.docx
+2025-05-12 16:57:17: Processing applicant image - using advanced placeholder detection method
+2025-05-12 16:57:17: Attempting to retrieve image for direct_hire_id: 37
+2025-05-12 16:57:17: Image found in database - ID: 59, Type: image/png
+2025-05-12 16:57:17: Image content exists and is not empty - size: 61397 bytes
+2025-05-12 16:57:17: Saved image to temporary file: C:\WINDOWS\TEMP/img_68220c4d8b013.jpg
+2025-05-12 16:57:17: Using direct ZipArchive approach for image insertion
+2025-05-12 16:57:17: Extracted document to find image placeholders
+2025-05-12 16:57:17: Copied image to media directory: C:\WINDOWS\TEMP/docx_extract_68220c4d8b71a/word/media/applicant_photo_20250512165717.jpg
+2025-05-12 16:57:17: Created new document with applicant image
+2025-05-12 16:57:17: Temporary extract directory should be cleaned up
+2025-05-12 16:57:17: Document exists and will be served directly
+2025-05-12 17:02:55: No-Zip clearance generation started
+2025-05-12 17:02:55: Direct hire ID: 37
+2025-05-12 17:02:55: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 17:02:55: Record approval status: Not approved
+2025-05-12 17:02:55: Attempting to add applicant image
+2025-05-12 17:02:55: Found image in database with ID: 59
+2025-05-12 17:02:55: Saved image to temporary file: C:\WINDOWS\TEMP/img_68220d9fcde61.jpg
+2025-05-12 17:02:55: Successfully added applicant image to document
+2025-05-12 17:02:55: Saving document to: temp/clearance_dsdddds_20250512_170255.docx
+2025-05-12 17:02:56: Document created successfully
+2025-05-12 17:02:56: Document exists and will be served directly
+2025-05-12 17:12:31: Direct clearance generation started (no template/ZipArchive)
+2025-05-12 17:12:31: Direct hire ID: 37
+2025-05-12 17:12:31: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 17:12:31: Record approval status: Not approved
+2025-05-12 17:12:31: Saved image to temporary file: C:\WINDOWS\TEMP/img_68220fdf79423.jpg
+2025-05-12 17:12:31: Added applicant photo
+2025-05-12 17:12:31: Document saved to: temp/Clearance_dsdddds_20250512_171231.docx
+2025-05-12 17:14:18: Template-based clearance generation script started
+2025-05-12 17:14:18: Direct hire ID: 37
+2025-05-12 17:14:18: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 17:14:18: Record approval status: Not approved
+2025-05-12 17:14:18: Using template file: Directhireclearance.docx
+2025-05-12 17:14:18: Status is not approved - no signature
+2025-05-12 17:14:18: Document saved to: temp/Clearance_dsdddds_20250512_171418.docx
+2025-05-12 17:14:18: Serving DOCX file directly without PDF conversion
+2025-05-12 17:14:18: Processing applicant image
+2025-05-12 17:14:19: Saved image to temporary file: C:\WINDOWS\TEMP/img_6822104b00f9b.jpg
+2025-05-12 17:14:19: Successfully added image to placeholder: image
+2025-05-12 17:14:19: Saved document with applicant image using template approach
+2025-05-12 17:15:07: Template-based clearance generation script started
+2025-05-12 17:15:07: Direct hire ID: 37
+2025-05-12 17:15:07: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 17:15:07: Record approval status: Not approved
+2025-05-12 17:15:07: Using template file: Directhireclearance.docx
+2025-05-12 17:15:07: Status is not approved - no signature
+2025-05-12 17:15:07: Document saved to: temp/Clearance_dsdddds_20250512_171507.docx
+2025-05-12 17:15:07: Serving DOCX file directly without PDF conversion
+2025-05-12 17:15:07: Processing applicant image
+2025-05-12 17:15:07: Saved image to temporary file: C:\WINDOWS\TEMP/img_6822107b3e0c2.jpg
+2025-05-12 17:15:07: Successfully added image to placeholder: image
+2025-05-12 17:15:07: Saved document with applicant image using template approach
+2025-05-12 17:15:13: Direct clearance generation started (no template/ZipArchive)
+2025-05-12 17:15:13: Direct hire ID: 37
+2025-05-12 17:15:13: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 17:15:13: Record approval status: Not approved
+2025-05-12 17:15:13: Saved image to temporary file: C:\WINDOWS\TEMP/img_68221081c4793.jpg
+2025-05-12 17:15:13: Added applicant photo
+2025-05-12 17:15:13: Document saved to: temp/Clearance_dsdddds_20250512_171513.docx
+2025-05-12 17:21:49: Fix clearance generation started
+2025-05-12 17:21:49: Direct hire ID: 37
+2025-05-12 17:21:49: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 17:21:49: Record approval status: Not approved
+2025-05-12 17:21:49: Template copied to: temp/Clearance_dsdddds_20250512_172149.docx
+2025-05-12 17:21:49: Status is not approved - no signature
+2025-05-12 17:21:50: Document saved to: temp/Clearance_dsdddds_20250512_172149.docx
+2025-05-12 17:21:50: Processing applicant image - using advanced placeholder detection method
+2025-05-12 17:21:50: Saved image to temporary file: C:\WINDOWS\TEMP/img_6822120e16bea.jpg
+2025-05-12 17:21:50: Using direct ZipArchive approach for image insertion
+2025-05-12 17:21:50: Extracted document to find image placeholders
+2025-05-12 17:21:50: Copied image to media directory: C:\WINDOWS\TEMP/docx_extract_6822120e18203/word/media/applicant_photo_20250512172150.jpg
+2025-05-12 17:21:50: Created new document with applicant image
+2025-05-12 17:21:50: Temporary extract directory should be cleaned up
+2025-05-12 17:24:23: Fix clearance generation started
+2025-05-12 17:24:23: Direct hire ID: 37
+2025-05-12 17:24:23: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 17:24:23: Record approval status: Not approved
+2025-05-12 17:24:23: Template copied to: temp/Clearance_dsdddds_20250512_172423.docx
+2025-05-12 17:24:23: Status is not approved - no signature
+2025-05-12 17:24:23: Document saved to: temp/Clearance_dsdddds_20250512_172423.docx
+2025-05-12 17:24:23: Processing applicant image - using advanced placeholder detection method
+2025-05-12 17:24:23: Saved image to temporary file: C:\WINDOWS\TEMP/img_682212a7d4b19.jpg
+2025-05-12 17:24:23: Using direct ZipArchive approach for image insertion
+2025-05-12 17:24:23: Extracted document to find image placeholders
+2025-05-12 17:24:23: Copied image to media directory: C:\WINDOWS\TEMP/docx_extract_682212a7d519b/word/media/applicant_photo_20250512172423.jpg
+2025-05-12 17:24:24: Created new document with applicant image
+2025-05-12 17:24:24: Temporary extract directory should be cleaned up

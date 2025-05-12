@@ -12,17 +12,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  <!-- Intro.js CSS and JS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/minified/introjs.min.css">
+  <link rel="stylesheet" href="assets/css/intro-tour-custom.css">
+  <script src="https://cdn.jsdelivr.net/npm/intro.js@7.2.0/minified/intro.min.js"></script>
+
   <!-- Guided Tour CSS -->
   <link rel="stylesheet" href="assets/css/guided-tour.css">
   
   <!-- Notification Fix CSS -->
   <link rel="stylesheet" href="assets/css/notification-fix.css">
+  <link rel="stylesheet" href="assets/css/notification-loading.css">
+  <link rel="stylesheet" href="assets/css/notification-read-fix.css">
   
   <!-- Floating Menu Fix CSS -->
   <link rel="stylesheet" href="assets/css/floating-menu-fix.css">
   
+  <!-- Dashboard Scroll Fix CSS -->
+  <link rel="stylesheet" href="assets/css/dashboard-scroll-fix.css">
+  
   <!-- Quick Access Menu Fix CSS -->
   <link rel="stylesheet" href="assets/css/quick-access-fix.css">
+  
+  <!-- Document Auto-Opener -->
+  <script src="assets/js/auto-open-document.js"></script>
   
   <!-- FullCalendar CSS -->
   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css' rel='stylesheet' />
@@ -33,33 +46,5 @@
   <script src="assets/js/session_notifications.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   
-  <!-- Set variables for blacklist button -->
-  <?php if (isset($_SESSION['user_id']) && isset($_SESSION['role'])): ?>
-  <script>
-    // Set variables for the blacklist button
-    var userRole = '<?php echo $_SESSION['role']; ?>';
-    
-    // Check if blacklist table exists and get count of pending entries
-    <?php
-    $pendingCount = 0;
-    if (strtolower($_SESSION['role']) === 'regional director') {
-        try {
-            // First check if the blacklist table exists
-            $stmt = $pdo->query("SHOW TABLES LIKE 'blacklist'");
-            if ($stmt->rowCount() > 0) {
-                // Table exists, get pending count
-                $stmt = $pdo->query("SELECT COUNT(*) FROM blacklist WHERE status = 'pending'");
-                $pendingCount = $stmt->fetchColumn();
-            }
-        } catch (Exception $e) {
-            // Silently fail, don't show count
-            $pendingCount = 0;
-        }
-    }
-    ?>
-    var pendingBlacklistCount = <?php echo $pendingCount; ?>;
-  </script>
-  
-  <!-- Blacklist button has been removed -->
-  <?php endif; ?>
+  <!-- All blacklist functionality has been completely removed -->
 </head>

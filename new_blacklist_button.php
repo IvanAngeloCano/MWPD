@@ -62,21 +62,7 @@ register_shutdown_function(function() {
     <script data-floating-menu type='text/template'>";
 });
 
-// Get unprocessed blacklist count for Regional Directors
-$blacklist_count = 0;
-if (isset($_SESSION['role']) && strtolower($_SESSION['role']) === 'regional director') {
-    try {
-        // Check if blacklist table exists
-        $stmt = $pdo->query("SHOW TABLES LIKE 'blacklist'");
-        if ($stmt->rowCount() > 0) {
-            // Count pending blacklist entries
-            $stmt = $pdo->query("SELECT COUNT(*) FROM blacklist WHERE status = 'pending'");
-            $blacklist_count = $stmt->fetchColumn();
-        }
-    } catch (PDOException $e) {
-        // Silently handle error
-    }
-}
+// No blacklist functionality - removed as requested
 ?>
 
 <!-- Floating Action Menu Styles -->
@@ -154,17 +140,7 @@ if (isset($_SESSION['role']) && strtolower($_SESSION['role']) === 'regional dire
     background-color: rgba(40, 167, 69, 0.9);
 }
 
-#blacklistLogsButton {
-    background-color: rgba(220, 53, 69, 0.7); /* Red with opacity */
-    color: white;
-    text-decoration: none;
-}
-
-#blacklistLogsButton:hover {
-    background-color: rgba(220, 53, 69, 0.9);
-    color: white;
-    text-decoration: none;
-}
+/* Blacklist button removed as requested */
 
 #reportGenButton {
     background-color: rgba(23, 162, 184, 0.7); /* Teal with opacity */
@@ -174,30 +150,14 @@ if (isset($_SESSION['role']) && strtolower($_SESSION['role']) === 'regional dire
     background-color: rgba(23, 162, 184, 0.9);
 }
 
-.blacklist-badge {
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    background-color: #dc3545;
-    color: white;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-weight: bold;
-}
+/* Blacklist badge removed as requested */
 </style>
 
 <!-- Floating Action Menu HTML -->
 <div class="floating-action-menu">
     <div class="main-button">
         <i class="fa fa-bars"></i>
-        <?php if ($blacklist_count > 0): ?>
-        <span class="blacklist-badge"><?= $blacklist_count ?></span>
-        <?php endif; ?>
+        <!-- Blacklist badge removed -->
     </div>
     <ul class="menu-options">
         <li class="menu-option" data-toggle="tooltip" title="Activity Logs">
@@ -205,11 +165,7 @@ if (isset($_SESSION['role']) && strtolower($_SESSION['role']) === 'regional dire
                 <i class="fa fa-history"></i>
             </div>
         </li>
-        <li class="menu-option" data-toggle="tooltip" title="Blacklist Management">
-            <a href="blacklist.php" class="option-button" id="blacklistLogsButton">
-                <i class="fa fa-ban"></i>
-            </a>
-        </li>
+        <!-- Blacklist management button removed -->
         <li class="menu-option" data-toggle="tooltip" title="Generate Reports">
             <div class="option-button" id="reportGenButton">
                 <i class="fa fa-file-export"></i>

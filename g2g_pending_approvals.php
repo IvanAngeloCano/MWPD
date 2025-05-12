@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_
                         }
                         
                         $message = "Gov-to-Gov record for $applicant_name has been approved";
-                        $link = "gov_to_gov.php?tab=endorsed";
+                        $link = "gov_to_gov_view.php?id={$details['g2g_id']}";
                         
                         if (function_exists('addNotification')) {
                             addNotification($submitter_id, $message, $details['g2g_id'], 'gov_to_gov', $link);
@@ -159,10 +159,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && isset($_
                     }
                     
                     $message = "Gov-to-Gov record for $applicant_name has been rejected. Reason: $remarks";
-                    $link = "gov_to_gov.php";
+                    // Link directly to the rejected record view page using the retrieved g2g_id
+                    $link = "gov_to_gov_view.php?id=$g2g_id";
                     
                     if (function_exists('addNotification')) {
-                        addNotification($submitter_id, $message, $approval_details['g2g_id'], 'gov_to_gov', $link);
+                        // Use the actual g2g_id we retrieved from the database
+                        addNotification($submitter_id, $message, $g2g_id, 'gov_to_gov', $link);
                     }
                 } catch (Exception $e) {
                     // Log notification error but continue with the process

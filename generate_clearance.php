@@ -7,9 +7,9 @@ include 'session.php';
 require_once 'connection.php';
 require_once 'vendor/autoload.php';
 
-use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
-use PhpOffice\PhpWord\Settings;
+use PhpOffice\PhpWord\Style\Font;
 
 // Function to log debugging information
 function logDebug($message) {
@@ -44,61 +44,137 @@ try {
     $isApproved = ($record['status'] === 'approved');
     logDebug("Record approval status: " . ($isApproved ? 'Approved' : 'Not approved'));
 
-    // Create the clearance document with template
-    $templateFile = 'Directhireclearance.docx';
-    
-    if (!file_exists($templateFile)) {
-        logDebug("Template file not found: $templateFile");
-        die("Error: Template file not found.");
-    }
-    
-    logDebug("Using template file: $templateFile");
-    $template = new TemplateProcessor($templateFile);
-    
     // Format dates properly
     $evaluated_formatted = !empty($record['evaluated']) ? date('F j, Y', strtotime($record['evaluated'])) : 'Not set';
     $for_confirmation_formatted = !empty($record['for_confirmation']) ? date('F j, Y', strtotime($record['for_confirmation'])) : 'Not set';
     $emailed_to_dhad_formatted = !empty($record['emailed_to_dhad']) ? date('F j, Y', strtotime($record['emailed_to_dhad'])) : 'Not set';
     $received_from_dhad_formatted = !empty($record['received_from_dhad']) ? date('F j, Y', strtotime($record['received_from_dhad'])) : 'Not set';
     
-    // Replace placeholders with actual data
-    // Basic information
-    $template->setValue('control_no', $record['control_no']);
-    $template->setValue('name', $record['name']);
-    $template->setValue('jobsite', $record['jobsite']);
-    $template->setValue('type', ucfirst($record['type']));
-    $template->setValue('status', ucfirst($record['status']));
-    $template->setValue('evaluator', $record['evaluator'] ?? 'Not assigned');
+    // Create new document from scratch (no template)
+    $phpWord = new PhpWord();
     
-    // Set date values
-    $template->setValue('evaluated', $evaluated_formatted);
-    $template->setValue('for_confirmation', $for_confirmation_formatted);
-    $template->setValue('emailed_to_dhad', $emailed_to_dhad_formatted);
-    $template->setValue('received_from_dhad', $received_from_dhad_formatted);
+    // Add styles
+    $titleStyle = array('bold' => true, 'size' => 16);
+    $heading1Style = array('bold' => true, 'size' => 14);
+    $heading2Style = array('bold' => true, 'size' => 12);
+    $normalStyle = array('size' => 11);
     
-    // Set current date
-    $template->setValue('current_date', date('F j, Y'));
+    // Add a section
+    $section = $phpWord->addSection();
+
+    // Add title
+    $section->addText('DIRECT HIRE CLEARANCE DOCUMENT', $titleStyle, array('alignment' => 'center'));
+    $section->addTextBreak(1);
     
-    // Add comments or note if available
-    $template->setValue('comments', !empty($record['note']) ? $record['note'] : 'No additional comments.');
+    // Basic information section
+    $section->addText('Basic Information', $heading1Style);
     
-    // If there's an approver, add their information
-    if (!empty($record['approved_by'])) {
-        // Get approver details
+    // Create a table for information
+    $table = $section->addTable(array('borderSize' => 1, 'borderColor' => '000000', 'width' => 100, 'unit' => 'pct'));
+    
+    // Helper function to add a row to the table
+    function addTableRow($table, $label, $value) {
+        $cellStyle = array('valign' => 'center');
+        $row = $table->addRow();
+        $row->addCell(3000, $cellStyle)->addText($label, array('bold' => true));
+        $row->addCell(7000, $cellStyle)->addText($value);
+    }
+    
+    // Add basic info
+    addTableRow($table, 'Control Number:', $record['control_no'] ?? '');
+    addTableRow($table, 'Name:', $record['name'] ?? '');
+    addTableRow($table, 'Jobsite:', $record['jobsite'] ?? '');
+    addTableRow($table, 'Type:', ucfirst($record['type'] ?? ''));
+    addTableRow($table, 'Status:', ucfirst($record['status'] ?? ''));
+    addTableRow($table, 'Evaluator:', $record['evaluator'] ?? 'Not assigned');
+    
+    // Add dates
+    $section->addTextBreak(1);
+    $section->addText('Important Dates', $heading1Style);
+    
+    $dateTable = $section->addTable(array('borderSize' => 1, 'borderColor' => '000000', 'width' => 100, 'unit' => 'pct'));
+    addTableRow($dateTable, 'Evaluated:', $evaluated_formatted);
+    addTableRow($dateTable, 'For Confirmation:', $for_confirmation_formatted);
+    addTableRow($dateTable, 'Emailed to DHAD:', $emailed_to_dhad_formatted);
+    addTableRow($dateTable, 'Received from DHAD:', $received_from_dhad_formatted);
+    
+    // Comments section
+    $section->addTextBreak(1);
+    $section->addText('Comments', $heading1Style);
+    $section->addText(!empty($record['note']) ? $record['note'] : 'No additional comments.');
+    
+    // Approval section
+    $section->addTextBreak(1);
+    $section->addText('Approval', $heading1Style);
+    
+    // Add approval info
+    if ($isApproved) {
         $approver_name = 'Regional Director';
-        $approver_stmt = $pdo->prepare("SELECT full_name FROM users WHERE id = ?");
-        $approver_stmt->execute([$record['approved_by']]);
-        $approver = $approver_stmt->fetch(PDO::FETCH_ASSOC);
-        if ($approver) {
-            $approver_name = $approver['full_name'];
+        if (!empty($record['approved_by'])) {
+            $approver_stmt = $pdo->prepare("SELECT full_name FROM users WHERE id = ?");
+            $approver_stmt->execute([$record['approved_by']]);
+            $approver = $approver_stmt->fetch(PDO::FETCH_ASSOC);
+            if ($approver) {
+                $approver_name = $approver['full_name'];
+            }
         }
         
-        $template->setValue('approved_by', $approver_name);
-        $template->setValue('approved_date', !empty($record['approved_at']) ? date('F j, Y', strtotime($record['approved_at'])) : date('F j, Y'));
+        $approvalDate = !empty($record['approved_at']) ? date('F j, Y', strtotime($record['approved_at'])) : date('F j, Y');
+        
+        $section->addText('✓ APPROVED', array('bold' => true, 'color' => '008800'));
+        $section->addText('Approved by: ' . $approver_name);
+        $section->addText('Date: ' . $approvalDate);
+        
+        // Try to add signature image if available
+        $signatureFile = 'signatures/Signature.png';
+        if (file_exists($signatureFile)) {
+            $section->addImage($signatureFile, array('width' => 150, 'height' => 75));
+            logDebug("Added signature image");
+        }
     } else {
-        $template->setValue('approved_by', 'Regional Director');
-        $template->setValue('approved_date', date('F j, Y'));
+        $section->addText('□ PENDING APPROVAL', array('bold' => true, 'color' => 'AA0000'));
     }
+
+    // Add applicant photo if available
+    $section->addTextBreak(1);
+    $section->addText('Applicant Photo', $heading1Style);
+    
+    try {
+        $image_query = "SELECT * FROM direct_hire_documents WHERE direct_hire_id = ? AND file_type LIKE 'image/%' LIMIT 1";
+        $image_stmt = $pdo->prepare($image_query);
+        $image_stmt->execute([$direct_hire_id]);
+        $image_data = $image_stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($image_data && !empty($image_data['file_content'])) {
+            // Create a temporary file for the image
+            $temp_image = sys_get_temp_dir() . '/' . uniqid('img_') . '.jpg';
+            file_put_contents($temp_image, $image_data['file_content']);
+            
+            // Add the image
+            $section->addImage($temp_image, array('width' => 200, 'height' => 200));
+            
+            // Clean up temp image after document generation
+            register_shutdown_function(function() use ($temp_image) {
+                if (file_exists($temp_image)) {
+                    unlink($temp_image);
+                    logDebug("Removed temporary image file: {$temp_image}");
+                }
+            });
+            
+            logDebug("Added applicant photo to document");
+        } else {
+            $section->addText('No photo available for this record.');
+            logDebug("No image found for direct_hire_id: {$direct_hire_id}");
+        }
+    } catch (Exception $e) {
+        $section->addText('Error loading photo: ' . $e->getMessage());
+        logDebug("Error adding applicant photo: " . $e->getMessage());
+    }
+    
+    // Footer
+    $footer = $section->addFooter();
+    $footer->addText('Generated on: ' . date('F j, Y') . ' | MWPD Clearance System', 
+        array('size' => 8), array('alignment' => 'center'));
     
     // Create temp directory if it doesn't exist
     $tempDir = 'temp';
@@ -107,128 +183,54 @@ try {
     }
 
     // Generate unique filename for the document
-    $docName = 'Clearance_' . $record['control_no'] . '_' . date('Ymd_His');
+    $docName = 'Clearance_' . ($record['control_no'] ?? 'new') . '_' . date('Ymd_His');
     $docxFile = $docName . '.docx';
     $tempDocxPath = $tempDir . '/' . $docxFile;
-
-    // Handle signature before saving template
-    if ($isApproved) {
-        // For approved status, try to insert the signature image using the correct placeholder format
-        logDebug("Status is approved - adding signature image");
-        
-        $signatureFile = 'signatures/Signature.png';
-        if (file_exists($signatureFile)) {
-            try {
-                // Use the suggested placeholder format
-                $template->setImageValue('signature1_image', [
-                    'path' => realpath($signatureFile),
-                    'width' => 150,
-                    'height' => 75,
-                    'ratio' => false
-                ]);
-                logDebug("Added signature image using signature1_image placeholder");
-            } catch (Exception $e) {
-                logDebug("Error adding signature image: " . $e->getMessage());
-                $template->setValue('signature1_image', '✓ APPROVED');
-            }
-        } else {
-            logDebug("Signature file not found: $signatureFile");
-            $template->setValue('signature1_image', '✓ APPROVED');
-        }
-    } else {
-        // For non-approved, leave empty
-        $template->setValue('signature1_image', '');
-        logDebug("Status is not approved - no signature");
-    }
-
-    // Save the document with filled template
-    $template->saveAs($tempDocxPath);
+    
+    // Save the document
+    $objWriter = IOFactory::createWriter($phpWord, 'Word2007');
+    $objWriter->save($tempDocxPath);
+    
     logDebug("Document saved to: $tempDocxPath");
-
-    // Make sure uploads directory exists
-    if (!file_exists('uploads')) {
-        mkdir('uploads', 0777, true);
-    }
-
-    // Convert DOCX to PDF using LibreOffice (if available)
-    $libreOfficeCommand = 'soffice --headless --convert-to pdf --outdir uploads ' . $tempDocxPath;
     
-    // Check if we're on Windows
-    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-        // Try to find LibreOffice on Windows
-        $libreOfficePaths = [
-            'C:\Program Files\LibreOffice\program\soffice.exe',
-            'C:\Program Files (x86)\LibreOffice\program\soffice.exe'
-        ];
-        
-        $libreOfficeExe = null;
-        foreach ($libreOfficePaths as $path) {
-            if (file_exists($path)) {
-                $libreOfficeExe = '"' . $path . '"';
-                break;
-            }
-        }
-        
-        if ($libreOfficeExe) {
-            $libreOfficeCommand = $libreOfficeExe . ' --headless --convert-to pdf --outdir uploads ' . $tempDocxPath;
-        }
-    }
-    
-    // Try to execute the command
-    $output = [];
-    $returnVar = 0;
-    exec($libreOfficeCommand . ' 2>&1', $output, $returnVar);
-    
-    if ($returnVar !== 0) {
-        logDebug("LibreOffice conversion failed: " . implode("\n", $output));
-        logDebug("Falling back to direct DOCX display");
-        
-        // If conversion fails, just serve the DOCX file
-        header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-        header('Content-Disposition: inline; filename="' . $docName . '.docx"');
-        header('Content-Length: ' . filesize($tempDocxPath));
-        readfile($tempDocxPath);
-    } else {
-        logDebug("PDF conversion successful");
-        
-        // If the conversion was successful, the PDF will be in the uploads directory
-        $generatedPdfPath = 'uploads/' . pathinfo($docxFile, PATHINFO_FILENAME) . '.pdf';
-        
-        if (file_exists($generatedPdfPath)) {
-            // Serve the PDF file
-            header('Content-Type: application/pdf');
-            header('Content-Disposition: inline; filename="' . $docName . '.pdf"');
-            header('Content-Length: ' . filesize($generatedPdfPath));
-            readfile($generatedPdfPath);
-            
-            logDebug("Document served without storing in database as requested");
-        } else {
-            logDebug("Generated PDF not found: $generatedPdfPath");
-            
-            // If PDF not found, serve the DOCX file
-            header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-            header('Content-Disposition: inline; filename="' . $docName . '.docx"');
-            header('Content-Length: ' . filesize($tempDocxPath));
-            readfile($tempDocxPath);
-        }
-    }
-    
-    // Clean up the temporary DOCX file
+    // Make sure the document is properly saved
     if (file_exists($tempDocxPath)) {
-        unlink($tempDocxPath);
-        logDebug("Cleaned up temporary DOCX file: $tempDocxPath");
+        // Create download_docx.php URL for proper handling
+        $web_path = str_replace('\\', '/', $tempDocxPath);
+        $download_link = "download_docx.php?file=" . urlencode($web_path);
+        
+        // Output HTML with JavaScript to automatically open the document
+        echo "<!DOCTYPE html>\n";
+        echo "<html><head><title>Generating Document...</title></head>\n";
+        echo "<body>\n";
+        echo "<div style='text-align:center; margin-top:50px;'>\n";
+        echo "<h2>Clearance Document Generated Successfully</h2>\n";
+        echo "<p>Your document has been generated and should open automatically.</p>\n";
+        echo "<p>If it doesn't open, <a href='{$download_link}' target='_blank'>click here</a> to download it.</p>\n";
+        echo "<p><a href='direct_hire_view.php?id={$direct_hire_id}'>Back to Record</a></p>\n";
+        echo "</div>\n";
+        
+        // JavaScript to automatically open the file
+        echo "<script>\n";
+        echo "window.location.href = '{$download_link}';\n";
+        echo "</script>\n";
+        echo "</body></html>\n";
+        
+        // Clean up the temporary DOCX file after serving it
+        register_shutdown_function(function() use ($tempDocxPath) {
+            if (file_exists($tempDocxPath)) {
+                unlink($tempDocxPath);
+                // Can't log here as the script has already completed
+            }
+        });
+    } else {
+        logDebug("Error: DOCX file not found at $tempDocxPath");
+        die("Error: Could not generate document.");
     }
-    
-    // Register a shutdown function to clean up the generated PDF file after it's served
-    register_shutdown_function(function() use ($generatedPdfPath) {
-        if (file_exists($generatedPdfPath)) {
-            unlink($generatedPdfPath);
-            // Can't log here as the script has already completed
-        }
-    });
     
 } catch (Exception $e) {
     logDebug("Error: " . $e->getMessage());
-    die("Error generating document: " . $e->getMessage());
+    echo "Error generating document: " . $e->getMessage();
+    echo "<br><a href='direct_hire_view.php?id={$direct_hire_id}'>Back to Record</a>";
 }
 ?>

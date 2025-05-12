@@ -1,14 +1,10 @@
 <?php
 include 'session.php';
 require_once 'connection.php';
-require_once 'includes/blacklist_checker.php';
-require_once 'blacklist_check.php'; // Added this line to include the checkBlacklist function
 
 // Initialize variables
 $error_message = '';
 $success_message = '';
-$show_blacklist_modal = false;
-$blacklist_data = [];
 $override_blacklist_check = isset($_POST['override_blacklist_check']) && $_POST['override_blacklist_check'] === 'true';
 
 // Check if we need to show blacklist warning modal on page load

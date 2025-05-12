@@ -1,0 +1,8 @@
+2025-05-12 17:19:05: Template-only clearance generator started
+2025-05-12 17:19:05: Direct hire ID: 37
+2025-05-12 17:19:05: Record found: {"id":37,"control_no":"dsdddds","name":"dsdas","jobsite":"dsadsads","evaluated":null,"for_confirmation":null,"emailed_to_dhad":null,"received_from_dhad":null,"evaluator":"","note":"","type":"professional","status":"pending","created_at":"2025-05-12 21:34:41","updated_at":"2025-05-12 22:34:38","submitted_by":null,"approved_by":null,"approved_at":null}
+2025-05-12 17:19:05: Will save output to: temp/Clearance_dsdddds_20250512_171905.docx
+2025-05-12 17:19:05: Trying PHPWord built-in template method
+2025-05-12 17:19:05: Error with PHPWord template: Method loadtemplate is not defined.
+2025-05-12 17:19:05: Copied template directly due to PHPWord error
+2025-05-12 17:19:05: Serving DOCX: temp/Clearance_dsdddds_20250512_171905.docx

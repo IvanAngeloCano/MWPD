@@ -1,0 +1,7 @@
+2025-05-12 14:12:37: Template file exists: Directhireclearance.docx
+2025-05-12 14:12:37: File size: 429171 bytes
+2025-05-12 14:12:37: WARNING: ZipArchive class is not available in your PHP installation
+2025-05-12 14:12:37: You need to enable the ZIP extension in php.ini
+2025-05-12 14:12:37: Find and uncomment the line: extension=zip
+2025-05-12 14:12:37: Then restart your Apache/PHP server
+2025-05-12 14:12:37: No image placeholders detected in basic check

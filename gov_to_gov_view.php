@@ -2,6 +2,9 @@
 include 'session.php';
 require_once 'connection.php';
 
+// Handle notification marking as read
+include 'read_notification_handler.php';
+
 // Check if ID is provided
 if (!isset($_GET['id']) || empty($_GET['id'])) {
     header('Location: gov_to_gov.php?error=No record ID specified');

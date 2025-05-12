@@ -1,0 +1,132 @@
+2025-05-12 17:08:41: === New image fix attempt started ===
+2025-05-12 17:08:41: Processing direct hire ID: 37
+2025-05-12 17:08:41: Using template: Directhireclearance.docx
+2025-05-12 17:08:41: Created working copy at: temp/Clearance_dsdddds_20250512_170841.docx
+2025-05-12 17:08:41: Now focusing on applicant image inclusion
+2025-05-12 17:08:41: Found image in database: ID=59, Type=image/png, Size=61397 bytes
+2025-05-12 17:08:41: Saved image to temporary file: temp/img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: Identifying placeholder in template by trying multiple options
+2025-05-12 17:08:41: Trying placeholder: applicant_image
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'applicant_image'
+2025-05-12 17:08:41: Trying placeholder: image
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'image'
+2025-05-12 17:08:41: Trying placeholder: photo
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'photo'
+2025-05-12 17:08:41: Trying placeholder: picture
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'picture'
+2025-05-12 17:08:41: Trying placeholder: portrait
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'portrait'
+2025-05-12 17:08:41: Trying placeholder: Picture1
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'Picture1'
+2025-05-12 17:08:41: Trying placeholder: Image1
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'Image1'
+2025-05-12 17:08:41: Trying placeholder: Photo1
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'Photo1'
+2025-05-12 17:08:41: Trying placeholder: Picture 1
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'Picture 1'
+2025-05-12 17:08:41: Trying placeholder: Image 1
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'Image 1'
+2025-05-12 17:08:41: Trying placeholder: PICTURE1
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'PICTURE1'
+2025-05-12 17:08:41: Trying placeholder: applicant_photo
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'applicant_photo'
+2025-05-12 17:08:41: Trying placeholder: user_photo
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'user_photo'
+2025-05-12 17:08:41: Trying placeholder: profile_photo
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'profile_photo'
+2025-05-12 17:08:41: Trying placeholder: id_photo
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder 'id_photo'
+2025-05-12 17:08:41: Trying placeholder: ${applicant_image}
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder '${applicant_image}'
+2025-05-12 17:08:41: Trying placeholder: ${image}
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder '${image}'
+2025-05-12 17:08:41: Trying placeholder: ${photo}
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder '${photo}'
+2025-05-12 17:08:41: Trying placeholder: ${picture}
+2025-05-12 17:08:41: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220ef95f6a5.jpg
+2025-05-12 17:08:41: SUCCESS: Image added with placeholder '${picture}'
+2025-05-12 17:08:41: Saved document with image replacement
+2025-05-12 17:08:41: Serving document: temp/Clearance_dsdddds_20250512_170841.docx
+2025-05-12 17:09:45: === New image fix attempt started ===
+2025-05-12 17:09:45: Processing direct hire ID: 37
+2025-05-12 17:09:45: Using template: Directhireclearance.docx
+2025-05-12 17:09:45: Created working copy at: temp/Clearance_dsdddds_20250512_170945.docx
+2025-05-12 17:09:45: Now focusing on applicant image inclusion
+2025-05-12 17:09:45: Found image in database: ID=59, Type=image/png, Size=61397 bytes
+2025-05-12 17:09:45: Saved image to temporary file: temp/img_68220f3922214.jpg
+2025-05-12 17:09:45: Identifying placeholder in template by trying multiple options
+2025-05-12 17:09:45: Using standard  format as requested
+2025-05-12 17:09:45: Trying placeholder: applicant_image
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'applicant_image'
+2025-05-12 17:09:45: Trying placeholder: image
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'image'
+2025-05-12 17:09:45: Trying placeholder: photo
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'photo'
+2025-05-12 17:09:45: Trying placeholder: picture
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'picture'
+2025-05-12 17:09:45: Trying placeholder: portrait
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'portrait'
+2025-05-12 17:09:45: Trying placeholder: photo_placeholder
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'photo_placeholder'
+2025-05-12 17:09:45: Trying placeholder: application_photo
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'application_photo'
+2025-05-12 17:09:45: Trying placeholder: user_image
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'user_image'
+2025-05-12 17:09:45: Trying placeholder: profile_image
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'profile_image'
+2025-05-12 17:09:45: Trying placeholder: id_image
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'id_image'
+2025-05-12 17:09:45: Trying placeholder: Applicant_Image
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'Applicant_Image'
+2025-05-12 17:09:45: Trying placeholder: Image
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'Image'
+2025-05-12 17:09:45: Trying placeholder: Photo
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'Photo'
+2025-05-12 17:09:45: Trying placeholder: Picture
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'Picture'
+2025-05-12 17:09:45: Trying placeholder: applicant_photo
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'applicant_photo'
+2025-05-12 17:09:45: Trying placeholder: user_photo
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'user_photo'
+2025-05-12 17:09:45: Trying placeholder: profile_photo
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'profile_photo'
+2025-05-12 17:09:45: Trying placeholder: id_photo
+2025-05-12 17:09:45: Setting image with path: C:\xampp\htdocs\MWPD\temp\img_68220f3922214.jpg
+2025-05-12 17:09:45: SUCCESS: Image added with placeholder 'id_photo'
+2025-05-12 17:09:45: Saved document with image replacement
+2025-05-12 17:09:45: Serving document: temp/Clearance_dsdddds_20250512_170945.docx

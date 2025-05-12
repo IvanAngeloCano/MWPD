@@ -1,0 +1,82 @@
+2025-05-12 16:28:44: Template image test started
+2025-05-12 16:28:50: Template image test started
+2025-05-12 16:28:50: Created temporary image file: C:\WINDOWS\TEMP/template_test_682205a2d9031.jpg
+2025-05-12 16:28:50: Copied template to: test_template_output.docx
+2025-05-12 16:28:50: Opened template successfully
+2025-05-12 16:28:50: Method 1 (basic string) successful
+2025-05-12 16:28:50: Method 2 (array format) successful
+2025-05-12 16:28:50: Method 3 (realpath array) successful
+2025-05-12 16:28:50: Method 4 (binary data) not implemented in this test
+2025-05-12 16:28:50: Saved template with image
+2025-05-12 16:29:30: Template image test started
+2025-05-12 16:29:30: Created temporary image file: C:\WINDOWS\TEMP/template_test_682205ca4c9a7.jpg
+2025-05-12 16:29:30: Copied template to: test_template_output.docx
+2025-05-12 16:29:30: Opened template successfully
+2025-05-12 16:29:30: Method 1 (basic string) successful
+2025-05-12 16:29:30: Method 2 (array format) successful
+2025-05-12 16:29:30: Method 3 (realpath array) successful
+2025-05-12 16:29:30: Method 4 (binary data) not implemented in this test
+2025-05-12 16:29:30: Saved template with image
+2025-05-12 16:29:54: Template image test started
+2025-05-12 16:29:54: Created temporary image file: C:\WINDOWS\TEMP/template_test_682205e2afce3.jpg
+2025-05-12 16:29:54: Copied template to: test_template_output.docx
+2025-05-12 16:29:54: Opened template successfully
+2025-05-12 16:29:54: Method 1 (basic string) successful
+2025-05-12 16:29:54: Method 2 (array format) successful
+2025-05-12 16:29:54: Method 3 (realpath array) successful
+2025-05-12 16:29:54: Method 4 (binary data) not implemented in this test
+2025-05-12 16:29:54: Saved template with image
+2025-05-12 16:30:53: Template image test started
+2025-05-12 16:30:53: Created temporary image file: C:\WINDOWS\TEMP/template_test_6822061d02503.jpg
+2025-05-12 16:30:53: Copied template to: test_template_output.docx
+2025-05-12 16:30:53: Opened template successfully
+2025-05-12 16:30:53: Method 1 (basic string) successful
+2025-05-12 16:30:53: Method 2 (array format) successful
+2025-05-12 16:30:53: Method 3 (realpath array) successful
+2025-05-12 16:30:53: Method 4 (binary data) not implemented in this test
+2025-05-12 16:30:53: Saved template with image
+2025-05-12 16:30:53: Template image test started
+2025-05-12 16:30:53: Created temporary image file: C:\WINDOWS\TEMP/template_test_6822061d91e36.jpg
+2025-05-12 16:30:53: Copied template to: test_template_output.docx
+2025-05-12 16:30:53: Opened template successfully
+2025-05-12 16:30:53: Method 1 (basic string) successful
+2025-05-12 16:30:53: Method 2 (array format) successful
+2025-05-12 16:30:53: Method 3 (realpath array) successful
+2025-05-12 16:30:53: Method 4 (binary data) not implemented in this test
+2025-05-12 16:30:53: Saved template with image
+2025-05-12 16:30:53: Template image test started
+2025-05-12 16:30:53: Created temporary image file: C:\WINDOWS\TEMP/template_test_6822061dc1662.jpg
+2025-05-12 16:30:53: Copied template to: test_template_output.docx
+2025-05-12 16:30:53: Opened template successfully
+2025-05-12 16:30:53: Method 1 (basic string) successful
+2025-05-12 16:30:53: Method 2 (array format) successful
+2025-05-12 16:30:53: Method 3 (realpath array) successful
+2025-05-12 16:30:53: Method 4 (binary data) not implemented in this test
+2025-05-12 16:30:53: Saved template with image
+2025-05-12 16:30:53: Template image test started
+2025-05-12 16:30:53: Created temporary image file: C:\WINDOWS\TEMP/template_test_6822061df0c97.jpg
+2025-05-12 16:30:53: Copied template to: test_template_output.docx
+2025-05-12 16:30:54: Opened template successfully
+2025-05-12 16:30:54: Method 1 (basic string) successful
+2025-05-12 16:30:54: Method 2 (array format) successful
+2025-05-12 16:30:54: Method 3 (realpath array) successful
+2025-05-12 16:30:54: Method 4 (binary data) not implemented in this test
+2025-05-12 16:30:54: Saved template with image
+2025-05-12 16:30:54: Template image test started
+2025-05-12 16:30:54: Created temporary image file: C:\WINDOWS\TEMP/template_test_6822061e2263a.jpg
+2025-05-12 16:30:54: Copied template to: test_template_output.docx
+2025-05-12 16:30:54: Opened template successfully
+2025-05-12 16:30:54: Method 1 (basic string) successful
+2025-05-12 16:30:54: Method 2 (array format) successful
+2025-05-12 16:30:54: Method 3 (realpath array) successful
+2025-05-12 16:30:54: Method 4 (binary data) not implemented in this test
+2025-05-12 16:30:54: Saved template with image
+2025-05-12 16:30:54: Template image test started
+2025-05-12 16:30:54: Created temporary image file: C:\WINDOWS\TEMP/template_test_6822061e4a71c.jpg
+2025-05-12 16:30:54: Copied template to: test_template_output.docx
+2025-05-12 16:30:54: Opened template successfully
+2025-05-12 16:30:54: Method 1 (basic string) successful
+2025-05-12 16:30:54: Method 2 (array format) successful
+2025-05-12 16:30:54: Method 3 (realpath array) successful
+2025-05-12 16:30:54: Method 4 (binary data) not implemented in this test
+2025-05-12 16:30:54: Saved template with image
