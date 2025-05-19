@@ -1,0 +1,91 @@
+User data from DB: Array
+(
+    [username] => tester
+    [full_name] => Allana Macatuno
+    [email] => aronpamulaklakin@gmail.com
+
+)
+
+User data after merge: Array
+(
+    [username] => tester
+    [full_name] => Allana Macatuno
+    [email] => aronpamulaklakin@gmail.com
+
+)
+
+User data from DB: Array
+(
+    [username] => tester
+    [full_name] => Allana Macatuno
+    [email] => aronpamulaklakin@gmail.com
+
+)
+
+User data after merge: Array
+(
+    [username] => tester
+    [full_name] => Allana Macatuno
+    [email] => aronpamulaklakin@gmail.com
+
+)
+
+User data from DB: Array
+(
+    [username] => tester
+    [full_name] => Allana Macatuno
+    [email] => aronpamulaklakin@gmail.com
+
+)
+
+User data after merge: Array
+(
+    [username] => tester
+    [full_name] => Allana Macatuno
+    [email] => aronpamulaklakin@gmail.com
+
+)
+
+
+2025-05-18 15:54:42 - DEBUG: Reset password for user ID 2
+Complete user data from DB: Array
+(
+    [id] => 2
+    [username] => tester
+    [password] => $2y$10$SJwkw20/1l.Ua2i8VqEBF.s2Bbk/eQuXw9eS5S6eMokZAeJNBmiLC
+    [full_name] => Allana Macatuno
+    [role] => User
+    [profile_picture] => 
+    [privacy_consent] => 1
+    [first_login] => 0
+    [email] => aronpamulaklakin@gmail.com
+
+    [status] => active
+    [created_at] => 2025-05-06 15:58:53
+)
+
+Checking for email fields: email, user_email, mail, email_address
+Found email in field 'email': aronpamulaklakin@gmail.com
+
+Using email: aronpamulaklakin@gmail.com
+
+
+2025-05-18 15:55:46 - DEBUG: Reset password for user ID 2
+Complete user data from DB: Array
+(
+    [id] => 2
+    [username] => tester
+    [password] => $2y$10$Ksb.5rYsiHP/OXGVJkyt2OK5OJIqI8kTOIsKv6MnB7VF8QELk489i
+    [full_name] => Allana Macatuno
+    [role] => User
+    [profile_picture] => 
+    [privacy_consent] => 1
+    [first_login] => 0
+    [email] => aronpamulaklakin@gmail.com
+    [status] => active
+    [created_at] => 2025-05-06 15:58:53
+)
+
+Checking for email fields: email, user_email, mail, email_address
+Found email in field 'email': aronpamulaklakin@gmail.com
+Using email: aronpamulaklakin@gmail.com

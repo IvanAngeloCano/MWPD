@@ -1,0 +1,51 @@
+/**
+ * Specific Fix for Question Mark Cursor on Title Attributes
+ * This targets the specific elements in the dashboard that are causing issues
+ */
+
+/* Global reset for title attributes - force default cursor */
+[title] {
+  cursor: default !important;
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+/* Specific fix for pending approval time column */
+.box-pending-approvals tbody td:last-child {
+  cursor: default !important;
+  border-bottom: none !important;
+}
+
+/* Specific fix for job fair contact info */
+.job-fairs-this-month .activity-meta {
+  cursor: default !important;
+  border-bottom: none !important;
+}
+
+/* Fix for Any Other Potential Tooltip Issues */
+.activity-meta[title],
+td[title], 
+th[title],
+div[title],
+span[title],
+a[title] {
+  cursor: text !important;
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+/* Restore pointer cursor for links */
+a {
+  cursor: pointer !important;
+}
+
+/* Make sure the tooltips still display nicely */
+.tooltip {
+  cursor: default !important;
+}
+
+/* Add this class to any element you want to hide cursor for */
+.no-question-cursor {
+  cursor: default !important;
+  border-bottom: none !important;
+}

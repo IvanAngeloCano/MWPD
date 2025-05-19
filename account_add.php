@@ -4,8 +4,8 @@ require_once 'connection.php';
 $pageTitle = "Add New User";
 include '_head.php';
 
-// Check if user has Division Head role
-if ($_SESSION['role'] !== 'div head' && $_SESSION['role'] !== 'Division Head') {
+// Check if user has Division Head or Regional Director role
+if ($_SESSION['role'] !== 'div head' && $_SESSION['role'] !== 'Division Head' && $_SESSION['role'] !== 'regional director' && $_SESSION['role'] !== 'Regional Director') {
     // Redirect to dashboard with error message
     $_SESSION['error_message'] = "You don't have permission to access this page.";
     header('Location: dashboard.php');
@@ -75,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 // Send email notifications to all Regional Directors (if email column exists)
                 if ($email_column_exists) {
-                    include_once 'email_notifications.php';
+                    // include_once 'email_notifications.php'; // Old email system with circular references
+include_once 'unified_email_system.php'; // New unified email system with fixed Gmail SMTP
                     
                     try {
                         // Find all Regional Directors with email

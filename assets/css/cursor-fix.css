@@ -1,0 +1,100 @@
+/* 
+ * Dashboard Scrollable Sections CSS - Version 3
+ * Comprehensive fix for all dashboard scrolling issues
+ */
+
+/* Make ALL scrollable containers work properly */
+.scrollable-container {
+  max-height: 300px;
+  overflow-y: auto !important;
+  display: block !important;
+  position: relative;
+  border: 1px solid #f5f5f5;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding: 4px;
+  background-color: white;
+}
+
+/* Target specific containers */
+.box-pending-approvals .scrollable-container,
+.job-fairs-this-month .scrollable-container,
+.recent-activity .scrollable-container {
+  max-height: 240px;
+}
+
+/* Fix table structure for proper scrolling */
+.scrollable-container table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.scrollable-container table thead {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 10;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Uniform scrollbar styling for all browsers */
+.scrollable-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Firefox scrollbar */
+.scrollable-container {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+/* Reset cursor for all elements with title attributes */
+[title] {
+  cursor: default !important;
+}
+
+/* Specifically target the pending approval time cells */
+.box-pending-approvals tbody td:last-child {
+  cursor: default !important;
+  border-bottom: none !important;
+}
+
+/* Target job fair contact info */
+.job-fairs-this-month .activity-meta {
+  cursor: default !important;
+  border-bottom: none !important;
+}
+
+/* Remove all question mark styling from title attributes */
+.activity-meta[title], td[title], th[title], div[title], span[title] {
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+/* Style tooltips consistently */
+.tooltip {
+  opacity: 1 !important;
+}
+
+.tooltip-inner {
+  max-width: 300px;
+  padding: 8px 12px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+}

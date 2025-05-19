@@ -9,11 +9,20 @@ $success_message = '';
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Get name
-        $name = $_POST['name'] ?? '';
+        // Get name components
+        $first_name = trim($_POST['first_name'] ?? '');
+        $middle_name = trim($_POST['middle_initial'] ?? '');
+        $last_name = trim($_POST['last_name'] ?? '');
+        
+        // Build full name for display purposes
+        $name = $first_name;
+        if (!empty($middle_name)) {
+            $name .= ' ' . $middle_name;
+        }
+        $name .= ' ' . $last_name;
         
         // Validate required fields
-        $required_fields = ['control_no', 'name', 'destination'];
+        $required_fields = ['control_no', 'first_name', 'last_name', 'destination'];
         foreach ($required_fields as $field) {
             if (empty($_POST[$field])) {
                 throw new Exception("Please fill in all required fields.");
@@ -23,11 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Process form submission - insert into database
         // Get the form data
         $control_no = trim($_POST['control_no']);
-        $name = trim($_POST['name']);
+        $passport_no = trim($_POST['passport_no'] ?? '');
         $destination = trim($_POST['destination']);
         $date_received = !empty($_POST['date_received']) ? $_POST['date_received'] : null;
         $evaluated = !empty($_POST['evaluated']) ? $_POST['evaluated'] : null;
-        $passport_no = trim($_POST['passport_no'] ?? '');
         $sex = $_POST['sex'] ?? '';
         $birth_date = !empty($_POST['birth_date']) ? $_POST['birth_date'] : null;
         $weight = !empty($_POST['weight']) ? $_POST['weight'] : null;
@@ -55,17 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             :contact_number, :email_address, :present_address, :educational_attainment, 
                             :remarks)";
             
-            // Split name into first, middle, last names
-            $name_parts = explode(' ', $name);
-            $first_name = $name_parts[0];
-            $last_name = end($name_parts); // Last element
-            
-            // If there are more than 2 parts, the middle ones form the middle name
-            $middle_name = '';
-            if (count($name_parts) > 2) {
-                $middle_parts = array_slice($name_parts, 1, count($name_parts) - 2);
-                $middle_name = implode(' ', $middle_parts);
-            }
+            // First, middle and last names are already separated from form input
+            // No need to split name
             
             // Prepare and execute the query
             $stmt = $pdo->prepare($sql);
@@ -375,21 +374,15 @@ include '_head.php';
         </div>
         <?php endif; ?>
         
-        <?php
-        <!-- Blacklist warning removed as requested -->
-        ?>
+
         
         <!-- Form Section -->
         <form class="record-form" method="POST" action="" enctype="multipart/form-data">
           <div class="form-grid">
             <label>Control No.<input type="text" name="control_no" required></label>
-            <div class="form-group">
-              <label for="name">Name</label>
-              <div class="input-with-status">
-                <input type="text" class="form-control" id="name" name="name" required>
-                <div id="checkStatus" class="input-status"></div>
-              </div>
-            </div>
+            <label>First Name<input type="text" name="first_name" placeholder="e.g. Juan" required></label>
+            <label>Middle Initial/Name<input type="text" name="middle_initial" placeholder="e.g. Miguel"></label>
+            <label>Last Name<input type="text" name="last_name" placeholder="e.g. Dela Cruz" required></label>
             <label>Destination<input type="text" name="destination" required></label>
             <label>Evaluated<input type="date" name="evaluated"></label>
             <label>For Confirmation<input type="date" name="for_confirmation"></label>
@@ -447,138 +440,39 @@ include '_head.php';
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const nameInput = document.getElementById('name');
     const submitButton = document.getElementById('submitButton');
     
-    if (nameInput && submitButton) {
-      // Disable submit button initially if name is empty
-      if (nameInput.value.trim() === '') {
-        submitButton.disabled = true;
-      }
-      
-      // Add event listener for input changes
-      nameInput.addEventListener('input', function() {
-        const name = this.value.trim();
-        submitButton.disabled = (name === '');
+    // Form validation for required fields
+    const requiredFields = document.querySelectorAll('input[required], select[required]');
+    requiredFields.forEach(field => {
+      field.addEventListener('input', function() {
+        validateForm();
       });
-    }
-  });
-    // Check if we need to show blacklist warning modal
-    <?php if ($show_blacklist_modal && !empty($blacklist_data)): ?>
-    // Populate blacklist modal with data from session
-    const blacklistDetails = document.getElementById('blacklistMatchDetails');
-    let detailsHTML = '<div class="blacklist-match-item">';
-
-    <?php
-    // If blacklist_data is a single record, convert to array
-    if (!is_array($blacklist_data) || !isset($blacklist_data[0])) {
-        $blacklist_data = [$blacklist_data];
-    }
-
-    foreach ($blacklist_data as $record) :
-    ?>
-      detailsHTML += '<p><strong>Name:</strong> <?= htmlspecialchars($record["name"] ?? "Unknown") ?></p>';
-      <?php if (!empty($record["reason"])): ?>
-      detailsHTML += '<p><strong>Reason:</strong> <?= htmlspecialchars($record["reason"]) ?></p>';
-      <?php endif; ?>
-      <?php if (!empty($record["details"])): ?>
-      detailsHTML += '<p><strong>Details:</strong> <?= htmlspecialchars($record["details"]) ?></p>';
-      <?php endif; ?>
-      <?php if (!empty($record["reference_no"])): ?>
-      detailsHTML += '<p><strong>Reference #:</strong> <?= htmlspecialchars($record["reference_no"]) ?></p>';
-      <?php endif; ?>
-      <?php if (!empty($record["date_added"])): ?>
-      detailsHTML += '<p><strong>Date Added:</strong> <?= htmlspecialchars($record["date_added"]) ?></p>';
-      <?php endif; ?>
-    <?php endforeach; ?>
-
-    detailsHTML += '</div>';
-    blacklistDetails.innerHTML = detailsHTML;
-
-    // Show the popup
-    document.getElementById('customBlacklistPopup').style.display = 'block';
-    <?php endif; ?>
+    });
     
-    // Setup name field for blacklist checking
-    const nameField = document.getElementById('name');
-    const statusDiv = document.getElementById('checkStatus');
-    
-    // Function to delay execution (debounce)
-    function debounce(func, wait) {
-      let timeout;
-      return function() {
-        const context = this;
-        const args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(context, args), wait);
-      };
-    }
-    
-    // Function to check for blacklist match
-    const checkBlacklist = debounce(function() {
-      // Get value from name field
-      const name = nameField ? nameField.value.trim() : '';
-      
-      // Don't proceed if name is empty
-      if (!name) return;
-      
-      // Only check when name has at least two parts (first and last name)
-      if (name.indexOf(' ') === -1) return;
-      
-      if (statusDiv) {
-        statusDiv.innerHTML = '<img src="assets/img/loading.gif" alt="Checking..." width="16">';
-      }
-      
-      // Make AJAX request to check blacklist
-      fetch('basic_blacklist_check.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'name=' + encodeURIComponent(name)
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.blacklisted) {
-          // Match found - show warning
-          statusDiv.innerHTML = '<i class="fa fa-exclamation-triangle" style="color: #dc3545;" title="Blacklisted"></i>';
-          showBlacklistMatch(data.details);
-        } else {
-          // No match
-          statusDiv.innerHTML = '<i class="fa fa-check-circle" style="color: #28a745;" title="No blacklist match"></i>';
-        }
-      })
-      .catch(error => {
-        console.error('Error checking blacklist:', error);
-        statusDiv.innerHTML = '';
-      });
-    }, 500);
-    
-    // Function to display blacklist match details
-    function showBlacklistMatch(details) {
-      const blacklistDetails = document.getElementById('blacklistMatchDetails');
-      let detailsHTML = '<div class="blacklist-match-item">';
-      
-      if (details && details.length > 0) {
-        details.forEach(record => {
-          detailsHTML += `<p><strong>Name:</strong> ${record.name || 'Unknown'}</p>`;
-          if (record.reason) detailsHTML += `<p><strong>Reason:</strong> ${record.reason}</p>`;
-          if (record.details) detailsHTML += `<p><strong>Details:</strong> ${record.details}</p>`;
-          if (record.reference_no) detailsHTML += `<p><strong>Reference #:</strong> ${record.reference_no}</p>`;
-          if (record.date_added) detailsHTML += `<p><strong>Date Added:</strong> ${record.date_added}</p>`;
+    function validateForm() {
+      if (submitButton) {
+        // Check if all required fields are filled
+        let allFilled = true;
+        requiredFields.forEach(field => {
+          if (!field.value.trim()) {
+            allFilled = false;
+          }
         });
-      } else {
-        detailsHTML += '<p>No detailed information available.</p>';
+        submitButton.disabled = !allFilled;
       }
-      
-      detailsHTML += '</div>';
-      blacklistDetails.innerHTML = detailsHTML;
-      
-      // Show the popup
-      document.getElementById('customBlacklistPopup').style.display = 'block';
     }
     
-    // Attach event listener
-    if (nameField) nameField.addEventListener('blur', checkBlacklist);
+    // Run initial validation
+    validateForm();
+    
+    // Initialize date inputs with current date as default
+    const dateInputs = document.querySelectorAll('input[type="date"]');
+    dateInputs.forEach(input => {
+      if (!input.value) {
+        const today = new Date().toISOString().split('T')[0];
+        input.value = today;
+      }
+    });
   });
 </script>

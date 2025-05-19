@@ -5,6 +5,10 @@
  * This file contains functions for sending email notifications throughout the application.
  */
 
+// Include email templates and fixed sender (instead of full system to avoid function conflicts)
+require_once 'email_templates.php';
+require_once 'fixed_email_sender.php';
+
 // Include our foolproof mailer
 require_once 'foolproof_mailer.php';
 
@@ -19,13 +23,24 @@ $GLOBALS['email_config'] = [
 
 // Email server configuration
 $GLOBALS['email_server'] = [
+    'enabled' => true,    // Set to true to enable email sending
+    'method' => 'smtp',   // Always use SMTP for Gmail
+    
     'smtp' => [
         'host' => 'smtp.gmail.com',
         'port' => 587,
         'secure' => 'tls',
         'auth' => true,
         'username' => 'luxsmith656@gmail.com',
-        'password' => 'collegeme4724246859713246859713',
+        'password' => 'lxnfpqehppfhopgv', // App password from Google account
+        'debug' => 2,     // Enable debugging to see detailed SMTP logs
+        'options' => [    // SSL/TLS options for secure connections
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ]
+        ]
     ],
 ];
 
@@ -90,7 +105,7 @@ function sendEmail($to, $subject, $html_content, $message_type = 'general') {
         $subject, 
         $message_type, 
         $result['success'] ? 'success' : 'failed', 
-        $result['success'] ? null : $result['error']
+        $result['success'] ? null : (isset($result['message']) ? $result['message'] : 'Unknown error')
     );
     
     return $result['success'];

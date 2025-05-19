@@ -44,6 +44,20 @@ $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$userId]);
 $user = $stmt->fetch();
 
+// Create an array with fallback values to prevent undefined array key warnings
+if (!is_array($user)) {
+    $user = [];
+}
+
+// Explicitly set these fields with proper fallbacks to avoid warnings
+$user['full_name'] = $user['full_name'] ?? $_SESSION['full_name'] ?? $_SESSION['username'] ?? 'User';
+$user['role'] = $user['role'] ?? $_SESSION['role'] ?? 'staff';
+$user['username'] = $user['username'] ?? $_SESSION['username'] ?? 'N/A';
+
+// Make sure these values are safely stored for the rest of the page
+$_SESSION['display_name'] = $user['full_name'];
+$_SESSION['display_role'] = $user['role'];
+
 // Debug user data
 error_log("User data retrieved, profile picture exists: " . (!empty($user['profile_picture']) ? 'Yes' : 'No'));
 if (!empty($user['profile_picture'])) {
@@ -162,7 +176,7 @@ include '_head.php';
                         <div class="profile-header-content">
                             <div class="header-title-wrapper">
                                 <h2>Account Settings</h2>
-                                <h3 class="profile-user-title"><?= htmlspecialchars($user['full_name']) ?></h3>
+                                <h3 class="profile-user-title"><?= htmlspecialchars($user['full_name'] ?? $_SESSION['username'] ?? 'User') ?></h3>
                             </div>
                             <p class="profile-subtitle">Manage your account information and security settings</p>
                         </div>
@@ -203,15 +217,15 @@ include '_head.php';
                                         </button>
                                     </div>
                                 </div>
-                                <h3 class="user-name"><?= htmlspecialchars($user['full_name']) ?></h3>
-                                <span class="user-role"><?= htmlspecialchars($user['role']) ?></span>
+                                <h3 class="user-name"><?= htmlspecialchars($user['full_name'] ?? $_SESSION['full_name'] ?? 'User') ?></h3>
+                                <span class="user-role"><?= htmlspecialchars(ucfirst($user['role'] ?? $_SESSION['role'] ?? 'staff')) ?></span>
 
                                 <div class="user-details">
                                     <div class="user-detail-item">
                                         <i class="fa fa-user"></i>
                                         <div>
                                             <span class="detail-label">Username</span>
-                                            <span class="detail-value"><?= htmlspecialchars($user['username']) ?></span>
+                                            <span class="detail-value"><?= htmlspecialchars($user['username'] ?? $_SESSION['username'] ?? 'N/A') ?></span>
                                         </div>
                                     </div>
 

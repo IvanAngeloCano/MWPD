@@ -1,0 +1,11 @@
+/* Custom CSS to move the wizard guide button slightly higher in the floating action menu */
+.floating-action-menu .menu-options {
+  position: relative;
+  top: -10px; /* Move the options higher by 10px instead of 20px */
+}
+
+/* Adjust the position of the wizard guide button */
+#wizardGuideButton {
+  position: relative;
+  top: 20px; /* Reduced adjustment for the wizard button itself */
+}

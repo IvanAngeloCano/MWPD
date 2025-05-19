@@ -1,0 +1,331 @@
+[15-May-2025 03:19:05 Europe/Berlin] 2025-05-15 03:19:05 - Attempting to send email to castanar656@gmail.com with subject: MWPD Email System Test - 2025-05-15 03:19:05
+[15-May-2025 03:19:05 Europe/Berlin] 2025-05-15 03:19:05 - Method 1: Using PHP mail() function
+[15-May-2025 03:19:07 Europe/Berlin] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 73
+[15-May-2025 03:19:07 Europe/Berlin] 2025-05-15 03:19:07 - Method 1 Failed: mail() function returned false
+[15-May-2025 03:19:07 Europe/Berlin] 2025-05-15 03:19:07 - Method 2: Using PHPMailer in mail mode
+[15-May-2025 03:19:10 Europe/Berlin] 2025-05-15 03:19:10 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[15-May-2025 03:19:10 Europe/Berlin] 2025-05-15 03:19:10 - Method 3: Using PHPMailer with SMTP using IP address
+[15-May-2025 03:19:10 Europe/Berlin] 2025-05-15 03:19:10 - Trying SMTP with IP: 142.250.4.108
+[15-May-2025 03:19:10 Europe/Berlin] PHP Deprecated:  Creation of dynamic property PHPMailer::$Timeout is deprecated in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 165
+[15-May-2025 03:19:12 Europe/Berlin] 2025-05-15 03:19:12 - Trying SMTP with IP: 142.250.4.109
+[15-May-2025 03:19:13 Europe/Berlin] 2025-05-15 03:19:13 - Trying SMTP with IP: 108.177.15.108
+[15-May-2025 03:19:20 Europe/Berlin] 2025-05-15 03:19:20 - Method 3 Failed: All SMTP IP attempts failed
+[15-May-2025 03:19:20 Europe/Berlin] 2025-05-15 03:19:20 - Method 4: Storing email in pending_emails.txt for later delivery
+[15-May-2025 03:19:20 Europe/Berlin] 2025-05-15 03:19:20 - Method 4 Success: Email stored for later delivery
+[15-May-2025 03:20:18 Europe/Berlin] 2025-05-15 03:20:18 - Attempting to send email to castanar656@gmail.com with subject: MWPD Email System Test - 2025-05-15 03:20:18
+[15-May-2025 03:20:18 Europe/Berlin] 2025-05-15 03:20:18 - Method 1: Using PHP mail() function
+[15-May-2025 03:20:20 Europe/Berlin] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 73
+[15-May-2025 03:20:20 Europe/Berlin] 2025-05-15 03:20:20 - Method 1 Failed: mail() function returned false
+[15-May-2025 03:20:20 Europe/Berlin] 2025-05-15 03:20:20 - Method 2: Using PHPMailer in mail mode
+[15-May-2025 03:20:23 Europe/Berlin] 2025-05-15 03:20:23 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[15-May-2025 03:20:23 Europe/Berlin] 2025-05-15 03:20:23 - Method 3: Using PHPMailer with SMTP using IP address
+[15-May-2025 03:20:23 Europe/Berlin] 2025-05-15 03:20:23 - Trying SMTP with IP: 142.250.4.108
+[15-May-2025 03:20:23 Europe/Berlin] PHP Deprecated:  Creation of dynamic property PHPMailer::$Timeout is deprecated in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 165
+[15-May-2025 03:20:24 Europe/Berlin] 2025-05-15 03:20:24 - Trying SMTP with IP: 142.250.4.109
+[15-May-2025 03:20:30 Europe/Berlin] 2025-05-15 03:20:30 - Trying SMTP with IP: 108.177.15.108
+[15-May-2025 03:20:33 Europe/Berlin] 2025-05-15 03:20:33 - Method 3 Failed: All SMTP IP attempts failed
+[15-May-2025 03:20:33 Europe/Berlin] 2025-05-15 03:20:33 - Method 4: Storing email in pending_emails.txt for later delivery
+[15-May-2025 03:20:33 Europe/Berlin] 2025-05-15 03:20:33 - Method 4 Success: Email stored for later delivery
+[15-May-2025 03:21:04 Europe/Berlin] 2025-05-15 03:21:04 - Attempting to send email to aronpamulaklakin@gmail.com with subject: MWPD Email System Test - 2025-05-15 03:21:04
+[15-May-2025 03:21:04 Europe/Berlin] 2025-05-15 03:21:04 - Method 1: Using PHP mail() function
+[15-May-2025 03:21:06 Europe/Berlin] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 73
+[15-May-2025 03:21:06 Europe/Berlin] 2025-05-15 03:21:06 - Method 1 Failed: mail() function returned false
+[15-May-2025 03:21:06 Europe/Berlin] 2025-05-15 03:21:06 - Method 2: Using PHPMailer in mail mode
+[15-May-2025 03:21:08 Europe/Berlin] 2025-05-15 03:21:08 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[15-May-2025 03:21:08 Europe/Berlin] 2025-05-15 03:21:08 - Method 3: Using PHPMailer with SMTP using IP address
+[15-May-2025 03:21:08 Europe/Berlin] 2025-05-15 03:21:08 - Trying SMTP with IP: 142.250.4.108
+[15-May-2025 03:21:08 Europe/Berlin] PHP Deprecated:  Creation of dynamic property PHPMailer::$Timeout is deprecated in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 165
+[15-May-2025 03:21:32 Europe/Berlin] 2025-05-15 03:21:32 - Trying SMTP with IP: 142.250.4.109
+[15-May-2025 03:21:34 Europe/Berlin] 2025-05-15 03:21:34 - Trying SMTP with IP: 108.177.15.108
+[15-May-2025 03:21:38 Europe/Berlin] 2025-05-15 03:21:38 - Method 3 Failed: All SMTP IP attempts failed
+[15-May-2025 03:21:38 Europe/Berlin] 2025-05-15 03:21:38 - Method 4: Storing email in pending_emails.txt for later delivery
+[15-May-2025 03:21:38 Europe/Berlin] 2025-05-15 03:21:38 - Method 4 Success: Email stored for later delivery
+[15-May-2025 03:22:48 Europe/Berlin] 2025-05-15 03:22:48 - Attempting to send email to aronpamulaklakin@gmail.com with subject: MWPD Email System Test - 2025-05-15 03:22:48
+[15-May-2025 03:22:48 Europe/Berlin] 2025-05-15 03:22:48 - Method 1: Using PHP mail() function
+[15-May-2025 03:22:50 Europe/Berlin] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 73
+[15-May-2025 03:22:50 Europe/Berlin] 2025-05-15 03:22:50 - Method 1 Failed: mail() function returned false
+[15-May-2025 03:22:50 Europe/Berlin] 2025-05-15 03:22:50 - Method 2: Using PHPMailer in mail mode
+[15-May-2025 03:22:51 Europe/Berlin] 2025-05-15 03:22:51 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[15-May-2025 03:22:51 Europe/Berlin] 2025-05-15 03:22:51 - Method 3: Using PHPMailer with SMTP using IP address
+[15-May-2025 03:22:51 Europe/Berlin] 2025-05-15 03:22:51 - Trying SMTP with IP: 142.250.4.108
+[15-May-2025 03:22:51 Europe/Berlin] PHP Deprecated:  Creation of dynamic property PHPMailer::$Timeout is deprecated in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 165
+[15-May-2025 03:22:52 Europe/Berlin] 2025-05-15 03:22:52 - Trying SMTP with IP: 142.250.4.109
+[15-May-2025 03:22:53 Europe/Berlin] 2025-05-15 03:22:53 - Trying SMTP with IP: 108.177.15.108
+[15-May-2025 03:22:55 Europe/Berlin] 2025-05-15 03:22:55 - Method 3 Failed: All SMTP IP attempts failed
+[15-May-2025 03:22:55 Europe/Berlin] 2025-05-15 03:22:55 - Method 4: Storing email in pending_emails.txt for later delivery
+[15-May-2025 03:22:55 Europe/Berlin] 2025-05-15 03:22:55 - Method 4 Success: Email stored for later delivery
+[18-May-2025 12:46:05 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 12:46:05 Europe/Berlin] PHP Warning:  Undefined array key "full_name" in C:\xampp\htdocs\MWPD\reset_password.php on line 154
+[18-May-2025 12:46:05 Europe/Berlin] PHP Warning:  Undefined array key "username" in C:\xampp\htdocs\MWPD\reset_password.php on line 189
+[18-May-2025 12:46:05 Europe/Berlin] PHP Warning:  Undefined array key "full_name" in C:\xampp\htdocs\MWPD\reset_password.php on line 193
+[18-May-2025 12:46:05 Europe/Berlin] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\MWPD\reset_password.php on line 197
+[18-May-2025 14:08:01 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:08:01 Europe/Berlin] PHP Warning:  Undefined array key "full_name" in C:\xampp\htdocs\MWPD\reset_password.php on line 154
+[18-May-2025 14:08:01 Europe/Berlin] PHP Warning:  Undefined array key "username" in C:\xampp\htdocs\MWPD\reset_password.php on line 189
+[18-May-2025 14:08:01 Europe/Berlin] PHP Warning:  Undefined array key "full_name" in C:\xampp\htdocs\MWPD\reset_password.php on line 193
+[18-May-2025 14:08:01 Europe/Berlin] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\MWPD\reset_password.php on line 197
+[18-May-2025 14:09:10 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:09:10 Europe/Berlin] PHP Warning:  Undefined array key "full_name" in C:\xampp\htdocs\MWPD\reset_password.php on line 154
+[18-May-2025 14:09:10 Europe/Berlin] PHP Warning:  Undefined array key "username" in C:\xampp\htdocs\MWPD\reset_password.php on line 189
+[18-May-2025 14:09:10 Europe/Berlin] PHP Warning:  Undefined array key "full_name" in C:\xampp\htdocs\MWPD\reset_password.php on line 193
+[18-May-2025 14:09:10 Europe/Berlin] PHP Warning:  Undefined array key "email" in C:\xampp\htdocs\MWPD\reset_password.php on line 197
+[18-May-2025 14:10:06 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:11:26 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:12:41 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:13:15 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:38 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:39 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:39 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:39 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:39 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:40 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:40 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:40 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:40 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:41 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:41 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:41 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:41 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:41 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:41 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:56 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:58 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:15:59 Europe/Berlin] Fetched 0 notifications for user ID: 1
+[18-May-2025 14:16:01 Europe/Berlin] 2025-05-18 14:16:01 - Attempting to send email to castanar656@gmail.com with subject: MWPD System - Password Reset
+[18-May-2025 14:16:01 Europe/Berlin] 2025-05-18 14:16:01 - Method 1: Using PHP mail() function
+[18-May-2025 14:16:03 Europe/Berlin] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 73
+[18-May-2025 14:16:03 Europe/Berlin] 2025-05-18 14:16:03 - Method 1 Failed: mail() function returned false
+[18-May-2025 14:16:03 Europe/Berlin] 2025-05-18 14:16:03 - Method 2: Using PHPMailer in mail mode
+[18-May-2025 14:16:04 Europe/Berlin] 2025-05-18 14:16:04 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[18-May-2025 14:16:04 Europe/Berlin] 2025-05-18 14:16:04 - Method 3: Using PHPMailer with SMTP using IP address
+[18-May-2025 14:16:04 Europe/Berlin] 2025-05-18 14:16:04 - Trying SMTP with IP: 142.250.4.108
+[18-May-2025 14:16:05 Europe/Berlin] 2025-05-18 14:16:05 - Trying SMTP with IP: 142.250.4.109
+[18-May-2025 14:16:06 Europe/Berlin] 2025-05-18 14:16:06 - Trying SMTP with IP: 108.177.15.108
+[18-May-2025 14:16:08 Europe/Berlin] 2025-05-18 14:16:08 - Method 3 Failed: All SMTP IP attempts failed
+[18-May-2025 14:16:08 Europe/Berlin] 2025-05-18 14:16:08 - Method 4: Storing email in pending_emails.txt for later delivery
+[18-May-2025 14:16:08 Europe/Berlin] 2025-05-18 14:16:08 - Method 4 Success: Email stored for later delivery
+[18-May-2025 14:16:08 Europe/Berlin] === START addNotification ===
+[18-May-2025 14:16:08 Europe/Berlin] Adding notification - User ID: 1, Message: Your password has been reset by an administrator. Check your email for the new password., Record ID: null, Type: password_reset
+[18-May-2025 14:16:08 Europe/Berlin] User has 0 existing notifications
+[18-May-2025 14:16:08 Europe/Berlin] SQL params: [1,"Your password has been reset by an administrator. Check your email for the new password.",null,"password_reset","change_password.php"]
+[18-May-2025 14:16:08 Europe/Berlin] Successfully added notification ID: 111
+[18-May-2025 14:16:08 Europe/Berlin] Verified notification ID 111 exists in database
+[18-May-2025 14:16:08 Europe/Berlin] === END addNotification ===
+[18-May-2025 14:17:17 Europe/Berlin] Fetched 1 notifications for user ID: 1
+[18-May-2025 14:17:19 Europe/Berlin] 2025-05-18 14:17:19 - Attempting to send email to luxsmith656@gmail.com with subject: MWPD System - Password Reset
+[18-May-2025 14:17:19 Europe/Berlin] 2025-05-18 14:17:19 - Method 1: Using PHP mail() function
+[18-May-2025 14:17:21 Europe/Berlin] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 73
+[18-May-2025 14:17:21 Europe/Berlin] 2025-05-18 14:17:21 - Method 1 Failed: mail() function returned false
+[18-May-2025 14:17:21 Europe/Berlin] 2025-05-18 14:17:21 - Method 2: Using PHPMailer in mail mode
+[18-May-2025 14:17:22 Europe/Berlin] 2025-05-18 14:17:22 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[18-May-2025 14:17:22 Europe/Berlin] 2025-05-18 14:17:22 - Method 3: Using PHPMailer with SMTP using IP address
+[18-May-2025 14:17:22 Europe/Berlin] 2025-05-18 14:17:22 - Trying SMTP with IP: 142.250.4.108
+[18-May-2025 14:17:23 Europe/Berlin] 2025-05-18 14:17:23 - Trying SMTP with IP: 142.250.4.109
+[18-May-2025 14:17:23 Europe/Berlin] 2025-05-18 14:17:23 - Trying SMTP with IP: 108.177.15.108
+[18-May-2025 14:17:24 Europe/Berlin] 2025-05-18 14:17:24 - Method 3 Failed: All SMTP IP attempts failed
+[18-May-2025 14:17:24 Europe/Berlin] 2025-05-18 14:17:24 - Method 4: Storing email in pending_emails.txt for later delivery
+[18-May-2025 14:17:24 Europe/Berlin] 2025-05-18 14:17:24 - Method 4 Success: Email stored for later delivery
+[18-May-2025 14:17:24 Europe/Berlin] === START addNotification ===
+[18-May-2025 14:17:24 Europe/Berlin] Adding notification - User ID: 1, Message: Your password has been reset by an administrator. Check your email for the new password., Record ID: null, Type: password_reset
+[18-May-2025 14:17:25 Europe/Berlin] User has 1 existing notifications
+[18-May-2025 14:17:25 Europe/Berlin] SQL params: [1,"Your password has been reset by an administrator. Check your email for the new password.",null,"password_reset","change_password.php"]
+[18-May-2025 14:17:25 Europe/Berlin] Successfully added notification ID: 112
+[18-May-2025 14:17:25 Europe/Berlin] Verified notification ID 112 exists in database
+[18-May-2025 14:17:25 Europe/Berlin] === END addNotification ===
+[18-May-2025 14:56:56 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 14:56:58 Europe/Berlin] 2025-05-18 14:56:58 - Attempting to send email to jamessimson656@gmail.com
+ with subject: MWPD System - Password Reset
+[18-May-2025 14:56:58 Europe/Berlin] 2025-05-18 14:56:58 - Method 1: Using PHP mail() function
+[18-May-2025 14:57:00 Europe/Berlin] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 73
+[18-May-2025 14:57:00 Europe/Berlin] 2025-05-18 14:57:00 - Method 1 Failed: mail() function returned false
+[18-May-2025 14:57:00 Europe/Berlin] 2025-05-18 14:57:00 - Method 2: Using PHPMailer in mail mode
+[18-May-2025 14:57:01 Europe/Berlin] 2025-05-18 14:57:01 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[18-May-2025 14:57:01 Europe/Berlin] 2025-05-18 14:57:01 - Method 3: Using PHPMailer with SMTP using IP address
+[18-May-2025 14:57:01 Europe/Berlin] 2025-05-18 14:57:01 - Trying SMTP with IP: 142.250.4.108
+[18-May-2025 14:57:03 Europe/Berlin] 2025-05-18 14:57:03 - Trying SMTP with IP: 142.250.4.109
+[18-May-2025 14:57:04 Europe/Berlin] 2025-05-18 14:57:04 - Trying SMTP with IP: 108.177.15.108
+[18-May-2025 14:57:06 Europe/Berlin] 2025-05-18 14:57:06 - Method 3 Failed: All SMTP IP attempts failed
+[18-May-2025 14:57:06 Europe/Berlin] 2025-05-18 14:57:06 - Method 4: Storing email in pending_emails.txt for later delivery
+[18-May-2025 14:57:06 Europe/Berlin] 2025-05-18 14:57:06 - Method 4 Success: Email stored for later delivery
+[18-May-2025 14:57:06 Europe/Berlin] === START addNotification ===
+[18-May-2025 14:57:06 Europe/Berlin] Adding notification - User ID: 2, Message: Your password has been reset by an administrator. Check your email for the new password., Record ID: null, Type: password_reset
+[18-May-2025 14:57:06 Europe/Berlin] User has 0 existing notifications
+[18-May-2025 14:57:06 Europe/Berlin] SQL params: [2,"Your password has been reset by an administrator. Check your email for the new password.",null,"password_reset","change_password.php"]
+[18-May-2025 14:57:06 Europe/Berlin] Successfully added notification ID: 113
+[18-May-2025 14:57:06 Europe/Berlin] Verified notification ID 113 exists in database
+[18-May-2025 14:57:06 Europe/Berlin] === END addNotification ===
+[18-May-2025 14:59:03 Europe/Berlin] 2025-05-18 14:59:03 - Attempting to send email to jamessimson656@gmail.com with subject: MWPD Email System Test - 2025-05-18 14:59:03
+[18-May-2025 14:59:03 Europe/Berlin] 2025-05-18 14:59:03 - Method 1: Using PHP mail() function
+[18-May-2025 14:59:05 Europe/Berlin] PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 73
+[18-May-2025 14:59:05 Europe/Berlin] 2025-05-18 14:59:05 - Method 1 Failed: mail() function returned false
+[18-May-2025 14:59:05 Europe/Berlin] 2025-05-18 14:59:05 - Method 2: Using PHPMailer in mail mode
+[18-May-2025 14:59:06 Europe/Berlin] 2025-05-18 14:59:06 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[18-May-2025 14:59:06 Europe/Berlin] 2025-05-18 14:59:06 - Method 3: Using PHPMailer with SMTP using IP address
+[18-May-2025 14:59:06 Europe/Berlin] 2025-05-18 14:59:06 - Trying SMTP with IP: 142.250.4.108
+[18-May-2025 14:59:06 Europe/Berlin] PHP Deprecated:  Creation of dynamic property PHPMailer::$Timeout is deprecated in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 165
+[18-May-2025 14:59:08 Europe/Berlin] 2025-05-18 14:59:08 - Trying SMTP with IP: 142.250.4.109
+[18-May-2025 14:59:09 Europe/Berlin] 2025-05-18 14:59:09 - Trying SMTP with IP: 108.177.15.108
+[18-May-2025 14:59:10 Europe/Berlin] 2025-05-18 14:59:10 - Method 3 Failed: All SMTP IP attempts failed
+[18-May-2025 14:59:10 Europe/Berlin] 2025-05-18 14:59:10 - Method 4: Storing email in pending_emails.txt for later delivery
+[18-May-2025 14:59:10 Europe/Berlin] 2025-05-18 14:59:10 - Method 4 Success: Email stored for later delivery
+[18-May-2025 15:01:57 Europe/Berlin] 2025-05-18 15:01:57 - Attempting to send email to jamessimson656@gmail.com with subject: MWPD Email System Test - 2025-05-18 15:01:57
+[18-May-2025 15:01:57 Europe/Berlin] 2025-05-18 15:01:57 - Skipping PHP mail() function as XAMPP doesn't have a local mail server
+[18-May-2025 15:01:57 Europe/Berlin] 2025-05-18 15:01:57 - Method 2: Using PHPMailer with direct SMTP connection
+[18-May-2025 15:01:58 Europe/Berlin] 2025-05-18 15:01:58 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[18-May-2025 15:01:58 Europe/Berlin] 2025-05-18 15:01:58 - Method 3: Using PHPMailer with SMTP using IP address
+[18-May-2025 15:01:58 Europe/Berlin] 2025-05-18 15:01:58 - Trying SMTP with IP: 142.250.4.108
+[18-May-2025 15:01:58 Europe/Berlin] 2025-05-18 15:01:58 - Trying SMTP with IP: 142.250.4.109
+[18-May-2025 15:01:59 Europe/Berlin] 2025-05-18 15:01:59 - Trying SMTP with IP: 108.177.15.108
+[18-May-2025 15:02:00 Europe/Berlin] 2025-05-18 15:02:00 - Method 3 Failed: All SMTP IP attempts failed
+[18-May-2025 15:02:00 Europe/Berlin] 2025-05-18 15:02:00 - Method 4: Storing email in pending_emails.txt for later delivery
+[18-May-2025 15:02:00 Europe/Berlin] 2025-05-18 15:02:00 - Method 4 Success: Email stored for later delivery
+[18-May-2025 15:04:35 Europe/Berlin] 2025-05-18 15:04:35 - Attempting to send email to jamessimson656@gmail.com with subject: MWPD Email System Test - 2025-05-18 15:04:35
+[18-May-2025 15:04:35 Europe/Berlin] 2025-05-18 15:04:35 - Skipping PHP mail() function as XAMPP doesn't have a local mail server
+[18-May-2025 15:04:35 Europe/Berlin] 2025-05-18 15:04:35 - Method 2: Using PHPMailer with direct SMTP connection
+[18-May-2025 15:04:35 Europe/Berlin] PHP Deprecated:  Creation of dynamic property PHPMailer::$SMTPOptions is deprecated in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 103
+[18-May-2025 15:04:36 Europe/Berlin] 2025-05-18 15:04:36 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[18-May-2025 15:04:36 Europe/Berlin] 2025-05-18 15:04:36 - Method 3: Using PHPMailer with SMTP using IP address
+[18-May-2025 15:04:36 Europe/Berlin] 2025-05-18 15:04:36 - Trying SMTP with IP: 142.250.4.108
+[18-May-2025 15:04:36 Europe/Berlin] PHP Deprecated:  Creation of dynamic property PHPMailer::$SMTPOptions is deprecated in C:\xampp\htdocs\MWPD\foolproof_mailer.php on line 196
+[18-May-2025 15:04:36 Europe/Berlin] 2025-05-18 15:04:36 - Trying SMTP with IP: 142.250.4.109
+[18-May-2025 15:04:37 Europe/Berlin] 2025-05-18 15:04:37 - Trying SMTP with IP: 108.177.15.108
+[18-May-2025 15:04:39 Europe/Berlin] 2025-05-18 15:04:39 - Method 3 Failed: All SMTP IP attempts failed
+[18-May-2025 15:04:39 Europe/Berlin] 2025-05-18 15:04:39 - Method 4: Storing email in pending_emails.txt for later delivery
+[18-May-2025 15:04:39 Europe/Berlin] 2025-05-18 15:04:39 - Method 4 Success: Email stored for later delivery
+[18-May-2025 15:25:53 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:25:55 Europe/Berlin] 2025-05-18 15:25:55 - Attempting to send email to jamessimson656@gmail.com
+ with subject: MWPD System - Password Reset
+[18-May-2025 15:25:55 Europe/Berlin] 2025-05-18 15:25:55 - Skipping PHP mail() function as XAMPP doesn't have a local mail server
+[18-May-2025 15:25:55 Europe/Berlin] 2025-05-18 15:25:55 - Method 2: Using PHPMailer with direct SMTP connection
+[18-May-2025 15:25:56 Europe/Berlin] 2025-05-18 15:25:56 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[18-May-2025 15:25:56 Europe/Berlin] 2025-05-18 15:25:56 - Method 3: Using PHPMailer with SMTP using IP address
+[18-May-2025 15:25:56 Europe/Berlin] 2025-05-18 15:25:56 - Trying SMTP with IP: 142.250.4.108
+[18-May-2025 15:25:56 Europe/Berlin] 2025-05-18 15:25:56 - Trying SMTP with IP: 142.250.4.109
+[18-May-2025 15:25:57 Europe/Berlin] 2025-05-18 15:25:57 - Trying SMTP with IP: 108.177.15.108
+[18-May-2025 15:25:58 Europe/Berlin] 2025-05-18 15:25:58 - Method 3 Failed: All SMTP IP attempts failed
+[18-May-2025 15:25:58 Europe/Berlin] 2025-05-18 15:25:58 - Method 4: Storing email in pending_emails.txt for later delivery
+[18-May-2025 15:25:58 Europe/Berlin] 2025-05-18 15:25:58 - Method 4 Success: Email stored for later delivery
+[18-May-2025 15:25:58 Europe/Berlin] === START addNotification ===
+[18-May-2025 15:25:58 Europe/Berlin] Adding notification - User ID: 2, Message: Your password has been reset by an administrator. Check your email for the new password., Record ID: null, Type: password_reset
+[18-May-2025 15:25:58 Europe/Berlin] User has 1 existing notifications
+[18-May-2025 15:25:58 Europe/Berlin] SQL params: [2,"Your password has been reset by an administrator. Check your email for the new password.",null,"password_reset","change_password.php"]
+[18-May-2025 15:25:58 Europe/Berlin] Successfully added notification ID: 114
+[18-May-2025 15:25:58 Europe/Berlin] Verified notification ID 114 exists in database
+[18-May-2025 15:25:58 Europe/Berlin] === END addNotification ===
+[18-May-2025 15:26:59 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:27:02 Europe/Berlin] 2025-05-18 15:27:02 - Attempting to send email to aronpamulaklakin@gmail.com
+ with subject: MWPD System - Password Reset
+[18-May-2025 15:27:02 Europe/Berlin] 2025-05-18 15:27:02 - Skipping PHP mail() function as XAMPP doesn't have a local mail server
+[18-May-2025 15:27:02 Europe/Berlin] 2025-05-18 15:27:02 - Method 2: Using PHPMailer with direct SMTP connection
+[18-May-2025 15:27:03 Europe/Berlin] 2025-05-18 15:27:03 - Method 2 Failed: AUTH failed: 530-5.7.0 Must issue a STARTTLS command first. For more information, go to
+[18-May-2025 15:27:03 Europe/Berlin] 2025-05-18 15:27:03 - Method 3: Using PHPMailer with SMTP using IP address
+[18-May-2025 15:27:03 Europe/Berlin] 2025-05-18 15:27:03 - Trying SMTP with IP: 142.250.4.108
+[18-May-2025 15:27:04 Europe/Berlin] 2025-05-18 15:27:04 - Trying SMTP with IP: 142.250.4.109
+[18-May-2025 15:27:05 Europe/Berlin] 2025-05-18 15:27:05 - Trying SMTP with IP: 108.177.15.108
+[18-May-2025 15:27:07 Europe/Berlin] 2025-05-18 15:27:07 - Method 3 Failed: All SMTP IP attempts failed
+[18-May-2025 15:27:07 Europe/Berlin] 2025-05-18 15:27:07 - Method 4: Storing email in pending_emails.txt for later delivery
+[18-May-2025 15:27:07 Europe/Berlin] 2025-05-18 15:27:07 - Method 4 Success: Email stored for later delivery
+[18-May-2025 15:27:07 Europe/Berlin] === START addNotification ===
+[18-May-2025 15:27:07 Europe/Berlin] Adding notification - User ID: 2, Message: Your password has been reset by an administrator. Check your email for the new password., Record ID: null, Type: password_reset
+[18-May-2025 15:27:07 Europe/Berlin] User has 2 existing notifications
+[18-May-2025 15:27:07 Europe/Berlin] SQL params: [2,"Your password has been reset by an administrator. Check your email for the new password.",null,"password_reset","change_password.php"]
+[18-May-2025 15:27:07 Europe/Berlin] Successfully added notification ID: 115
+[18-May-2025 15:27:07 Europe/Berlin] Verified notification ID 115 exists in database
+[18-May-2025 15:27:07 Europe/Berlin] === END addNotification ===
+[18-May-2025 15:33:11 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:33:13 Europe/Berlin] 2025-05-18 15:33:13 - Using fixed Gmail sender for email to aronpamulaklakin@gmail.com
+
+[18-May-2025 15:33:13 Europe/Berlin] 2025-05-18 15:33:13 - Attempting to send email to aronpamulaklakin@gmail.com
+ via fixed_email_sender.php
+[18-May-2025 15:33:16 Europe/Berlin] 2025-05-18 15:33:16 - Email send error: DATA command failed: 502-5.5.1 Unrecognized command. For more information, go to
+502 5.5.1  https://support.google.com/a/answer/3221692 d9443c01a7336-231d4aca0c6sm43377655ad.9 - gsmtp
+
+[18-May-2025 15:33:17 Europe/Berlin] 2025-05-18 15:33:17 - Using fixed Gmail sender for email to aronpamulaklakin@gmail.com
+
+[18-May-2025 15:33:17 Europe/Berlin] 2025-05-18 15:33:17 - Attempting to send email to aronpamulaklakin@gmail.com
+ via fixed_email_sender.php
+[18-May-2025 15:33:19 Europe/Berlin] 2025-05-18 15:33:19 - Email send error: DATA command failed: 502-5.5.1 Unrecognized command. For more information, go to
+502 5.5.1  https://support.google.com/a/answer/3221692 d2e1a72fcca58-742a970e1a3sm4468330b3a.71 - gsmtp
+
+[18-May-2025 15:33:20 Europe/Berlin] 2025-05-18 15:33:20 - Using fixed Gmail sender for email to aronpamulaklakin@gmail.com
+
+[18-May-2025 15:33:20 Europe/Berlin] 2025-05-18 15:33:20 - Attempting to send email to aronpamulaklakin@gmail.com
+ via fixed_email_sender.php
+[18-May-2025 15:33:23 Europe/Berlin] 2025-05-18 15:33:23 - Email send error: DATA command failed: 502-5.5.1 Unrecognized command. For more information, go to
+502 5.5.1  https://support.google.com/a/answer/3221692 d9443c01a7336-231d4ed5e7bsm43266965ad.249 - gsmtp
+
+[18-May-2025 15:33:23 Europe/Berlin] === START addNotification ===
+[18-May-2025 15:33:23 Europe/Berlin] Adding notification - User ID: 2, Message: Your password has been reset by an administrator. Please contact your administrator for the new password., Record ID: null, Type: password_reset
+[18-May-2025 15:33:23 Europe/Berlin] User has 3 existing notifications
+[18-May-2025 15:33:23 Europe/Berlin] SQL params: [2,"Your password has been reset by an administrator. Please contact your administrator for the new password.",null,"password_reset","change_password.php"]
+[18-May-2025 15:33:23 Europe/Berlin] Successfully added notification ID: 116
+[18-May-2025 15:33:23 Europe/Berlin] Verified notification ID 116 exists in database
+[18-May-2025 15:33:23 Europe/Berlin] === END addNotification ===
+[18-May-2025 15:33:23 Europe/Berlin] 2025-05-18 15:33:23 - Using fixed Gmail sender for email to aronpamulaklakin@gmail.com
+
+[18-May-2025 15:33:23 Europe/Berlin] 2025-05-18 15:33:23 - Attempting to send email to aronpamulaklakin@gmail.com
+ via fixed_email_sender.php
+[18-May-2025 15:33:26 Europe/Berlin] 2025-05-18 15:33:26 - Email send error: DATA command failed: 502-5.5.1 Unrecognized command. For more information, go to
+502 5.5.1  https://support.google.com/a/answer/3221692 d9443c01a7336-231d4e988c3sm43675045ad.120 - gsmtp
+
+[18-May-2025 15:33:26 Europe/Berlin] 2025-05-18 15:33:26 - Using fixed Gmail sender for email to aronpamulaklakin@gmail.com
+
+[18-May-2025 15:33:26 Europe/Berlin] 2025-05-18 15:33:26 - Attempting to send email to aronpamulaklakin@gmail.com
+ via fixed_email_sender.php
+[18-May-2025 15:33:29 Europe/Berlin] 2025-05-18 15:33:29 - Email send error: DATA command failed: 502-5.5.1 Unrecognized command. For more information, go to
+502 5.5.1  https://support.google.com/a/answer/3221692 d9443c01a7336-231d4ebb0f5sm43460925ad.192 - gsmtp
+
+[18-May-2025 15:33:30 Europe/Berlin] 2025-05-18 15:33:30 - Using fixed Gmail sender for email to aronpamulaklakin@gmail.com
+
+[18-May-2025 15:33:30 Europe/Berlin] 2025-05-18 15:33:30 - Attempting to send email to aronpamulaklakin@gmail.com
+ via fixed_email_sender.php
+[18-May-2025 15:33:32 Europe/Berlin] 2025-05-18 15:33:32 - Email send error: DATA command failed: 502-5.5.1 Unrecognized command. For more information, go to
+502 5.5.1  https://support.google.com/a/answer/3221692 d9443c01a7336-231d4ed1946sm43744505ad.217 - gsmtp
+
+[18-May-2025 15:33:33 Europe/Berlin] === START addNotification ===
+[18-May-2025 15:33:33 Europe/Berlin] Adding notification - User ID: 2, Message: Your password has been reset by an administrator. Please contact your administrator for the new password., Record ID: null, Type: password_reset
+[18-May-2025 15:33:33 Europe/Berlin] User has 4 existing notifications
+[18-May-2025 15:33:33 Europe/Berlin] SQL params: [2,"Your password has been reset by an administrator. Please contact your administrator for the new password.",null,"password_reset","change_password.php"]
+[18-May-2025 15:33:33 Europe/Berlin] Successfully added notification ID: 117
+[18-May-2025 15:33:33 Europe/Berlin] Verified notification ID 117 exists in database
+[18-May-2025 15:33:33 Europe/Berlin] === END addNotification ===
+[18-May-2025 15:34:38 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:35:37 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:35:39 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:35:39 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:35:39 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:35:39 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:35:40 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:35:40 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:38:41 Europe/Berlin] Fetched 2 notifications for user ID: 1
+[18-May-2025 15:48:32 Europe/Berlin] === START addNotification ===
+[18-May-2025 15:48:32 Europe/Berlin] Adding notification - User ID: 1, Message: User account for approved (dsadff) has been rejected, Record ID: null, Type: user_account
+[18-May-2025 15:48:32 Europe/Berlin] User has 3 existing notifications
+[18-May-2025 15:48:32 Europe/Berlin] SQL params: [1,"User account for approved (dsadff) has been rejected",null,"user_account","accounts.php"]
+[18-May-2025 15:48:32 Europe/Berlin] Successfully added notification ID: 122
+[18-May-2025 15:48:32 Europe/Berlin] Verified notification ID 122 exists in database
+[18-May-2025 15:48:32 Europe/Berlin] === END addNotification ===
+[18-May-2025 15:48:32 Europe/Berlin] 2025-05-18 15:48:32 - Using fixed Gmail sender for email to aronpamulaklakin@gmail.com
+[18-May-2025 15:48:32 Europe/Berlin] 2025-05-18 15:48:32 - Attempting to send email to aronpamulaklakin@gmail.com via fixed_email_sender.php
+[18-May-2025 15:48:36 Europe/Berlin] 2025-05-18 15:48:36 - Email sent successfully to aronpamulaklakin@gmail.com
+[18-May-2025 15:48:36 Europe/Berlin] 2025-05-18 15:48:36 - Approval email to aronpamulaklakin@gmail.com: SUCCESS
+[18-May-2025 15:48:36 Europe/Berlin] 2025-05-18 15:48:36 - Using fixed Gmail sender for email to aronpamulaklakin@gmail.com
+[18-May-2025 15:48:36 Europe/Berlin] 2025-05-18 15:48:36 - Attempting to send email to aronpamulaklakin@gmail.com via fixed_email_sender.php
+[18-May-2025 15:48:41 Europe/Berlin] 2025-05-18 15:48:41 - Email sent successfully to aronpamulaklakin@gmail.com
+[18-May-2025 15:48:41 Europe/Berlin] 2025-05-18 15:48:41 - Submitter email to aronpamulaklakin@gmail.com: SUCCESS
+[18-May-2025 15:49:40 Europe/Berlin] === START addNotification ===
+[18-May-2025 15:49:40 Europe/Berlin] Adding notification - User ID: 1, Message: User account for approved (sda3) has been rejected, Record ID: null, Type: user_account
+[18-May-2025 15:49:40 Europe/Berlin] User has 5 existing notifications
+[18-May-2025 15:49:40 Europe/Berlin] Deleted oldest notification for user 1
+[18-May-2025 15:49:40 Europe/Berlin] SQL params: [1,"User account for approved (sda3) has been rejected",null,"user_account","accounts.php"]
+[18-May-2025 15:49:40 Europe/Berlin] Successfully added notification ID: 126
+[18-May-2025 15:49:40 Europe/Berlin] Verified notification ID 126 exists in database
+[18-May-2025 15:49:40 Europe/Berlin] === END addNotification ===
+[18-May-2025 15:49:40 Europe/Berlin] 2025-05-18 15:49:40 - Using fixed Gmail sender for email to aronpamulaklakin@gmail.com
+[18-May-2025 15:49:40 Europe/Berlin] 2025-05-18 15:49:40 - Attempting to send email to aronpamulaklakin@gmail.com via fixed_email_sender.php
+[18-May-2025 15:49:44 Europe/Berlin] 2025-05-18 15:49:44 - Email sent successfully to aronpamulaklakin@gmail.com
+[18-May-2025 15:49:44 Europe/Berlin] 2025-05-18 15:49:44 - Approval email to aronpamulaklakin@gmail.com: SUCCESS
+[18-May-2025 15:49:44 Europe/Berlin] 2025-05-18 15:49:44 - Using fixed Gmail sender for email to aronpamulaklakin@gmail.com
+[18-May-2025 15:49:44 Europe/Berlin] 2025-05-18 15:49:44 - Attempting to send email to aronpamulaklakin@gmail.com via fixed_email_sender.php
+[18-May-2025 15:49:48 Europe/Berlin] 2025-05-18 15:49:48 - Email sent successfully to aronpamulaklakin@gmail.com
+[18-May-2025 15:49:48 Europe/Berlin] 2025-05-18 15:49:48 - Submitter email to aronpamulaklakin@gmail.com: SUCCESS

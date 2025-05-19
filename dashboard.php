@@ -193,6 +193,9 @@ function time_elapsed_string($datetime, $full = false) {
 
 <body>
 
+<!-- Dashboard scrolling now handled by external CSS -->
+
+
   <div class="layout-wrapper">
     <?php include '_sidebar.php'; ?>
 
@@ -296,35 +299,37 @@ function time_elapsed_string($datetime, $full = false) {
 
 
           <!-- Box 2: Pending Approvals -->
-          <div class="bento-box box-pending-approvals" id="pendingApprovalsBox">
-            <h2>Pending Approvals <span class="count-badge"><?= $total_pending ?></span></h2>
+          <div class="bento-box box-pending-approvals">
+            <h2>Pending Approvals <span class="count-badge"><?= $direct_hire_pending ?></span></h2>
+            <div class="scrollable-container">
             <?php if (count($pending_approvals) > 0): ?>
-            <table>
-              <thead>
-                <tr>
-                  <th>Process Type</th>
-                  <th>Applicant Name</th>
-                  <th>Status</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($pending_approvals as $approval): ?>
-                <tr>
-                  <td><?= htmlspecialchars($approval['process_type']) ?></td>
-                  <td><?= htmlspecialchars($approval['applicant_name']) ?></td>
-                  <td><span class="status-badge pending"><?= ucfirst(htmlspecialchars($approval['status'])) ?></span></td>
-                  <td title="<?= date('M j, Y g:i A', strtotime($approval['created_at'])) ?>"><?= time_elapsed_string($approval['created_at']) ?></td>
-                </tr>
-                <?php endforeach; ?>
-              </tbody>
-            </table>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Process Type</th>
+                    <th>Applicant Name</th>
+                    <th>Status</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($pending_approvals as $approval): ?>
+                  <tr>
+                    <td><?= htmlspecialchars($approval['process_type']) ?></td>
+                    <td><?= htmlspecialchars($approval['applicant_name']) ?></td>
+                    <td><span class="status-badge pending"><?= ucfirst(htmlspecialchars($approval['status'])) ?></span></td>
+                    <td title="<?= date('M j, Y g:i A', strtotime($approval['created_at'])) ?>"><?= time_elapsed_string($approval['created_at']) ?></td>
+                  </tr>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
             <?php else: ?>
-            <div class="no-records">
-                <i class="fa fa-check-circle"></i>
-                <p>No pending approvals at this time</p>
-            </div>
+              <div class="no-records">
+                  <i class="fa fa-check-circle"></i>
+                  <p>No pending approvals at this time</p>
+              </div>
             <?php endif; ?>
+            </div>
             <div class="view-all">
               <!-- <p class="records-info">Showing <?= min(count($pending_approvals), 5) ?> of <?= $direct_hire_pending ?> pending records</p> -->
             </div>
@@ -357,22 +362,24 @@ function time_elapsed_string($datetime, $full = false) {
           <div class="bento-box box-activity-log job-fairs-this-month">
             <h2>This Month's Job Fairs</h2>
             <?php if (count($this_month_fairs) > 0): ?>
-            <ul class="activity-list">
-              <?php foreach ($this_month_fairs as $fair): ?>
-              <li>
-                <div class="activity-time"><?= date('M j', strtotime($fair['date'])) ?></div>
-                <div class="activity-info">
-                  <div class="activity-text"><?= htmlspecialchars($fair['venue']) ?></div>
-                  <div class="activity-meta"><?= htmlspecialchars($fair['contact_info']) ?></div>
-                  <div class="activity-status">
-                    <span class="status-badge <?= strtolower($fair['status']) ?>">
-                      <?= ucfirst(htmlspecialchars($fair['status'])) ?>
-                    </span>
+            <div class="scrollable-container">
+              <ul class="activity-list">
+                <?php foreach ($this_month_fairs as $fair): ?>
+                <li>
+                  <div class="activity-time"><?= date('M j', strtotime($fair['date'])) ?></div>
+                  <div class="activity-info">
+                    <div class="activity-text"><?= htmlspecialchars($fair['venue']) ?></div>
+                    <div class="activity-meta"><?= htmlspecialchars($fair['contact_info'] ?? 'N/A') ?></div>
+                    <div class="activity-status">
+                      <span class="status-badge <?= strtolower($fair['status']) ?>">
+                        <?= ucfirst(htmlspecialchars($fair['status'])) ?>
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </li>
-              <?php endforeach; ?>
-            </ul>
+                </li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
             <div class="view-all">
               <!-- <a href="job_fairs.php" class="btn-link">View all job fairs <i class="fa fa-arrow-right"></i></a> -->
             </div>
@@ -388,24 +395,26 @@ function time_elapsed_string($datetime, $full = false) {
           <div class="bento-box box-statistics recent-activity">
             <h2>Recent System Activity</h2>
             <?php if (count($activity_logs) > 0): ?>
-            <ul class="activity-list">
-              <?php foreach ($activity_logs as $log): 
-                  $time = !empty($log['updated_at']) && $log['updated_at'] > $log['created_at'] 
-                          ? $log['updated_at'] 
-                          : $log['created_at'];
-                  
-                  // Format exact time for tooltip  
-                  $exact_time = date('M j, Y g:i A', strtotime($time));
-              ?>
-              <li>
-                <div class="activity-time"><?= date('M j', strtotime($time)) ?></div>
-                <div class="activity-info">
-                  <div class="activity-text"><?= htmlspecialchars($log['activity']) ?></div>
-                  <div class="activity-meta" title="<?= $exact_time ?>"><?= time_elapsed_string($time) ?></div>
-                </div>
-              </li>
-              <?php endforeach; ?>
-            </ul>
+            <div class="scrollable-container">
+              <ul class="activity-list">
+                <?php foreach ($activity_logs as $log): 
+                    $time = !empty($log['updated_at']) && $log['updated_at'] > $log['created_at'] 
+                            ? $log['updated_at'] 
+                            : $log['created_at'];
+                    
+                    // Format exact time for tooltip  
+                    $exact_time = date('M j, Y g:i A', strtotime($time));
+                ?>
+                <li>
+                  <div class="activity-time"><?= date('M j', strtotime($time)) ?></div>
+                  <div class="activity-info">
+                    <div class="activity-text"><?= htmlspecialchars($log['activity']) ?></div>
+                    <div class="activity-meta" title="<?= $exact_time ?>"><?= time_elapsed_string($time) ?></div>
+                  </div>
+                </li>
+                <?php endforeach; ?>
+              </ul>
+            </div>
             <div class="view-all">
               <!-- <p class="records-info">Showing <?= count($activity_logs) ?> most recent activities</p> -->
             </div>
@@ -432,12 +441,7 @@ function time_elapsed_string($datetime, $full = false) {
               <i class="fa fa-magic"></i>
             </div>
           </li>
-          <!-- Blacklist management removed as requested -->
-          <li class="menu-option" data-toggle="tooltip" title="Generate Reports">
-            <div class="option-button" id="reportGenButton">
-              <i class="fa fa-file-export"></i>
-            </div>
-          </li>
+          <!-- Generate Reports option removed as requested -->
         </ul>
       </div>
       
@@ -1599,6 +1603,8 @@ function time_elapsed_string($datetime, $full = false) {
     });
   </script>
 
+
+<!-- Dashboard scrolling now handled by external JS file -->
 
 </body>
 </html>

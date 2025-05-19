@@ -225,6 +225,9 @@ try {
                         ORDER BY created_at DESC LIMIT ?, ?";
         $stmt = $pdo->prepare($sql);
 
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $rows_per_page;
+
         $all_params = array($active_tab);
         $all_params = array_merge($all_params, $search_params, $date_params, $filter_params);
         $all_params[] = $offset;
@@ -539,7 +542,14 @@ include '_head.php';
               }
               document.getElementById('filterChips').innerHTML = chips.join('');
             }
+            // Document ready functions
             document.addEventListener('DOMContentLoaded', function() {
+              // Check if we need to reload the table after deletion
+              const urlParams = new URLSearchParams(window.location.search);
+              if (urlParams.get('reload') === 'true') {
+                // Force table reload
+                loadRecords();
+              }
               renderFilterChips();
               // Remove chip handler
               document.getElementById('filterChips').addEventListener('click', function(e) {
@@ -570,7 +580,7 @@ include '_head.php';
                 <th>Name</th>
                 <th>Jobsite</th>
                 <th>Status</th>
-                <th>Action</th>
+                <th style="text-align: center;">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -598,9 +608,9 @@ include '_head.php';
                       <a href="direct_hire_edit.php?id=<?= $record['id'] ?>" title="Edit Record">
                         <i class="fa fa-edit"></i>
                       </a>
-                      <button class="delete-button" onclick="openDeleteModal(<?= $record['id'] ?>)" title="Delete Record">
+                      <a href="javascript:void(0)" onclick="openDeleteModal(<?= $record['id'] ?>)" title="Delete Record">
                         <i class="fa fa-trash-alt"></i>
-                      </button>
+                      </a>
                     </td>
                   </tr>
                 <?php endforeach; ?>

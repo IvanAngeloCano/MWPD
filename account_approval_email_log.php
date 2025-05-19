@@ -6,6 +6,8 @@
  * can check to see what emails would have been sent.
  */
 
+include_once 'unified_email_system.php'; // New unified email system with fixed Gmail SMTP
+
 /**
  * Log an account approval notification
  * 

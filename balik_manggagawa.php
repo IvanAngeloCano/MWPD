@@ -634,7 +634,7 @@ include '_head.php';
         </tbody>
       </table>
 
-      <div class="pagination-container">
+      <div class="pagination-container" id="paginationContainer">
         <div class="pagination">
           <button class="prev-btn" id="prevPageBtn" onclick="prevPage()">
             <i class="fa fa-chevron-left"></i> Previous
@@ -688,17 +688,18 @@ include '_head.php';
       initPagination();
     });
     
-    // Add input event for rows per page
-    document.getElementById('rowsPerPage').addEventListener('input', function() {
+    // Add change event for rows per page
+    document.getElementById('rowsPerPage').addEventListener('change', function() {
       let newValue = parseInt(this.value);
       
       // Handle empty or invalid values
       if (isNaN(newValue) || newValue <= 0) {
-        // Don't update yet, wait for valid input
-        return;
+        // Set to minimum value
+        newValue = 1;
+        this.value = newValue;
       }
       
-      // Update rows per page and refresh pagination
+      // Update rows per page and refresh pagination immediately
       rowsPerPage = newValue;
       currentPage = 1;
       initPagination();
@@ -794,18 +795,31 @@ include '_head.php';
     const startRecord = document.getElementById("startRecord");
     const endRecord = document.getElementById("endRecord");
     const totalRecords = document.getElementById("totalRecords");
+    const paginationContainer = document.getElementById("paginationContainer");
+    
+    // Hide pagination entirely if there are no records
+    if (window.allRows.length === 0 || totalPages === 0) {
+      paginationContainer.style.display = "none";
+      return;
+    } else {
+      paginationContainer.style.display = "flex";
+    }
     
     // Disable/enable prev button
     if (currentPage === 1) {
+      prevButton.style.display = "none";
       prevButton.disabled = true;
     } else {
+      prevButton.style.display = "";
       prevButton.disabled = false;
     }
     
     // Disable/enable next button
     if (currentPage === totalPages || totalPages === 0) {
+      nextButton.style.display = "none";
       nextButton.disabled = true;
     } else {
+      nextButton.style.display = "";
       nextButton.disabled = false;
     }
     
@@ -824,8 +838,13 @@ include '_head.php';
     }
     
     // Update showing records information
-    startRecord.textContent = (currentPage - 1) * rowsPerPage + 1;
-    endRecord.textContent = Math.min(currentPage * rowsPerPage, window.allRows.length);
+    if (window.allRows.length > 0) {
+      startRecord.textContent = (currentPage - 1) * rowsPerPage + 1;
+      endRecord.textContent = Math.min(currentPage * rowsPerPage, window.allRows.length);
+    } else {
+      startRecord.textContent = "0";
+      endRecord.textContent = "0";
+    }
     totalRecords.textContent = window.allRows.length;
   }
   
@@ -1064,6 +1083,12 @@ include '_head.php';
 
   // Add double-click functionality to table rows
   document.addEventListener('DOMContentLoaded', function() {
+    // Check if we need to reload the table after deletion
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('reload') === 'true') {
+      // Force table reload
+      fetchRecords();
+    }
     const tableRows = document.querySelectorAll('.balik-mangagawa-table tbody tr');
     
     tableRows.forEach(row => {

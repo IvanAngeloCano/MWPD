@@ -4,8 +4,8 @@ require_once 'connection.php';
 $pageTitle = "Account Management";
 include '_head.php';
 
-// Check if user has Division Head role
-if ($_SESSION['role'] !== 'div head' && $_SESSION['role'] !== 'Division Head') {
+// Check if user has Division Head or Regional Director role
+if ($_SESSION['role'] !== 'div head' && $_SESSION['role'] !== 'Division Head' && $_SESSION['role'] !== 'regional director' && $_SESSION['role'] !== 'Regional Director') {
     // Redirect to dashboard with error message
     $_SESSION['error_message'] = "You don't have permission to access this page.";
     header('Location: dashboard.php');

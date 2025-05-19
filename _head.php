@@ -28,8 +28,13 @@
   <!-- Floating Menu Fix CSS -->
   <link rel="stylesheet" href="assets/css/floating-menu-fix.css">
   
-  <!-- Dashboard Scroll Fix CSS -->
-  <link rel="stylesheet" href="assets/css/dashboard-scroll-fix.css">
+  <!-- Wizard Position Fix CSS -->
+  <link rel="stylesheet" href="assets/css/wizard-position-fix.css">
+  
+  <!-- Dashboard Scroll Fixes -->
+  <link rel="stylesheet" href="assets/css/dashboard-scroll-fix-v3.css">
+  <link rel="stylesheet" href="assets/css/cursor-title-fix.css">
+  <script src="assets/js/dashboard-scroll-fix.js"></script>
   
   <!-- Quick Access Menu Fix CSS -->
   <link rel="stylesheet" href="assets/css/quick-access-fix.css">
@@ -45,6 +50,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/session_notifications.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="assets/js/pagination-fix.js"></script>
   
   <!-- All blacklist functionality has been completely removed -->
 </head>

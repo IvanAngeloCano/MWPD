@@ -1,0 +1,83 @@
+/* Enhanced scrolling functionality for dashboard */
+
+/* General scrollable container styling */
+.scrollable-container {
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: 10px;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Enable mouse wheel scrolling explicitly */
+.scrollable-container:hover {
+  overflow-y: auto;
+}
+
+/* Table specific styling for pending approvals */
+.scrollable-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.scrollable-container thead th {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 10;
+  border-bottom: 1px solid #eee;
+  padding: 8px;
+  text-align: left;
+}
+
+.scrollable-container tbody td {
+  padding: 8px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+/* Activity list styling */
+.scrollable-container .activity-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.scrollable-container .activity-list li {
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+/* Custom scrollbar styling */
+.scrollable-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb:hover {
+  background: #999;
+  cursor: pointer;
+}
+
+/* Firefox scrollbar styling */
+.scrollable-container {
+  scrollbar-width: thin;
+  scrollbar-color: #bbb #f5f5f5;
+}
+
+/* IE scrollbar styling */
+.scrollable-container {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}

@@ -1,6 +1,7 @@
 <?php
 include 'session.php';
 require_once 'connection.php';
+include_once 'unified_email_system.php'; // New unified email system with fixed Gmail SMTP
 $pageTitle = "Account Approval Requests";
 include '_head.php';
 

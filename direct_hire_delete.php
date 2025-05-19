@@ -36,8 +36,8 @@ try {
     // Commit transaction
     $pdo->commit();
     
-    // Redirect with success message
-    header("Location: direct_hire.php?tab=$record_type&success=Record deleted successfully");
+    // Redirect with success message and reload parameter
+    header("Location: direct_hire.php?tab=$record_type&success=Record deleted successfully&reload=true");
     exit();
     
 } catch (Exception $e) {

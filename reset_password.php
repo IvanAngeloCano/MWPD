@@ -2,7 +2,8 @@
 include 'session.php';
 require_once 'connection.php';
 include_once 'notifications.php';
-include_once 'email_notifications.php';
+// include_once 'email_notifications.php'; // Old email system with circular references
+include_once 'unified_email_system.php'; // New unified email system with fixed Gmail SMTP
 include_once 'alert_system.php';  // Include the session-based alert system
 $pageTitle = "Reset User Password";
 include '_head.php';
@@ -35,10 +36,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $new_password = generateSecurePassword();
             $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
             
-            // Get user info
-            $user_stmt = $pdo->prepare("SELECT username, full_name, email FROM users WHERE id = ?");
+            // Get user info - Get ALL fields to check for potential email column name variations
+            $user_stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
             $user_stmt->execute([$reset_user_id]);
             $user = $user_stmt->fetch(PDO::FETCH_ASSOC);
+            
+            // Detailed debugging
+            $debug_log = "\n" . date('Y-m-d H:i:s') . " - DEBUG: Reset password for user ID {$reset_user_id}\n";
+            $debug_log .= "Complete user data from DB: " . print_r($user, true) . "\n";
+            
+            // Check for variations of email field names
+            $possible_email_fields = ['email', 'user_email', 'mail', 'email_address'];
+            $debug_log .= "Checking for email fields: " . implode(", ", $possible_email_fields) . "\n";
+            
+            // Look for any variation of an email field
+            $found_email = '';
+            foreach ($possible_email_fields as $field) {
+                if (isset($user[$field]) && !empty($user[$field])) {
+                    $found_email = $user[$field];
+                    $debug_log .= "Found email in field '{$field}': {$found_email}\n";
+                    break;
+                }
+            }
+            
+            // If still no email found, check for any field that might contain an email
+            if (empty($found_email)) {
+                foreach ($user as $field => $value) {
+                    if (is_string($value) && filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                        $found_email = $value;
+                        $debug_log .= "Found email-like value in field '{$field}': {$found_email}\n";
+                        break;
+                    }
+                }
+            }
+            
+            // Add the found email to the user array
+            if (!empty($found_email)) {
+                $user['email'] = $found_email;
+                $debug_log .= "Using email: {$found_email}\n";
+            } else {
+                $debug_log .= "No valid email field found for this user!\n";
+            }
+            
+            // Save debug log
+            file_put_contents('email_debug.txt', $debug_log, FILE_APPEND);
+            
+            // Initialize default values to prevent undefined array key errors
+            if ($user) {
+                $user = array_merge([
+                    'username' => '',
+                    'full_name' => '',
+                    'email' => ''
+                ], $user);
+            }
             
             if (!$user) {
                 $error_message = "User not found.";
@@ -50,12 +100,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Send email notification if email is available
                 $email_sent = false;
                 if (!empty($user['email'])) {
-                    $email_sent = sendPasswordResetEmail(
+                    // Use our unified email system directly for the most reliable delivery
+                    $email_sent = unified_send_password_reset(
                         $user['email'],
                         $user['full_name'],
                         $user['username'],
                         $new_password
                     );
+                    
+                    // Log this reset action for debugging
+                    error_log(date('Y-m-d H:i:s') . " - Password reset for {$user['username']} (ID: {$reset_user_id}), email sent to {$user['email']}, result: " . ($email_sent ? 'SUCCESS' : 'FAILED'));
                 }
                 
                 // Add in-app notification for the user
@@ -71,16 +125,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Add session-based alert for immediate feedback
                 addAlert(
                     'success',
-                    "Password reset successful for " . htmlspecialchars($user['full_name']) . 
+                    "Password reset successful for " . htmlspecialchars(isset($user['full_name']) ? $user['full_name'] : 'user') . 
                     ($email_sent ? ". The new password has been sent to their email." : ".")
                 );
                 
                 // Set success message
-                $_SESSION['success_message'] = "Password reset successful for " . htmlspecialchars($user['full_name']) . 
+                $_SESSION['success_message'] = "Password reset successful for " . htmlspecialchars(isset($user['full_name']) ? $user['full_name'] : 'user') . 
                                             ($email_sent ? ". The new password has been sent to their email." : ".");
                 
                 // Record the reset action in the system log
-                $log_message = "Password reset for user ID {$reset_user_id} ({$user['username']}) by user ID {$_SESSION['user_id']}";
+                $log_message = "Password reset for user ID {$reset_user_id} (" . (isset($user['username']) ? $user['username'] : 'unknown') . ") by user ID {$_SESSION['user_id']}";
                 file_put_contents('system_log.txt', date('Y-m-d H:i:s') . ": {$log_message}\n", FILE_APPEND);
                 
                 // Redirect back to accounts page
@@ -110,6 +164,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: accounts.php');
             exit();
         }
+        
+        // Initialize default values to prevent undefined array key errors
+        $user = array_merge([
+            'username' => '',
+            'full_name' => '',
+            'email' => ''
+        ], $user);
     } catch (PDOException $e) {
         $_SESSION['error_message'] = "Database error: " . $e->getMessage();
         header('Location: accounts.php');
@@ -151,7 +212,7 @@ function generateSecurePassword($length = 10) {
       <main class="main-content">
         <div class="password-reset-wrapper">
           <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-            <h1 style="margin: 0; font-size: 24px; color: #333;">Reset Password for <?= htmlspecialchars($user['full_name']) ?></h1>
+            <h1 style="margin: 0; font-size: 24px; color: #333;">Reset Password for <?= htmlspecialchars(isset($user['full_name']) ? $user['full_name'] : '') ?></h1>
             <a href="accounts.php" style="display: inline-flex; align-items: center; gap: 5px; background-color: #6c757d; color: white; border: none; border-radius: 4px; padding: 8px 12px; text-decoration: none; font-weight: 500;">
               <i class="fa fa-arrow-left"></i> Back to Users
             </a>
@@ -186,15 +247,15 @@ function generateSecurePassword($length = 10) {
                 <div class="user-info" style="margin-bottom: 20px;">
                   <div style="display: grid; grid-template-columns: 120px 1fr; margin-bottom: 10px;">
                     <span style="font-weight: 500;">Username:</span>
-                    <span><?= htmlspecialchars($user['username']) ?></span>
+                    <span><?= htmlspecialchars(isset($user['username']) ? $user['username'] : '') ?></span>
                   </div>
                   <div style="display: grid; grid-template-columns: 120px 1fr; margin-bottom: 10px;">
                     <span style="font-weight: 500;">Full Name:</span>
-                    <span><?= htmlspecialchars($user['full_name']) ?></span>
+                    <span><?= htmlspecialchars(isset($user['full_name']) ? $user['full_name'] : '') ?></span>
                   </div>
                   <div style="display: grid; grid-template-columns: 120px 1fr; margin-bottom: 10px;">
                     <span style="font-weight: 500;">Email:</span>
-                    <span><?= htmlspecialchars($user['email'] ?: 'No email address') ?></span>
+                    <span><?= htmlspecialchars(isset($user['email']) && !empty($user['email']) ? $user['email'] : 'No email address') ?></span>
                   </div>
                 </div>
                 

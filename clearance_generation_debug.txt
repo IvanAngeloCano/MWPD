@@ -638,3 +638,13 @@
 2025-05-12 17:24:23: Copied image to media directory: C:\WINDOWS\TEMP/docx_extract_682212a7d519b/word/media/applicant_photo_20250512172423.jpg
 2025-05-12 17:24:24: Created new document with applicant image
 2025-05-12 17:24:24: Temporary extract directory should be cleaned up
+2025-05-18 12:47:43: Fix clearance generation started
+2025-05-18 12:47:43: Direct hire ID: 17
+2025-05-18 12:47:43: Record found: {"id":17,"control_no":"DH-2025-003","name":"Angela Reyes","jobsite":"Singapore","evaluated":"2025-02-01","for_confirmation":"2025-02-03","emailed_to_dhad":"2025-02-04","received_from_dhad":"2025-02-07","evaluator":"Engr. Santos","note":"All documents complete","type":"professional","status":"approved","created_at":"2025-05-02 12:14:22","updated_at":"2025-05-12 19:53:47","submitted_by":null,"approved_by":1,"approved_at":"2025-05-12 19:53:47"}
+2025-05-18 12:47:43: Record approval status: Approved
+2025-05-18 12:47:43: Template copied to: temp/Clearance_DH-2025-003_20250518_124743.docx
+2025-05-18 12:47:44: Status is approved - adding signature image
+2025-05-18 12:47:44: Added signature image using signature1_image placeholder
+2025-05-18 12:47:44: Document saved to: temp/Clearance_DH-2025-003_20250518_124743.docx
+2025-05-18 12:47:44: Processing applicant image - using advanced placeholder detection method
+2025-05-18 12:47:44: No image found for this record

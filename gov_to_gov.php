@@ -188,13 +188,18 @@ try {
               <span>Showing <span id="startRecord"><?= min(($offset + 1), $total_records) ?></span>-<span id="endRecord"><?= min(($offset + $rows_per_page), $total_records) ?></span> of <span id="totalRecords"><?= $total_records ?></span> records</span>
             </div>
             
-            <div class="rows-per-page" style="display:inline-block;">
+            <form action="" method="GET" id="rowsPerPageForm" style="display:inline-block;">
+              <input type="hidden" name="tab" value="<?= htmlspecialchars($active_tab) ?>">
+              <input type="hidden" name="page" value="<?= $page ?>">
+              <?php if (!empty($search_query)): ?>
+                <input type="hidden" name="search" value="<?= htmlspecialchars($search_query) ?>">
+              <?php endif; ?>
               <label>
                 Rows per page:
-                <input type="number" min="1" id="rowsPerPage" class="rows-input" value="<?= $rows_per_page ?>">
+                <input type="number" min="1" name="rows" id="rowsInput" class="rows-input" value="<?= $rows_per_page ?>">
               </label>
-              <button type="button" id="resetRowsBtn" class="reset-btn">Reset</button>
-            </div>
+              <button type="button" id="resetRowsBtn" class="reset-btn" style="background-color: #0d6efd; color: #fff; border: none; border-radius: 6px; padding: 3px 10px; cursor: pointer;">Reset</button>
+            </form>
           </div>
         </div>
 
@@ -777,6 +782,15 @@ try {
   
   // Handle rows per page input
   document.addEventListener('DOMContentLoaded', function() {
+    // Check if we need to reload the table after deletion
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('reload') === 'true') {
+      // Force table reload - refresh the page without the reload parameter
+      const newUrl = window.location.href.replace('&reload=true', '').replace('?reload=true&', '?').replace('?reload=true', '');
+      window.location.href = newUrl;
+      return;
+    }
+    
     // Add input event for rows per page
     document.getElementById('rowsPerPage').addEventListener('input', function() {
       let newValue = parseInt(this.value);
